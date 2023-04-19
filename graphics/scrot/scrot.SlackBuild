@@ -69,6 +69,8 @@ else
   LIBDIRSUFFIX=""
 fi
 
+set -e
+
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
@@ -87,6 +89,7 @@ CXXFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --mandir=/usr/man \
   --disable-static \
   --build=$ARCH-slackware-linux
 
