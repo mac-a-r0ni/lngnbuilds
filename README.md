@@ -1,4 +1,4 @@
-lngnbuilds
+#lngnbuilds
  SlackBuilds optimized for aarch64 machines.
 
 Currently testing software aiming for slackwareaarch64-current
