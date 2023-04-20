@@ -1,0 +1,5 @@
+xdg-desktop-portal-hyprland (XDG backend for hyprland)
+
+Due to reasons explained in hyprland-protocols, we have a separate
+desktop portal impl for Hyprland. Although -wlr does work with
+Hyprland, -hyprland offers more features.
