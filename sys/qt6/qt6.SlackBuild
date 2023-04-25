@@ -83,6 +83,10 @@ rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$SRCNAM-$VERSION.tar.xz
 cd $SRCNAM-$VERSION
 #7z x $CWD/$BSCLANG.7z
+
+# cflags patch from arch
+patch -Np1 -i $CWD/qt6-base-cflags.patch || exit 1
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
