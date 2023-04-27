@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Slackware build script for python-distutils-extra
+# Slackware build script for open-vm-tools
 
-# Copyright 2022 Jay Lanagan (j@lngn.net), Detroit, MI, USA
+# Copyright 2017 Jeremy HOCDE
+# Copyright 2018 Alexander VERBOVETSKY
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,11 +25,13 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=python-distutils-extra
-VERSION=${VERSION:-2.50}
+PRGNAM=open-vm-tools
+VERSION=${VERSION:-12.2.0_21223074} # Remember to change VERSION - to _ !!!
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
+
+SRCVER=$(echo $VERSION | tr _ -)
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -38,6 +41,9 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
+# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
+# the name of the created package would be, and then exit. This information
+# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
@@ -64,14 +70,31 @@ else
   LIBDIRSUFFIX=""
 fi
 
+VGAUTH=${VGAUTH:-no}
+case "$VGAUTH" in
+  no)
+    VGAUTH_OPTS="--disable-vgauth"
+    ;;
+  yes)
+    VGAUTH_OPTS=""
+    ;;
+  xmlsec)
+    VGAUTH_OPTS="--enable-xmlsec1"
+    ;;
+  *)
+    echo "eRRoR with VGAUTH parameter"
+    exit 1
+    ;;
+esac
+
 set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM\_$VERSION
-tar xvf $CWD/$PRGNAM\_$VERSION.tar.xz
-cd $PRGNAM
+rm -rf $PRGNAM-$SRCVER
+tar xvf $CWD/$PRGNAM-$SRCVER.tar.gz
+cd $PRGNAM-$SRCVER
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -79,20 +102,49 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-python3 setup.py install --root=$PKG
+sed -i "s|\ -Werror||" configure.ac
+
+autoreconf -i
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+LIBS=-lcrypt \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --mandir=/usr/man \
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --with-pam \
+  --without-x \
+  $VGAUTH_OPTS \
+  --build=$ARCH-slackware-linux
+
+make
+make install DESTDIR=$PKG
+
+mkdir -p $PKG/etc/rc.d
+cp $CWD/rc.vmtoolsd $PKG/etc/rc.d/rc.vmtoolsd.new
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+find $PKG -name perllocal.pod \
+  -o -name ".packlist" \
+  -o -name "*.bs" \
+  | xargs rm -f
+
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cd doc
-cp -a FAQ README $PKG/usr/doc/$PRGNAM-$VERSION
-cd ..
-cp -a LICENSE $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+	INSTALL LICENSE README docs/ \
+  $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+rm -f $PKG/usr/lib*/*.la
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
