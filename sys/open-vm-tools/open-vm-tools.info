@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/vmware/open-vm-tools/releases/download/stable-12.2.
 MD5SUM="96ee2fec9d09c2ade8d2e372171e0ac7"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="libmspack libdnet"
+REQUIRES="libmspack"
 MAINTAINER=""
 EMAIL=""
