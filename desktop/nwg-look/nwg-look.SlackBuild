@@ -77,8 +77,8 @@ tar xvf $CWD/v$VERSION.tar.?z || tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
 tar xvf $CWD/nwg-look-vendor-$VERSION.tar.gz
 
-# lower Go minimum version so we can build on 15.0
-patch -Np1 -i $CWD/gomin.patch || exit 1
+# lower Go minimum version so we can build on 15.0, not needed (but harmless) on -current
+#patch -Np1 -i $CWD/gomin.patch || exit 1
 
 chown -R root:root .
 find -L . \
