@@ -1,5 +1,5 @@
 PRGNAM="hyprland"
-VERSION="0.25.0-2"
+VERSION="0.25.0"
 HOMEPAGE="https://hyprland.org/"
 DOWNLOAD="https://github.com/hyprwm/Hyprland/releases/download/v0.25.0/source-v0.25.0-2.tar.gz"
 MD5SUM="b7f2e440e5743d236648a70c0d40ca29"
