@@ -83,11 +83,11 @@ find -L . \
 [ "${AVAHI:-no}" != "no" ] && avahi_opts=true || avahi_opts=false
 [ "${GTK_DOC:-no}" != "no" ] && doc_opts=true || doc_opts=false
 
-mkdir build
-cd build
+mkdir meson-build
+cd meson-build
   CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
-  meson .. \
+  meson setup .. \
     --prefix=/usr \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
     --libexecdir=/usr/libexec \
