@@ -74,7 +74,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$PKGNAM
-tar xvf $CWD/$PKGNAM-v$VERSION-2.tar.?z
+tar xvf $CWD/$PKGNAM-v$VERSION.tar.?z
 cd $PRGNAM-$PKGNAM
 chown -R root:root .
 find -L . \
