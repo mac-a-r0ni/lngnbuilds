@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/nwg-piotr/nwg-panel/archive/v0.9.4/nwg-panel-0.9.4.
 MD5SUM="bcde486300c5ad6fa7963b72ff892399"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gtk-layer-shell nwg-icon-picker playerctl python3-psutil python3-i3ipc python3-dasbus python3-netifaces python3-wheel SwayNotificationCenter wlr-randr"
+REQUIRES="gtk-layer-shell light nwg-icon-picker playerctl python3-psutil python3-i3ipc python3-dasbus python3-netifaces python3-wheel SwayNotificationCenter wlr-randr"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
