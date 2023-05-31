@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for discord
+# Slackware build script for bitwarden-desktop
 #
-# Copyright 2016-2021  Jeremy Hansen <jebrhansen+SBo -at- gmail.com>
+# Copyright 2022 marav, Paris, FR
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,9 +24,9 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=armcord-bin
-SRCNAM=ArmCord
-VERSION=${VERSION:-3.2.0}
+PRGNAM=bitwarden-desktop
+SRCNAM=bitwarden
+VERSION=${VERSION:-2023.5.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -51,14 +51,25 @@ TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-set -eu
+if [ "$ARCH" = "i586" ]; then
+  DEBARCH="i386"
+  LIBDIRSUFFIX=""
+  echo "This package is currently only available for 64bit."
+  exit 1
+elif [ "$ARCH" = "x86_64" ]; then
+  DEBARCH="amd64"
+  LIBDIRSUFFIX="64"
+else
+  echo "Package for $(uname -m) architecture is not available."
+  exit 1
+fi
+
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $PKG
-ar x $CWD/${SRCNAM}_${VERSION}_arm64.deb data.tar.xz
-tar xvf $PKG/data.tar.xz
-rm $PKG/data.tar.xz
+ar p $CWD/Bitwarden-${VERSION}-amd64.deb data.tar.xz | tar Jxv
 
 chown -R root:root .
 find -L . \
@@ -70,14 +81,11 @@ find -L . \
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mkdir -p $PKG/usr/bin
-( cd $PKG/usr/bin ; ln -sf /opt/$SRCNAM/$PRGNAM $PRGNAM )
-
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a $PKG/usr/share/doc/$SRCNAM/* $PKG/opt/Bitwarden/LICENSE* \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+rm -rf $PKG/usr/share/doc
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-
-# Don't need these:
-rm -rf $PKG/usr/share/doc $PKG/usr/share/lintian
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
