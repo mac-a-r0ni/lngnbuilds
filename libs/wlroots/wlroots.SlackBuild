@@ -24,8 +24,10 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
+SRCNAM=source
 PRGNAM=wlroots
-VERSION=${VERSION:-0.16.2}
+VERSION=${VERSION:-0.17.0-dev}
+HYPVER=${VERSION:-0.26.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -69,9 +71,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
-cd $PRGNAM-$VERSION
+rm -rf $SRCNAM-$HYPVER
+tar xvf $CWD/$SRCNAM-$HYPVER.tar.?z
+cd $SRCNAM-$HYPVER/subprojects/wlroots
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
