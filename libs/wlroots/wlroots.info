@@ -1,5 +1,5 @@
 PRGNAM="wlroots"
-VERSION="0.26.0"
+VERSION="0.17.0-dev"
 HOMEPAGE="https://gitlab.freedesktop.org/wlroots/wlroots"
 DOWNLOAD="https://github.com/hyprwm/Hyprland/releases/download/v0.26.0/source-v0.26.0.tar.gz"
 MD5SUM="5c21b37aac222d89755634bf29786940"
