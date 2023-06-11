@@ -71,9 +71,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $SRCNAM-$HYPVER
-tar xvf $CWD/$SRCNAM-$HYPVER.tar.?z
-cd $SRCNAM-$HYPVER/subprojects/wlroots
+rm -rf $SRCNAM-v$HYPVER
+tar xvf $CWD/$SRCNAM-v$HYPVER.tar.?z
+cd $SRCNAM-v$HYPVER/subprojects/wlroots
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
