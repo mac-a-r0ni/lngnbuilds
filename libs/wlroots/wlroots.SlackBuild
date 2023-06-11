@@ -71,7 +71,7 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $SRCNAM-v$HYPVER
+rm -rf hyprland-source
 tar xvf $CWD/$SRCNAM-v$HYPVER.tar.?z
 cd hyprland-source/subprojects/wlroots
 chown -R root:root .
@@ -81,8 +81,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir build
-cd build
+mkdir meson-build
+cd meson-build
   CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
   meson setup .. \
