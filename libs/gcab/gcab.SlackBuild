@@ -86,7 +86,7 @@ find -L . \
 # Configure, build, and install:
 export CFLAGS="$SLKCFLAGS"
 export CXXFLAGS="$SLKCFLAGS"
-mkdir meson-build
+mkdir -p meson-build
 cd meson-build
   meson setup .. \
  --prefix=/usr \
