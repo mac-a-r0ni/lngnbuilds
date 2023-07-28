@@ -28,8 +28,8 @@ PRGNAM=mullvadvpn-app
 SRCNAM=MullvadVPN
 VERSION=${VERSION:-2023.4}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_lngn}
-PKGTYPE=${PKGTYPE:-txz}
+TAG=${TAG:-_SBo}
+PKGTYPE=${PKGTYPE:-tgz}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -47,7 +47,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/lngn}
+TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -85,7 +85,10 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 # move and cleanup of debian package files and creating dirs needed by the pkg
-
+mkdir -p $PKG/etc/rc.d
+  cp -a $CWD/rc.mullvad $PKG/etc/rc.d/rc.mullvad
+  chmod 755 $PKG/etc/rc.d/rc.mullvad
+  chown root:root $PKG/etc/rc.d/rc.mullvad
 mkdir -p $PKG/etc/mullvad-vpn
 mkdir -p $PKG/var/log/mullvad-vpn
 mkdir -p $PKG/var/run/mullvad-vpn

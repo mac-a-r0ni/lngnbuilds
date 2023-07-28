@@ -1,14 +1,14 @@
 #!/bin/sh
 #
-# /etc/rc.d/rc.httpd
+# /etc/rc.d/rc.mullvad
 #
 # Start/stop/restart - Mullvad VPN Service.
 #
 # To make Mullvad VPN start automatically at boot, make this
 # file executable:  chmod 755 /etc/rc.d/rc.mullvad
 #
-# You will also need to add this to /etc/rc.d/rc.local:
-# Start MullvadVPN:
+# and also you must add this to /etc/rc.d/rc.local to
+# start MullvadVPN:
 #
 # if [ -x /etc/rc.d/rc.mullvad ]; then
 #   /etc/rc.d/rc.mullvad start
