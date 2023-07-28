@@ -1,0 +1,14 @@
+MullvadVPN-app Desktop Client
+
+This is a repackaged Debian binary package for MullvadVPN's Desktop Client.
+
+If by chance you're one of the elite few running the in-development
+Slackware aarch64 port, you'll need to manually download this file
+in the current working SlackBuild directory due to limitations with
+SBo info files:
+
+https://github.com/mullvad/mullvadvpn-app/releases/download/2023.4/MullvadVPN-2023.4_arm64.deb
+
+The script will find it and build the appropriate package. DO NOT
+download it unless you are on the ARM64 platform or else you will
+end up with a broken package on x86_64.
