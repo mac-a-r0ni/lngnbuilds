@@ -28,8 +28,8 @@ PRGNAM=mullvadvpn-app
 SRCNAM=MullvadVPN
 VERSION=${VERSION:-2023.4}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
-PKGTYPE=${PKGTYPE:-tgz}
+TAG=${TAG:-_lngn}
+PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -47,7 +47,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/SBo}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -84,13 +84,18 @@ find -L . \
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+# move and cleanup of debian package files and creating dirs needed by the pkg
+
+mkdir -p $PKG/etc/mullvad-vpn
+mkdir -p $PKG/var/log/mullvad-vpn
+mkdir -p $PKG/var/run/mullvad-vpn
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a $PKG/usr/share/doc/mullvad-vpn/* $PKG/opt/Mullvad\ VPN\/LICENSE* \
   $PKG/usr/doc/$PRGNAM-$VERSION
 mkdir -p $PKG/usr/share/zsh
 cp -a $PKG/usr/local/share/* $PKG/usr/share
 rm -rf $PKG/usr/share/doc
-rm -rf $PKG/usr/local/share
+rm -rf $PKG/usr/local
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
