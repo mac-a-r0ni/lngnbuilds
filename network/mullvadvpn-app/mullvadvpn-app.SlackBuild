@@ -91,7 +91,6 @@ mkdir -p $PKG/etc/rc.d
   chown root:root $PKG/etc/rc.d/rc.mullvad
 mkdir -p $PKG/etc/mullvad-vpn
 mkdir -p $PKG/var/log/mullvad-vpn
-mkdir -p $PKG/var/run/mullvad-vpn
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a $PKG/usr/share/doc/mullvad-vpn/* $PKG/opt/Mullvad\ VPN\/LICENSE* \
   $PKG/usr/doc/$PRGNAM-$VERSION
