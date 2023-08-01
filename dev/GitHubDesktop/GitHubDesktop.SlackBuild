@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for mullvadvpn-app
+# Slackware build script for discord
 #
 # Copyright 2023 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
@@ -24,32 +24,12 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=mullvadvpn-app
-SRCNAM=MullvadVPN
-VERSION=${VERSION:-2023.4}
+PRGNAM=GitHubDesktop
+SRCNAM=GitHubDesktop
+VERSION=${VERSION:-3.2.7}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
-
-if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$( uname -m ) ;;
-  esac
-fi
-
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
-if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
-  exit 0
-fi
-
-TMP=${TMP:-/tmp/lngn}
-PKG=$TMP/package-$PRGNAM
-OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i586" ]; then
   DEBARCH="i386"
@@ -67,12 +47,26 @@ else
   exit 1
 fi
 
-set -e
+# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
+# the name of the created package would be, and then exit. This information
+# could be useful to other scripts.
+if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
+  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  exit 0
+fi
+
+TMP=${TMP:-/tmp/lngn}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+set -eu
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $PKG
-ar p $CWD/$SRCNAM-${VERSION}_$DEBARCH.deb data.tar.xz | tar Jxv
+ar x $CWD/${SRCNAM}-linux-$DEBARCH-${VERSION}-linux2.deb data.tar.xz
+tar xvf $PKG/data.tar.xz
+rm $PKG/data.tar.xz
 
 chown -R root:root .
 find -L . \
@@ -84,21 +78,14 @@ find -L . \
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-# move and cleanup of debian package files and creating dirs needed by the pkg
-mkdir -p $PKG/etc/rc.d
-  cp -a $CWD/rc.mullvad $PKG/etc/rc.d/rc.mullvad
-  chmod 755 $PKG/etc/rc.d/rc.mullvad
-  chown root:root $PKG/etc/rc.d/rc.mullvad
-mkdir -p $PKG/etc/mullvad-vpn
-mkdir -p $PKG/var/log/mullvad-vpn
+mkdir -p $PKG/usr/bin
+( cd $PKG/usr/bin ; ln -sf /opt/$SRCNAM/$PRGNAM $PRGNAM )
+
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a $PKG/usr/share/doc/mullvad-vpn/* $PKG/opt/Mullvad\ VPN\/LICENSE* \
-  $PKG/usr/doc/$PRGNAM-$VERSION
-mkdir -p $PKG/usr/share/zsh
-cp -a $PKG/usr/local/share/* $PKG/usr/share
-rm -rf $PKG/usr/share/doc
-rm -rf $PKG/usr/local
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+# Don't need these:
+rm -rf $PKG/usr/share/doc $PKG/usr/share/lintian
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
