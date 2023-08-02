@@ -4,5 +4,5 @@ Version=1.0
 Type=ArmCord
 Terminal=false
 Exec=/usr/bin/armcord
-Name=armcord    
+Name=armcord
 Icon=/usr/share/icons/armcord_icon.png
