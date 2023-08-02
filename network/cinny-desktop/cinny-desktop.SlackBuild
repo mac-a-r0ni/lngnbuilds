@@ -57,7 +57,7 @@ if [ "$ARCH" = "i586" ]; then
   echo "This package is currently only available for 64bit."
   exit 1
 elif [ "$ARCH" = "x86_64" ]; then
-  DEBARCH="amd64"
+  DEBARCH="x86_64"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
   DEBARCH="arm64"
