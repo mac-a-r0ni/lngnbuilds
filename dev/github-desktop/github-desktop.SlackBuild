@@ -87,7 +87,10 @@ find -L . \
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+# fix the symlink
 mkdir -p $PKG/usr/bin
+rm -rf $PKG/usr/bin/github-desktop
+ln -sf ../lib64/github-desktop/github-desktop $PKG/usr/bin/github-desktop
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
@@ -97,8 +100,8 @@ mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
 mv $PKG/usr/lib/* $PKG/usr/lib${LIBDIRSUFFIX}
 rm -rf $PKG/usr/lib
 
-# Don't need these:
-mv $PKG/usr/share/doc/* $PKG/usr/doc/$PRGNAM-$VERSION
+# move docs and remove lintian dir:
+mv $PKG/usr/share/doc/$PRGNAM/* $PKG/usr/doc/$PRGNAM-$VERSION
 rm -rf $PKG/usr/share/doc $PKG/usr/share/lintian
 
 mkdir -p $PKG/install
