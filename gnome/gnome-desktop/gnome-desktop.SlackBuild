@@ -22,10 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# Updated to version 40.2 by Igor Alexandrov <igor.alexandrov@outlook.com>
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-desktop
-VERSION=${VERSION:-43.2}
+VERSION=${VERSION:-44.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -73,7 +75,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
+tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -82,8 +84,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir meson-build
-cd meson-build
+mkdir build
+cd build
   CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
   meson setup .. \
@@ -96,7 +98,7 @@ cd meson-build
     --buildtype=release \
     -Dsystemd=disabled \
     -Ddesktop_docs=false \
-    -Dgtk_doc=false
+    -Dgtk_doc=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
