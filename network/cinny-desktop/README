@@ -1,7 +1,5 @@
-MullvadVPN-app Desktop Client
+Cinny Desktop - yet another Matrix client.
 
-This is a repackaged Debian binary package for MullvadVPN's Desktop Client.
+This is a repackaged Debian binary package for Cinny Desktop.
 
-There is no 32bit application available, so the $DOWNLOAD is for the
-ARM64-aarch64 client and the $DOWNLOAD_x86_64 is for the x86 one. The
-script will build the right one for you.
+There is no 32bit application available.

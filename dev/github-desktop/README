@@ -1,7 +1,12 @@
 
-github-desktop (Desktop client for GitHub use)
+github-desktop (Desktop client for GitHub)
 
 Fork of GitHub Desktop to support various Linux distributions.
 
-64-bit only. x86_64($DOWNLOAD_x86_64) and aarch64 ($DOWNLOAD) are supported
-in the script. It will fail on a 32-bit system.
+64-bit only. It will spit an error on a 32-bit system.
+
+The script also supports aarch64 but you must manually wget the file
+as the .info cannot support it directly.
+
+aarch64 link:
+https://github.com/shiftkey/desktop/releases/download/release-3.2.7-linux2/GitHubDesktop-linux-arm64-3.2.7-linux2.deb
