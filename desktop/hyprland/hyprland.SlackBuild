@@ -29,9 +29,9 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PKGNAM=source
 PRGNAM=hyprland
-VERSION=${VERSION:-0.26.0}
+VERSION=${VERSION:-0.29.0}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_nwg}
+TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
@@ -50,7 +50,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/nwg}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 

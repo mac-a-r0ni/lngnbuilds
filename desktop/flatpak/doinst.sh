@@ -24,7 +24,7 @@ preserve_perms() {
 config etc/profile.d/flatpak.sh.new
 preserve_perms etc/profile.d/flatpak.sh.new
 
-# Make the flathub/gnome-nightly repositories available systemwide:
+# Make the flathub repositories available systemwide:
 chroot . \
   /usr/bin/flatpak remote-add --user --if-not-exists \
   flathub /etc/flatpak/remotes.d/flathub.flatpakrepo
