@@ -29,7 +29,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=google-go-lang
-VERSION=${VERSION:-1.20.5}
+VERSION=${VERSION:-1.21.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -52,10 +52,6 @@ if [ "$ARCH" = "i586" ]; then
 elif [ "$ARCH" = "x86_64" ]; then
   LIBDIRSUFFIX="64"
   GOARCH="amd64"
-elif [ "$ARCH" = "arm" ]; then
-  LIBDIRSUFFIX=""
-  GOARCH="arm"
-  export GOARM="7" # can be '5' as well, to use soft float instead of hardware
 elif [ "$ARCH" = "aarch64" ]; then
   LIBDIRSUFFIX="64"
   GOARCH="arm64"
