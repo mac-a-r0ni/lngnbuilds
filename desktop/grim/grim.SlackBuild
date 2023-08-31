@@ -25,8 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=grim
-SRCNAM=grim-v1.4.0
-VERSION=${VERSION:-1.4.0}
+SRCNAM=grim-v1.4.1
+VERSION=${VERSION:-1.4.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -73,8 +73,6 @@ cd $TMP
 rm -rf $SRCNAM
 tar xvf $CWD/$SRCNAM.tar.gz || tar xvf $CWD/v$VERSION.tar.gz
 cd $SRCNAM
-# https://git.sr.ht/~emersion/grim/commit/89e02e663fabc534b7e7039514f60a8c5d70070d
-patch -p1 -i $CWD/89e02e663fabc534b7e7039514f60a8c5d70070d.patch
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -98,7 +96,7 @@ cd meson-build
     -Djpeg=enabled \
     -Dman-pages=enabled \
     -Dfish-completions=false \
-    -Dbash-completions=false \
+    -Dbash-completions=true \
 
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install

@@ -5,15 +5,15 @@
 # You must make exactly 11 lines for the formatting to be correct.  It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 
-     |-----handy-ruler------------------------------------------------------|
-i3ipc: i3ipc (An improved Python library to control i3wm and sway)
-i3ipc:
-i3ipc:
-i3ipc:
-i3ipc:
-i3ipc:
-i3ipc:
-i3ipc:
-i3ipc:
-i3ipc:
-i3ipc:
+          |-----handy-ruler------------------------------------------------------|
+noto-emoji: noto-emoji (Noto Emoji fonts)
+noto-emoji:
+noto-emoji: Color Noto emoji fonts, and tools for working with them.
+noto-emoji:
+noto-emoji: https://github.com/googlei18n/noto-emoji
+noto-emoji:
+noto-emoji:
+noto-emoji:
+noto-emoji:
+noto-emoji:
+noto-emoji:
