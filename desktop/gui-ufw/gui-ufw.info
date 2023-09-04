@@ -1,5 +1,5 @@
 PRGNAM="gui-ufw"
-VERSION="1.12.1"
+VERSION="22.04.0"
 HOMEPAGE="https://github.com/costales/gufw"
 DOWNLOAD="https://github.com/costales/gufw/releases/download/22.04/gui-ufw-22.04.0.tar.gz"
 MD5SUM="8a10f6957b38b569a82843e1276c1a50"
