@@ -80,8 +80,6 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-#patch -p1 < $CWD/unhide-deprecated-api.patch
-
 mkdir -p build
 cd build
   cmake -DPORT=GTK \
@@ -99,7 +97,7 @@ cd build
 	-DENABLE_DOCUMENTATION=OFF \
 	-DENABLE_BUBBLEWRAP_SANDBOX=ON \
 	-DUSE_SYSTEM_MALLOC=on \
-        -DUSE_GSTREAMER_TRANSCODER=OFF \
+        -DUSE_GSTREAMER_TRANSCODER=ON \
         -DUSE_AVIF=ON \
         -Wno-dev \
         -G Ninja \
@@ -109,10 +107,6 @@ cd build
 # of the resources, so let's try to limit it to half the available ones
 "${NINJA:=ninja}" -j$(expr $(nproc) + 1)
 DESTDIR=$PKG $NINJA -j1 install
-
-#mkdir -p $PKG/usr/share/gtk-doc/html/webkit{2,dom}gtk-4.0
-#cp -rf ../Documentation/* \
-#  $PKG/usr/share/gtk-doc/html/webkit2gtk-4.0
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a ../NEWS $PKG/usr/doc/$PRGNAM-$VERSION
