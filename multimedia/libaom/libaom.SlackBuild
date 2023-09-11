@@ -25,11 +25,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=aom
-# The 'official' archive for the aom 3.6.0 release has the git commit in
-# the filename, so adjustments are required for a sane Slackware build:
-VERSION=${VERSION:-3.6.0}
-GITCOMMIT=${GITCOMMIT:-3c65175b1972da4a1992c1dae2365b48d13f9a8d}
+PRGNAM=libaom
+VERSION=${VERSION:-3.7.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -75,7 +72,7 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$GITCOMMIT.tar.gz -C $TMP/$PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
