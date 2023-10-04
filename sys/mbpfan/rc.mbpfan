@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# /etc/rc.d/mbpfan: start/stop mbpfan
+# daemon -fr --pidfiles=/var/run --name mbpfan /usr/bin/mbpfan
+
+SSD=/usr/bin/daemon
+PATH=/usr/bin/mbpfan
+PRG=mbpfan
+RUNDIR=/var/run
+PID=$RUNDIR/mbpfan.pid
+
+case $1 in
+  start)
+    $SSD -fr --pidfiles=$PID --name $PRG $PATH ;;
+  stop)
+    kill $(pidof $PROG) ;;
+  restart)
+    $0 stop
+    $0 start ;;
+  status)
+    $SSD --status --exec $PROG
+    case $? in
+      0) echo "$PROG is running with pid $(pidof $PROG)" ;;
+      1) echo "$PROG is not running but the pid file $PID exists" ;;
+      3) echo "$PROG is not running" ;;
+      4) echo "Unable to determine the program status" ;;
+    esac ;;
+  *)
+    echo "usage: $0 [start|stop|restart|status]" ;;
+esac
