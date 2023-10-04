@@ -1,11 +1,14 @@
 #!/bin/sh
-
+------------------------------------------------------------------------
 # Slackware build script for broadcom-wl
-# Casually changed the name of the package to match all other distros
-# name so there is no confusion on _what_ this package is for.
+#
+# SlackBuild formerly known as 'broadcom-sta' on slackbuilds.org
+# Changed the name of the package to match the patchset in use, this is
+# re-based on patches for Arch Linux. See:
+# https://gitlab.archlinux.org/archlinux/packaging/packages/broadcom-wl-dkms
 
 # Copyright 2015-2019 Andreas Voegele <andreas@andreasvoegele.com>
-# Updated & Maintained for my personal use 2022 Jay Lanagan (j@lngn.net).
+# Copyright 2022-23 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above

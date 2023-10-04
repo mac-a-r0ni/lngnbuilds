@@ -92,15 +92,18 @@ mkdir -p $PKG/usr/bin
 rm -rf $PKG/usr/bin/github-desktop
 ln -sf ../lib64/github-desktop/github-desktop $PKG/usr/bin/github-desktop
 
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-
 # fix libs location
 mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
 mv $PKG/usr/lib/* $PKG/usr/lib${LIBDIRSUFFIX}
 rm -rf $PKG/usr/lib
 
+# make these files exec so sbopkglint don't complain
+chmod 755 $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM/resources/app/{keytar,desktop-notifications,fs_admin}.node
+
 # move docs and remove lintian dir:
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
 mv $PKG/usr/share/doc/$PRGNAM/* $PKG/usr/doc/$PRGNAM-$VERSION
 rm -rf $PKG/usr/share/doc $PKG/usr/share/lintian
 

@@ -8,5 +8,5 @@ Fork of GitHub Desktop to support various Linux distributions.
 The script also supports aarch64 but you must manually wget the file
 as the .info cannot support it directly.
 
-aarch64 link:
-https://github.com/shiftkey/desktop/releases/download/release-3.2.7-linux2/GitHubDesktop-linux-arm64-3.2.7-linux2.deb
+arm64/aarch64 link:
+https://github.com/shiftkey/desktop/releases/download/release-3.3.1-linux1/GitHubDesktop-linux-arm64-3.3.1-linux1.deb
