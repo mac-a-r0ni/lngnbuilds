@@ -1,30 +1,34 @@
 #!/bin/sh
 #
-# /etc/rc.d/mbpfan: start/stop mbpfan
-# daemon -fr --pidfiles=/var/run --name mbpfan /usr/bin/mbpfan
+# /etc/rc.d/rc.mbpfan
+#
+# Start/stop/restart - mbpfan.
+#
+# To make mbpfan start automatically at boot, make this
+# file executable:  chmod 755 /etc/rc.d/rc.mbpfan
+#
+# and also you must add this to /etc/rc.d/rc.local to
+# start mbpfan:
+#
+# if [ -x /etc/rc.d/rc.mbpfan ]; then
+#   /etc/rc.d/rc.mbpfan start
+# fi
 
-SSD=/usr/bin/daemon
-PATH=/usr/bin/mbpfan
-PRG=mbpfan
-RUNDIR=/var/run
-PID=$RUNDIR/mbpfan.pid
 
-case $1 in
-  start)
-    $SSD -fr --pidfiles=$PID --name $PRG $PATH ;;
-  stop)
-    kill $(pidof $PROG) ;;
-  restart)
-    $0 stop
-    $0 start ;;
-  status)
-    $SSD --status --exec $PROG
-    case $? in
-      0) echo "$PROG is running with pid $(pidof $PROG)" ;;
-      1) echo "$PROG is not running but the pid file $PID exists" ;;
-      3) echo "$PROG is not running" ;;
-      4) echo "Unable to determine the program status" ;;
-    esac ;;
+case "$1" in
+  'start')
+    /usr/bin/mbpfan >/dev/null &
+  ;;
+  'stop')
+    pkill -f /usr/bin/mbpfan >/dev/null &
+    # Remove both possible .pid locations:
+    rm -f /var/run/mbpfan.pid /var/run/mbpfan/mbpfan.pid
+  ;;
+  'restart')
+    /usr/bin/mbpfan >/dev/null &
+  ;;
   *)
-    echo "usage: $0 [start|stop|restart|status]" ;;
+    echo "Usage: $0 {start|stop|restart}"
+  ;;
 esac
+
