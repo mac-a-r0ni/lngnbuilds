@@ -14,18 +14,16 @@
 #   /etc/rc.d/rc.mbpfan start
 # fi
 
-
 case "$1" in
   'start')
-    /usr/bin/mbpfan >/dev/null &
+    /usr/sbin/mbpfan -f >/dev/null &
   ;;
   'stop')
-    pkill -f /usr/bin/mbpfan >/dev/null &
-    # Remove both possible .pid locations:
-    rm -f /var/run/mbpfan.pid /var/run/mbpfan/mbpfan.pid
+    pkill -f /usr/sbin/mbpfan >/dev/null &
+    rm -f /var/run/mbpfan.pid
   ;;
   'restart')
-    /usr/bin/mbpfan >/dev/null &
+    /usr/sbin/mbpfan -f >/dev/null &
   ;;
   *)
     echo "Usage: $0 {start|stop|restart}"
