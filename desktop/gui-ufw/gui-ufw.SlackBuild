@@ -54,7 +54,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -69,11 +69,11 @@ patch -p1 < $CWD/path-fix.diff
 
 python3 setup.py install --prefix=/usr --root=$PKG
 
-# fix installation of files in odd places
-rm -R $PKG/usr/share/doc
-mkdir -p $PKG/usr/man/man8
-mv $PKG/usr/share/man/man8/gufw.8 $PKG/usr/man/man8
-rm -R $PKG/usr/share/man
+# Move the manpage to a sane directory.
+mv $PKG/usr/share/man $PKG/usr
+
+# Clean up some duplicates
+rm -rf $PKG/usr/share/doc
 
 # Compress and link manpages, if any:
 if [ -d $PKG/usr/man ]; then
