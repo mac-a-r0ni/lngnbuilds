@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mullvadvpn-app
 SRCNAM=MullvadVPN
-VERSION=${VERSION:-2023.4}
+VERSION=${VERSION:-2023.5}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -86,9 +86,9 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 
 # move and cleanup of debian package files and creating dirs needed by the pkg
 mkdir -p $PKG/etc/rc.d
-  cp -a $CWD/rc.mullvad $PKG/etc/rc.d/rc.mullvad
-  chmod 755 $PKG/etc/rc.d/rc.mullvad
-  chown root:root $PKG/etc/rc.d/rc.mullvad
+cp -a $CWD/rc.mullvad $PKG/etc/rc.d/rc.mullvad
+chmod 755 $PKG/etc/rc.d/rc.mullvad
+chown root:root $PKG/etc/rc.d/rc.mullvad
 mkdir -p $PKG/etc/mullvad-vpn
 mkdir -p $PKG/var/log/mullvad-vpn
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
