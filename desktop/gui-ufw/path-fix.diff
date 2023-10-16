@@ -1,5 +1,5 @@
---- gufw-pkexec
-+++ gufw-pkexec
+--- a/bin/gufw-pkexec
++++ b/bin/gufw-pkexec
 @@ -1,2 +1,11 @@
  #!/bin/bash
 -python3 /usr/share/gufw/gufw/gufw.py $1
