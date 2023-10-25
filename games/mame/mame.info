@@ -1,7 +1,7 @@
 PRGNAM="mame"
 VERSION="0.260"
 HOMEPAGE="http://mamedev.org/"
-DOWNLOAD="https://github.com/mamedev/mame/archive/mame0255/mame-mame0260.tar.gz"
+DOWNLOAD="https://github.com/mamedev/mame/archive/mame0260/mame-mame0260.tar.gz"
 MD5SUM="1cd779c4b074db03e63832d59f676f30"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
