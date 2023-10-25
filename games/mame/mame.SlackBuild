@@ -263,6 +263,7 @@ make USE_QTDEBUG=$QTOPT \
      USE_SYSTEM_LIB_ZLIB=1 \
      USE_SYSTEM_LIB_JPEG=1 \
      USE_SYSTEM_LIB_FLAC=1 \
+     USE_WAYLAND=1 \
      PYTHON_EXECUTABLE="/usr/bin/python3 -S" \
      OPT_FLAGS="$SLKCFLAGS" \
      LDOPTS="-fuse-ld=gold" \
