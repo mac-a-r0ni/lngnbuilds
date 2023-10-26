@@ -25,8 +25,9 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=luajit
-VERSION=${VERSION:-2.0.5}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-2.0_e826d0c}
+REVISION=${REVISION:-e826d0c101d750fac8334d71e221c50d8dbe236c}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -72,9 +73,10 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf LuaJIT-$VERSION
-tar zxvf $CWD/LuaJIT-$VERSION.tar.gz
-cd LuaJIT-$VERSION
+rm -rf luajit-$VERSION
+tar zxvf $CWD/$REVISION.tar.gz
+# im sure theres a smart way to change - to _ but i'm not that guy
+cd luajit-2.0-e826d0c
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
