@@ -72,7 +72,12 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $PKG
-ar p $CWD/cinny_${VERSION}_$DEBARCH.deb data.tar.gz || ar p $CWD/$SRCNAM-$DEBARCH.deb data.tar.gz | tar xzv
+
+if [ "$DEBARCH" = "arm64" ]; then
+ar p $CWD/cinny_${VERSION}_$DEBARCH.deb data.tar.gz | tar xzv
+elif [ "$DEBARCH" = "x86_64" ]; then
+ar p $CWD/$SRCNAM-$DEBARCH.deb data.tar.gz | tar xzv
+fi
 
 chown -R root:root .
 find -L . \
