@@ -57,7 +57,7 @@ if [ "$ARCH" = "i586" ]; then
   echo "This package is currently only available for 64bit."
   exit 1
 elif [ "$ARCH" = "x86_64" ]; then
-  DEBARCH="x86_64"
+  DEBARCH="amd64"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
   DEBARCH="arm64"
@@ -75,8 +75,8 @@ cd $PKG
 
 if [ "$DEBARCH" = "arm64" ]; then
 ar p $CWD/cinny_${VERSION}_$DEBARCH.deb data.tar.gz | tar xzv
-elif [ "$DEBARCH" = "x86_64" ]; then
-ar p $CWD/$SRCNAM-$DEBARCH.deb data.tar.gz | tar xzv
+elif [ "$DEBARCH" = "amd64" ]; then
+ar p $CWD/cinny_${VERSION}_$DEBARCH.deb data.tar.gz | tar xzv
 fi
 
 chown -R root:root .
