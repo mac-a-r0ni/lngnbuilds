@@ -5,6 +5,6 @@ DOWNLOAD="https://www.freedesktop.org/software/appstream/releases/AppStream-0.16
 MD5SUM="d60cdc2c2641398c2fde38e6436d185b"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="libxmlb"
+REQUIRES="libxmlb libstemmer"
 MAINTAINER=""
 EMAIL=""
