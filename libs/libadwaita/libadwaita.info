@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/libadwaita/1.4/libadwaita-1.4.0.tar
 MD5SUM="45fb9c5bc8ca300d0f3e806733123f00"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=""
+REQUIRES="appstream libxmlb"
 MAINTAINER=""
 EMAIL=""
