@@ -91,7 +91,9 @@ meson setup \
   --mandir=/usr/man \
   --prefix=/usr \
   --sysconfdir=/etc \
-  -Dgtk_doc=${GTK_DOC:-false} \
+  -Dtests=false \
+  -Dexamples=false \
+  -Dgtk_doc=false \
   build/
 
 ${NINJA:=ninja} -v -C build/
