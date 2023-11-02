@@ -1,5 +1,12 @@
 Cinny Desktop - yet another Matrix client.
 
-This is a repackaged Debian binary package for Cinny Desktop.
+This is a native Slackware built application. The official scripts
+build a deb package as well as an AppImage. One can also repackage
+the official deb files, but they aren't guaranteed to work on
+Slackware. By building a deb package locally, we guarantee
+it's built with the correct libs and versions.
+
+Cinny is also able to be used directly from the web with your
+electron supporting browser of choice.
 
 There is no 32bit application available.
