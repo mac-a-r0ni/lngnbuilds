@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for libadwaita
+# Slackware build script for Tuba
 
-# Copyright © 2022-2023 Logan Rathbone, Province of Ontario, Canada
+# Copyright 2023 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,18 +24,18 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=libadwaita
-VERSION=${VERSION:-1.4.0}
+PRGNAM=tuba
+VERSION=${VERSION:-0.5.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
+case "$( uname -m )" in
     i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
-       *) ARCH=$( uname -m ) ;;
-  esac
+    *) ARCH=$( uname -m ) ;;
+esac
 fi
 
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
@@ -64,16 +64,14 @@ else
   LIBDIRSUFFIX=""
 fi
 
-set -e 
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
-
-cd $PRGNAM-$VERSION
-
+rm -rf Tuba-$VERSION
+tar xvf $CWD/Tuba-$VERSION.tar.?z
+cd Tuba-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -81,39 +79,36 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-meson setup \
-  --buildtype=${BUILDTYPE:-release} \
+mkdir build
+cd build
+  CFLAGS="$SLKCFLAGS" \
+  CXXFLAGS="$SLKCFLAGS" \
+  meson setup .. \
+  --buildtype=release \
   --infodir=/usr/info \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --localstatedir=/var \
-  --mandir=/usr/man \
+  --mandir=/usr/man  \
   --prefix=/usr \
   --sysconfdir=/etc \
-  -Dgtk_doc=${GTK_DOC:-false} \
-  build/
+  -Dstrip=true
 
-${NINJA:=ninja} -v -C build/
-DESTDIR=$PKG $NINJA -C build/ install
+  "${NINJA:=ninja}"
+  DESTDIR=$PKG $NINJA install
+cd ..
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
-# strip, unless debug build requested
-if [[ "$BUILDTYPE" != *"debug"* ]]; then
-  find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
-    | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
-fi
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a \
-  AUTHORS HACKING* README* COPYING NEWS \
-  $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a CODE_OF_CONDUCT.md LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
+#cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
