@@ -99,7 +99,6 @@ cd meson-build
     -Dsystemd=disabled
 
   "${NINJA:=ninja}"
-  $NINJA -C meson-build
   make -C hyprland-share-picker all
   DESTDIR=$PKG $NINJA install
 cd ..
