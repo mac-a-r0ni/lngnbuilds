@@ -97,12 +97,12 @@ cd meson-build
     --sysconfdir=/etc \
     -Dstrip=true \
     -Dsystemd=disabled
-
+cd ..
   "${NINJA:=ninja}"
   $NINJA -C meson-build
   make -C hyprland-share-picker all
   DESTDIR=$PKG $NINJA install
-cd ..
+
 install -Dm0755 -t $PKG/usr/bin $TMP/$PRGNAM-$VERSION/hyprland-share-picker/build/hyprland-share-picker
 install -Dm0644 -t $PKG/usr/share/xdg-desktop-portal $CWD/hyprland-portals.conf
 
