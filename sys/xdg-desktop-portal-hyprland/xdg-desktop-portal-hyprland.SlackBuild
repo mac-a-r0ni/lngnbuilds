@@ -96,10 +96,9 @@ cd meson-build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
-    -Dsystemd=disabled \
+    -Dsystemd=disabled
 
   "${NINJA:=ninja}"
-  $NINJA -C build
   make -C hyprland-share-picker all
   DESTDIR=$PKG $NINJA install
 cd ..
