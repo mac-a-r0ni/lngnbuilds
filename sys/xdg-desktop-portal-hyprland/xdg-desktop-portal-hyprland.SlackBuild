@@ -81,7 +81,7 @@ find -L . \
 
 # to submit this to SBo I either need to have a pkg for the protocols or bundle a specific git pull when shipping
 # preferrable to make a pkg if we have a stable release by then.
-#git clone https://github.com/hyprwm/hyprland-protocols $TMP/$PRGNAM-$VERSION/subprojects/hyprland-protocols
+git clone https://github.com/hyprwm/hyprland-protocols $TMP/$PRGNAM-$VERSION/subprojects/hyprland-protocols
 
 mkdir meson-build
 cd meson-build
@@ -99,7 +99,6 @@ cd meson-build
     -Dsystemd=disabled
 
   "${NINJA:=ninja}"
-#  make -C hyprland-share-picker all
   DESTDIR=$PKG $NINJA install
 cd ..
 #install -Dm0755 -t $PKG/usr/bin $TMP/$PRGNAM-$VERSION/hyprland-share-picker/build/hyprland-share-picker
