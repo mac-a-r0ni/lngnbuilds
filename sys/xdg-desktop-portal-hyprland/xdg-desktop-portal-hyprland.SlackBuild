@@ -96,7 +96,6 @@ cd meson-build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
-    -Dsd-bus-provider=libelogind \
     -Dsystemd=disabled
 
   "${NINJA:=ninja}"
