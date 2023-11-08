@@ -71,7 +71,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf appstream_glib_$SRCVERSION
-tar xvf $CWD/$SRCVERSION.tar.gz
+tar xvf $CWD/appstream-glib-$SRCVERSION.tar.gz
 cd appstream-glib-$SRCVERSION
 chown -R root:root .
 find -L . \

@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=xdg-desktop-portal-hyprland
-VERSION=${VERSION:-0.5.0}
+VERSION=${VERSION:-1.2.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -96,12 +96,13 @@ cd meson-build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
-    -Dsd-bus-provider=libelogind \
     -Dsystemd=disabled
 
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
+#install -Dm0755 -t $PKG/usr/bin $TMP/$PRGNAM-$VERSION/hyprland-share-picker/build/hyprland-share-picker
+install -Dm0644 -t $PKG/usr/share/xdg-desktop-portal $CWD/hyprland-portals.conf
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
