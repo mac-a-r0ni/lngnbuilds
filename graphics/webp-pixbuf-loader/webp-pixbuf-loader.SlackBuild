@@ -76,7 +76,7 @@ mkdir build
 cd build
   CFLAGS="-Wl,-s $SLKCFLAGS" \
   CXXFLAGS="-Wl,-s $SLKCFLAGS" \
-  meson .. \
+  meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
