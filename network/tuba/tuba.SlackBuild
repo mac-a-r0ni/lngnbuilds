@@ -91,6 +91,7 @@ cd build
   --mandir=/usr/man  \
   --prefix=/usr \
   --sysconfdir=/etc \
+  -Ddistro=true \
   -Dstrip=true
 
   "${NINJA:=ninja}"
