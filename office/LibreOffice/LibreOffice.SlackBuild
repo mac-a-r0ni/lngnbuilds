@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 # ex:set ai shiftwidth=4 inputtab=spaces smarttab noautotab:
+# 7.6.3.1 update removed system icu or LO fails to build.
+#    --with-system-icu \
 
 # Slackware build script for LibreOffice
 
@@ -245,7 +247,6 @@ fi
     --with-system-epoxy \
     --with-system-expat \
     --with-system-hunspell \
-    --with-system-icu \
     --with-system-jpeg \
     --with-system-lcms2 \
     --with-system-libodfgen \
