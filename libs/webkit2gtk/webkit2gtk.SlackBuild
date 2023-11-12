@@ -99,6 +99,7 @@ cd build
 	-DUSE_SYSTEM_MALLOC=on \
         -DUSE_GSTREAMER_TRANSCODER=ON \
         -DUSE_AVIF=ON \
+        -DUSE_JPEGXL=OFF \
         -Wno-dev \
         -G Ninja \
         ..
