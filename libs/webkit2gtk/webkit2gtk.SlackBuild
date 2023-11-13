@@ -96,7 +96,6 @@ cd build
         -DENABLE_JOURNALD_LOG=OFF \
 	-DENABLE_DOCUMENTATION=OFF \
 	-DENABLE_BUBBLEWRAP_SANDBOX=ON \
-	-DENABLE_UNIFIED_BUILDS=OFF \
 	-DUSE_SYSTEM_MALLOC=on \
         -DUSE_GSTREAMER_TRANSCODER=ON \
         -DUSE_AVIF=ON \
@@ -107,7 +106,7 @@ cd build
 
 # The build might crash on high specs machines because ninja eat all
 # of the resources, so let's try to limit it to half the available ones
-"${NINJA:=ninja}" -j$(expr $(nproc) )
+"${NINJA:=ninja}" -j$(expr $(nproc) / 2)
 DESTDIR=$PKG $NINJA -j1 install
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
