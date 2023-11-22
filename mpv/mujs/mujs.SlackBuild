@@ -90,7 +90,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
 chmod 644 docs/*.png
 
-make shared && make install-shared \
+make release && make install-shared \
   prefix=/usr \
   libdir=/usr/lib${LIBDIRSUFFIX} \
   DESTDIR=$PKG
