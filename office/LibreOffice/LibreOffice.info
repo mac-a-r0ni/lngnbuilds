@@ -1,8 +1,8 @@
 PRGNAM="LibreOffice"
-VERSION="7.6.3.1"
+VERSION="7.6.3.2"
 HOMEPAGE="https://www.libreoffice.org"
-DOWNLOAD="https://download.documentfoundation.org/libreoffice/src/7.6.3/libreoffice-7.6.3.1.tar.xz \
-		https://slackware.lngn.net/pub/source/libreoffice/libreoffice-7.6.3.1-srcs.tar.xz"
+DOWNLOAD="https://download.documentfoundation.org/libreoffice/src/7.6.3/libreoffice-7.6.3.2.tar.xz \
+		https://slackware.lngn.net/pub/source/libreoffice/libreoffice-7.6.3.2-srcs.tar.xz"
 MD5SUM="13fca0b5df68b445340d7c5f8373e99c \
 		"
 DOWNLOAD_x86_64=""
