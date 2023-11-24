@@ -31,7 +31,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mujs
-VERSION=${VERSION:-1.3.3}
+VERSION=${VERSION:-1.3.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -90,7 +90,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
 chmod 644 docs/*.png
 
-make shared && make install-shared \
+make release && make install-shared \
   prefix=/usr \
   libdir=/usr/lib${LIBDIRSUFFIX} \
   DESTDIR=$PKG
