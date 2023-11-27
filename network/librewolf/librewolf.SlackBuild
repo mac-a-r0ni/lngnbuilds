@@ -32,6 +32,8 @@ PKGTYPE=${PKGTYPE:-txz}
 
 ARCH="${ARCH:-$(uname -m)}"
 if [ "$ARCH" != "x86_64" ]; then
+	echo "$ARCH is not supported for $PRGNAM-$VERSION."
+	exit 1;
 elif [ "$ARCH" != "aarch64" ]; then
 	echo "$ARCH is not supported for $PRGNAM-$VERSION."
 	exit 1;
