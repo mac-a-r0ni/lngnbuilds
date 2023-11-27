@@ -31,18 +31,24 @@ TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
 ARCH="${ARCH:-$(uname -m)}"
-if [ "$ARCH" != "x86_64" ]; then
-	echo "$ARCH is not supported for $PRGNAM-$VERSION."
-	exit 1;
-elif [ "$ARCH" != "aarch64" ]; then
-	echo "$ARCH is not supported for $PRGNAM-$VERSION."
-	exit 1;
+if [ "$ARCH" = "i586" ]; then
+  LIBDIRSUFFIX=""
+  echo "This package is currently only available for 64bit."
+  exit 1
+elif [ "$ARCH" = "x86_64" ]; then
+  LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "aarch64" ]; then
+  LIBDIRSUFFIX="64"
+else
+  echo "Package for $(uname -m) architecture is not available."
+  exit 1
 fi
 
 if [ -n "${PRINT_PACKAGE_NAME}" ]; then
 	echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
 	exit 0
 fi
+
 
 TMP="${TMP:-/tmp/lngn}"
 PKG="$TMP/package-$PRGNAM"
