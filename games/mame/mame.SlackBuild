@@ -241,7 +241,7 @@ fi
 # with py3, but it won't hurt anything either.
 
 # 20211111 bkw: make ccache handle precompiled headers
-export CCACHE_SLOPPINESS=pch_defines,time_macros,include_file_mtime,include_file_ctime
+#export CCACHE_SLOPPINESS=pch_defines,time_macros,include_file_mtime,include_file_ctime
 
 # 20211111 bkw: undocumented option, build a mame that only supports
 # pac-man and its clones. used for testing only.
