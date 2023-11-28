@@ -105,15 +105,6 @@ if [ -n "$MISSING" ]; then
   exit 1
 fi
 
-# 20211112 bkw: GroovyMAME support has changed, see README_groovy.txt.
-# This part of it has to run in $CWD.
-GROOVY="${GROOVY:-no}"
-
-if [ "$GROOVY" = "update" ]; then
-  sh mkgroovy.sh $VERSION
-  GROOVY=yes
-fi
-
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
@@ -154,26 +145,6 @@ USE_SYSTEM_LIB_LUA=1 \
 # JDK! In case you're wondering, only the C code in the bundled portmidi
 # is built (no Java needed).
 
-# Version-specific patches & sed fixes. We do it this way to keep this
-# script compatible with older versions.
-PATCHES=""
-case "$VERSION" in
-  0.200) # couple files missing an include...
-    sed -i '1i#include <cmath>' \
-           src/devices/cpu/mips/ps2vif1.cpp \
-           src/devices/cpu/mips/mips3.cpp
-           ;;
-  0.204)
-    sed -i '1i#include <cmath>' src/mame/video/xavix.cpp
-    ;;
-  *) ;;
-esac
-
-[ -n "$PATCHES" ] && \
-  for i in "$PATCHES"; do
-    [ -f "$CWD/$i" ] && patch -p1 < "$CWD/$i"
-  done
-
 # This is purely cosmetic, and can't be set on the make command line.
 sed -i 's,ubuntu-intrepid,slackware,g' scripts/genie.lua
 sed -i 's/DISTRO := generic/DISTRO := slackware/' makefile
@@ -192,36 +163,6 @@ if [ "${QTDEBUG:-yes}" = "yes" ]; then
   QTOPT=1
 else
   QTOPT=0
-fi
-
-# 20211112 bkw: the rest of the GroovyMAME stuff.
-# The diffs look to be close to half a meg, so they're compressed.
-if [ "$GROOVY" = "yes" ]; then
-  GROOVYDIFF="$( /bin/ls $CWD/gm${VERSION/./}*.diff.xz 2>/dev/null | tail -1 )"
-  if [ -e "$GROOVYDIFF" ]; then
-    GROOVYVER="$( basename $GROOVYDIFF .diff.xz )"
-    echo "=== GROOVYDIFF $GROOVYDIFF"
-    echo "=== GROOVYVER $GROOVYVER"
-
-    # The "-f -Z" is necessary to make sure the patched files end up
-    # with the same timestamp every time the script is run. ccache
-    # needs this because the include_file_mtime doesn't seem to
-    # play nice with precompiled headers, even though it's supposed to.
-    # When the patch is generated, we have to add timestamps to make
-    # this work (see mkgroovy.sh for details).
-
-    xzcat "$GROOVYDIFF" | patch -p1 -f -Z
-  else
-    cat <<EOF
-***
-GroovyMAME support was requested, but I don't have a GroovyMAME patch
-for MAME $VERSION. Try running this script with GROOVY=update in the
-environment, or wait a few days for the GroovyMAME author to release
-an update. See README_groovy.txt for more information.
-***
-EOF
-    exit 1
-  fi
 fi
 
 # Build option notes:
@@ -247,15 +188,6 @@ fi
 # pac-man and its clones. used for testing only.
 if [ "${PACONLY:-no}" = "yes" ]; then
   PACOPT="SOURCES=src/mame/drivers/pacman.cpp"
-fi
-
-# 20211111 bkw: build with ccache by default, now that it works.
-if [ "${USE_CCACHE:-yes}" = "yes" ]; then
-  CC="/usr/bin/ccache /usr/bin/clang"
-  CXX="/usr/bin/ccache /usr/bin/clang++"
-else
-  CC="${CC:-$( which gcc )}"
-  CXX="${CXX:-$( which g++ )}"
 fi
 
 make USE_QTDEBUG=$QTOPT \
@@ -356,10 +288,6 @@ cp -a ini/examples ini/presets $PKGDOC
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-
-[ -n "$GROOVYVER" ] && \
-  sed -i "19s,\$, This package was patched with GroovyMAME $GROOVYVER.," \
-  $PKG/install/slack-desc
 
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
