@@ -97,7 +97,7 @@ else
 fi
 
 # patch to fix icu4c support with slackware's package
-patch -p < $CWD/libreoffice-7.5.8.2-icu-74-compatibility.patch
+patch -p1 < $CWD/libreoffice-7.5.8.2-icu-74-compatibility.patch
 
 chown -R root:root .
 find -L . \
