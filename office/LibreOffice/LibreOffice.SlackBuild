@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # ex:set ai shiftwidth=4 inputtab=spaces smarttab noautotab:
+# 7.6.4.1 added patch for icu, re-introduced --with-system-icu
 # 7.6.3.1 update removed system icu or LO fails to build.
 #    --with-system-icu \
 
@@ -30,7 +31,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-7.6.3.2}
+VERSION=${VERSION:-7.6.4.1}
 SHORT_VERSION=${VERSION%.*.*}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
@@ -94,6 +95,9 @@ if [ -r $CWD/$SRCNAM-${VERSION}-srcs.tar.xz ]; then
 else
   HAVE_SRCS_TARBALL=0
 fi
+
+# patch to fix icu4c support with slackware's package
+patch -p < $CWD/libreoffice-7.5.8.2-icu-74-compatibility.patch
 
 chown -R root:root .
 find -L . \
@@ -247,6 +251,7 @@ fi
     --with-system-epoxy \
     --with-system-expat \
     --with-system-hunspell \
+    --with-system-icu \
     --with-system-jpeg \
     --with-system-lcms2 \
     --with-system-libodfgen \
@@ -296,8 +301,6 @@ fi
     $ucpp \
     $odbc \
     $xmlsec \
-
-
 
 #Create a srcs tarball if we don't already have one
 chmod a+x bin/unpack-sources
