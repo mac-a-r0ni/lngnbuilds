@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # ex:set ai shiftwidth=4 inputtab=spaces smarttab noautotab:
+# Edits for aarch64 builds by Jay Lanagan (j@lngn.net)
 # 7.6.4.1 added patch for icu, re-introduced --with-system-icu
 # 7.6.3.1 update removed system icu or LO fails to build.
 #    --with-system-icu \
