@@ -1,10 +1,10 @@
 PRGNAM="LibreOffice"
-VERSION="7.6.3.2"
+VERSION="7.6.4.1"
 HOMEPAGE="https://www.libreoffice.org"
-DOWNLOAD="https://download.documentfoundation.org/libreoffice/src/7.6.3/libreoffice-7.6.3.2.tar.xz \
-		https://slackware.lngn.net/pub/source/libreoffice/libreoffice-7.6.3.2-srcs.tar.xz"
-MD5SUM="3d083e600db4f747c90c714292f1d695 \
-	0a81e4781f7a752cb4c98ec76ec3fdaf"
+DOWNLOAD="https://download.documentfoundation.org/libreoffice/src/7.6.4/libreoffice-7.6.4.1.tar.xz \
+          https://slackware.lngn.net/pub/source/libreoffice/libreoffice-7.6.4.1-srcs.tar.xz"
+MD5SUM="51cb8339342bf6d95b07c72b6106cb00 \
+        e201bc5366aad54225592833e10ade10"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="zulu-openjdk11 apache-ant perl-Archive-Zip"
