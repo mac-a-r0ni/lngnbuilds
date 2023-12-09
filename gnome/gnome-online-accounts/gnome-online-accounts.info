@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/core/45/45.0/sources/gnome-online-accounts-
 MD5SUM="9406339e88caf9ecd11191f96b6cc10e"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="rest webkit2gtk6.0"
+REQUIRES="rest webkitgtk6.0"
 MAINTAINER="Ozan Türkyılmaz"
 EMAIL="ozan.turkyilmaz@gmail.com"
