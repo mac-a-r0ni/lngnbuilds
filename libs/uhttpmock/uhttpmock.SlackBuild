@@ -32,7 +32,7 @@ PKGTYPE=${PKGTYPE:-txz}
 
 INTROSPECTION=${INTROSPECTION:-true}
 GTKDOC=${GTKDOC:-false}
-VALA=${VALA:-true}
+VALA=${VALA:-enabled}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
