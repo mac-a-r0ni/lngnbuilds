@@ -31,7 +31,7 @@ TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
 INTROSPECTION=${INTROSPECTION:-yes}
-GTKDOC=${GTKDOC:-no}
+GTKDOC=${GTKDOC:-false}
 VALA=${VALA:-yes}
 
 if [ -z "$ARCH" ]; then
