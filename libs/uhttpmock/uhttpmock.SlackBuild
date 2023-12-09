@@ -30,9 +30,9 @@ BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
-INTROSPECTION=${INTROSPECTION:-yes}
+INTROSPECTION=${INTROSPECTION:-true}
 GTKDOC=${GTKDOC:-false}
-VALA=${VALA:-yes}
+VALA=${VALA:-true}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
