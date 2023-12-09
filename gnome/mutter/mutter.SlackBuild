@@ -91,6 +91,8 @@ cd build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
+    -Degl_device=true \
+    -Dwayland_eglstream=true \
     -Dstrip=true \
     -Dprofiler=false \
     -Dsystemd=false
