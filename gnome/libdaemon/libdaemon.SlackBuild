@@ -92,7 +92,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --localstatedir=/var \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --disable-static \
-  --build=$ARCH-slackware-linux
+  --build=$ARCH-slackware-linux-gnu
 
 make
 make install DESTDIR=$PKG
