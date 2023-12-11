@@ -112,8 +112,8 @@ cd build
     -Dpdf=enabled \
     -Dps=enabled \
     -Dtiff=enabled \
-    -Dnautilus=false \
-    -Dgspell=disabled \
+    -Dnautilus=${NAUTILUS_PLUGIN} \
+    -Dgspell=enabled \
     -Dgtk_doc=false \
     -Dsystemduserunitdir=no
   "${NINJA:=ninja}"
