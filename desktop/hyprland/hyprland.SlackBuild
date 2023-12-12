@@ -86,7 +86,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-    sed -i -e '/^release:/{n;s/-D/-DCMAKE_SKIP_RPATH=ON -D/}' Makefile
+    sed -i -e '/^release:/{n;s/-D/-DCMAKE_SKIP_RPATH=ON -DNO_SYSTEMD:STRING=true -D/}' Makefile
 
 cd $TMP/$PRGNAM-$PKGNAM
 
@@ -113,7 +113,7 @@ cd $TMP/$PRGNAM-$PKGNAM
     install -Dm0644 -t "$PKG/usr/share/wayland-sessions" "example/$PRGNAM.desktop"
     install -Dm0644 -t "$PKG/usr/share/$PRGNAM" "example/$PRGNAM.conf"
     find subprojects/wlroots/build -name 'libwlroots.so.*' -type f -execdir \
-    install -Dm0755 -t "$pkgdir/usr/lib${LIBDIRSUFFIX}/" {} \;
+    install -Dm0755 -t "$PKG/usr/lib${LIBDIRSUFFIX}/" {} \;
 
 #    install -Dm0755 -t "$PKG/usr/lib${LIBDIRSUFFIX}" "$TMP/$PRGNAM-$PKGNAM/subprojects/wlroots/build/libwlroots.so.12032"
 
