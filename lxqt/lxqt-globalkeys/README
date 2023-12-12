@@ -1,0 +1,3 @@
+The core components are two binaries lxqt-globalkeysd and lxqt-config-globalkeyshortcuts. 
+lxqt-globalkeysd is running in a daemon-like manner as so-called LXQt Module and doing the actual work. 
+GUI lxqt-config-globalkeyshortcuts is used to customize the shortcut settings.

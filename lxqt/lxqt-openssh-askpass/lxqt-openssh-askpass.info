@@ -1,0 +1,8 @@
+PRGNAM="lxqt-openssh-askpass"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/lxqt-openssh-askpass"
+DOWNLOAD="https://github.com/lxqt/lxqt-openssh-askpass/releases/download/1.4.0/lxqt-openssh-askpass-1.4.0.tar.xz"
+MD5SUM="be5108335d14959730836c60cf84b4a4"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

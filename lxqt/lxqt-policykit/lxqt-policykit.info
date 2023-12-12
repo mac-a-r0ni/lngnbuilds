@@ -1,0 +1,8 @@
+PRGNAM="lxqt-policykit"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/lxqt-policykit"
+DOWNLOAD="https://github.com/lxqt/lxqt-policykit/releases/download/1.4.0/lxqt-policykit-1.4.0.tar.xz"
+MD5SUM="b54a2a158fd79f197013ef34d2330544"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

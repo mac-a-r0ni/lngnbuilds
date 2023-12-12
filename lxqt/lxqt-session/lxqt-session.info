@@ -1,0 +1,8 @@
+PRGNAM="lxqt-session"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/lxqt-session"
+DOWNLOAD="https://github.com/lxqt/lxqt-session/releases/download/1.4.0/lxqt-session-1.4.0.tar.xz"
+MD5SUM="b8a4d40eeaf6972cfa23467043e2f5c4"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

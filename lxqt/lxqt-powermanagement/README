@@ -1,0 +1,3 @@
+The core components are two binaries lxqt-powermanagement and lxqt-config-powermanagement.
+lxqt-powermanagement is running in a daemon-like manner as so-called "LXQt Module" and doing the actual work. 
+GUI "Power Management Settings (binary lxqt-config-powermanagement) is used to customize settings.

@@ -1,0 +1,5 @@
+Freedesktop.org compliant menu files for LXQt Panel, Configuration 
+Center and PCManFM-Qt/libfm-qt.Runtime and build dependency for 
+lxqt-panel, lxqt-config and pcmanfm-qt. 
+
+Replacement for and partially based on lxmenu-data (LXDE).

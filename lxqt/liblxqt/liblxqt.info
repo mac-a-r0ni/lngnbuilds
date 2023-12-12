@@ -1,0 +1,8 @@
+PRGNAM="liblxqt"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/liblxqt"
+DOWNLOAD="https://github.com/lxqt/liblxqt/releases/download/1.4.0/liblxqt-1.4.0.tar.xz"
+MD5SUM="5877977a8314f6470c15faa09c24c764"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

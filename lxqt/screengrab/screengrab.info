@@ -1,0 +1,8 @@
+PRGNAM="screengrab"
+VERSION="2.7.0"
+HOMEPAGE="https://github.com/lxqt/screengrab"
+DOWNLOAD="https://github.com/lxqt/screengrab/releases/download/2.7.0/screengrab-2.7.0.tar.xz"
+MD5SUM="df840ca6ad74b6388b9c0067c9f31423"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

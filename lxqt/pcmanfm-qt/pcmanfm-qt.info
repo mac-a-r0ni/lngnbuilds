@@ -1,0 +1,8 @@
+PRGNAM="pcmanfm-qt"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/pcmanfm-qt"
+DOWNLOAD="https://github.com/lxqt/pcmanfm-qt/releases/download/1.4.0/pcmanfm-qt-1.4.0.tar.xz"
+MD5SUM="c1dd6d90fce688064251c0c29ae765eb"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

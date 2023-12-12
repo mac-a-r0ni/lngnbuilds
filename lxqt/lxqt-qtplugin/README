@@ -1,0 +1,3 @@
+This repository is providing a library libqtlxqt to integrate Qt with LXQt.
+
+With this plugin, all Qt-based programs can adopt settings of LXQt, such as the icon theme.

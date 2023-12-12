@@ -1,0 +1,8 @@
+PRGNAM="lxqt-about"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/lxqt-about"
+DOWNLOAD="https://github.com/lxqt/lxqt-about/releases/download/1.4.0/lxqt-about-1.4.0.tar.xz"
+MD5SUM="169b0aa807f45f486b5853c8abc4085e"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

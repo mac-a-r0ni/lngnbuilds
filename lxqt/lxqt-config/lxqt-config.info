@@ -1,0 +1,8 @@
+PRGNAM="lxqt-config"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/lxqt-config"
+DOWNLOAD="https://github.com/lxqt/lxqt-config/releases/download/1.4.0/lxqt-config-1.4.0.tar.xz"
+MD5SUM="ddfc6906bb9967957e1a3c0ad604118f"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

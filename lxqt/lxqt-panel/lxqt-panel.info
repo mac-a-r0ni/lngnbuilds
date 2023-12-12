@@ -1,0 +1,8 @@
+PRGNAM="lxqt-panel"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/lxqt-panel"
+DOWNLOAD="https://github.com/lxqt/lxqt-panel/releases/download/1.4.0/lxqt-panel-1.4.0.tar.xz"
+MD5SUM="ac8d89f21fa96b73d61ba54715fb5969"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

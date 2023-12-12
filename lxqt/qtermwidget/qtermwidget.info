@@ -1,0 +1,8 @@
+PRGNAM="qtermwidget"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/qtermwidget"
+DOWNLOAD="https://github.com/lxqt/qtermwidget/releases/download/1.4.0/qtermwidget-1.4.0.tar.xz"
+MD5SUM="9fd252579ded4aa05665d4fc979629e6"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

@@ -1,0 +1,8 @@
+PRGNAM="libqtxdg"
+VERSION="3.12.0"
+HOMEPAGE="https://github.com/lxqt/libqtxdg"
+DOWNLOAD="https://github.com/lxqt/libqtxdg/releases/download/3.12.0/libqtxdg-3.12.0.tar.xz"
+MD5SUM="6cb85091630b7d84278b2430e92a62bb"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

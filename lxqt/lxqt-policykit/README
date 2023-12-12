@@ -1,0 +1,5 @@
+lxqt-policykit is the polkit authentification agent of LXQt.
+
+polkit is a software framework to handle privileges of processes. In LXQt it is e. g. used to extend the privileges of the GUI tools of lxqt-admin. 
+These are launched by a regular user. But in order to apply the settings they deal with root privileges are needed and acquired via polkit. 
+Among the various components of polkit the authentication agent is the one to query the user for credentials by dialogue windows like this one of lxqt-policykit.

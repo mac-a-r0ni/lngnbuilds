@@ -1,0 +1,8 @@
+PRGNAM="libfm-qt"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/libfm-qt"
+DOWNLOAD="https://github.com/lxqt/libfm-qt/releases/download/1.4.0/libfm-qt-1.4.0.tar.xz"
+MD5SUM="d018e160cefdbccfea8bd550f2d7b517"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

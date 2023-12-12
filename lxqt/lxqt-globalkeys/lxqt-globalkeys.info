@@ -1,0 +1,8 @@
+PRGNAM="lxqt-globalkeys"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/lxqt-globalkeys"
+DOWNLOAD="https://github.com/lxqt/lxqt-globalkeys/releases/download/1.4.0/lxqt-globalkeys-1.4.0.tar.xz"
+MD5SUM="7fe7276feab135abc1d5bb3e699e59f5"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

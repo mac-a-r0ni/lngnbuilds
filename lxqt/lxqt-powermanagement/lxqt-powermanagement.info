@@ -1,0 +1,8 @@
+PRGNAM="lxqt-powermanagement"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/lxqt-powermanagement"
+DOWNLOAD="https://github.com/lxqt/lxqt-powermanagement/releases/download/1.4.0/lxqt-powermanagement-1.4.0.tar.xz"
+MD5SUM="74807502b819853a13c2c03406a1aeb5"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

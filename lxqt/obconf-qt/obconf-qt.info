@@ -1,0 +1,8 @@
+PRGNAM="obconf-qt"
+VERSION="0.16.3"
+HOMEPAGE="https://github.com/lxqt/obconf-qt"
+DOWNLOAD="https://github.com/lxqt/obconf-qt/releases/download/0.16.3/obconf-qt-0.16.3.tar.xz"
+MD5SUM="6a3f8d3bf8b257ec643fc8d40d88a4f5"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

@@ -1,0 +1,8 @@
+PRGNAM="qterminal"
+VERSION="1.4.0"
+HOMEPAGE="https://github.com/lxqt/qterminal"
+DOWNLOAD="https://github.com/lxqt/qterminal/releases/download/1.4.0/qterminal-1.4.0.tar.xz"
+MD5SUM="8d8f85dc99fc074c27eed09630951e09"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"

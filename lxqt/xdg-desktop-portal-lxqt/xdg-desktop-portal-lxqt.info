@@ -1,0 +1,8 @@
+PRGNAM="xdg-desktop-portal-lxqt"
+VERSION="0.5.0"
+HOMEPAGE="https://github.com/lxqt/xdg-desktop-portal-lxqt"
+DOWNLOAD="https://github.com/lxqt/xdg-desktop-portal-lxqt/releases/download/0.5.0/xdg-desktop-portal-lxqt-0.5.0.tar.xz"
+MD5SUM="364cb93bd4ad1f3d0e5e932ea118dc80"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"
