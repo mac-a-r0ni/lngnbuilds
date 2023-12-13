@@ -93,7 +93,7 @@ find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
 
 # 20230810 bkw: patch for gcc 13 (Slackware -current), from AUR, by
 # way of biker_rat on LQ, delivered C/O ponce.
-patch -p1 < $CWD/gcc13-missing-includes.diff
+#patch -p1 < $CWD/gcc13-missing-includes.diff
 
 # 20201027 bkw: fix the '<unknown version>' in the window title. This
 # used to be done in an uglier way (with a patch that occasionally broke
