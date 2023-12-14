@@ -20,15 +20,13 @@
 #  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#  -----------------------------------------------------------------------
-#  MODIFIED BY FRANK HONOLKA <slackernetuk@gmail.com>
-#  -----------------------------------------------------------------------
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libstatgrab
 VERSION=${VERSION:-0.92.1}
-BUILD=${BUILD:-2}
-TAG=${TAG:-_snuk}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
@@ -47,7 +45,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/snuk}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -121,4 +119,3 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
-/sbin/upgradepkg --install-new --reinstall $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
