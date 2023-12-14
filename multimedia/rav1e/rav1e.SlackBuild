@@ -28,7 +28,7 @@ PRGNAM=rav1e
 VERSION=${VERSION:-0.6.6}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
-PKGTYPE=${PKGTYPE:-tgz}
+PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -145,22 +145,22 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 CARGO_HOME=.cargo \
-PATH="/opt/rust16/bin:$PATH" \
-LD_LIBRARY_PATH="/opt/rust16/lib$LIBDIRSUFFIX" \
+#PATH="/opt/rust16/bin:$PATH" \
+#LD_LIBRARY_PATH="/opt/rust16/lib$LIBDIRSUFFIX" \
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 cargo build --offline --release $CARGOTARGET
 CARGO_HOME=.cargo \
-PATH="/opt/rust16/bin:$PATH" \
-LD_LIBRARY_PATH="/opt/rust16/lib$LIBDIRSUFFIX" \
+#PATH="/opt/rust16/bin:$PATH" \
+#LD_LIBRARY_PATH="/opt/rust16/lib$LIBDIRSUFFIX" \
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 cargo cbuild --offline --release $CARGOTARGET
-PATH="/opt/rust16/bin:$PATH" \
-LD_LIBRARY_PATH="/opt/rust16/lib$LIBDIRSUFFIX" \
+#PATH="/opt/rust16/bin:$PATH" \
+#LD_LIBRARY_PATH="/opt/rust16/lib$LIBDIRSUFFIX" \
 cargo install --offline  --no-track --root "${PKG}/usr" --path="."
-PATH="/opt/rust16/bin:$PATH" \
-LD_LIBRARY_PATH="/opt/rust16/lib$LIBDIRSUFFIX" \
+#PATH="/opt/rust16/bin:$PATH" \
+#LD_LIBRARY_PATH="/opt/rust16/lib$LIBDIRSUFFIX" \
 cargo cinstall --offline --destdir=${PKG} --prefix=/usr --libdir=/usr/lib$LIBDIRSUFFIX
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
