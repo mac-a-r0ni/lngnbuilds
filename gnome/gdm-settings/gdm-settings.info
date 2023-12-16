@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/gdm-settings/gdm-settings/archive/v4.1/gdm-settings
 MD5SUM="d5a4075ba1c2779d4ddeede7929daa45"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gdm"
+REQUIRES="gdm blueprint-compiler"
 MAINTAINER="rizitis"
 EMAIL="rizitis@gmail.com"
