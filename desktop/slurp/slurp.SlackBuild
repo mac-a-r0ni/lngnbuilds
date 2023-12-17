@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=slurp
-VERSION=${VERSION:-1.4.0}
+VERSION=${VERSION:-1.5.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -92,8 +92,7 @@ cd meson-build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
-    -Dstrip=true \
-
+    -Dstrip=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
