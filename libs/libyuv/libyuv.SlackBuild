@@ -25,11 +25,11 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libyuv
-VERSION=${VERSION:-20220925_84d76f9}
+VERSION=${VERSION:-20231211_7da8059}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
-GITNAM=${GITNAM:-84d76f9b4ef15b282b0b62a3d73f7ab1b7f41f7e}
+GITNAM=${GITNAM:-7da8059c262c237d6673e4717c6d29911051adff}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
