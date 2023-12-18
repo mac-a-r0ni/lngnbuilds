@@ -2,7 +2,8 @@
 
 # Slackware build script for libbacktrace
 
-# Copyright 2022 Jay Langan (j@lngn.net), Detroit, MI, USA.
+# Copyright 2022,2023 Jay Langan (j@lngn.net), Detroit, MI, USA.
+# Thanks to Nathanial Russell for keeping the dream alive.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,15 +23,13 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-wget -c https://github.com/ianlancetaylor/libbacktrace/archive/14818b7783eeb9a56c3f0fca78cefd3143f8c5f6/libbacktrace-14818b7783eeb9a56c3f0fca78cefd3143f8c5f6.tar.gz
-
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libbacktrace
 VERSION=${VERSION:-1.0}
 GITSRC=14818b7783eeb9a56c3f0fca78cefd3143f8c5f6
 BUILD=${BUILD:-1}
-TAG=${TAG:-_gfs}
+TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
@@ -46,7 +45,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/gfs}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
