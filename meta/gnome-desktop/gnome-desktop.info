@@ -1,4 +1,4 @@
-PRGNAM="gnome-core"
+PRGNAM="gnome-desktop"
 VERSION="45.2"
 HOMEPAGE="http://gnome.org/"
 DOWNLOAD="https://download.gnome.org/core/45/45.2/NEWS"
