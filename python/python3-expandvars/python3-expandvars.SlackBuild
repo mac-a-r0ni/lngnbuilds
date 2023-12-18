@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for python3-frozenlist
+# Slackware build script for python-expandvars
 
-# Copyright 2021-2023 Isaac Yu <isaacyu@protonmail.com>
-# Maintained 2023 by Jay Lanagan (j@lngn.net), Detroit, MI, USA.
+# Copyright 2023 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -17,21 +16,22 @@
 #  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
 #  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 #  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
 #  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 #  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+wget -c https://github.com/sayanarijit/expandvars/archive/v0.12.0/expandvars-0.12.0.tar.gz
+
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=python3-frozenlist
-VERSION=${VERSION:-1.4.1}
+SRCNAM=expandvars
+PRGNAM=python-expandvars
+VERSION=${VERSION:-0.12.0}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_lngn}
+TAG=${TAG:-_nwg}
 PKGTYPE=${PKGTYPE:-txz}
-
-SRCNAM=frozenlist
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -41,12 +41,15 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
+# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
+# the name of the created package would be, and then exit. This information
+# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
 fi
 
-TMP=${TMP:-/tmp/lngn}
+TMP=${TMP:-/tmp/nwg}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -83,13 +86,16 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 python3 -m build --wheel --skip-dependency-check --no-isolation
-python3 -m installer --compile-bytecode 2 --destdir=$PKG dist/*.whl
+python3 -m installer --compile-bytecode 2 -d "$PKG" dist/*.whl
+
+#python3 -m build --no-isolation
+#python3 -m installer -d "$PKG" dist/*.whl
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CHANGES.rst CONTRIBUTORS.txt LICENSE README.rst $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a CODE_OF_CONDUCT.md LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
