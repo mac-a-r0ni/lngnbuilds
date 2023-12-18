@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|
-gnome-core: gnome-core (GNOME Desktop meta-package)
-gnome-core:
-gnome-core: This is a meta-package to control the GNOME desktop installation.
-gnome-core: Removal of this package will not effect your GNOME install, it
-gnome-core: is intended to make installs/updates easier.
-gnome-core:
-gnome-core: Homepage: https://gnome.org/
-gnome-core:
-gnome-core:
-gnome-core:
-gnome-core:
+gnome-base: gnome-base (GNOME Desktop meta-package)
+gnome-base:
+gnome-base: This is a meta-package to control the GNOME desktop installation.
+gnome-base: Removal of this package will not effect your GNOME install, it
+gnome-base: is intended to make installs/updates easier.
+gnome-base:
+gnome-base: Homepage: https://gnome.org/
+gnome-base:
+gnome-base:
+gnome-base:
+gnome-base:
