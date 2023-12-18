@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+             |-----handy-ruler------------------------------------------------------|
+gnome-desktop: gnome-desktop (GNOME Desktop meta-package)
+gnome-desktop:
+gnome-desktop: This is a meta-package to control the GNOME desktop installation.
+gnome-desktop: Removal of this package will not effect your GNOME install, it
+gnome-desktop: is intended to make installs/updates easier.
+gnome-desktop:
+gnome-desktop: Homepage: https://gnome.org/
+gnome-desktop:
+gnome-desktop:
+gnome-desktop:
+gnome-desktop:

@@ -1,0 +1,535 @@
+The following modules have a new version:
+ - epiphany (45.0 => 45.1)
+ - evolution-data-server (3.50.1 => 3.50.2)
+ - gjs (1.78.0 => 1.78.1)
+ - gnome-bluetooth (42.6 => 42.7)
+ - gnome-disk-utility (45.0 => 45.1)
+ - gnome-maps (45.1 => 45.2)
+ - gnome-shell (45.0 => 45.2)
+ - gnome-shell-extensions (45.0 => 45.2)
+ - gnome-software (45.1 => 45.2)
+ - gnome-text-editor (45.0 => 45.1)
+ - gssdp (1.6.2 => 1.6.3)
+ - gtk (4.12.3 => 4.12.4)
+ - gupnp (1.6.5 => 1.6.6)
+ - libadwaita (1.4.0 => 1.4.2)
+ - libgsf (1.14.50 => 1.14.51)
+ - libshumate (1.1.1 => 1.1.2)
+ - libsoup (3.4.3 => 3.4.4)
+ - loupe (45.0 => 45.2)
+ - mutter (45.0 => 45.2)
+ - nautilus (45.1 => 45.2)
+ - tracker-miners (3.6.1 => 3.6.2)
+ - vala (0.56.13 => 0.56.14)
+ - xdg-desktop-portal-gnome (45.0 => 45.1)
+
+The following modules weren't upgraded in this release:
+   adwaita-icon-theme, at-spi2-core, atkmm, baobab, calls, cantarell-fonts,
+   cogl, d-spy, dconf, dconf-editor, devhelp, evince, folks, gcab, gcr,
+   gdk-pixbuf, gdm, geocode-glib, gexiv2, glib, glib-networking, glibmm,
+   gmime, gnome-autoar, gnome-backgrounds, gnome-boxes, gnome-builder,
+   gnome-calculator, gnome-calendar, gnome-characters, gnome-clocks,
+   gnome-color-manager, gnome-connections, gnome-console, gnome-contacts,
+   gnome-control-center, gnome-desktop, gnome-font-viewer,
+   gnome-initial-setup, gnome-keyring, gnome-logs, gnome-menus, gnome-music,
+   gnome-online-accounts, gnome-remote-desktop, gnome-session,
+   gnome-settings-daemon, gnome-system-monitor, gnome-tour, gnome-user-docs,
+   gnome-user-share, gnome-weather, gobject-introspection, gom, grilo,
+   grilo-plugins, gsettings-desktop-schemas, gsound, gspell, gtk+, gtk-doc,
+   gtk-vnc, gtkmm, gtksourceview, gupnp-av, gupnp-dlna, gvfs, json-glib,
+   jsonrpc-glib, libdazzle, libdex, libgee, libgtop, libgweather, libgxps,
+   libhandy, libmediaart, libnma, libnotify, libpanel, libpeas, librsvg,
+   libsecret, libsigc++, mm-common, orca, pango, pangomm, phodav, pyatspi,
+   pygobject, rest, rygel, simple-scan, snapshot, sushi, sysprof, tecla,
+   template-glib, totem, totem-pl-parser, tracker, vte, yelp, yelp-tools,
+   yelp-xsl
+
+========================================
+  epiphany
+========================================
+
+45.1 - November 6, 2023
+=======================
+
+ * Fix URLs improperly not found when searching history (#2103)
+ * Normalize text when middle clicking new tab button (#2160)
+ * Fix critical when deleting bookmark tags (#2180)
+ * Fix crash when dropping URLs onto Open Tabs view (#2211)
+ * Fix window leak when installing web apps (#2214)
+ * Update AdGuard YouTube ad blocker (!1396)
+ * Fix memory leak when creating web apps (!1400)
+ * Fix crashes related to WebExtensions (!1404 and !1407, Kdwk)
+ * Updated translations
+
+
+========================================
+  evolution-data-server
+========================================
+
+Evolution-Data-Server 3.50.2 2023-12-01
+---------------------------------------
+
+Bug Fixes:
+	I#505 - alarm-notify: Some reminders could be lost
+	I#506 - alarm-notify: Birthday floating date shifted by one day
+	M!139 - CamelGpgContext: Don't leak istream in gpg_sign_sync() (Guido Günther)
+	M!145 - e-xml-utils: Fix build with libxml2 2.12 (Jürg Billeter)
+
+Miscellaneous:
+	OAuth2: Add scheme handler for OAuth2 prompts in external browser
+	EReminderWatcher: Last-notified time not always set
+
+Translations:
+	Boyuan Yang (zh_CN)
+	Florentina Mușat (ro)
+
+
+========================================
+  gjs
+========================================
+
+Version 1.78.1
+--------------
+
+- Closed bugs and merge requests:
+  * Gtk template signals cause a reference cycle that is not detected [#576,
+    !891, James Westman]
+  * Modules from resources may get loaded twice [#577, !892, Philip Chimento]
+  * docs: add examples for creating cairo image surfaces [!894, Andy Holmes]
+  * Deadlocks between GJS GC and dconf gsettings when a setting value is changed
+    [#558, !895, msizanoen]
+  * Gtk3: Fix leak in GtkBuilder template signal connections [!896, Philip
+    Chimento]
+
+
+========================================
+  gnome-bluetooth
+========================================
+
+ver 42.7:
+This version fixes bugs that stopped the Obex Push server from automatically
+accepting files from paired devices and caused the device's Connection switch to
+appear out of sync with the connection state. This version also contains build
+fixes and updated translations.
+
+
+========================================
+  gnome-disk-utility
+========================================
+
+45.1 - November 30, 2023
+========================
+
+Bastien Nocera:
+ * creatediskimage: Fix crash if image creation has errors
+
+Sabri Ünal:
+ * appdata: Update appdata
+ * appdata: update some URLs - Add vcs-browser URL. - Update the donation URL. - Move the homepage URL above the other URLs.
+
+Updated translations:
+ * Ekaterine Papava (ka), Florentina Mușat (ro), Jordi Mas i Hernandez
+   (ca)
+
+
+========================================
+  gnome-maps
+========================================
+
+45.2 - Dec 3, 2023
+=========================
+
+Changes since 45.1
+ - Fixed triggering a extranous reload of the trip query in the case the
+   user has already filled in query points
+
+Added/updated/fixed translations
+ - Catalan
+
+All contributors to this release
+Jordi Mas i Hernandez <jmas@softcatala.org>
+Marcus Lundblad <ml@dfupdate.se>
+
+
+========================================
+  gnome-shell
+========================================
+
+45.2
+====
+* Fix performance degradation due to repeated signal leak [Sebastian; !3001]
+* Optimize application search [Sebastian; !3004]
+* Fix on-screen keyboard backspace getting stuck [Sebastian; !3009]
+* Fix arrow navigation in search results [Sebastian; !3015]
+* Support async code in Eval() D-Bus method [Florian; !3021]
+* Fix sliders not requesting any size [Florian; !2994]
+* Only show prefs dialog after the extension has been loaded [Florian; !3025]
+* Improve high-contrast styling [Sam; !3030]
+* Fix mapping of tablet rings/strips [Peter; !3029]
+* Add support for "version-name" field in extension metainfo
+  [Aryan, Florian; !2995, !3034]
+* Fixed crashes [Carlos, Sebastian, Florian; !2993, !3018, !3011]
+* Misc. bug fixes and cleanups [Florian, Barnabás, Jonas, Julian, Charles;
+  !3005, !3008, !2190, !3023, !2997]
+
+Contributors:
+  Jonas Dreßler, Carlos Garnacho, Sam Hewitt, Peter Hutterer, Aryan Kaushik,
+  Sebastian Keller, Florian Müllner, Barnabás Pőcze, Julian Sparber,
+  Charles Wong
+
+Translators:
+  Ekaterine Papava [ka], Ngọc Quân Trần [vi], Dušan Kazik [sk]
+
+45.1
+====
+* Fix scroll handling on sliders [Carlos; !2967]
+* overview: Handle unredirection as part of the state transition [Robert; !2970]
+* Handle DESKTOP windows during workspace animations [Sundeep; !2865]
+* Fix unexpected focus changes with multi-window apps [Florian; !2959]
+* Improve recording indicator in light style [Georges; !2983]
+* Fix calendar popup shrinking on date changes [Sebastian; !2989]
+* Fixed crashes [Daniel, Sebastian; !2975, !2974]
+* Misc. bug fixes and cleanups [Florian, Martin, Alessandro, Sebastian; !2966,
+  !2978, !2987, !3000, #6763]
+
+Contributors:
+  Alessandro Bono, Carlos Garnacho, Sebastian Keller, Sundeep Mediratta,
+  Florian Müllner, Georges Basile Stavracas Neto, robert.mader@collabora.com,
+  Daniel van Vugt, Martin Zurowietz
+
+Translators:
+  Jordi Mas [ca], Fabio Tomat [fur], Ekaterine Papava [ka], Sabri Ünal [tr],
+  Cheng-Chia Tseng [zh_TW], Changwoo Ryu [ko], Florentina Mușat [ro],
+  Brage Fuglseth [nb], Evangelos Skarmoutsos [el], Efstathios Iosifidis [el],
+  Марко Костић [sr], Hugo Carvalho [pt]
+
+
+========================================
+  gnome-shell-extensions
+========================================
+
+45.2
+====
+* window-list: Fix buttons not being clickable at the screen edge
+  [Florian; !291]
+* window-list: Really fix initial preview visibility [Florian; !292]
+* workspace-indicator: Really fix initial preview visibility [Florian; !292]
+* Misc. bug fixes and cleanups [Florian; !290]
+
+Contributors:
+  Florian Müllner
+
+45.1
+====
+* workspace-indicator: Fix initial preview visibility [Florian; !280]
+* screenshot-window-sizer: Fix cycling between sizes backwards [Florian; !284]
+* Misc. bug fixes and cleanups [Florian; !276, !275, !278, !281]
+
+Contributors:
+  Florian Müllner
+
+Translators:
+  Kristjan SCHMIDT [eo], Brage Fuglseth [nb]
+
+
+========================================
+  gnome-software
+========================================
+
+Version 45.2
+~~~~~~~~~~~~
+Released: 2023-12-01
+
+This is a stable release with translations update:
+ * Catalan (Jordi Mas)
+ * Czech (Daniel Rusek)
+ * Friulian (Fabio Tomat)
+ * Georgian (Ekaterine Papava)
+ * Russian (Artur S0)
+ * Vietnamese (Ngọc Quân Trần)
+
+
+========================================
+  gnome-text-editor
+========================================
+
+# Text Editor 45.1
+
+ • Use proper etag when comparing document for changes after a Save As
+   operation occurs.
+ • Fix row styling in preferences.
+ • Fix memory leak of GtkNativeDialog.
+ • Translation updates.
+
+
+========================================
+  gssdp
+========================================
+
+1.6.3 (stable)
+==============
+ - Do not crash if socket receive fails
+ - Do not leak local address in SocketSource
+
+Bugs fixed in this release:
+ - https://gitlab.gnome.org/GNOME/gssdp/issues/12
+
+All contributors to this release:
+ - Jens Georg <mail@jensge.org>
+ - Colin <colin@uninsane.org>
+
+
+========================================
+  gtk
+========================================
+
+Overview of Changes in 4.12.4, 17-11-2023
+=========================================
+
+* a11y:
+ - Tweak name computation for some corner cases
+
+* gdk:
+ - gl: Improve our use of GLES a bit (use vertex arrays and
+   GL_BGRA if available)
+ - Fix some errors in our memory format tables
+
+* gsk:
+ - gl: handle texture-scale nodes more faithfully
+ - gl: Fix icon padding in the atlas
+
+* Windows:
+ - Stop relying on glib for build configuration
+
+* Tools:
+ - Add a --undecorated option to gtk4-rendernode-tool
+
+* Translation updates
+ Catalan
+ French
+ Romanian
+ Russian
+ Spanish
+ Turkish
+
+
+
+========================================
+  gupnp
+========================================
+
+1.6.6 (stable)
+==============
+ - NetworkManager: Drop manual creation of lo contexts
+ - ServiceProxy: Add new API for creating actions
+ - Introspection: Be more resilient against weird formatting
+ - Acl: Improve introspectability
+ - ServiceProxy: Add result iterator for Action
+ - Plug various smaller leaks
+
+All contributors to this release:
+ - Jens Georg <mail@jensge.org>
+
+
+========================================
+  libadwaita
+========================================
+
+=============
+Version 1.4.2
+=============
+
+- Really fix build with libappstream 1.0
+
+=============
+Version 1.4.1
+=============
+
+- Fix build with MSVC
+- Fix build with libappstream 1.0
+- AdwCarousel
+  - Fix carousel scroll behavior with page reordering
+- AdwComboRow
+  - Fix focus when opening the popover
+  - Set the correct state on the selected checkmark
+- AdwNavigationView
+  - Fix a warning message
+- AdwTabOverview
+  - Allow child focus on out animations
+- AdwTabView
+  - Keep view alive during ::page-detached
+  - Fix crashes when using :pages
+- Docs
+  - Fix erroneous <child> use in breakpoints migration guide
+- Translation updates
+  - Russian
+  - Serbian
+
+
+========================================
+  libgsf
+========================================
+
+libgsf 1.14.51
+
+Morten:
+	* Fix thumbnailer crash.  [#29]
+	* Fix leaks.
+
+--------------------------------------------------------------------------
+
+========================================
+  libshumate
+========================================
+
+=====================
+Version 1.1.2
+=====================
+ - Fix using overlay map layers with different tile sizes than the reference
+   source
+
+
+========================================
+  libsoup
+========================================
+
+Changes in libsoup from 3.4.3 to 3.4.4:
+
+* Improve HTTP/2 performance when a lot of buffering happens [Keyu Tao]
+* Support building libnghttp2 as a subproject [hrxi]
+
+
+========================================
+  loupe
+========================================
+
+45.2
+====
+
+- Fix order of images gets confused after deleting image
+- Fix image is not shown when sucessfully reloaded after error
+- Fix keyboard shortcuts shows the swipe gestures the wrong way round
+
+45.1
+=======
+
+- Fix sandbox for image decoding not enabled by default
+- Fix printing on different printer than selected
+- Fix print dialog crashes on confirmation
+- Fix print dialog needs second confirmation inside Flatpaks
+- Fix SVGs sometimes not re-rendering for zoom level
+- Fix animated image formats with variable frame length using only one length
+- Fix rotation getting applied twice to HEIF images
+
+
+========================================
+  mutter
+========================================
+
+45.2
+====
+* Disable HW cursor when inhibited by backend [Robert; !3412]
+* Fix disabling check-alive timeout [Sebastian K.; !3367]
+* Propagate focus appearance to all ancestors [Sebastian W.; !3356]
+* Fix tablets on X11 having the wrong device [Carlos; !3393]
+* Fixed crash [Carlos; !3370]
+
+Contributors:
+  Carlos Garnacho, Sebastian Keller, Robert Mader, Sebastian Wick
+
+Translators:
+  Ngọc Quân Trần [vi], Ekaterine Papava [ka]
+
+45.1
+====
+* Fix filtering keybinding events in presence of grabs [Sebastian K.; !3054]
+* Fix direct scanout support when using integer scaling [Daniel; !3290]
+* Fix capitalization of some keys when caps lock is on [Carlos; !3306]
+* Fix vsync regression [Robert; !3286]
+* Fix visibility of software cursors when using direct scanout [Robert; !3302]
+* Fix artifacts at the bottom of some surfaces [Robert; !3310]
+* Discard monitor configs with fractional scale when unusable [Jonas Å.; !3299]
+* Apply track point settings [Rohan; !3089]
+* xwayland: Enable XDG portal only when not nested [Olivier; !3303]
+* Inhibit real-time scheduling when mode setting [Ray; !3324]
+* Don't delay frame updates after idle period [Michel; !3174]
+* Fix running Xwayland in headless setup with nvidia driver [Olivier; !3320]
+* wayland: Send keyboard modifiers after the enter event  [Alexandros; !3341]
+* Fixed crashes [Carlos, Jonas D., Robert, Sebastian W., Jonas Å.; !3287, !3283,
+  !3311, !3322, !3318]
+* Misc. bug fixes and cleanups [Daniel, Corentin, Carlos, Jonas Å., Ivan,
+  Michel, Sebastian W., Robert, Barnabás, Peter; !3212, !3298, !3267, !3297,
+  !3313, !3316, !3317, !3323, !3325, !3326, !3328, !3330, !3332, !3319]
+
+Contributors:
+  Jonas Ådahl, Michel Dänzer, Jonas Dreßler, Olivier Fourdan,
+  Alexandros Frantzis, Carlos Garnacho, Peter Hutterer, Rohan Hendrik Jotz-Lean,
+  Sebastian Keller, Robert Mader, Ivan Molodetskikh, Florian Müllner,
+  Corentin Noël, Barnabás Pőcze, Ray Strode, Daniel van Vugt, Sebastian Wick
+
+Translators:
+  Kristjan SCHMIDT [eo], Rafael Fontenelle [pt_BR], Guillaume Bernard [fr],
+  Jordi Mas i Hernandez [ca], Florentina Mușat [ro]
+
+
+========================================
+  nautilus
+========================================
+
+Major changes in 45.2
+=====================
+
+* Bugfixes:
+  - Don't crash when reconnecting to remove server (António Fernandes)
+  - Actually detect unmount on some non-native mounts (António Fernandes)
+  - Don't crash on image properties (Khalid Abu Shawarib)
+  - Allow types and sizes in Properties to expand (Peter Eisenmann)
+  - Don't corrupt toast messages (velsinki)
+* Translation updates (GNOME Translation Project contributors)
+
+
+========================================
+  tracker-miners
+========================================
+
+NEW in 3.6.1 - 2023-10-31
+=========================
+  * Improvements to the seccomp jail, and fixes for spurious SIGSYS
+    positives.
+  * Use GDateTime to handle dates
+
+Translations: ka
+
+
+========================================
+  vala
+========================================
+
+Vala 0.56.14
+============
+ * Various improvements and bug fixes:
+  - codegen: Generate compatible wrapper of ref-void functions [#1486]
+  - vala: Prevent usage of strlen() on non-null-terminated string [#1485]
+
+ * Bindings:
+  - glib-2.0: Add new symbols from 2.78
+  - gstreamer-1.0: Make ElementFactory.make()'s name parameter default to null
+  - gtk4-wayland: Add the missing wayland-client bindings
+  - wayland-client: Complete the binding
+
+
+========================================
+  xdg-desktop-portal-gnome
+========================================
+
+Changes in 45.1
+=================
+
+- accountdialog: Fix crash when pressing Escape
+- Send remote file URIs as local FUSE URIs
+- Various fixes to screencast and input capture
+- Expose org.gnome.desktop.calendar through the Settings portal
+- Put dialogs in separate window groups
+- Translation updates
+
+

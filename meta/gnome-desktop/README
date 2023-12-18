@@ -1,0 +1,5 @@
+gnome-desktop (GNOME Desktop meta-package)
+
+This is a meta-package to control the GNOME desktop installation.
+Removal of this package will not effect your GNOME install, it
+is intended to make installs/updates easier.
