@@ -30,7 +30,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 PRGNAM=muParser
 VERSION=${VERSION:-2.3.4}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_snuk}
+TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
 SRCNAM=$(echo $PRGNAM | tr A-Z a-z)
@@ -51,7 +51,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/snuk}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -112,4 +112,3 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
-/sbin/upgradepkg --install-new --reinstall $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

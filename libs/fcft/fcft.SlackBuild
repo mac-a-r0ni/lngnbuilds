@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=fcft
-VERSION=${VERSION:-3.1.6}
+VERSION=${VERSION:-3.1.7}
 BUILD=${BUILD:-2}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -34,7 +34,7 @@ if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
-   
+
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -65,7 +65,7 @@ else
   LIBDIRSUFFIX=""
 fi
 
-set -e 
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -97,7 +97,7 @@ cd meson-build
     -Dgrapheme-shaping=enabled \
     -Drun-shaping=enabled \
     -Dtest-text-shaping=true \
-    -Dexamples=false \
+    -Dexamples=false
 
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install

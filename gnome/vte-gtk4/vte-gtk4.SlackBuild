@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=vte-gtk4
 PRGNAM2=vte
-VERSION=${VERSION:-0.74.1}
+VERSION=${VERSION:-0.74.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -71,7 +71,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM2-$VERSION
-tar xvf $CWD/$PRGNAM2-$VERSION.tar.xz
+tar xvf $CWD/$PRGNAM2-$VERSION.tar.?z
 cd $PRGNAM2-$VERSION
 chown -R root:root .
 find -L . \
@@ -108,7 +108,7 @@ cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-# Only ship the gtk4 parts of the package. 
+# Only ship the gtk4 parts of the package.
 # The rest is covered by Slackware's VTE package:
 rm -rf $PKG/etc
 rm -rf $PKG/usr/doc
@@ -117,7 +117,7 @@ rm -rf $PKG/usr/share/locale
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
- AUTHORS COPYING.* ChangeLog README.md \
+ AUTHORS COPYING.* README.md \
  $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

@@ -25,7 +25,7 @@
 PRGNAM=libsysstat
 VERSION=${VERSION:-0.4.6}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_snuk}
+TAG=${TAG:-_lngn}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -36,7 +36,7 @@ if [ -z "$ARCH" ]; then
 fi
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/snuk}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -92,11 +92,6 @@ find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 fi
 
-if [ -d $PKG/usr/share/man ]; then
-find $PKG/usr/share/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/share/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
-fi
-
 find $PKG -name perllocal.pod -o -name ".packlist" -o -name "*.bs" | xargs rm -f || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
@@ -109,4 +104,3 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-txz}
-/sbin/upgradepkg --install-new --reinstall $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-txz}

@@ -26,11 +26,11 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=webkit2gtk
 SRCNAM=webkitgtk
-VERSION=${VERSION:-2.42.3}
+VERSION=${VERSION:-2.42.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
-# changed build dir test
+
 TMP=${TMP:-/build/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
@@ -109,8 +109,19 @@ cd build
 "${NINJA:=ninja}" -j$(expr $(nproc) / 2)
 DESTDIR=$PKG $NINJA -j1 install
 
+cd ..
+
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+# remove the unneeded binary since all 3 packages create one
+# we just need the libs for epiphany & gnome
+rm -R $PKG/usr/bin
+
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a ../NEWS $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a NEWS $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
