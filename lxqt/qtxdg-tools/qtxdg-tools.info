@@ -1,4 +1,4 @@
-PRGNAM="xdg-desktop-portal-lxqt"
+PRGNAM="qtxdg-tools"
 VERSION="3.12.0"
 HOMEPAGE="https://github.com/lxqt/qtxdg-tools"
 DOWNLOAD="https://github.com/lxqt/qtxdg-tools/releases/download/3.12.0/qtxdg-tools-3.12.0.tar.xz"
