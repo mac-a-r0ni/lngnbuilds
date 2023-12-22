@@ -38,19 +38,6 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-bailout() {
-  printf "This requires a \"colord\" user and group.\n"
-  printf "groupadd -g 303 colord\n"
-  printf "useradd -d /var/lib/colord -u 303 -g colord -s /bin/false colord"
-  exit 1
-}
-
-if ! getent group colord 2>/dev/null 1>/dev/null ; then
-  bailout
-elif ! getent passwd colord 2>/dev/null 1>/dev/null ; then
-  bailout
-fi
-
 # If the variable PRINT_PACKAGE_NAME is set, then this script will report what
 # the name of the created package would be, and then exit. This information
 # could be useful to other scripts.
@@ -78,6 +65,11 @@ elif [ "$ARCH" = "aarch64" ]; then
 else
   SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
+fi
+
+if ! grep -q ^colord: /etc/group ; then
+  groupadd -g 303 colord
+  useradd -d /var/lib/colord -u 303 -g colord -s /bin/false colord
 fi
 
 if [ "${BASH_COMPLETION:-no}" = "yes" ]; then
