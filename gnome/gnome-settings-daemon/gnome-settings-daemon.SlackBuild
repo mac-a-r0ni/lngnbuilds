@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-settings-daemon
-VERSION=${VERSION:-45.0}
+VERSION=${VERSION:-45.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -79,7 +79,6 @@ find -L . -prune -name 'subprojects/gvc/.gitlab-ci' \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Adding the gcr3 option to use gcr-3, unless slackware upgrades to gcr-4
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
