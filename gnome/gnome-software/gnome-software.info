@@ -5,7 +5,7 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-software/45/gnome-software-45
 MD5SUM="a350160d9523e6123418e13ef50fe2db"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gnome-shell flatpak"
+REQUIRES="gnome-shell flatpak sysprof"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
 # malcontent fwupd
