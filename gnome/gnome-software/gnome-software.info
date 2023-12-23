@@ -1,0 +1,11 @@
+PRGNAM="gnome-software"
+VERSION="45.2"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/gnome-software"
+DOWNLOAD="https://download.gnome.org/sources/gnome-software/45/gnome-software-45.2.tar.xz"
+MD5SUM="a350160d9523e6123418e13ef50fe2db"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="gnome-shell flatpak"
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"
+# malcontent fwupd
