@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
         |-----handy-ruler------------------------------------------------------|
-snapshot: snapshot (GNOMEs Camera App)
+snapshot: snapshot (GNOME Camera App)
 snapshot:
 snapshot: Snapshot is the GNOME projects camera application for taking pictures
 snapshot: and videos. It is intended to replace Cheese.
 snapshot:
+snapshot: Homepage: https://gitlab.gnome.org/GNOME/snapshot
 snapshot:
 snapshot:
 snapshot:
 snapshot:
-snapshot: https://gitlab.gnome.org/GNOME/snapshot
 snapshot:
