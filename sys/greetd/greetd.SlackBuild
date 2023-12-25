@@ -25,6 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=greetd
+PRGUID=greeter
+PRGGID=greeter
 VERSION=${VERSION:-0.9.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
@@ -67,7 +69,12 @@ else
   LIBDIRSUFFIX=""
 fi
 
-set -eu
+if ! grep -q ^greeter: /etc/group ; then
+  groupadd -g 380 greeter
+  useradd -d /var/lib/greeter -u 380 -g greeter -G video -s /bin/false greeter
+fi
+
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -75,6 +82,63 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$VERSION.tar.?z
 cd $PRGNAM-$VERSION
+
+# build offline
+# configuration tells cargo to use the configured directory
+# for dependencies instead of downloading from crates.io
+mkdir .cargo
+cat << EOF >> .cargo/config
+[source.crates-io]
+registry = 'https://github.com/rust-lang/crates.io-index'
+replace-with = 'vendored-sources'
+
+[source.vendored-sources]
+directory = '$(pwd)/vendor'
+EOF
+
+# deps and versions come from Cargo.lock
+mkdir vendor
+(
+  cd vendor
+
+  grep -h -A 4 "\[\[package\]\]" \
+      $(find "../" -maxdepth 1 -mindepth 1 -name Cargo.lock | tr '\n' ' ') | \
+      sed 's/[[:space:]]*=[[:space:]]*/=/g;s/^--//;s/^\[\[/--\n[[/' | \
+      awk 'BEGIN { RS = "--\n" ; FS="\n" } { print $2, $3, $4, $5 }' | \
+      sed 's/"//g;s/name=//;s/ version=/=/' | \
+      grep " source=" | \
+      sed 's/ dependencies=.*$//' | \
+      sed 's/ source=[^ ]*//' | \
+      sed 's/ checksum=/=/' | \
+      sort -u | \
+      while read -r dep ; do
+
+    cksum="$(printf "%s\n" "$dep" | cut -d= -f3)"
+    ver="$(printf "%s\n" "$dep" | cut -d= -f2)"
+    dep="$(printf "%s\n" "$dep" | cut -d= -f1)"
+
+    tar xvf $CWD/$dep-$ver.crate
+
+    touch $dep-$ver/.cargo-ok
+
+    # generate checksum
+    {
+      printf "{\n"
+      printf '    "files": {\n'
+
+      (
+        cd $dep-$ver
+        find . -type f -print0 | xargs -0 sha256sum | sed -n '/\.cargo-checksum\.json/!p' | sed 's/\.\///;s/^\([^ ]*\)[[:space:]][[:space:]]*\(.*\)$/"\2":"\1",/'
+      ) | sed '$ s/,$//'
+
+      printf "    },\n"
+      printf '    "package": "%s"'  "$cksum"
+
+      printf "}\n"
+    } > $dep-$ver/.cargo-checksum.json
+  done
+)
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -83,8 +147,8 @@ find -L . \
  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # how da fuck do I get vendor files for rust?
-cargo fetch --locked --target "$ARCH-unknown-linux-gnu"
-cargo build --frozen --release --all-features
+#cargo fetch --locked --target "$ARCH-unknown-linux-gnu"
+cargo build --offline --frozen --release --all-features
 make -C man all
 
 install -Dm0755 -t "$PKG/usr/bin/" "target/release/$PRGNAM"
@@ -105,7 +169,7 @@ find $PKG | xargs file | egrep "ELF.*executable" | cut -f 1 -d : \
 
 # create this in pkg to ensure it exists
 mkdir -p $PKG/var/lib/$PRGNAM
-chown -R $PRGNAM:$PRGNAM $PKG/var/lib/$PRGNAM
+chown -R $PRGUID:$PRGGID $PKG/var/lib/$PRGNAM
 
 gzip -9 $PKG/usr/man/man?/*
 
@@ -115,6 +179,7 @@ cp -a LICENSE README.md \
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
