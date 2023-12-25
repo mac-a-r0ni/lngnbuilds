@@ -69,6 +69,11 @@ else
   LIBDIRSUFFIX=""
 fi
 
+if ! grep -q ^flatpak: /etc/group ; then
+  groupadd -g 372 flatpak
+  useradd -d /var/lib/flatpak -u 372 -g flatpak -s /bin/false flatpak
+fi
+
 set -e
 
 rm -rf $PKG

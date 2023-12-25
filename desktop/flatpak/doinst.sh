@@ -1,4 +1,9 @@
 #!/bin/sh
+if ! grep -q ^flatpak: /etc/group ; then
+  chroot . groupadd -g 372 flatpak
+  chroot . useradd -d /var/lib/flatpak -u 372 -g flatpak -s /bin/false flatpak
+fi
+
 config() {
   NEW="$1"
   OLD="`dirname $NEW`/`basename $NEW .new`"
