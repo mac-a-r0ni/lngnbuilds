@@ -154,7 +154,7 @@ make -C man all
 install -Dm0755 -t "$PKG/usr/bin/" "target/release/$PRGNAM"
 install -Dm0644 -t "$PKG/etc/$PRGNAM/" config.toml
 install -Dm0644 "$CWD/$PRGNAM.pam" "$PKG/etc/pam.d/$PRGNAM"
-install -Dm0755 -t "$PKG/usr/bin/" "target/release/${PRGNAM#*-}"
+install -Dm0755 -t "$PKG/usr/bin/" "target/release/{agreety,fakegreet,greetd}"
 make -C man DESTDIR="$PKG" MANDIR=/usr/man PREFIX=/usr install
 
 cd $TMP/$PRGNAM-$VERSION
