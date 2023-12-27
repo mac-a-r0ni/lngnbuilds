@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=nwg-hello
-VERSION=${VERSION:-0.1.1}
+VERSION=${VERSION:-0.1.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -95,8 +95,8 @@ find -L . \
 
   python3 setup.py install --root="$PKG" --optimize=1
 
-#find $PKG | xargs file | egrep "ELF.*executable" | cut -f 1 -d : \
-#          | xargs strip --strip-unneeded 2> /dev/null
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a README* \
