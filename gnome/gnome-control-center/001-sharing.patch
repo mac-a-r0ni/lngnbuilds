@@ -1,0 +1,97 @@
+From c01ba469b9794703eadcd14ad012bb00ee1c6e3a Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <46272571+nater1983@users.noreply.github.com>
+Date: Mon, 4 Sep 2023 13:22:46 -0500
+Subject: [PATCH] Update cc-sharing-panel.c
+
+---
+ panels/sharing/cc-sharing-panel.c | 32 +++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+diff --git a/panels/sharing/cc-sharing-panel.c b/panels/sharing/cc-sharing-panel.c
+index 0e00117d5..d9ca2912a 100644
+--- a/panels/sharing/cc-sharing-panel.c
++++ b/panels/sharing/cc-sharing-panel.c
+@@ -709,7 +709,23 @@ static gboolean
+ file_sharing_get_require_password (GValue   *value,
+                                    GVariant *variant,
+                                    gpointer  user_data)
++
++/* Spawn the gnome-user-share-webdav daemon for non-systemd system's */
++
+ {
++   g_autoptr(GError) error = NULL;
++   gchar *argv[]={"/usr/libexec/gnome-user-share-webdav",NULL};
++   gint pid;
++   gboolean ret;
++ 
++   ret = g_spawn_async(NULL,argv,NULL,G_SPAWN_DO_NOT_REAP_CHILD,NULL,NULL,&pid,&error);
++ 
++   if (!ret){
++   g_print("Error: %s\n",error->message);
++   g_error_free(error);
++   return;
++   }
++	
+   if (g_str_equal (g_variant_get_string (variant, NULL), "always"))
+     g_value_set_boolean (value, TRUE);
+   else
+@@ -866,6 +882,22 @@ enable_gnome_remote_desktop_service (CcSharingPanel *self)
+ {
+   g_autoptr(GError) error = NULL;
+ 
++/* Spawn the gnome-remote-desktop-daemon for non-systemd system's */
++
++  gchar *argv[]={"/usr/libexec/gnome-remote-desktop-daemon",NULL};
++  gint pid;
++  gboolean ret;
++
++  ret = g_spawn_async(NULL,argv,NULL,G_SPAWN_DO_NOT_REAP_CHILD,NULL,NULL,&pid,&error);
++
++  if (!ret){
++  g_print("Error: %s\n",error->message);
++  g_error_free(error);
++  return;
++  }
++
++  return;
++
+   if (is_remote_desktop_enabled (self))
+     return;
+ 
+From 4eae49b256449a9e5133847984b3325ce8602709 Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <46272571+nater1983@users.noreply.github.com>
+Date: Mon, 4 Sep 2023 13:26:36 -0500
+Subject: [PATCH] Update cc-media-sharing.c
+
+---
+ panels/sharing/cc-media-sharing.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/panels/sharing/cc-media-sharing.c b/panels/sharing/cc-media-sharing.c
+index d0f12aa248..74fd8b1cdc 100644
+--- a/panels/sharing/cc-media-sharing.c
++++ b/panels/sharing/cc-media-sharing.c
+@@ -95,7 +95,22 @@ cc_media_sharing_get_preferences (gchar  ***folders)
+ 
+ void
+ cc_media_sharing_set_preferences (gchar    **folders)
+-{
++
++/* Spawn the rygel daemon for non-systemd system's */
++
++{ g_autoptr(GError) error = NULL;
++  gchar *argv[]={"/usr/bin/rygel",NULL};
++  gint pid;
++  gboolean ret;
++  
++  ret = g_spawn_async(NULL,argv,NULL,G_SPAWN_DO_NOT_REAP_CHILD,NULL,NULL,&pid,&error);
++  
++  if (!ret){
++  g_print("Error: %s\n",error->message);
++  g_error_free(error);
++  return;
++  }
++
+   g_autoptr(GKeyFile) file = NULL;
+   gchar **str_list;
+   g_autofree gchar *path = NULL;
