@@ -168,6 +168,12 @@ find $PKG | xargs file | egrep "ELF.*executable" | cut -f 1 -d : \
 mkdir -p $PKG/var/lib/$PRGNAM
 chown -R $PRGUID:$PRGGID $PKG/var/lib/$PRGNAM
 
+# set XDG_RUNTIME_DIR when booting w/ greetd
+# will NOT run without this set
+mkdir -p $PKG/etc/profile.d
+install -Dm0755 $PKG/etc/profile.d $CWD/greetd.sh
+install -Dm0755 $PKG/etc/profile.d $CWD/greetd.csh
+
 gzip -9 $PKG/usr/man/man?/*
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
