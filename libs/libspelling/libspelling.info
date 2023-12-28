@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/libspelling/0.2/libspelling-0.2.0.t
 MD5SUM="a45d59c7bff6d5ba8a17a84defa935a5"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=""
+REQUIRES="gtksourceview5"
 MAINTAINER=""
 EMAIL=""
