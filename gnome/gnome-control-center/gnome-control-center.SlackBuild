@@ -72,9 +72,6 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
-# patches for openrc-settingsd by Nathaniel Russel ::epic::
-#patch -Np1 -i $CWD/001-sharing.patch
-#patch -Np1 -i $CWD/0001-keyboard-Use-new-gnome-desktop-api-for-getting-defau.patch
 chown -R root:root .
 find -L . -prune -name 'subprojects/gvc/.gitlab-ci' \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
