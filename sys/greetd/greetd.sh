@@ -1,3 +1,3 @@
 #!/bin/sh
 
-export XDG_RUNTIME_DIR=/tmp
+export XDG_RUNTIME_DIR=/run/user/$UID

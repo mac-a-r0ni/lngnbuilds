@@ -5,6 +5,6 @@ DOWNLOAD="https://slackware.lngn.net/pub/source/cinny-desktop/cinny_3.2.1_arm64.
 MD5SUM="643744ab156a533e2102036eeffabd0f"
 DOWNLOAD_x86_64="https://slackware.lngn.net/pub/source/cinny-desktop/cinny_3.2.1_amd64.deb"
 MD5SUM_x86_64="df718b4f289a752a96b19c85d8baecfc"
-REQUIRES="libayatana-appindicator libwpe webkit2gtk wpebackend-fdo"
+REQUIRES="libayatana-appindicator webkit2gtk"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
