@@ -94,6 +94,9 @@ CXXFLAGS="$SLKCFLAGS" \
 make
 make install DESTDIR=$PKG
 
+# setup some sane defaults for non-systemd systems
+cp -a $CWD/10-slackware.conf $PKG/etc/dracut.conf.d
+
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
