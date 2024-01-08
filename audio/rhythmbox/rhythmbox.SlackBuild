@@ -67,32 +67,23 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-#LDFLAGS="-ltdb" \
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-./configure \
-  --prefix=/usr \
-  --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --sysconfdir=/etc \
-  --localstatedir=/var \
-  --mandir=/usr/man \
+mkdir build
+cd build
+  CFLAGS="$SLKCFLAGS" \
+  CXXFLAGS="$SLKCFLAGS" \
+  meson setup .. \
+  --buildtype=release \
   --infodir=/usr/info \
-  --docdir=/usr/doc/$PRGNAM-$VERSION \
-  --with-gnome-keyring \
-  --with-ipod \
-  --with-mtp \
-  --with-gudev \
-  --without-hal \
-  --with${BRAS}-brasero \
-  --enable-browser-plugin \
-  --enable-vala=auto \
-  --with-mdns=auto \
-  --disable-scrollkeeper \
-  --with-x \
-  --build=$ARCH-slackware-linux
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --localstatedir=/var \
+  --mandir=/usr/man  \
+  --prefix=/usr \
+  --sysconfdir=/etc \
+  -Dstrip=true
 
-make
-make install DESTDIR=$PKG
+  "${NINJA:=ninja}"
+  DESTDIR=$PKG $NINJA install
+cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
