@@ -25,9 +25,9 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=grilo
-VERSION=${VERSION:-0.3.15}
+VERSION=${VERSION:-0.3.16}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_lngn}	
+TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
@@ -91,6 +91,7 @@ cd build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
+    -Denable-gtk-doc=false \
     -Dstrip=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
