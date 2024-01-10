@@ -106,8 +106,6 @@ mkdir -p build
   DESTDIR=$PKG ninja install
 )
 
-
-
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
@@ -115,12 +113,13 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 mv $PKG/etc/i3/config $PKG/etc/i3/config.new
 mv $PKG/etc/i3/config.keycodes $PKG/etc/i3/config.keycodes.new
 
-# Make xterm default terminal
-sed -i 's/i3-sensible-terminal/xterm/' $PKG/etc/i3/config.new
+# Make xfce4-terminal default terminal
+sed -i 's/i3-sensible-terminal/xfce4-terminal/' $PKG/etc/i3/config.new
 
 # KDM menu entry
-mkdir -p $PKG/usr/share/apps/kdm/sessions
-ln -s /usr/share/xsessions/i3.desktop $PKG/usr/share/apps/kdm/sessions/
+# commenting out as this just doesn't ship on slackware these days
+#mkdir -p $PKG/usr/share/apps/kdm/sessions
+#ln -s /usr/share/xsessions/i3.desktop $PKG/usr/share/apps/kdm/sessions/
 
 # Install an xinitrc script
 mkdir -p $PKG/etc/X11/xinit
@@ -163,6 +162,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
