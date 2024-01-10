@@ -1,0 +1,5 @@
+dmenu
+xcb-util-xrm
+yajl
+perl-JSON-XS
+perl-AnyEvent
