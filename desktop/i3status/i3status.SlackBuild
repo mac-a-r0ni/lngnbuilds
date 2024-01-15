@@ -85,18 +85,19 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 mkdir -p build
-( cd build
-	CFLAGS="$SLKCFLAGS" \
-	meson -Dmans=true \
-	      --prefix /usr \
-	      --libdir /usr/lib$LIBDIRSUFFIX \
-	      --mandir /usr/man \
-	      --sysconfdir /etc \
-	     --localstatedir /var \
-	 ..
-      CFLAGS="$SLKCFLAGS" ninja
-      DESTDIR=$PKG ninja install
-)
+cd build
+  CFLAGS="$SLKCFLAGS" \
+  meson setup .. \
+   -Dmans=true \
+  --prefix /usr \
+  --libdir /usr/lib$LIBDIRSUFFIX \
+  --mandir /usr/man \
+  --sysconfdir /etc \
+  --localstatedir /var
+  CFLAGS="$SLKCFLAGS" ninja
+  DESTDIR=$PKG ninja install
+
+cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -112,8 +113,9 @@ cp -a LICENSE $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
-cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
