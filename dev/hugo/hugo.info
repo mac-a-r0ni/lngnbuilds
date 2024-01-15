@@ -4,7 +4,7 @@ HOMEPAGE="https://gohugo.io"
 DOWNLOAD="https://github.com/gohugoio/hugo/archive/v0.121.2/hugo-0.121.2.tar.gz \
           https://slackware.lngn.net/pub/source/hugo/hugo-vendor-0.121.2.tar.xz"
 MD5SUM="74b6bd866f7fa2ac031a723728125e21 \
-        0c554f840f01a637bf45492e6c548b81"
+        f76d8f94f01bf1e23c3a95a9972e911c"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="google-go-lang"
