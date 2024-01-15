@@ -1,8 +1,8 @@
 PRGNAM="hugo"
-VERSION="0.120.4"
+VERSION="0.121.2"
 HOMEPAGE="https://gohugo.io"
-DOWNLOAD="https://github.com/gohugoio/hugo/archive/v0.120.4/hugo-0.120.4.tar.gz /
-          https://slackware.lngn.net/pub/source/hugo/hugo-vendor-0.120.4.tar.xz"
+DOWNLOAD="https://github.com/gohugoio/hugo/archive/v0.121.2/hugo-0.121.2.tar.gz /
+          https://slackware.lngn.net/pub/source/hugo/hugo-vendor-0.121.2.tar.xz"
 MD5SUM="c2076258e07b684988fd93025c4b0b8e /
         4514aeb51a20195b1b1716b40d3d3a43"
 DOWNLOAD_x86_64=""
