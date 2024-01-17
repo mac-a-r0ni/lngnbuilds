@@ -14,6 +14,6 @@ MD5SUM="c96cc477ac0ca12e23a73fd3d8207508 \
         b58a325a8349a630c8ca1a532fe07b01"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="pandoc-bin"
+REQUIRES="pandoc-bin powerline-status FontAwesome"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
