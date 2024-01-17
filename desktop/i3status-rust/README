@@ -1,0 +1,6 @@
+i3status-rust (resource friendly replacement for i3status)
+
+i3status-rs is a feature-rich and resource-friendly replacement for
+i3status, written in pure Rust. It provides a way to display "blocks"
+of system information (time, battery status, volume, etc) on bars that
+support the i3bar protocol.
