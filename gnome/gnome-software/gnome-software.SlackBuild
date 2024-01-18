@@ -105,7 +105,6 @@ CFLAGS="$SLKCFLAGS" \
     -Dsoup2=false \
     -Dprofile=slackware64-current
 
-#-Dmogwai=true
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
@@ -124,6 +123,7 @@ rm -r $PKG/usr/share/doc
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
