@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-browser-connector/42/gnome-br
 MD5SUM="d5b00a3ff63dad073c86d855b2017661"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="jq p7zip"
+REQUIRES="jq"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"

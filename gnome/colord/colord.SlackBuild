@@ -140,6 +140,7 @@ chown -R $PRGNAM:$PRGNAM $PKG/var/lib/$PRGNAM
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
