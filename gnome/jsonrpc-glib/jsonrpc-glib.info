@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/core/45/45.0/sources/jsonrpc-glib-3.44.0.ta
 MD5SUM="3e36288c3d377dc453ee8984fe217c01"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gi-docgen"
+REQUIRES=""
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
