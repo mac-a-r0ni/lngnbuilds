@@ -85,9 +85,11 @@ find -L . \
 # Build against libgit2 version >= 1.0
 #patch -p1 < $CWD/detect-libgit2-version.patch
 
+mkdir -p build
+cd build
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson build \
+meson setup .. \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --sysconfdir=/etc \
@@ -97,6 +99,7 @@ meson build \
   -Dgtk_doc=false
 
 DESTDIR=$PKG "${NINJA:=ninja}" -C build install
+cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
