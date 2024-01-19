@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libxmlb
-VERSION=${VERSION:-0.3.14}
+VERSION=${VERSION:-0.3.15}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -80,20 +80,21 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+mkdir build
+cd build
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson setup \
+meson setup .. \
   --buildtype=release \
   --infodir=/usr/info \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --localstatedir=/var \
   --mandir=/usr/man \
   --prefix=/usr \
-  --sysconfdir=/etc \
-  build
-"${NINJA:=ninja}" -C build
-DESTDIR=$PKG $NINJA -C build install
-
+  --sysconfdir=/etc
+"${NINJA:=ninja}"
+DESTDIR=$PKG $NINJA install
+cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
@@ -108,6 +109,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
