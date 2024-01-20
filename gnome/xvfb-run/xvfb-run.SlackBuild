@@ -22,7 +22,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# 20-05-2023: Updated to version 21.1.7 and cleaned up to adhere to 
+# 20-05-2023: Updated to version 21.1.7 and cleaned up to adhere to
 # sbopkglint standards. - Bob Funk
 
 cd $(dirname $0) ; CWD=$(pwd)
@@ -66,6 +66,7 @@ mkdir install
 
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 cat $CWD/slack-desc > install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
