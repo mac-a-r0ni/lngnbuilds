@@ -93,9 +93,8 @@ cmake \
 make protocols
 make -C build all
 
-# makefile has no install function so we must copy the file ourselves
-mkdir -p $PKG/usr/bin
-cp $TMP/$PRGNAM-$VERSION/build/$PRGNAM $PKG/usr/bin
+# makefile has no install function so we must install the file ourselves
+install -Dm755 -t $TMP/$PRGNAM-$VERSION/build/$PRGNAM $PKG/usr/bin
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -122,6 +121,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
