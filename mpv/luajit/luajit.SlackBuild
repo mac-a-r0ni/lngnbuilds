@@ -24,10 +24,11 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
+NAME=LuaJIT
 PRGNAM=luajit
-GITVER=${VERSION:-2.0-43d0a19}
-VERSION=${VERSION:-2.1_43d0a19}
-REVISION=${REVISION:-43d0a19158ceabaa51b0462c1ebc97612b420a2e}
+GITVER=${VERSION:-20231223.c525bcb9}
+VERSION=${VERSION:-2.1.c525bcb9}
+#REVISION=${REVISION:-43d0a19158ceabaa51b0462c1ebc97612b420a2e}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -74,10 +75,10 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$GITVER
-tar zxvf $CWD/$REVISION.tar.gz
+rm -rf $NAME-$GITVER
+tar xvf $CWD/$NAME-$GITVER.tar.?z
 # im sure theres a smart way to change - to _ but i'm not that guy
-cd $PRGNAM-$GITVER
+cd $NAME-$GITVER
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
