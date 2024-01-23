@@ -27,12 +27,13 @@
 # Modifications for qt 5.2.0 2013 by Michael James, AU
 # Modifications for qt 5.x by Eric Hameleers, Eindhoven, NL
 # Modifications for qt 6.x 2023, 2024 by Eric Hameleers, Eindhoven, NL
+# Modifications for arm64 & rpi devices 2024 by Jay Lanagan, Detroit, MI
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PKGNAM=qt6
 VERSION=$(ls qt-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_lngn}
 PKGSRC=$(echo $VERSION | cut -d - -f 1)
 PKGVER=$(echo $VERSION | tr - _)
@@ -207,7 +208,7 @@ cmake -S $(pwd) -B build-${PKGNAM} \
   -DFEATURE_webengine_system_pulseaudio="${USE_PULSEAUDIO}" \
   -DFEATURE_webengine_webrtc_pipewire=ON \
   -DQT_BUILD_EXAMPLES=OFF \
-  -DQT_USE_CCACHE=OFF \
+  -DQT_USE_CCACHE=ON \
   2>&1 | tee $TMP/configure-${PKGNAM}.log
 cmake --build build-${PKGNAM} --parallel \
   2>&1 | tee $TMP/make-${PKGNAM}.log
