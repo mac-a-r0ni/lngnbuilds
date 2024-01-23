@@ -1,6 +1,6 @@
 PRGNAM="PyQt6"
 VERSION="6.6.1"
-HOMEPAGE="https://www.riverbankcomputing.com/software/pyqtwebengine/intro"
+HOMEPAGE="https://www.riverbankcomputing.com/software/pyqt/intro"
 DOWNLOAD="https://files.pythonhosted.org/packages/8c/2b/6fe0409501798abc780a70cab48c39599742ab5a8168e682107eaab78fca/PyQt6-6.6.1.tar.gz"
 MD5SUM="4b93fcefb54df7fef21dd8be7a5ef79f"
 DOWNLOAD_x86_64=""
