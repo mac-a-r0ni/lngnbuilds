@@ -96,7 +96,7 @@ sip-build \
   cd build
   make
   make INSTALL_ROOT=$PKG install
-
+  cd ..
 /usr/bin/python3 -m compileall -d / $PKG/usr/lib${LIBDIRSUFFIX}
 /usr/bin/python3 -O -m compileall -d / $PKG/usr/lib${LIBDIRSUFFIX}
 
