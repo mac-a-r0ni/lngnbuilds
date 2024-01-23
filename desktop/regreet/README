@@ -1,0 +1,6 @@
+ReGreet (Clean and customizable greeter for greetd)
+
+A clean and customizable GTK-based greetd greeter written in Rust
+using Relm4. This is meant to be run under a Wayland compositor
+(like Sway). It is based on Max Moser's LightDM Elephant greeter,
+which is based on Matt Shultz's Fischer's example LightDM greeter.
