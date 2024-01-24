@@ -12,7 +12,7 @@ libyuv: libyuv is an open source project that includes YUV
 libyuv: scaling and conversion functionality.It can be used
 libyuv: to convert to YUV from webcam formats for compression.
 libyuv:
-libyuv: Homepage:https://chromium.googlesource.com/libyuv/libyuv/
+libyuv: Homepage: https://chromium.googlesource.com/libyuv/libyuv/
 libyuv:
 libyuv:
 libyuv:
