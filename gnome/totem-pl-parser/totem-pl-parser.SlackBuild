@@ -11,7 +11,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=totem-pl-parser
 VERSION=${VERSION:-3.26.6}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -70,7 +70,7 @@ meson setup \
   --prefix=/usr \
   --libexecdir=/usr/lib$LIBDIRSUFFIX \
   --buildtype=release \
-  -Denable-gtk-doc=true \
+  -Denable-gtk-doc=false \
   -Dstrip=true \
   ..
 "${NINJA:=ninja}"
