@@ -96,7 +96,7 @@ cd build
         -DENABLE_JOURNALD_LOG=OFF \
 	-DENABLE_DOCUMENTATION=OFF \
 	-DENABLE_BUBBLEWRAP_SANDBOX=ON \
-	-DUSE_SYSTEM_MALLOC=on \
+	-DUSE_SYSTEM_MALLOC=ON \
         -DUSE_GSTREAMER_TRANSCODER=ON \
         -DUSE_AVIF=ON \
         -DUSE_JPEGXL=OFF \
@@ -126,6 +126,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
