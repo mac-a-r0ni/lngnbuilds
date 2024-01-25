@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gdm
 VERSION=${VERSION:-45.0.1}
-BUILD=${BUILD:-3}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -124,8 +124,9 @@ cat $CWD/gdm-launch-environment.pam > $PKG/etc/pam.d/gdm-launch-environment
 cat $CWD/wayland-session > $PKG/etc/gdm/wayland-session
 
 # Install GDM wrapper script:
-mv $PKG/usr/sbin/{gdm,gdm-bin}
-cat $CWD/gdm.wrap > $PKG/usr/sbin/gdm
+# This has been fixed on -current, commenting out...
+# mv $PKG/usr/sbin/{gdm,gdm-bin}
+# cat $CWD/gdm.wrap > $PKG/usr/sbin/gdm
 
 # Handle /etc/gdm/custom.conf a little nicer:
 mv $PKG/etc/gdm/{custom.conf,custom.conf.new}
