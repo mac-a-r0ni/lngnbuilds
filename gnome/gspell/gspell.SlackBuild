@@ -95,7 +95,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --disable-debug \
   --disable-static \
-  --enable-gtk-doc \
+  --disable-gtk-doc \
   --build=$ARCH-slackware-linux
 make
 make install DESTDIR=$PKG
@@ -113,6 +113,7 @@ rm -f $PKG/usr/lib*/*.la
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
