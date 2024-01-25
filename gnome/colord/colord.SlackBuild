@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=colord
-VERSION=${VERSION:-1.4.6}
+VERSION=${VERSION:-1.4.7}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -72,7 +72,7 @@ if ! grep -q ^colord: /etc/group ; then
   useradd -d /var/lib/colord -u 303 -g colord -s /bin/false colord
 fi
 
-if [ "${BASH_COMPLETION:-no}" = "yes" ]; then
+if [ "${BASH_COMPLETION:-yes}" = "yes" ]; then
   USE_BASH="true"
 else
   USE_BASH="false"
@@ -100,7 +100,8 @@ sed -i "s|0.114|0.113|" meson.build
 
 mkdir -p build
 cd build
-meson --prefix=/usr \
+meson setup \
+      --prefix=/usr \
       --buildtype=release \
       --localstatedir=/var \
       --libdir=lib${LIBDIRSUFFIX} \
@@ -125,8 +126,8 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 # Fix paths
-sed -i "s|/lib|/lib${LIBDIRSUFFIX}|g" $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig/colord.pc
-sed -i "s|/lib|/lib${LIBDIRSUFFIX}|g" $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig/colorhug.pc
+#sed -i "s|/lib|/lib${LIBDIRSUFFIX}|g" $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig/colord.pc
+#sed -i "s|/lib|/lib${LIBDIRSUFFIX}|g" $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig/colorhug.pc
 mv $PKG/usr/share/dbus-1/system.d/org.freedesktop.ColorManager.conf $PKG/usr/share/dbus-1/system.d/org.freedesktop.ColorManager.conf.new
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
