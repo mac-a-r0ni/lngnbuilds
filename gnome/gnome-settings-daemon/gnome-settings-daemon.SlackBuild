@@ -93,6 +93,7 @@ cd build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
+    -Dcolord=false \
     -Dsystemd=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
