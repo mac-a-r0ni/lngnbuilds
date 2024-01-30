@@ -104,7 +104,7 @@ esac
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 export NINJAJOBS="$NUMJOBS"
 
-TMP=${TMP:-/root/tmp}
+TMP=${TMP:-/home/tmp}
 PKG=$TMP/package-${PKGNAM}
 OUTPUT=${OUTPUT:-/tmp}
 
