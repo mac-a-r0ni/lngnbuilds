@@ -7,6 +7,6 @@ MD5SUM="d82a556fa5aec1a5d08e0b11363ee936 \
         8273e04cac05d790e67254aed1b44993"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="zulu-openjdk17 apache-ant perl-Archive-Zip"
+REQUIRES="zulu-openjdk17 apache-ant liblangtag perl-Archive-Zip"
 MAINTAINER="Christoph Willing"
 EMAIL="chris.willing@linux.com"
