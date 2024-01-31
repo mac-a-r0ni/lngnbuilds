@@ -301,6 +301,7 @@ fi
     $valgrind \
     $ucpp \
     $odbc \
+    $liblangtag \
     $xmlsec \
 
 #Create a srcs tarball if we don't already have one
