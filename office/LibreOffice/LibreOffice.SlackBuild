@@ -2,6 +2,7 @@
 #
 # ex:set ai shiftwidth=4 inputtab=spaces smarttab noautotab:
 # Edits for aarch64 builds by Jay Lanagan (j@lngn.net)
+# 24.2.0.3 uncommented --with-system-libxml, added liblangtag dep
 # 7.6.4.1 added patch for icu, re-introduced --with-system-icu
 # 7.6.3.1 update removed system icu or LO fails to build.
 #    --with-system-icu \
@@ -173,7 +174,7 @@ if test -e /usr/include/lpsolve ; then lpsolve="--with-system-lpsolve" ; else lp
 if pkg-config --exists mdds-1.4 ; then mdds="--with-system-mdds" ; else mdds="" ; fi
 if pkg-config --exists mythes ; then mythes="--with-system-mythes" ; else mythes="" ; fi
 if test -x /usr/bin/odbc_config ; then odbc="--with-system-odbc" ; else odbc="" ; fi
-#if test -d /usr/lib${LIBDIRSUFFIX}/python3*/site-packages/lxml ; then lxml="--with-system-lxml" ; else lxml="" ; fi
+if test -d /usr/lib${LIBDIRSUFFIX}/python3*/site-packages/lxml ; then lxml="--with-system-lxml" ; else lxml="" ; fi
 if pkg-config --exists xmlsec1 ; then
   xmlsec="--with-system-xmlsec"
 else
