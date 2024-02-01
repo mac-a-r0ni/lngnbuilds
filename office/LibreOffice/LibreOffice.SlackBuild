@@ -72,6 +72,7 @@ elif [ "$ARCH" = "x86_64" ]; then
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
   SLKCFLAGS="-O2 -fPIC"
+  LDFLAGS="-lz"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
@@ -214,6 +215,7 @@ fi
 ./configure \
     CFLAGS="$SLKCFLAGS" \
     CXXFLAGS="$SLKCFLAGS" \
+    LDFLAGS="$LDFLAGS" \
     NSS_CFLAGS="$(pkg-config --cflags-only-I mozilla-nss)"\
     --prefix=/usr   \
     --mandir=/usr/man \
