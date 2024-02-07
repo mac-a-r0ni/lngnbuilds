@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for evolution
+# Slackware build script for clutter-gtk
 
 # Copyright 2022 Ozan Türkyılmaz
 # All rights reserved.
@@ -24,54 +24,14 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=evolution
-VERSION=${VERSION:-3.50.3}
+PRGNAM=clutter-gtk
+VERSION=${VERSION:-1.8.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
-GCOV=${GCOV:-no}
 GTKDOC=${GTKDOC:-no}
-TESTS=${TESTS:-no}
-BOGOFILTER=${BOGOFILTER:-no}
-SPAMASSASION=${SPAMASSASION:-no}
-GNOMEDESKTOP=${GNOMEDESKTOP:-yes}
-
-if [ "$GCOV" = "yes" ]; then
-  GCOVP="ON"
-else
-  GCOVP="OFF"
-fi
-
-if [ "$GTKDOC" = "yes" ]; then
-  GTKDOCP="ON"
-else
-  GTKDOCP="OFF"
-fi
-
-if [ "$TESTS" = "yes" ]; then
-  TESTSP="ON"
-else
-  TESTSP="OFF"
-fi
-
-if [ "$BOGOFILTER" = "yes" ]; then
-  BOGOFILTERP="ON"
-else
-  BOGOFILTERP="OFF"
-fi
-
-if [ "$SPAMASSASION" = "yes" ]; then
-  SPAMASSASIONP="ON"
-else
-  SPAMASSASIONP="OFF"
-fi
-
-if [ "$GNOMEDESKTOP" = "yes" ]; then
-  GNOMEDESKTOPP="ON"
-else
-  GNOMEDESKTOPP="OFF"
-fi
+INTROSPECTION=${INTROSPECTION:-yes}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -122,56 +82,37 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir -p build
-cd build
-  cmake \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_INSTALL_PREFIX=/usr  \
-    -DSYSCONF_INSTALL_DIR=/etc \
-    -DLIB_SUFFIX=${LIBDIRSUFFIX} \
-    -DMAN_INSTALL_DIR=/usr/man   \
-    -DENABLE_CODE_COVERAGE="$GCOV" \
-    -DENABLE_GNOME_DESKTOP="$GNOMEDESKTOP" \
-    -DENABLE_GTK_DOC="$GTKDOC"   \
-    -DENABLE_INSTALLED_TESTS="$TESTS"  \
-    -DENABLE_SMIME=ON            \
-    -DENABLE_PST_IMPORT=ON       \
-    -DENABLE_YTNEF=OFF            \
-    -DENABLE_CONTACT_MAPS=ON     \
-    -DENABLE_TEXT_HIGHLIGHT=ON   \
-    -DWITH_BOGOFILTER="$BOGOFILTER"\
-    -DWITH_SPAMASSASSIN="$SPAMASSASION"\
-    -DWITH_SA_LEARN=OFF          \
-    -DENABLE_PLUGINS=all         \
-    -DENABLE_SCHEMAS_COMPILE=OFF \
-    -DWITH_GLADE_CATALOG=OFF     \
-    -DENABLE_MARKDOWN=ON         \
-    -DCMAKE_BUILD_TYPE=Release .. \
-    -G Ninja
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --mandir=/usr/man \
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --disable-static \
+  --enable-gtk-doc="$GTKDOC" \
+  --enable-introspection="$INTROSPECTION" \
+  --build=$ARCH-slackware-linux
 
-  "${NINJA:=ninja}"
-  DESTDIR=$PKG $NINJA install
-cd ..
+make
+make install DESTDIR=$PKG
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
-
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS COPYING COPYING-DOCS COPYING-DOCS.CCBYSA  COPYING-DOCS.GFDL COPYING.LGPL2 COPYING.LGPL3 \
-  COPYING.OPENLDAP HACKING MAINTAINERS NEWS NEWS-1.0 README.md README.translators \
+  ABOUT-NLS COPYING NEWS README \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/slack-required > $PKG/install/slack-required
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
