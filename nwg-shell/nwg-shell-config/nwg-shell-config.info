@@ -7,6 +7,6 @@ MD5SUM="9b6581790bdabbc9d907ec34899eaf0f \
         bae7126cf7fbb634e09ddedd861a133d"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gtklock playerctl geopy i3ipc wlsunset"
+REQUIRES="gtklock playerctl geopy python-i3ipc wlsunset"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
