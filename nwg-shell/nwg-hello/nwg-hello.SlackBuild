@@ -98,9 +98,9 @@ sed -i -e 's,systemctl,loginctl,g' sway-config
 
   python3 setup.py install --root="$PKG" --optimize=1
 
-# install patched Slackware config file into package so
-# things work auto-magically upon install.
-cat $CWD/nwg-hello.json > $PKG/etc/nwg-hello/nwg-hello.json
+# install default config file into package so things work
+# auto-magically upon install
+install -Dm0644 -t $PKG/etc/nwg-hello/nwg-hello.json $CWD/nwg-hello.json
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
