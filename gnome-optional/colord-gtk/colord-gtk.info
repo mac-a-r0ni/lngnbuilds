@@ -5,6 +5,6 @@ DOWNLOAD="http://www.freedesktop.org/software/colord/releases/colord-gtk-0.3.0.t
 MD5SUM="08c245d6482b3923a2b6a09f7fbbe612"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="colord"
+REQUIRES=""
 MAINTAINER="David Spencer"
 EMAIL="baildon.research@googlemail.com"
