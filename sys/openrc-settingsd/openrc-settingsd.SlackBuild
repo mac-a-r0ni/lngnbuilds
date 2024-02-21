@@ -73,7 +73,8 @@ rm -rf $PRGNAM-v$VERSION
 tar xvf $CWD/$PRGNAM-v$VERSION.tar.?z || exit 1
 cd $PRGNAM-v$VERSION || exit 1
 
-patch -p1 < $CWD/bb5a25fbdca43700176a2756873fb3f722815414.patch || exit 1
+#patch -p1 < $CWD/bb5a25fbdca43700176a2756873fb3f722815414.patch || exit 1
+patch -p1 < $CWD/10.patch || exit 1
 
 chown -R root:root .
 find . \
@@ -96,6 +97,7 @@ cd build
     -Dopenrc=disabled \
     -Dhostname-style=slackware \
     -Dlocale-style=slackware \
+    -Dtime-style=slackware \
     -Dstrip=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
