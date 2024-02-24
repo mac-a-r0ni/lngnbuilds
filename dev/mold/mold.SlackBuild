@@ -86,7 +86,7 @@ cd build
     -DCMAKE_INSTALL_MANDIR=/usr/man \
     -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION \
     -DCMAKE_BUILD_TYPE=Release ..
-  make
+  make -j $(nproc)
   make install DESTDIR=$PKG
 cd ..
 

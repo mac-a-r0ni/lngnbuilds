@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-settings-daemon/45/gnome-sett
 MD5SUM="61c2d2eb639e6eae775e4330c0dc47fe"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="colord gcr4 geoclue2 geocode-glib2 gnome-desktop libgweather4"
+REQUIRES="gcr4 geoclue2 geocode-glib2 gnome-desktop libgweather4"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
