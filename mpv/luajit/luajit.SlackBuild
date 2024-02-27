@@ -26,8 +26,8 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 NAME=LuaJIT
 PRGNAM=luajit
-GITVER=${VERSION:-20240131.9cc2e42b}
-VERSION=${VERSION:-2.1.9cc2e42b}
+GITVER=${VERSION:-20240204.0d313b24}
+VERSION=${VERSION:-2.1_0d313b24}
 #REVISION=${REVISION:-43d0a19158ceabaa51b0462c1ebc97612b420a2e}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
@@ -77,7 +77,6 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $NAME-$GITVER
 tar xvf $CWD/$NAME-$GITVER.tar.?z
-# im sure theres a smart way to change - to _ but i'm not that guy
 cd $NAME-$GITVER
 chown -R root:root .
 find -L . \
