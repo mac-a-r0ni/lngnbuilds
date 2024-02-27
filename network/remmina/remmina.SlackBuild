@@ -28,16 +28,16 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=remmina
-VERSION=${VERSION:-1.4.34}
+VERSION=${VERSION:-1.4.35}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
-DIRNAME=Remmina-v.$VERSION
+DIRNAME=Remmina-v$VERSION
 
-AVAHI=${AVAHI:-OFF}
+AVAHI=${AVAHI:-ON}
 KWALLET=${KWALLET:-OFF}
-TELEPATHY=${TELEPATHY:-OFF}
+TELEPATHY=${TELEPATHY:-ON}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
