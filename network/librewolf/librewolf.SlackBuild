@@ -75,10 +75,10 @@ mv squashfs-root "$NAMVER"
 rm -f "$PKG/opt/$NAMVER/removed-files"
 
 # Executable, desktop, and icon file.
+# This was orig a messy bunch of symlinks that I didn't like.
 ln -s "../../opt/$NAMVER/AppRun" "$PKG/usr/bin/$PRGNAM"
-ln -s "../../../opt/$NAMVER/io.gitlab.LibreWolf.desktop" "$PKG/usr/share/applications/$PRGNAM.desktop"
-ln -s "../../../opt/$NAMVER/browser/chrome/icons/default/default128.png \
-  /usr/share/pixmaps/librewolf.png"
+install -Dm0644 -T $PKG/opt/$NAMVER/io.gitlab.LibreWolf.desktop $PKG/usr/share/applications/$PRGNAM.desktop
+install -Dm0644 -T $PKG/opt/$NAMVER/browser/chrome/icons/default/default128.png $PKG/usr/share/pixmaps/librewolf.png
 
 cp "$CWD/$PRGNAM.SlackBuild" "$PKG/usr/doc/$NAMVER/$PRGNAM.SlackBuild"
 cp "$CWD/README" "$PKG/usr/doc/$NAMVER/README"
