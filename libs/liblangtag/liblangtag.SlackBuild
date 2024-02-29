@@ -99,6 +99,8 @@ CXXFLAGS="$SLKCFLAGS" \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --with-html-dir=/usr/doc/$PRGNAM-$VERSION/gtk-doc/html \
+  --disable-gtk-doc \
+  --disable-gtk-doc-html \
   --disable-test \
   --build=$ARCH-slackware-linux
 
