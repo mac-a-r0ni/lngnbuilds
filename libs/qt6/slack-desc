@@ -6,7 +6,7 @@
 # customary to leave one space after the ':'.
 
    |-----handy-ruler------------------------------------------------------|
-qt6: qt6 (a C++ graphical user interface toolkit)
+qt6: qt6 (Qt GUI toolkit, version 6)
 qt6:
 qt6: Qt is a complete and well-developed object-oriented framework for
 qt6: developing graphical user interface (GUI) applications using C++.

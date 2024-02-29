@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Copyright 2021  Heinz Wiesinger, Amsterdam, The Netherlands
+# Copyright 2023, 2024  Patrick J. Volkerding, Sebeka, Minnesota, USA
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -20,29 +21,29 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-BRANCH="5.15.10"
+BRANCH="6.6.2"
 
 rm -f qt-everywhere-src-*.tar*
 
 git clone https://invent.kde.org/qt/qt/qt5.git
 
 cd qt5
-  git checkout kde/5.15
+  git checkout v${BRANCH}
   ./init-repository
 
   # Sync qtwebengine version with the rest of qt5
-  sed -i -E "s/5.15.(.*)/$BRANCH/" qtwebengine/.qmake.conf
+  sed -i -E "s/6.6.(.*)/$BRANCH\"\)/" qtwebengine/.cmake.conf
 
   for i in $(find . -type d -name "qt*" -maxdepth 1); do
     cd $i
-      ../qtbase/bin/syncqt.pl -version $BRANCH
+      ../qtbase/libexec/syncqt.pl -version $BRANCH
     cd ..
   done
 
-  # Not in the release tarball for 5.15.2
-  rm -rf qtqa qtrepotools qtsystems qtpim qtfeedback qtdocgallery qtcanvas3d
-  rm -rf qtdatavis3d/tools qtcharts/tools
-  rm -f init-repository README.git .commit-template
+  # Not in the release tarball for 6.6.1:
+  rm -rf README.git init-repository \
+    qtcanvas3d qtfeedback qtgamepad qtpim qtqa qtrepotools qtsystems qtwebglplugin qtxmlpatterns \
+    qtcharts/tools qtdatavis3d/tools qtgraphs/tools
 
   VERSION="${BRANCH}_$(git log --format="%ad_%h" --date=short | head -n 1 | tr -d -)"
   LONGDATE="$(git log -1 --format=%cd --date=format:%c )"
@@ -52,7 +53,7 @@ cd ..
 mv qt5 qt-everywhere-src-$VERSION
 
 tar --exclude-vcs -cf qt-everywhere-src-$VERSION.tar qt-everywhere-src-$VERSION
-tar -cf qt5-gitmodules.tar qt-everywhere-src-$VERSION/**/.gitmodules qt-everywhere-src-$VERSION/.gitmodules
+tar -cf qt5-gitmodules.tar qt-everywhere-src-$VERSION/*/.gitmodules qt-everywhere-src-$VERSION/.gitmodules
 tar --concatenate --file=qt-everywhere-src-$VERSION.tar qt5-gitmodules.tar
 plzip -9 -v qt-everywhere-src-$VERSION.tar
 touch -d "$LONGDATE" qt-everywhere-src-$VERSION.tar.lz
