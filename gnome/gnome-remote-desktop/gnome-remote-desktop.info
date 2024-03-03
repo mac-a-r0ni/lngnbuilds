@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/core/45/45.1/sources/gnome-remote-desktop-4
 MD5SUM="d48fabf028b7756dcc43bf8a69483411"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="libfdk-aac nv-codec-headers tpm2-tss"
+REQUIRES="libfdk-aac tpm2-tss"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
