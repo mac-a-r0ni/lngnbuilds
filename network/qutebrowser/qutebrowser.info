@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/qutebrowser/qutebrowser/releases/download/v3.1.0/qu
 MD5SUM="6ee615bff8c109164371cdb8d43a5fb1"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="qt6 PyQt6 python-PyQt6_WebEngine"
+REQUIRES="PyQt6 python-PyQt6_WebEngine"
 MAINTAINER="D Woodfall"
 EMAIL="dave@slackbuilds.org"
