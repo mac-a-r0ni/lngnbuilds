@@ -99,7 +99,7 @@ cd build
 cd ..
 
 # add symlink in package to fix terrible exec program name
-ln -s /usr/bin/dev.geopjr.Tuba /usr/bin/tuba
+ln -s $PKG/usr/bin/dev.geopjr.Tuba .tuba
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
