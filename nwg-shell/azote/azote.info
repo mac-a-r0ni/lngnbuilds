@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/nwg-piotr/azote/archive/v1.12.5/azote-1.12.5.tar.gz
 MD5SUM="fd6fd5de93e320adcbc61a809266d760"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="feh maim slop send2trash swaybg wlr-randr"
+REQUIRES="feh maim slop python-send2trash swaybg wlr-randr"
 MAINTAINER=""
 EMAIL=""
