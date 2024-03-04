@@ -65,9 +65,9 @@ find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
 # pam.pc, so we have to remove it from LIBS, then add -lpam to LDLIBS.
 # Also, use our CFLAGS, fix the man page path, and install to /usr,
 # not /usr/local.
-sed -i -e '/^LIBS\>/s,\<pam\>,,' \
-       -e '/^LDLIBS\>/s,$, -lpam,' \
-       -e "/-std=/s,= ,= $SLKCFLAGS ," \
+#sed -i -e '/^LIBS\>/s,\<pam\>,,' \
+#       -e '/^LDLIBS\>/s,$, -lpam,' \
+sed -i -e "/-std=/s,= ,= $SLKCFLAGS ," \
        -e 's,share/man,man,g' \
        -e 's,usr/local,usr,g' \
        makefile
