@@ -98,9 +98,6 @@ cd build
   DESTDIR=$PKG $NINJA install
 cd ..
 
-# add symlink in package to fix terrible exec program name
-ln -s $PKG/usr/bin/dev.geopjr.Tuba .tuba
-
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
