@@ -26,7 +26,8 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mullvadvpn-app
 SRCNAM=MullvadVPN
-VERSION=${VERSION:-2024.1-beta2}
+SRCVERSION=${VERSION:-2024.1-beta2}
+VERSION=$(echo "$SRCVERSION" | tr - .)
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -72,7 +73,7 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $PKG
-ar p $CWD/$SRCNAM-${VERSION}_$DEBARCH.deb data.tar.xz | tar Jxv
+ar p $CWD/$SRCNAM-${SRCVERSION}_$DEBARCH.deb data.tar.xz | tar Jxv
 
 chown -R root:root .
 find -L . \
