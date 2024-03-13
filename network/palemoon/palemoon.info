@@ -1,11 +1,11 @@
 PRGNAM="palemoon"
-VERSION="33.0.0"
+VERSION="33.0.1"
 HOMEPAGE="http://www.palemoon.org/"
-DOWNLOAD="http://repo.palemoon.org/MoonchildProductions/Pale-Moon/archive/33.0.0_Release.tar.gz \
-          http://repo.palemoon.org/MoonchildProductions/UXP/archive/RB_20240130.tar.gz \
+DOWNLOAD="http://repo.palemoon.org/MoonchildProductions/Pale-Moon/archive/33.0.1_Release.tar.gz \
+          http://repo.palemoon.org/MoonchildProductions/UXP/archive/RB_20240227.tar.gz \
           http://ponce.cc/slackware/sources/repo/autoconf-2.13.tar.xz"
-MD5SUM="b36013db466a513ca7e427184ff56d24 \
-        8c4b028352c2e7c48130edc221350924 \
+MD5SUM="84f478de6bf701779d1fd2a9431a5523 \
+        7dca951c88cb880f4e479b25e8cf01dc \
         f2994d302cf736e7e71974edfa51da3c"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
