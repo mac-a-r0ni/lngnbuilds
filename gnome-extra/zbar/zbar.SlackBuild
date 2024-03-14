@@ -99,6 +99,10 @@ CXXFLAGS="$SLKCFLAGS" \
   --mandir=/usr/man \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --with-gnu-ld \
+  --with-gtk=auto \
+  --with-python=auto \
+  --with-qt=no \
+  --enable-doc=yes \
   --build=$ARCH-slackware-linux \
   $video_opt
 
