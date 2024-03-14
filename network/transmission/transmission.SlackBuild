@@ -144,7 +144,7 @@ cd build
     -DCMAKE_INSTALL_MANDIR=/usr/man \
     -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION \
     -DCMAKE_BUILD_TYPE=Release ..
-  make VERBOSE=1
+  make -j5 VERBOSE=1
   make install/strip DESTDIR=$PKG
 cd ..
 
