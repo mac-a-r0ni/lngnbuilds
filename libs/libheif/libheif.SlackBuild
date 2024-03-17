@@ -86,6 +86,11 @@ cd build
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DLIB_SUFFIX=${LIBDIRSUFFIX} \
+    -DWITH_DAV1D=ON \
+    -DWITH_RAV1E=ON \
+    -DWITH_FFMPEG_DECODER=ON \
+    -DWITH_FFMPEG_DECODER_PLUGIN=ON \
+    -DWITH_SvtEnc=ON \
     --preset=release ..
   make
   make install/strip DESTDIR=$PKG
