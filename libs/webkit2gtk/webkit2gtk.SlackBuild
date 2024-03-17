@@ -99,6 +99,7 @@ cd build
 	-DUSE_SYSTEM_MALLOC=ON \
         -DUSE_GSTREAMER_TRANSCODER=ON \
         -DUSE_AVIF=ON \
+        -DUSE_GTK4=OFF \
         -DUSE_JPEGXL=OFF \
         -DUSE_LIBBACKTRACE=OFF \
         -Wno-dev \
