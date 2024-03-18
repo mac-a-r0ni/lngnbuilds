@@ -1,10 +1,12 @@
 PRGNAM="armcord-bin"
 VERSION="3.2.6"
 HOMEPAGE="https://github.com/ArmCord/ArmCord"
-DOWNLOAD="https://github.com/ArmCord/ArmCord/releases/download/v3.2.6/ArmCord_3.2.6_arm64.deb"
-MD5SUM="67310f2f0dd76004d002e5fff1895c72"
-DOWNLOAD_x86_64="https://github.com/ArmCord/ArmCord/releases/download/v3.2.6/ArmCord_3.2.6_amd64.deb"
-MD5SUM_x86_64="cd0e07b149506c8d19d01005c51324b0"
+DOWNLOAD="https://github.com/ArmCord/ArmCord/releases/download/v3.2.6/ArmCord_3.2.6_arm64.deb \
+          https://github.com/ArmCord/ArmCord/releases/download/v3.2.6/ArmCord_3.2.6_amd64.deb"
+MD5SUM="67310f2f0dd76004d002e5fff1895c72 \
+        cd0e07b149506c8d19d01005c51324b0"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
 REQUIRES=""
 MAINTAINER=""
 EMAIL=""
