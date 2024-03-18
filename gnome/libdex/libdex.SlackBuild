@@ -95,7 +95,7 @@ cd build
     -Ddocs=false \
     -Dexamples=false \
     -Dintrospection=enabled \
-    -Dsysprof=false \
+    -Dsysprof=true \
     -Dtests=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
