@@ -1,10 +1,12 @@
 PRGNAM="librewolf"
-VERSION="123.0"
+VERSION="123.0.1"
 HOMEPAGE="https://librewolf.net/"
-DOWNLOAD="https://gitlab.com/api/v4/projects/24386000/packages/generic/librewolf/123.0-1/LibreWolf.aarch64.AppImage"
-MD5SUM="7383e321f08865d3988084987bc5ab38"
-DOWNLOAD_x86_64="https://gitlab.com/api/v4/projects/24386000/packages/generic/librewolf/123.0-1/LibreWolf.x86_64.AppImage"
-MD5SUM_x86_64="fe2427c07a7a9207980af3f1e5d23264"
+DOWNLOAD="https://gitlab.com/api/v4/projects/24386000/packages/generic/librewolf/123.0.1-1/LibreWolf.aarch64.AppImage \
+          https://gitlab.com/api/v4/projects/24386000/packages/generic/librewolf/123.0.1-1/LibreWolf.x86_64.AppImage"
+MD5SUM="22b2b540fb434957c9ff749279e7e876 \
+        cefd3c978a0311b43eb393d83d5a3577"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
 REQUIRES=""
 MAINTAINER="Ivan Kovmir"
 EMAIL="i@kovmir.eu"
