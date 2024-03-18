@@ -44,7 +44,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mame
-VERSION=${VERSION:-0.261}
+VERSION=${VERSION:-0.263}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -198,7 +198,7 @@ make USE_QTDEBUG=$QTOPT \
      USE_WAYLAND=1 \
      PYTHON_EXECUTABLE="/usr/bin/python3 -S" \
      OPT_FLAGS="$SLKCFLAGS" \
-     LDOPTS="-fuse-ld=gold" \
+     LDOPTS="-fuse-ld=mold" \
      OVERRIDE_CC="$CC" \
      OVERRIDE_CXX="$CXX" \
      CC="$CC" \
