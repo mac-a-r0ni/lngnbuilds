@@ -90,6 +90,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --enable-static=no \
   --disable-schemas-compile \
+  --with-webkit2gtk-4-1 \
   --build=$ARCH-slackware-linux
 
 make
