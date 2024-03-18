@@ -34,7 +34,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=nbd
-VERSION=${VERSION:-3.25}
+VERSION=${VERSION:-3.26.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -90,18 +90,20 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 autoreconf -fiv
+sed -i -e 's|../man/sh.tmpl|sh.tmpl|' systemd/Makefile.am
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --mandir=/usr/man \
   --sysconfdir=/etc \
   --localstatedir=/var \
-  --mandir=/usr/man \
   --enable-syslog \
   --disable-debug \
-  --enable-gznbd \
+  --disable-gznbd \
+  --disable-systemd \
   --build=$ARCH-slackware-linux
 
 make

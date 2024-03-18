@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
          |-----handy-ruler------------------------------------------------------|
-feedbackd: feedbackd (Haptic/visual/audio feedback for GNOME)
-feedbackd:
-feedbackd: A daemon to provide haptic, led and audio feedback triggered by
-feedbackd: application events.
-feedbackd:
-feedbackd: Homepage: https://source.puri.sm/Librem5/feedbackd
-feedbackd:
-feedbackd:
-feedbackd:
-feedbackd:
-feedbackd:
+sofia-sip: sofia-sip (Sofia-SIP library runtime)
+sofia-sip:
+sofia-sip: Sofia-SIP is an open-source SIP User-Agent library, compliant with
+sofia-sip: the IETF RFC3261 specification. It can be used as a building block
+sofia-sip: for SIP client software for uses such as VoIP, IM, and many other
+sofia-sip: real-time and person-to-person communication services.
+sofia-sip:
+sofia-sip: Homepage: http://git.gnome.org/browse/sofia-sip
+sofia-sip:
+sofia-sip:
+sofia-sip:

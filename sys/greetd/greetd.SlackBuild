@@ -80,7 +80,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$VERSION.tar.?z
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
 
 # build offline
@@ -163,15 +163,15 @@ cd $TMP/$PRGNAM-$VERSION
 find $PKG | xargs file | egrep "ELF.*executable" | cut -f 1 -d : \
           | xargs strip --strip-unneeded 2> /dev/null
 
+# move this file to 'rc.4.local' for Slackware to boot directly
+# to greetd from init level 4 startup
+mkdir -p $PKG/etc/rc.d
+cat $CWD/rc.4.$PRGNAM > $PKG/etc/rc.d/rc.4.$PRGNAM
+chmod 0644 $PKG/etc/rc.d/rc.4.$PRGNAM
+
 # create this in pkg to ensure it exists
 mkdir -p $PKG/var/lib/$PRGNAM
 chown -R $PRGUID:$PRGGID $PKG/var/lib/$PRGNAM
-
-# set XDG_RUNTIME_DIR when booting w/ greetd
-# will NOT run without this set
-mkdir -p $PKG/etc/profile.d
-install -Dm0755 $PKG/etc/profile.d $CWD/greetd.sh
-install -Dm0755 $PKG/etc/profile.d $CWD/greetd.csh
 
 gzip -9 $PKG/usr/man/man?/*
 

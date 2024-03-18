@@ -89,6 +89,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
 cargo build --release --no-default-features
 install -Dt $PKG/usr/bin $TMP/$PRGNAM-$VERSION/target/release/i3status-rs
 cargo xtask generate-manpage
