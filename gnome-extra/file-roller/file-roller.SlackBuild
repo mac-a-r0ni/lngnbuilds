@@ -93,7 +93,6 @@ meson setup .. \
  --localstatedir=/var \
  -Ddefault_library=shared \
  -Drun-in-place=false \
- -Duse_native_appchooser=true \
  -Dnautilus-actions=enabled \
  -Dnotification=enabled \
  -Dpackagekit=false \
