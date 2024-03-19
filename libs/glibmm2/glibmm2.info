@@ -1,5 +1,5 @@
 PRGNAM="glibmm2"
-VERSION="1.78.1"
+VERSION="2.78.1"
 HOMEPAGE="https://www.gtkmm.org/"
 DOWNLOAD="https://download.gnome.org/sources/glibmm/2.78/glibmm-2.78.1.tar.xz"
 MD5SUM="52b93bf93de45e5a6b3c321bc832cd9c"
