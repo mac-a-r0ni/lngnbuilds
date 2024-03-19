@@ -29,7 +29,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libmspack
-VERSION=${VERSION:-0.11alpha}
+VERSION=${VERSION:-1.11}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
