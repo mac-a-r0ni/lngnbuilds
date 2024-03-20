@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-system-monitor/46/gnome-syste
 MD5SUM="d2c121f58825bf5a441f16f13b0d3201"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gtkmm4"
+REQUIRES="gtkmm4 libgtop"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
