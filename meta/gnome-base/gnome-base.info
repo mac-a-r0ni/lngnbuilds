@@ -1,7 +1,7 @@
 PRGNAM="gnome-base"
 VERSION="46.0"
 HOMEPAGE="http://gnome.org/"
-DOWNLOAD="https://download.gnome.org/core/46/46.0/NEWS"
+DOWNLOAD="https://download.gnome.org/core/46/46/NEWS"
 MD5SUM="5c096b18741cb0f11dff25c68ddb575f"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
