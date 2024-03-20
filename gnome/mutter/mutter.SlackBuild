@@ -95,7 +95,8 @@ cd build
     -Dwayland_eglstream=true \
     -Dstrip=true \
     -Dprofiler=false \
-    -Dsystemd=false
+    -Dsystemd=false \
+    -Dtests=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
