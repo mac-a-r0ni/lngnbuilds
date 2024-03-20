@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/core/45/45.0/sources/gnome-builder-45.0.tar
 MD5SUM="dc095a68d1b4d44b7ee7eda5fd3c9c10"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gtksourceview4 libhandy jsonrpc-glib libpeas template-glib webkit2gtk cmark libgit2-glib gspell Sphinx sphinx-rtd-theme sysprof"
+REQUIRES="gtksourceview4 jsonrpc-glib libpeas template-glib webkit2gtk cmark libgit2-glib gspell sysprof"
 MAINTAINER="Charadon"
 EMAIL="dev@iotib.net"
