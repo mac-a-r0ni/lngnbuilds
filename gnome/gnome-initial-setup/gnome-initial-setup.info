@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-initial-setup/45/gnome-initia
 MD5SUM="b934408eb86601ea1f337ebd07b529dd"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=""
+REQUIRES="libadwaita"
 MAINTAINER=""
 EMAIL=""
