@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-builder/46/gnome-builder-46.0
 MD5SUM="327d6df9eb30afdbe599faa3b52b2a2c"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gtksourceview4 jsonrpc-glib libpeas template-glib webkit2gtk cmark libgit2-glib gspell sysprof"
+REQUIRES="gtksourceview4 jsonrpc-glib libpeas2 template-glib webkit2gtk cmark libgit2-glib gspell sysprof"
 MAINTAINER="Charadon"
 EMAIL="dev@iotib.net"
