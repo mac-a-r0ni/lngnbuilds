@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-flashback/3.52/gnome-flashbac
 MD5SUM="a40bc6ba65aa191255808d562a2b858e"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gnome-bluetooth gnome-desktop gnome-panel gnome-session gnome-backgrounds gnome-control-center"
+REQUIRES="gnome-bluetooth gnome-desktop gnome-panel gnome-session gnome-backgrounds gnome-control-center metacity"
 MAINTAINER=""
 EMAIL=""
