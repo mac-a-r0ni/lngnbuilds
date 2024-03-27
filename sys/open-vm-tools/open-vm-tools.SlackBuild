@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=open-vm-tools
-VERSION=${VERSION:-12.3.5_22544099} # Remember to change VERSION - to _ !!!
+VERSION=${VERSION:-12.4.0_23259341} # Remember to change VERSION - to _ !!!
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -104,7 +104,7 @@ find -L . \
 
 sed -i "s|\ -Werror||" configure.ac
 
-autoreconf -i
+#autoreconf -i
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 LIBS=-lcrypt \

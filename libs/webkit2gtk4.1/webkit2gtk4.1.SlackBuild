@@ -99,7 +99,7 @@ cd build
         -DUSE_AVIF=ON \
         -DUSE_GTK4=OFF \
         -DUSE_GSTREAMER_TRANSCODER=ON \
-        -DUSE_JPEGXL=OFF \
+        -DUSE_JPEGXL=ON \
         -DUSE_LIBBACKTRACE=OFF \
         -Wno-dev \
         -G Ninja \
