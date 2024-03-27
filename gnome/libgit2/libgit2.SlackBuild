@@ -92,6 +92,8 @@ cd build
     -DUSE_SHA1=HTTPS \
     -DUSE_HTTPS=OpenSSL \
     -DUSE_NTLMCLIENT=OFF \
+    -DUSE_HTTP_PARSER=system \
+    -DUSE_SSH=ON \
     -DLIB_INSTALL_DIR:PATH="lib${LIBDIRSUFFIX}" \
     -DCMAKE_BUILD_TYPE=Release ..
 

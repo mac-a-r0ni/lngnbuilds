@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-software
-VERSION=${VERSION:-45.3}
+VERSION=${VERSION:-46.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -79,10 +79,6 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Build with appstream 1.0 or 0.16
-patch -Np1 -i $CWD/0655f358ed0e8455e12d9634f60bc4dbaee434e3.patch || exit 1
-patch -Np1 -i $CWD/e431ab003f3fabf616b6eb7dc93f8967bc9473e5.patch || exit 1
-
 mkdir -p build
 cd build
 CFLAGS="$SLKCFLAGS" \
@@ -96,10 +92,10 @@ CFLAGS="$SLKCFLAGS" \
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dtests=false \
-    -Dfwupd=false \
+    -Dfwupd=true \
     -Dgudev=true \
     -Dexternal_appstream=true \
-    -Dmalcontent=false \
+    -Dmalcontent=true \
     -Dpackagekit=false \
     -Dgtk_doc=false \
     -Dsoup2=false \

@@ -1,0 +1,3761 @@
+From 24ec73db2634f590a8ebb5900279ff2b6ea3ba95 Mon Sep 17 00:00:00 2001
+From: Jordan Petridis <jordan@centricular.com>
+Date: Sat, 29 Apr 2023 18:02:20 +0300
+Subject: [PATCH 1/4] Hard depend on systemd and drop other sessions
+
+Systemd has been the default session for a while and everyone not
+using system already heavily patches things and reimplements its
+dbus apis.
+
+This commit makes systemd a hard dependency, for both the
+session and the journal, and drops the consolekit backend as
+consolekit has been unmaintained for a good while now.
+---
+ data/meson.build                  | 118 ++--
+ doc/man/gnome-session.1           |  18 +-
+ gnome-session/gsm-autostart-app.c |   8 -
+ gnome-session/gsm-consolekit.c    | 972 ------------------------------
+ gnome-session/gsm-consolekit.h    |  59 --
+ gnome-session/gsm-manager.c       |  18 -
+ gnome-session/gsm-system.c        |  12 -
+ gnome-session/gsm-systemd.c       |  11 -
+ gnome-session/gsm-util.c          |   4 -
+ gnome-session/gsm-util.h          |   2 -
+ gnome-session/main.c              |  19 +-
+ gnome-session/meson.build         |   4 -
+ meson.build                       |  84 +--
+ meson_options.txt                 |   4 -
+ tools/meson.build                 |   4 +-
+ 15 files changed, 85 insertions(+), 1252 deletions(-)
+ delete mode 100644 gnome-session/gsm-consolekit.c
+ delete mode 100644 gnome-session/gsm-consolekit.h
+
+diff --git a/data/meson.build b/data/meson.build
+index f6d264f89..37862e077 100644
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -120,70 +120,68 @@ install_data(
+   install_dir: join_paths(session_datadir, 'GConf', 'gsettings')
+ )
+ 
+-if enable_systemd_session
+-  unit_conf = configuration_data()
+-  unit_conf.set('libexecdir', session_libexecdir)
+-
+-  systemd_service = ['gnome-session-manager@.service',
+-                     'gnome-session-signal-init.service',
+-                     'gnome-session-restart-dbus.service',
+-                     'gnome-session-monitor.service',
+-                     'gnome-session-failed.service']
+-
+-  foreach service: systemd_service
+-    configure_file(
+-      input: service + '.in',
+-      output: service,
+-      install: true,
+-      install_dir: systemd_userunitdir,
+-      configuration: unit_conf
+-    )
+-  endforeach
+-
+-  systemd_target = files('gnome-session-wayland@.target',
+-                         'gnome-session-wayland.target',
+-                         'gnome-session-x11@.target',
+-                         'gnome-session-x11.target',
+-                         'gnome-session-x11-services.target',
+-                         'gnome-session-x11-services-ready.target',
+-                         'gnome-session@.target',
+-                         'gnome-session.target',
+-                         'gnome-session-pre.target',
+-                         'gnome-session-manager.target',
+-                         'gnome-session-initialized.target',
+-                         'gnome-session-shutdown.target',
+-                         'gnome-session-failed.target',
+-                         )
+-
+-  install_data(
+-    systemd_target,
+-    install_dir: systemd_userunitdir
++unit_conf = configuration_data()
++unit_conf.set('libexecdir', session_libexecdir)
++
++systemd_service = ['gnome-session-manager@.service',
++                    'gnome-session-signal-init.service',
++                    'gnome-session-restart-dbus.service',
++                    'gnome-session-monitor.service',
++                    'gnome-session-failed.service']
++
++foreach service: systemd_service
++  configure_file(
++    input: service + '.in',
++    output: service,
++    install: true,
++    install_dir: systemd_userunitdir,
++    configuration: unit_conf
+   )
++endforeach
+ 
+-  install_data(
+-    'gnome-launched-override.scope.conf',
+-    rename: 'override.conf',
+-    install_dir : join_paths(systemd_userunitdir, 'gnome-launched-.scope.d')
+-  )
++systemd_target = files('gnome-session-wayland@.target',
++                        'gnome-session-wayland.target',
++                        'gnome-session-x11@.target',
++                        'gnome-session-x11.target',
++                        'gnome-session-x11-services.target',
++                        'gnome-session-x11-services-ready.target',
++                        'gnome-session@.target',
++                        'gnome-session.target',
++                        'gnome-session-pre.target',
++                        'gnome-session-manager.target',
++                        'gnome-session-initialized.target',
++                        'gnome-session-shutdown.target',
++                        'gnome-session-failed.target',
++                        )
++
++install_data(
++  systemd_target,
++  install_dir: systemd_userunitdir
++)
+ 
+-  foreach session, req_components: required_components
+-    wanted_targets = []
+-    foreach component: req_components
+-      wanted_targets += 'Wants=@0@.target'.format(component)
+-    endforeach
+-
+-    configure_file(
+-      input: session + '.session.conf.in',
+-      output: session + '.session.conf',
+-      configuration: {
+-        'requires_component': shell_component[session],
+-        'wants_required_components': '\n'.join(wanted_targets),
+-      },
+-      install_dir: systemd_userunitdir / 'gnome-session@@0@.target.d'.format(
+-        session),
+-    )
++install_data(
++  'gnome-launched-override.scope.conf',
++  rename: 'override.conf',
++  install_dir : join_paths(systemd_userunitdir, 'gnome-launched-.scope.d')
++)
++
++foreach session, req_components: required_components
++  wanted_targets = []
++  foreach component: req_components
++    wanted_targets += 'Wants=@0@.target'.format(component)
+   endforeach
+-endif
++
++  configure_file(
++    input: session + '.session.conf.in',
++    output: session + '.session.conf',
++    configuration: {
++      'requires_component': shell_component[session],
++      'wants_required_components': '\n'.join(wanted_targets),
++    },
++    install_dir: systemd_userunitdir / 'gnome-session@@0@.target.d'.format(
++      session),
++  )
++endforeach
+ 
+ data = files('hardware-compatibility')
+ 
+diff --git a/doc/man/gnome-session.1 b/doc/man/gnome-session.1
+index 7f6f36052..305454513 100644
+--- a/doc/man/gnome-session.1
++++ b/doc/man/gnome-session.1
+@@ -43,14 +43,6 @@ When this option is present, then default autostart directories will not be sear
+ Use the applications defined in \fBSESSION.session\fP. If not specified,
+ \fBgnome.session\fP will be used.
+ .TP
+-.I "--builtin"
+-Use the legacy non-systemd method of managing the user session. This is the
+-opposite of the \fI--systemd\fP option.
+-.TP
+-.I "--systemd"
+-Use the systemd method of managing the user session. This is the opposite of
+-the \fI--builtin\fP option.
+-.TP
+ .I "--failsafe"
+ Run in fail-safe mode. User-specified applications will not be started.
+ .TP
+@@ -90,17 +82,11 @@ The \fB.session\fP files are looked for in
+ \fB$XDG_CONFIG_DIRS/gnome-session/sessions\fP and
+ \fB$XDG_DATA_DIRS/gnome-session/sessions\fP.
+ .SH systemd
+-\fIgnome-session\fP can pass much of the session management over to systemd
+-(see the \fI--systemd\fP option which may be the default since 3.34). In this
+-case, startup components that have \fBX-GNOME-HiddenUnderSystemd=true\fP
++\fIgnome-session\fP can pass much of the session management over to systemd.
++In this case, startup components that have \fBX-GNOME-HiddenUnderSystemd=true\fP
+ set in their \fB.desktop\fP file will be ignored by \fIgnome-session\fP. It
+ instead relies on the fact that these components are managed by systemd.
+ .PP
+-As of GNOME 3.34 the systemd support is new and the customizing the
+-configuration is not yet easily possible. With GNOME 3.34 it may be best to use
+-\fI--builtin\fP if session customizations are required. This is due to the way
+-that GNOME currently defines the components that will be started on each session
+-type.
+ .PP
+ \fBsystemd\fP provides the two special targets \fBgraphical-session.target\fP
+ and \fBgraphical-session-pre.target\fP which are fully functional and should be
+diff --git a/gnome-session/gsm-autostart-app.c b/gnome-session/gsm-autostart-app.c
+index 306196c72..3a29eaf9e 100644
+--- a/gnome-session/gsm-autostart-app.c
++++ b/gnome-session/gsm-autostart-app.c
+@@ -31,12 +31,8 @@
+ #define GNOME_DESKTOP_USE_UNSTABLE_API
+ #include <libgnome-desktop/gnome-systemd.h>
+ 
+-#ifdef HAVE_SYSTEMD
+-#ifdef ENABLE_SYSTEMD_JOURNAL
+ #include <systemd/sd-journal.h>
+-#endif
+ #include <systemd/sd-daemon.h>
+-#endif
+ 
+ #include "gsm-autostart-app.h"
+ #include "gsm-util.h"
+@@ -961,7 +957,6 @@ app_launched (GAppLaunchContext *ctx,
+                                    NULL, NULL, NULL);
+ }
+ 
+-#ifdef ENABLE_SYSTEMD_JOURNAL
+ static void
+ on_child_setup (GsmAutostartApp *app)
+ {
+@@ -988,7 +983,6 @@ on_child_setup (GsmAutostartApp *app)
+                 close (standard_error);
+         }
+ }
+-#endif
+ 
+ static gboolean
+ autostart_app_start_spawn (GsmAutostartApp *app,
+@@ -1039,12 +1033,10 @@ autostart_app_start_spawn (GsmAutostartApp *app,
+                 g_app_launch_context_setenv (ctx, "DESKTOP_AUTOSTART_ID", startup_id);
+         }
+ 
+-#ifdef ENABLE_SYSTEMD_JOURNAL
+         if (sd_booted () > 0) {
+                 child_setup_func = (GSpawnChildSetupFunc) on_child_setup;
+                 child_setup_data = app;
+         }
+-#endif
+ 
+         handler = g_signal_connect (ctx, "launched", G_CALLBACK (app_launched), app);
+         success = g_desktop_app_info_launch_uris_as_manager (priv->app_info,
+diff --git a/gnome-session/gsm-consolekit.c b/gnome-session/gsm-consolekit.c
+deleted file mode 100644
+index 2598e803b..000000000
+--- a/gnome-session/gsm-consolekit.c
++++ /dev/null
+@@ -1,972 +0,0 @@
+-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+- *
+- * Copyright (C) 2008 Jon McCann <jmccann@redhat.com>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 2, or (at your option)
+- * any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, see <http://www.gnu.org/licenses/>.
+- */
+-
+-#include "config.h"
+-
+-#include <errno.h>
+-#include <string.h>
+-#include <stdlib.h>
+-#include <unistd.h>
+-#include <sys/types.h>
+-#include <pwd.h>
+-
+-#include <glib.h>
+-#include <glib-object.h>
+-#include <glib/gi18n.h>
+-#include <gio/gio.h>
+-#include <gio/gunixfdlist.h>
+-
+-#include "gsm-system.h"
+-#include "gsm-consolekit.h"
+-
+-#define CK_NAME      "org.freedesktop.ConsoleKit"
+-
+-#define CK_MANAGER_PATH         "/org/freedesktop/ConsoleKit/Manager"
+-#define CK_MANAGER_INTERFACE    CK_NAME ".Manager"
+-#define CK_SEAT_INTERFACE       CK_NAME ".Seat"
+-#define CK_SESSION_INTERFACE    CK_NAME ".Session"
+-
+-
+-struct _GsmConsolekitPrivate
+-{
+-        GDBusProxy      *ck_proxy;
+-        GDBusProxy      *ck_session_proxy;
+-
+-        char            *session_id;
+-        gchar           *session_path;
+-
+-        const gchar     *inhibit_locks;
+-        gint             inhibit_fd;
+-
+-        gboolean         is_active;
+-
+-        gint             delay_inhibit_fd;
+-        gboolean         prepare_for_shutdown_expected;
+-};
+-
+-enum {
+-        PROP_0,
+-        PROP_ACTIVE
+-};
+-
+-static void gsm_consolekit_system_init (GsmSystemInterface *iface);
+-
+-G_DEFINE_TYPE_WITH_CODE (GsmConsolekit, gsm_consolekit, G_TYPE_OBJECT,
+-                         G_IMPLEMENT_INTERFACE (GSM_TYPE_SYSTEM,
+-                                                gsm_consolekit_system_init))
+-
+-static void
+-drop_system_inhibitor (GsmConsolekit *manager)
+-{
+-        if (manager->priv->inhibit_fd != -1) {
+-                g_debug ("GsmConsolekit: Dropping system inhibitor fd %d", manager->priv->inhibit_fd);
+-                close (manager->priv->inhibit_fd);
+-                manager->priv->inhibit_fd = -1;
+-        }
+-}
+-
+-static void
+-drop_delay_inhibitor (GsmConsolekit *manager)
+-{
+-        if (manager->priv->delay_inhibit_fd != -1) {
+-                g_debug ("GsmConsolekit: Dropping delay inhibitor");
+-                close (manager->priv->delay_inhibit_fd);
+-                manager->priv->delay_inhibit_fd = -1;
+-        }
+-}
+-
+-static void
+-gsm_consolekit_finalize (GObject *object)
+-{
+-        GsmConsolekit *consolekit = GSM_CONSOLEKIT (object);
+-
+-        g_clear_object (&consolekit->priv->ck_proxy);
+-        g_clear_object (&consolekit->priv->ck_session_proxy);
+-        free (consolekit->priv->session_id);
+-        g_free (consolekit->priv->session_path);
+-
+-        drop_system_inhibitor (consolekit);
+-        drop_delay_inhibitor (consolekit);
+-
+-        G_OBJECT_CLASS (gsm_consolekit_parent_class)->finalize (object);
+-}
+-
+-static void
+-gsm_consolekit_set_property (GObject      *object,
+-                             guint         prop_id,
+-                             const GValue *value,
+-                             GParamSpec   *pspec)
+-{
+-        GsmConsolekit *self = GSM_CONSOLEKIT (object);
+-
+-        switch (prop_id) {
+-        case PROP_ACTIVE:
+-                self->priv->is_active = g_value_get_boolean (value);
+-                break;
+-        default:
+-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+-        }
+-}
+-
+-static void
+-gsm_consolekit_get_property (GObject    *object,
+-                             guint       prop_id,
+-                             GValue     *value,
+-                             GParamSpec *pspec)
+-{
+-        GsmConsolekit *self = GSM_CONSOLEKIT (object);
+-
+-        switch (prop_id) {
+-        case PROP_ACTIVE:
+-                g_value_set_boolean (value, self->priv->is_active);
+-                break;
+-        default:
+-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+-                break;
+-        }
+-}
+-
+-static void
+-gsm_consolekit_class_init (GsmConsolekitClass *manager_class)
+-{
+-        GObjectClass *object_class;
+-
+-        object_class = G_OBJECT_CLASS (manager_class);
+-
+-        object_class->get_property = gsm_consolekit_get_property;
+-        object_class->set_property = gsm_consolekit_set_property;
+-        object_class->finalize = gsm_consolekit_finalize;
+-
+-        g_object_class_override_property (object_class, PROP_ACTIVE, "active");
+-
+-        g_type_class_add_private (manager_class, sizeof (GsmConsolekitPrivate));
+-}
+-
+-static void ck_session_proxy_signal_cb (GDBusProxy  *proxy,
+-                                        const gchar *sender_name,
+-                                        const gchar *signal_name,
+-                                        GVariant    *parameters,
+-                                        gpointer     user_data);
+-
+-static void ck_proxy_signal_cb (GDBusProxy  *proxy,
+-                                const gchar *sender_name,
+-                                const gchar *signal_name,
+-                                GVariant    *parameters,
+-                                gpointer     user_data);
+-
+-static void
+-ck_pid_get_session (GsmConsolekit *manager,
+-                    pid_t          pid,
+-                    gchar        **session_id)
+-{
+-        GVariant *res;
+-
+-        *session_id = NULL;
+-
+-        if (pid < 0) {
+-                g_warning ("Calling GetSessionForUnixProcess failed."
+-                           "Invalid pid.");
+-                return;
+-        }
+-
+-        res = g_dbus_proxy_call_sync (manager->priv->ck_proxy,
+-                                      "GetSessionForUnixProcess",
+-                                      g_variant_new ("(u)", pid),
+-                                      0,
+-                                      -1,
+-                                      NULL,
+-                                      NULL);
+-        if (!res) {
+-                g_warning ("Calling GetSessionForUnixProcess failed."
+-                           "Check that ConsoleKit is properly installed.");
+-                return;
+-        }
+-
+-        g_variant_get (res, "(o)", session_id);
+-        g_variant_unref (res);
+-}
+-
+-static void
+-gsm_consolekit_init (GsmConsolekit *manager)
+-{
+-        GError *error = NULL;
+-        GDBusConnection *bus;
+-        GVariant *res;
+-
+-        manager->priv = G_TYPE_INSTANCE_GET_PRIVATE (manager,
+-                                                     GSM_TYPE_CONSOLEKIT,
+-                                                     GsmConsolekitPrivate);
+-
+-        manager->priv->inhibit_fd = -1;
+-        manager->priv->delay_inhibit_fd = -1;
+-
+-        bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+-        if (bus == NULL)
+-                g_error ("Failed to connect to system bus: %s",
+-                         error->message);
+-        manager->priv->ck_proxy =
+-                g_dbus_proxy_new_sync (bus,
+-                                       0,
+-                                       NULL,
+-                                       CK_NAME,
+-                                       CK_MANAGER_PATH,
+-                                       CK_MANAGER_INTERFACE,
+-                                       NULL,
+-                                       &error);
+-        if (manager->priv->ck_proxy == NULL) {
+-                g_warning ("Failed to connect to consolekit: %s",
+-                           error->message);
+-                g_clear_error (&error);
+-        }
+-
+-        g_signal_connect (manager->priv->ck_proxy, "g-signal",
+-                          G_CALLBACK (ck_proxy_signal_cb), manager);
+-
+-        ck_pid_get_session (manager, getpid (), &manager->priv->session_id);
+-
+-        if (manager->priv->session_id == NULL) {
+-                g_warning ("Could not get session id for session. Check that ConsoleKit is "
+-                           "properly installed.");
+-                return;
+-        }
+-
+-        /* in ConsoleKit, the session id is the session path */
+-        manager->priv->session_path = g_strdup (manager->priv->session_id);
+-
+-        manager->priv->ck_session_proxy =
+-                g_dbus_proxy_new_sync (bus,
+-                                       0,
+-                                       NULL,
+-                                       CK_NAME,
+-                                       manager->priv->session_path,
+-                                       CK_SESSION_INTERFACE,
+-                                       NULL,
+-                                       &error);
+-        if (manager->priv->ck_proxy == NULL) {
+-                g_warning ("Failed to connect to consolekit session: %s",
+-                           error->message);
+-                g_clear_error (&error);
+-        }
+-
+-        g_signal_connect (manager->priv->ck_session_proxy, "g-signal",
+-                          G_CALLBACK (ck_session_proxy_signal_cb), manager);
+-
+-        g_object_unref (bus);
+-}
+-
+-static void
+-emit_restart_complete (GsmConsolekit *manager,
+-                       GError     *error)
+-{
+-        GError *call_error;
+-
+-        call_error = NULL;
+-
+-        if (error != NULL) {
+-                call_error = g_error_new_literal (GSM_SYSTEM_ERROR,
+-                                                  GSM_SYSTEM_ERROR_RESTARTING,
+-                                                  error->message);
+-        }
+-
+-        g_signal_emit_by_name (G_OBJECT (manager),
+-                               "request_completed", call_error);
+-
+-        if (call_error != NULL) {
+-                g_error_free (call_error);
+-        }
+-}
+-
+-static void
+-emit_stop_complete (GsmConsolekit *manager,
+-                    GError     *error)
+-{
+-        GError *call_error;
+-
+-        call_error = NULL;
+-
+-        if (error != NULL) {
+-                call_error = g_error_new_literal (GSM_SYSTEM_ERROR,
+-                                                  GSM_SYSTEM_ERROR_STOPPING,
+-                                                  error->message);
+-        }
+-
+-        g_signal_emit_by_name (G_OBJECT (manager),
+-                               "request_completed", call_error);
+-
+-        if (call_error != NULL) {
+-                g_error_free (call_error);
+-        }
+-}
+-
+-static void
+-restart_done (GObject      *source,
+-              GAsyncResult *result,
+-              gpointer      user_data)
+-{
+-        GDBusProxy *proxy = G_DBUS_PROXY (source);
+-        GsmConsolekit *manager = user_data;
+-        GError *error = NULL;
+-        GVariant *res;
+-
+-        res = g_dbus_proxy_call_finish (proxy, result, &error);
+-
+-        if (!res) {
+-                g_warning ("Unable to restart system: %s", error->message);
+-                emit_restart_complete (manager, error);
+-                g_error_free (error);
+-        } else {
+-                emit_restart_complete (manager, NULL);
+-                g_variant_unref (res);
+-        }
+-}
+-
+-static void
+-gsm_consolekit_attempt_restart (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-
+-        /* Use Restart instead of Reboot because it will work on
+-         * both CK and CK2 */
+-        g_dbus_proxy_call (manager->priv->ck_proxy,
+-                           "Restart",
+-                           g_variant_new ("()"),
+-                           0,
+-                           G_MAXINT,
+-                           NULL,
+-                           restart_done,
+-                           manager);
+-}
+-
+-static void
+-stop_done (GObject      *source,
+-           GAsyncResult *result,
+-           gpointer      user_data)
+-{
+-        GDBusProxy *proxy = G_DBUS_PROXY (source);
+-        GsmConsolekit *manager = user_data;
+-        GError *error = NULL;
+-        GVariant *res;
+-
+-        res = g_dbus_proxy_call_finish (proxy, result, &error);
+-
+-        if (!res) {
+-                g_warning ("Unable to stop system: %s", error->message);
+-                emit_stop_complete (manager, error);
+-                g_error_free (error);
+-        } else {
+-                emit_stop_complete (manager, NULL);
+-                g_variant_unref (res);
+-        }
+-}
+-
+-static void
+-gsm_consolekit_attempt_stop (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-
+-        /* Use Stop insetad of PowerOff because it will work with
+-         * Ck and CK2. */
+-        g_dbus_proxy_call (manager->priv->ck_proxy,
+-                           "Stop",
+-                           g_variant_new ("()"),
+-                           0,
+-                           G_MAXINT,
+-                           NULL,
+-                           stop_done,
+-                           manager);
+-}
+-
+-static void
+-gsm_consolekit_set_session_idle (GsmSystem *system,
+-                              gboolean   is_idle)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-
+-        g_debug ("Updating consolekit idle status: %d", is_idle);
+-        g_dbus_proxy_call_sync (manager->priv->ck_session_proxy,
+-                                "SetIdleHint",
+-                                g_variant_new ("(b)", is_idle),
+-                                0,
+-                                G_MAXINT,
+-                                NULL, NULL);
+-}
+-
+-static void
+-ck_session_get_seat (GsmConsolekit *manager,
+-                     gchar        **seat)
+-{
+-        GVariant *res;
+-
+-        *seat = NULL;
+-
+-        res = g_dbus_proxy_call_sync (manager->priv->ck_session_proxy,
+-                                      "GetSeatId",
+-                                      g_variant_new ("()"),
+-                                      0,
+-                                      -1,
+-                                      NULL, NULL);
+-        if (!res) {
+-                g_warning ("GsmConsoleKit: Calling GetSeatId failed.");
+-                return;
+-        }
+-
+-        g_variant_get (res, "(o)", seat);
+-        g_variant_unref (res);
+-}
+-
+-/* returns -1 on failure
+- *          0 seat is multi-session
+- *          1 seat is not multi-session
+- */
+-static gint
+-ck_seat_can_multi_session (GsmConsolekit *manager,
+-                           const gchar   *seat)
+-{
+-        GDBusConnection *bus;
+-        GVariant *res;
+-        gboolean  can_activate;
+-
+-
+-        bus = g_dbus_proxy_get_connection (manager->priv->ck_proxy);
+-        res = g_dbus_connection_call_sync (bus,
+-                                           CK_NAME,
+-                                           seat,
+-                                           CK_SEAT_INTERFACE,
+-                                           "CanActivateSessions",
+-                                           g_variant_new ("()"),
+-                                           G_VARIANT_TYPE_BOOLEAN,
+-                                           0,
+-                                           -1,
+-                                           NULL, NULL);
+-        if (!res) {
+-                g_warning ("GsmConsoleKit: Calling GetSeatId failed.");
+-                return -1;
+-        }
+-
+-        g_variant_get (res, "(b)", &can_activate);
+-        g_variant_unref (res);
+-
+-        return can_activate == TRUE ? 1 : 0;
+-}
+-
+-static gboolean
+-gsm_consolekit_can_switch_user (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-        gchar *seat;
+-        gint ret;
+-
+-        ck_session_get_seat (manager, &seat);
+-        ret = ck_seat_can_multi_session (manager, seat);
+-        free (seat);
+-
+-        return ret > 0;
+-}
+-
+-static gboolean
+-gsm_consolekit_can_restart (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-        GVariant *res;
+-        gboolean can_restart;
+-
+-        res = g_dbus_proxy_call_sync (manager->priv->ck_proxy,
+-                                      "CanRestart",
+-                                      g_variant_new ("()"),
+-                                      0,
+-                                      G_MAXINT,
+-                                      NULL,
+-                                      NULL);
+-        if (!res) {
+-                g_warning ("Calling CanRestart failed. Check that ConsoleKit is "
+-                           "properly installed.");
+-                return FALSE;
+-        }
+-
+-        g_variant_get (res, "(b)", &can_restart);
+-        g_variant_unref (res);
+-
+-        return can_restart;
+-}
+-
+-static gboolean
+-gsm_consolekit_can_stop (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-        GVariant *res;
+-        gboolean can_stop;
+-
+-        res = g_dbus_proxy_call_sync (manager->priv->ck_proxy,
+-                                      "CanStop",
+-                                      g_variant_new ("()"),
+-                                      0,
+-                                      G_MAXINT,
+-                                      NULL,
+-                                      NULL);
+-        if (!res) {
+-                g_warning ("Calling CanStop failed. Check that ConsoleKit is "
+-                           "properly installed.");
+-                return FALSE;
+-        }
+-
+-        g_variant_get (res, "(b)", &can_stop);
+-        g_variant_unref (res);
+-
+-        return can_stop;
+-}
+-
+-/* returns -1 on failure, 0 on success */
+-static gint
+-ck_session_get_class (GsmConsolekit *manager,
+-                      gchar        **session_class)
+-{
+-        GVariant *res;
+-
+-        *session_class = NULL;
+-
+-        res = g_dbus_proxy_call_sync (manager->priv->ck_session_proxy,
+-                                      "GetSessionClass",
+-                                      g_variant_new ("()"),
+-                                      0,
+-                                      -1,
+-                                      NULL, NULL);
+-        if (!res) {
+-                g_warning ("GsmConsoleKit: Calling GetSessionClass failed.");
+-                return -1;
+-        }
+-
+-        g_variant_get (res, "(s)", session_class);
+-        g_variant_unref (res);
+-
+-        return 0;
+-}
+-
+-static gboolean
+-gsm_consolekit_is_login_session (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-        int res;
+-        gboolean ret;
+-        gchar *session_class = NULL;
+-
+-        ret = FALSE;
+-
+-        if (manager->priv->session_id == NULL) {
+-                return ret;
+-        }
+-
+-        res = ck_session_get_class (manager, &session_class);
+-        if (res < 0) {
+-                g_warning ("Could not get session class: %s", strerror (-res));
+-                return FALSE;
+-        }
+-        ret = (g_strcmp0 (session_class, "greeter") == 0);
+-        g_free (session_class);
+-
+-        return ret;
+-}
+-
+-static gboolean
+-gsm_consolekit_can_suspend (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-        gchar *rv;
+-        GVariant *res;
+-        gboolean can_suspend;
+-
+-        res = g_dbus_proxy_call_sync (manager->priv->ck_proxy,
+-                                      "CanSuspend",
+-                                      NULL,
+-                                      0,
+-                                      G_MAXINT,
+-                                      NULL,
+-                                      NULL);
+-        if (!res) {
+-                g_warning ("Calling CanSuspend failed. Check that ConsoleKit is "
+-                           "properly installed.");
+-                return FALSE;
+-        }
+-
+-        g_variant_get (res, "(s)", &rv);
+-        g_variant_unref (res);
+-
+-        can_suspend = g_strcmp0 (rv, "yes") == 0 ||
+-                      g_strcmp0 (rv, "challenge") == 0;
+-
+-        g_free (rv);
+-
+-        return can_suspend;
+-}
+-
+-static gboolean
+-gsm_consolekit_can_hibernate (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-        gchar *rv;
+-        GVariant *res;
+-        gboolean can_hibernate;
+-
+-        res = g_dbus_proxy_call_sync (manager->priv->ck_proxy,
+-                                      "CanHibernate",
+-                                      NULL,
+-                                      0,
+-                                      G_MAXINT,
+-                                      NULL,
+-                                      NULL);
+-        if (!res) {
+-                g_warning ("Calling CanHibernate failed. Check that ConsoleKit is "
+-                           "properly installed.");
+-                return FALSE;
+-        }
+-
+-        g_variant_get (res, "(s)", &rv);
+-        g_variant_unref (res);
+-
+-        can_hibernate = g_strcmp0 (rv, "yes") == 0 ||
+-                        g_strcmp0 (rv, "challenge") == 0;
+-
+-        g_free (rv);
+-
+-        return can_hibernate;
+-}
+-
+-static void
+-suspend_done (GObject      *source,
+-              GAsyncResult *result,
+-              gpointer      user_data)
+-{
+-        GDBusProxy *proxy = G_DBUS_PROXY (source);
+-        GError *error = NULL;
+-        GVariant *res;
+-
+-        res = g_dbus_proxy_call_finish (proxy, result, &error);
+-
+-        if (!res) {
+-                g_warning ("Unable to suspend system: %s", error->message);
+-                g_error_free (error);
+-        } else {
+-                g_variant_unref (res);
+-        }
+-}
+-
+-static void
+-hibernate_done (GObject      *source,
+-                GAsyncResult *result,
+-                gpointer      user_data)
+-{
+-        GDBusProxy *proxy = G_DBUS_PROXY (source);
+-        GError *error = NULL;
+-        GVariant *res;
+-
+-        res = g_dbus_proxy_call_finish (proxy, result, &error);
+-
+-        if (!res) {
+-                g_warning ("Unable to hibernate system: %s", error->message);
+-                g_error_free (error);
+-        } else {
+-                g_variant_unref (res);
+-        }
+-}
+-
+-static void
+-gsm_consolekit_suspend (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-
+-        g_dbus_proxy_call (manager->priv->ck_proxy,
+-                           "Suspend",
+-                           g_variant_new ("(b)", TRUE),
+-                           0,
+-                           G_MAXINT,
+-                           NULL,
+-                           suspend_done,
+-                           manager);
+-}
+-
+-static void
+-gsm_consolekit_hibernate (GsmSystem *system)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-
+-        g_dbus_proxy_call (manager->priv->ck_proxy,
+-                           "Hibernate",
+-                           g_variant_new ("(b)", TRUE),
+-                           0,
+-                           G_MAXINT,
+-                           NULL,
+-                           hibernate_done,
+-                           manager);
+-}
+-
+-static void
+-inhibit_done (GObject      *source,
+-              GAsyncResult *result,
+-              gpointer      user_data)
+-{
+-        GDBusProxy *proxy = G_DBUS_PROXY (source);
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (user_data);
+-        GError *error = NULL;
+-        GVariant *res;
+-        GUnixFDList *fd_list = NULL;
+-        gint idx;
+-
+-        /* Drop any previous inhibit before recording the new one */
+-        drop_system_inhibitor (manager);
+-
+-        res = g_dbus_proxy_call_with_unix_fd_list_finish (proxy, &fd_list, result, &error);
+-
+-        if (!res) {
+-                g_warning ("Unable to inhibit system: %s", error->message);
+-                g_error_free (error);
+-        } else {
+-                g_variant_get (res, "(h)", &idx);
+-                manager->priv->inhibit_fd = g_unix_fd_list_get (fd_list, idx, &error);
+-                if (manager->priv->inhibit_fd == -1) {
+-                        g_warning ("Failed to receive system inhibitor fd: %s", error->message);
+-                        g_error_free (error);
+-                }
+-                g_debug ("System inhibitor fd is %d", manager->priv->inhibit_fd);
+-                g_object_unref (fd_list);
+-                g_variant_unref (res);
+-        }
+-
+-        /* Handle a race condition, where locks got unset during dbus call */
+-        if (manager->priv->inhibit_locks == NULL) {
+-                drop_system_inhibitor (manager);
+-        }
+-}
+-
+-static void
+-gsm_consolekit_set_inhibitors (GsmSystem        *system,
+-                               GsmInhibitorFlag  flags)
+-{
+-        GsmConsolekit *manager = GSM_CONSOLEKIT (system);
+-        const gchar *locks = NULL;
+-        gboolean inhibit_logout;
+-        gboolean inhibit_suspend;
+-
+-        inhibit_logout = (flags & GSM_INHIBITOR_FLAG_LOGOUT) != 0;
+-        inhibit_suspend = (flags & GSM_INHIBITOR_FLAG_SUSPEND) != 0;
+-
+-        if (inhibit_logout && inhibit_suspend) {
+-                locks = "sleep:shutdown";
+-        } else if (inhibit_logout) {
+-                locks = "shutdown";
+-        } else if (inhibit_suspend) {
+-                locks = "sleep";
+-        }
+-        manager->priv->inhibit_locks = locks;
+-
+-        if (locks != NULL) {
+-                g_debug ("Adding system inhibitor on %s", locks);
+-                g_dbus_proxy_call_with_unix_fd_list (manager->priv->ck_proxy,
+-                                                     "Inhibit",
+-                                                     g_variant_new ("(ssss)",
+-                                                                    locks,
+-                                                                    g_get_user_name (),
+-                                                                    "user session inhibited",
+-                                                                    "block"),
+-                                                     0,
+-                                                     G_MAXINT,
+-                                                     NULL,
+-                                                     NULL,
+-                                                     inhibit_done,
+-                                                     manager);
+-        } else {
+-                drop_system_inhibitor (manager);
+-        }
+-}
+-
+-static void
+-reboot_or_poweroff_done (GObject      *source,
+-                         GAsyncResult *res,
+-                         gpointer      user_data)
+-{
+-        GsmConsolekit *consolekit = user_data;
+-        GVariant *result;
+-        GError *error = NULL;
+-
+-        result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source),
+-                                           res,
+-                                           &error);
+-
+-        if (result == NULL) {
+-                if (!g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_ACCESS_DENIED)) {
+-                        g_warning ("Shutdown failed: %s", error->message);
+-                }
+-                g_error_free (error);
+-                drop_delay_inhibitor (consolekit);
+-                g_debug ("GsmConsolekit: shutdown preparation failed");
+-                consolekit->priv->prepare_for_shutdown_expected = FALSE;
+-                g_signal_emit_by_name (consolekit, "shutdown-prepared", FALSE);
+-        } else {
+-                g_variant_unref (result);
+-        }
+-}
+-
+-static void
+-gsm_consolekit_prepare_shutdown (GsmSystem *system,
+-                                 gboolean   restart)
+-{
+-        GsmConsolekit *consolekit = GSM_CONSOLEKIT (system);
+-        GUnixFDList *fd_list;
+-        GVariant *res;
+-        GError *error = NULL;
+-        gint idx;
+-
+-        g_debug ("GsmConsolekit: prepare shutdown");
+-
+-        res = g_dbus_proxy_call_with_unix_fd_list_sync (consolekit->priv->ck_proxy,
+-                                                        "Inhibit",
+-                                                        g_variant_new ("(ssss)",
+-                                                                       "shutdown",
+-                                                                       g_get_user_name (),
+-                                                                       "Preparing to end the session",
+-                                                                       "delay"),
+-                                                        0,
+-                                                        G_MAXINT,
+-                                                        NULL,
+-                                                        &fd_list,
+-                                                        NULL,
+-                                                        &error);
+-        if (res == NULL) {
+-                g_warning ("Failed to get delay inhibitor: %s", error->message);
+-                g_error_free (error);
+-                /* We may fail here with CK and that's ok */
+-        } else {
+-                g_variant_get (res, "(h)", &idx);
+-
+-                consolekit->priv->delay_inhibit_fd = g_unix_fd_list_get (fd_list, idx, NULL);
+-
+-                g_debug ("GsmConsolekit: got delay inhibitor, fd = %d", consolekit->priv->delay_inhibit_fd);
+-
+-                g_variant_unref (res);
+-                g_object_unref (fd_list);
+-        }
+-
+-        consolekit->priv->prepare_for_shutdown_expected = TRUE;
+-
+-        g_dbus_proxy_call (consolekit->priv->ck_proxy,
+-                           restart ? "Reboot" : "PowerOff",
+-                           g_variant_new ("(b)", TRUE),
+-                           0,
+-                           G_MAXINT,
+-                           NULL,
+-                           reboot_or_poweroff_done,
+-                           consolekit);
+-}
+-
+-static void
+-gsm_consolekit_complete_shutdown (GsmSystem *system)
+-{
+-        GsmConsolekit *consolekit = GSM_CONSOLEKIT (system);
+-
+-        /* remove delay inhibitor, if any */
+-        drop_delay_inhibitor (consolekit);
+-}
+-
+-static gboolean
+-gsm_consolekit_is_last_session_for_user (GsmSystem *system)
+-{
+-        return FALSE;
+-}
+-
+-static void
+-gsm_consolekit_system_init (GsmSystemInterface *iface)
+-{
+-        iface->can_switch_user = gsm_consolekit_can_switch_user;
+-        iface->can_stop = gsm_consolekit_can_stop;
+-        iface->can_restart = gsm_consolekit_can_restart;
+-        iface->can_suspend = gsm_consolekit_can_suspend;
+-        iface->can_hibernate = gsm_consolekit_can_hibernate;
+-        iface->attempt_stop = gsm_consolekit_attempt_stop;
+-        iface->attempt_restart = gsm_consolekit_attempt_restart;
+-        iface->suspend = gsm_consolekit_suspend;
+-        iface->hibernate = gsm_consolekit_hibernate;
+-        iface->set_session_idle = gsm_consolekit_set_session_idle;
+-        iface->is_login_session = gsm_consolekit_is_login_session;
+-        iface->set_inhibitors = gsm_consolekit_set_inhibitors;
+-        iface->prepare_shutdown = gsm_consolekit_prepare_shutdown;
+-        iface->complete_shutdown = gsm_consolekit_complete_shutdown;
+-        iface->is_last_session_for_user = gsm_consolekit_is_last_session_for_user;
+-}
+-
+-GsmConsolekit *
+-gsm_consolekit_new (void)
+-{
+-        GsmConsolekit *manager;
+-
+-        manager = g_object_new (GSM_TYPE_CONSOLEKIT, NULL);
+-
+-        return manager;
+-}
+-
+-static void
+-ck_proxy_signal_cb (GDBusProxy  *proxy,
+-                    const gchar *sender_name,
+-                    const gchar *signal_name,
+-                    GVariant    *parameters,
+-                    gpointer     user_data)
+-{
+-        GsmConsolekit *consolekit = user_data;
+-        gboolean is_about_to_shutdown;
+-
+-        g_debug ("GsmConsolekit: received ConsoleKit signal: %s", signal_name);
+-
+-        if (g_strcmp0 (signal_name, "PrepareForShutdown") != 0) {
+-                g_debug ("GsmConsolekit: ignoring %s signal", signal_name);
+-                return;
+-        }
+-
+-        g_variant_get (parameters, "(b)", &is_about_to_shutdown);
+-        if (!is_about_to_shutdown) {
+-                g_debug ("GsmConsolekit: ignoring %s signal since about-to-shutdown is FALSE", signal_name);
+-                return;
+-        }
+-
+-        if (consolekit->priv->prepare_for_shutdown_expected) {
+-                g_debug ("GsmConsolekit: shutdown successfully prepared");
+-                g_signal_emit_by_name (consolekit, "shutdown-prepared", TRUE);
+-                consolekit->priv->prepare_for_shutdown_expected = FALSE;
+-        }
+-}
+-
+-static void
+-ck_session_proxy_signal_cb (GDBusProxy  *proxy,
+-                            const gchar *sender_name,
+-                            const gchar *signal_name,
+-                            GVariant    *parameters,
+-                            gpointer     user_data)
+-{
+-        GsmConsolekit *consolekit = user_data;
+-        gboolean is_active;
+-
+-        g_debug ("GsmConsolekit: received ConsoleKit signal: %s", signal_name);
+-
+-        if (g_strcmp0 (signal_name, "ActiveChanged") != 0) {
+-                g_debug ("GsmConsolekit: ignoring %s signal", signal_name);
+-                return;
+-        }
+-
+-        g_variant_get (parameters, "(b)", &is_active);
+-        if (consolekit->priv->is_active != is_active) {
+-                g_debug ("GsmConsolekit: session state changed");
+-                consolekit->priv->is_active = is_active;
+-                g_object_notify (G_OBJECT (consolekit), "active");
+-        }
+-}
+diff --git a/gnome-session/gsm-consolekit.h b/gnome-session/gsm-consolekit.h
+deleted file mode 100644
+index 963a9fd59..000000000
+--- a/gnome-session/gsm-consolekit.h
++++ /dev/null
+@@ -1,59 +0,0 @@
+-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+- *
+- * Copyright (C) 2008 Jon McCann <jmccann@redhat.com>
+- *
+- * This program is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU General Public License as
+- * published by the Free Software Foundation; either version 2 of the
+- * License, or (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful, but
+- * WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+- * General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, see <http://www.gnu.org/licenses/>.
+- *
+- * Authors:
+- *	Jon McCann <jmccann@redhat.com>
+- */
+-
+-#ifndef __GSM_CONSOLEKIT_H__
+-#define __GSM_CONSOLEKIT_H__
+-
+-#include <glib.h>
+-#include <glib-object.h>
+-
+-G_BEGIN_DECLS
+-
+-#define GSM_TYPE_CONSOLEKIT             (gsm_consolekit_get_type ())
+-#define GSM_CONSOLEKIT(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GSM_TYPE_CONSOLEKIT, GsmConsolekit))
+-#define GSM_CONSOLEKIT_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GSM_TYPE_CONSOLEKIT, GsmConsolekitClass))
+-#define GSM_IS_CONSOLEKIT(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GSM_TYPE_CONSOLEKIT))
+-#define GSM_IS_CONSOLEKIT_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GSM_TYPE_CONSOLEKIT))
+-#define GSM_CONSOLEKIT_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS((obj), GSM_TYPE_CONSOLEKIT, GsmConsolekitClass))
+-
+-typedef struct _GsmConsolekit        GsmConsolekit;
+-typedef struct _GsmConsolekitClass   GsmConsolekitClass;
+-typedef struct _GsmConsolekitPrivate GsmConsolekitPrivate;
+-
+-struct _GsmConsolekit
+-{
+-        GObject               parent;
+-
+-        GsmConsolekitPrivate *priv;
+-};
+-
+-struct _GsmConsolekitClass
+-{
+-        GObjectClass parent_class;
+-};
+-
+-GType            gsm_consolekit_get_type        (void);
+-
+-GsmConsolekit   *gsm_consolekit_new             (void) G_GNUC_MALLOC;
+-
+-G_END_DECLS
+-
+-#endif /* __GSM_CONSOLEKIT_H__ */
+diff --git a/gnome-session/gsm-manager.c b/gnome-session/gsm-manager.c
+index 05e0d8d55..9c9ffe82a 100644
+--- a/gnome-session/gsm-manager.c
++++ b/gnome-session/gsm-manager.c
+@@ -40,17 +40,9 @@
+ #include "gsm-manager.h"
+ #include "org.gnome.SessionManager.h"
+ 
+-#ifdef ENABLE_SYSTEMD_JOURNAL
+ #include <systemd/sd-journal.h>
+-#endif
+ 
+-#ifdef HAVE_SYSTEMD
+ #include <systemd/sd-daemon.h>
+-#else
+-/* So we don't need to add ifdef's everywhere */
+-#define sd_notify(u, m)            do {} while (0)
+-#define sd_notifyf(u, m, ...)      do {} while (0)
+-#endif
+ 
+ #include "gsm-store.h"
+ #include "gsm-inhibitor.h"
+@@ -284,12 +276,10 @@ on_required_app_failure (GsmManager  *manager,
+                 allow_logout = !_log_out_is_locked_down (manager);
+         }
+ 
+-#ifdef ENABLE_SYSTEMD_JOURNAL
+         sd_journal_send ("MESSAGE_ID=%s", GSM_MANAGER_UNRECOVERABLE_FAILURE_MSGID,
+                          "PRIORITY=%d", 3,
+                          "MESSAGE=Unrecoverable failure in required component %s", app_id,
+                          NULL);
+-#endif
+ 
+         gsm_fail_whale_dialog_we_failed (FALSE,
+                                          allow_logout,
+@@ -314,12 +304,10 @@ on_display_server_failure (GsmManager *manager,
+                 extensions = NULL;
+         }
+ 
+-#ifdef ENABLE_SYSTEMD_JOURNAL
+         sd_journal_send ("MESSAGE_ID=%s", GSM_MANAGER_UNRECOVERABLE_FAILURE_MSGID,
+                          "PRIORITY=%d", 3,
+                          "MESSAGE=Unrecoverable failure in required component %s", app_id,
+                          NULL);
+-#endif
+ 
+         gsm_quit ();
+ }
+@@ -974,7 +962,6 @@ _client_stop (const char *id,
+         return FALSE;
+ }
+ 
+-#ifdef HAVE_SYSTEMD
+ static void
+ maybe_restart_user_bus (GsmManager *manager)
+ {
+@@ -1007,7 +994,6 @@ maybe_restart_user_bus (GsmManager *manager)
+                 g_debug ("GsmManager: reloading user bus failed: %s", error->message);
+         }
+ }
+-#endif
+ 
+ static void
+ do_phase_exit (GsmManager *manager)
+@@ -1020,10 +1006,8 @@ do_phase_exit (GsmManager *manager)
+                                    NULL);
+         }
+ 
+-#ifdef HAVE_SYSTEMD
+         if (!priv->systemd_managed)
+                 maybe_restart_user_bus (manager);
+-#endif
+ 
+         end_phase (manager);
+ }
+@@ -1417,12 +1401,10 @@ start_phase (GsmManager *manager)
+                 do_phase_startup (manager);
+                 break;
+         case GSM_MANAGER_PHASE_RUNNING:
+-#ifdef ENABLE_SYSTEMD_JOURNAL
+                 sd_journal_send ("MESSAGE_ID=%s", GSM_MANAGER_STARTUP_SUCCEEDED_MSGID,
+                                  "PRIORITY=%d", 5,
+                                  "MESSAGE=Entering running state",
+                                  NULL);
+-#endif
+                 gsm_xsmp_server_start_accepting_new_clients (priv->xsmp_server);
+                 if (priv->pending_end_session_tasks != NULL)
+                         complete_end_session_tasks (manager);
+diff --git a/gnome-session/gsm-system.c b/gnome-session/gsm-system.c
+index 39b59f9f5..57ad9440f 100644
+--- a/gnome-session/gsm-system.c
++++ b/gnome-session/gsm-system.c
+@@ -25,9 +25,6 @@
+ 
+ #include "gsm-systemd.h"
+ 
+-#ifdef HAVE_CONSOLEKIT
+-#include "gsm-consolekit.h"
+-#endif
+ 
+ enum {
+         REQUEST_COMPLETED,
+@@ -270,15 +267,6 @@ gsm_get_system (void)
+                 }
+         }
+ 
+-#ifdef HAVE_CONSOLEKIT
+-        if (system == NULL) {
+-                system = GSM_SYSTEM (gsm_consolekit_new ());
+-                if (system != NULL) {
+-                        g_debug ("Using ConsoleKit for session tracking");
+-                }
+-        }
+-#endif
+-
+         if (system == NULL) {
+                 system = g_object_new (gsm_system_null_get_type (), NULL);
+                 g_warning ("Using null backend for session tracking");
+diff --git a/gnome-session/gsm-systemd.c b/gnome-session/gsm-systemd.c
+index cf30a4bd5..9361496e9 100644
+--- a/gnome-session/gsm-systemd.c
++++ b/gnome-session/gsm-systemd.c
+@@ -21,8 +21,6 @@
+ #include "config.h"
+ #include "gsm-systemd.h"
+ 
+-#ifdef HAVE_SYSTEMD
+-
+ #include <errno.h>
+ #include <string.h>
+ #include <stdlib.h>
+@@ -1171,13 +1169,4 @@ sd_proxy_signal_cb (GDBusProxy  *proxy,
+         }
+ }
+ 
+-#else
+-
+-GsmSystemd *
+-gsm_systemd_new (void)
+-{
+-        return NULL;
+-}
+-
+-#endif
+ 
+diff --git a/gnome-session/gsm-util.c b/gnome-session/gsm-util.c
+index f2752573c..dfc7b08d6 100644
+--- a/gnome-session/gsm-util.c
++++ b/gnome-session/gsm-util.c
+@@ -626,7 +626,6 @@ gsm_util_export_activation_environment (GError     **error)
+         return environment_updated;
+ }
+ 
+-#ifdef HAVE_SYSTEMD
+ gboolean
+ gsm_util_export_user_environment (GError     **error)
+ {
+@@ -815,7 +814,6 @@ gsm_util_systemd_reset_failed (GError **error)
+ 
+         return TRUE;
+ }
+-#endif
+ 
+ void
+ gsm_util_setenv (const char *variable,
+@@ -839,14 +837,12 @@ gsm_util_setenv (const char *variable,
+                 g_clear_error (&error);
+         }
+ 
+-#ifdef HAVE_SYSTEMD
+         /* If this fails, the system user session won't get the updated environment
+          */
+         if (!gsm_util_update_user_environment (variable, value, &error)) {
+                 g_debug ("Could not make systemd aware of %s=%s environment variable: %s", variable, value, error->message);
+                 g_clear_error (&error);
+         }
+-#endif
+ }
+ 
+ const char * const *
+diff --git a/gnome-session/gsm-util.h b/gnome-session/gsm-util.h
+index bc26a21e5..bd32e05f9 100644
+--- a/gnome-session/gsm-util.h
++++ b/gnome-session/gsm-util.h
+@@ -53,14 +53,12 @@ const char * const * gsm_util_listenv               (void);
+ const char * const * gsm_util_get_variable_blacklist(void);
+ 
+ gboolean    gsm_util_export_activation_environment  (GError     **error);
+-#ifdef HAVE_SYSTEMD
+ gboolean    gsm_util_export_user_environment        (GError     **error);
+ gboolean    gsm_util_start_systemd_unit             (const char  *unit,
+                                                      const char  *mode,
+                                                      GError     **error);
+ gboolean    gsm_util_systemd_reset_failed           (GError     **error);
+ 
+-#endif
+ 
+ void        gsm_quit                                (void);
+ 
+diff --git a/gnome-session/main.c b/gnome-session/main.c
+index 3ae852250..9c06e4afc 100644
+--- a/gnome-session/main.c
++++ b/gnome-session/main.c
+@@ -43,14 +43,11 @@
+ #include "gsm-system.h"
+ #include "gsm-fail-whale.h"
+ 
+-#ifdef ENABLE_SYSTEMD_JOURNAL
+ #include <systemd/sd-journal.h>
+-#endif
+ 
+ #define GSM_DBUS_NAME "org.gnome.SessionManager"
+ 
+ static gboolean systemd_service = FALSE;
+-static gboolean use_systemd = USE_SYSTEMD_SESSION;
+ static gboolean failsafe = FALSE;
+ static gboolean show_version = FALSE;
+ static gboolean debug = FALSE;
+@@ -283,7 +280,6 @@ initialize_gio (void)
+         }
+ }
+ 
+-#ifdef ENABLE_SYSTEMD_SESSION
+ static gboolean
+ leader_term_or_int_signal_cb (gpointer data)
+ {
+@@ -387,7 +383,6 @@ systemd_leader_run(void)
+         gsm_main ();
+         exit(0);
+ }
+-#endif /* ENABLE_SYSTEMD_SESSION */
+ 
+ int
+ main (int argc, char **argv)
+@@ -402,11 +397,7 @@ main (int argc, char **argv)
+         guint             name_owner_id;
+         GOptionContext   *options;
+         static GOptionEntry entries[] = {
+-#ifdef ENABLE_SYSTEMD_SESSION
+                 { "systemd-service", 0, 0, G_OPTION_ARG_NONE, &systemd_service, N_("Running as systemd service"), NULL },
+-                { "systemd", 0, 0, G_OPTION_ARG_NONE, &use_systemd, N_("Use systemd session management"), NULL },
+-#endif
+-                { "builtin", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &use_systemd, N_("Use builtin session management (rather than the systemd based one)"), NULL },
+                 { "autostart", 'a', 0, G_OPTION_ARG_STRING_ARRAY, &override_autostart_dirs, N_("Override standard autostart directories"), N_("AUTOSTART_DIR") },
+                 { "session", 0, 0, G_OPTION_ARG_STRING, &opt_session_name, N_("Session to use"), N_("SESSION_NAME") },
+                 { "debug", 0, 0, G_OPTION_ARG_NONE, &debug, N_("Enable debugging code"), NULL },
+@@ -460,7 +451,6 @@ main (int argc, char **argv)
+          * journald picks ups the nicer "gnome-session" as the program
+          * name instead of whatever shell script GDM happened to use.
+          */
+-#ifdef ENABLE_SYSTEMD_JOURNAL
+         if (!debug) {
+                 int journalfd;
+ 
+@@ -470,7 +460,6 @@ main (int argc, char **argv)
+                         dup2(journalfd, 2);
+                 }
+         }
+-#endif
+ 
+         gdm_log_init ();
+         gdm_log_set_debug (debug);
+@@ -545,15 +534,12 @@ main (int argc, char **argv)
+ 
+         session_name = opt_session_name;
+ 
+-#ifdef HAVE_SYSTEMD
+         gsm_util_export_user_environment (&error);
+         if (error && !g_getenv ("RUNNING_UNDER_GDM"))
+                 g_warning ("Failed to upload environment to systemd: %s", error->message);
+         g_clear_error (&error);
+-#endif
+ 
+-#ifdef ENABLE_SYSTEMD_SESSION
+-        if (use_systemd && !systemd_service) {
++        if (!systemd_service) {
+                 g_autofree gchar *gnome_session_target;
+                 const gchar *session_type;
+ 
+@@ -589,7 +575,6 @@ main (int argc, char **argv)
+                         g_warning ("Falling back to non-systemd startup procedure due to error: %s", error->message);
+                 g_clear_error (&error);
+         }
+-#endif /* ENABLE_SYSTEMD_SESSION */
+ 
+         {
+                 gchar *ibus_path;
+@@ -626,9 +611,7 @@ main (int argc, char **argv)
+ 
+         gsm_main ();
+ 
+-#ifdef HAVE_SYSTEMD
+         gsm_util_export_user_environment (NULL);
+-#endif
+ 
+         g_clear_object (&manager);
+         g_free (gl_renderer);
+diff --git a/gnome-session/meson.build b/gnome-session/meson.build
+index 7d2f3c043..8c221e8c4 100644
+--- a/gnome-session/meson.build
++++ b/gnome-session/meson.build
+@@ -60,10 +60,6 @@ foreach iface: dbus_ifaces
+   )
+ endforeach
+ 
+-if enable_consolekit
+-  sources += files('gsm-consolekit.c')
+-endif
+-
+ cflags = [
+   '-DLOCALE_DIR="@0@"'.format(session_localedir),
+   '-DDATA_DIR="@0@"'.format(session_pkgdatadir),
+diff --git a/meson.build b/meson.build
+index 5121dc69d..75c33a348 100644
+--- a/meson.build
++++ b/meson.build
+@@ -111,68 +111,30 @@ session_bin_deps = session_deps + [
+ # Check for session selector GTK+ UI
+ enable_session_selector = get_option('session_selector')
+ 
+-# Check for session tracking backend
+-session_tracking = 'null backend'
+-
+-enable_systemd = get_option('systemd')
+-enable_systemd_session = get_option('systemd_session') != 'disable'
+-use_systemd_session = get_option('systemd_session') == 'default'
+-enable_systemd_journal = get_option('systemd_journal')
+-enable_consolekit = get_option('consolekit')
+-if enable_systemd or enable_consolekit
+-  session_bin_deps += dependency('gio-unix-2.0', version: glib_req_version)
+-
+-  # Check for systemd
+-  if enable_systemd
+-    systemd_userunitdir = get_option('systemduserunitdir')
+-    if systemd_userunitdir == ''
+-      systemd_dep = dependency('systemd', version: '>= 242', required: true)
+-      systemd_userunitdir = systemd_dep.get_pkgconfig_variable('systemduserunitdir',
+-                                                               define_variable: ['prefix', prefix])
+-    endif
+-
+-    libsystemd_dep = dependency('libsystemd', version: '>= 209', required: false)
+-    session_bin_deps += libsystemd_dep
+-
+-    if not libsystemd_dep.found()
+-      libsystemd_login_dep = dependency('libsystemd-login', version: '>= 183', required: false)
+-      libsystemd_daemon_dep = dependency('libsystemd-daemon', required: false)
+-      libsystemd_journal_dep = dependency('libsystemd-journal', required: false)
+-      assert(libsystemd_login_dep.found() and libsystemd_daemon_dep.found() and libsystemd_journal_dep.found(),
+-             'Systemd support explicitly required, but systemd not found')
+-
+-      session_bin_deps += [
+-        libsystemd_login_dep,
+-        libsystemd_daemon_dep,
+-        libsystemd_journal_dep
+-      ]
+-    endif
+-
+-    session_tracking = 'systemd'
+-  endif
+-
+-  # Check for ConsoleKit
+-  if enable_consolekit
+-    dbus_glib_dep = dependency('dbus-glib-1', version: '>= 0.76')
+-    assert(dbus_glib_dep.found(), 'ConsoleKit support explicitly required, but dbus-glib not found')
+-
+-    session_bin_deps += dbus_glib_dep
+-
+-    if enable_systemd
+-      session_tracking += ' (with fallback to ConsoleKit)'
+-    else
+-      session_tracking = 'ConsoleKit'
+-    endif
+-  endif
++session_bin_deps += dependency('gio-unix-2.0', version: glib_req_version)
++
++# Check for systemd
++systemd_userunitdir = get_option('systemduserunitdir')
++if systemd_userunitdir == ''
++  systemd_dep = dependency('systemd', version: '>= 242', required: true)
++  systemd_userunitdir = systemd_dep.get_pkgconfig_variable('systemduserunitdir',
++                                                            define_variable: ['prefix', prefix])
+ endif
+-if enable_systemd_session
+-  assert(enable_systemd, 'Systemd support must be enabled when using systemd session management')
++
++libsystemd_dep = dependency('libsystemd', version: '>= 209', required: false)
++if libsystemd_dep.found()
++  session_bin_deps += libsystemd_dep
++else
++  libsystemd_login_dep = dependency('libsystemd-login', version: '>= 183', required: true)
++  libsystemd_daemon_dep = dependency('libsystemd-daemon', required: true)
++  libsystemd_journal_dep = dependency('libsystemd-journal', required: true)
++
++  session_bin_deps += [
++    libsystemd_login_dep,
++    libsystemd_daemon_dep,
++    libsystemd_journal_dep
++  ]
+ endif
+-config_h.set('HAVE_SYSTEMD', enable_systemd)
+-config_h.set('ENABLE_SYSTEMD_SESSION', enable_systemd_session)
+-config_h.set('ENABLE_SYSTEMD_JOURNAL', enable_systemd_journal)
+-config_h.set('HAVE_CONSOLEKIT', enable_consolekit)
+-config_h.set10('USE_SYSTEMD_SESSION', use_systemd_session)
+ 
+ configure_file(
+   output: 'config.h',
+@@ -219,7 +181,7 @@ output += '        compiler:                 ' + cc.get_id() + '\n'
+ output += '        cflags:                   ' + ' '.join(compiler_flags) + '\n'
+ output += '        Debug mode:               ' + session_debug.to_string() + '\n'
+ output += '        Use *_DISABLE_DEPRECATED: ' + enable_deprecation_flags.to_string() + '\n\n'
+-output += '        Session tracking:         ' + session_tracking + ' \n'
++output += '        Session tracking:         ' + 'systemd' + ' \n'
+ output += '        Build Docbook:            ' + enable_docbook.to_string() + '\n'
+ output += '        Build manpages:           ' + enable_man.to_string()
+ message(output)
+diff --git a/meson_options.txt b/meson_options.txt
+index d3bd38389..f146c55c9 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -1,9 +1,5 @@
+ option('deprecation_flags', type: 'boolean', value: false, description: 'use *_DISABLE_DEPRECATED flags')
+ option('session_selector', type: 'boolean', value: false, description: 'enable building a custom session selector dialog')
+-option('systemd', type: 'boolean', value: true, description: 'Use systemd')
+-option('systemd_session', type: 'combo', choices: ['disable', 'enable', 'default'], value: 'default', description: 'Whether to include systemd session support and use it by default')
+-option('systemd_journal', type: 'boolean', value:'true', description: 'Send log to systemd-journal')
+ option('systemduserunitdir', type: 'string', description: 'Directory for systemd user service files')
+-option('consolekit', type: 'boolean', value: false, description: 'Use consolekit')
+ option('docbook', type: 'boolean', value: true, description: 'build documentation')
+ option('man', type: 'boolean', value: true, description: 'build documentation (requires xmlto)')
+diff --git a/tools/meson.build b/tools/meson.build
+index b21519dad..6ea37b621 100644
+--- a/tools/meson.build
++++ b/tools/meson.build
+@@ -11,9 +11,7 @@ programs = [
+   ['gnome-session-inhibit', session_deps, cflags, session_bindir]
+ ]
+ 
+-if enable_systemd_session
+-  programs += [['gnome-session-ctl', session_bin_deps, cflags, session_libexecdir]]
+-endif
++programs += [['gnome-session-ctl', session_bin_deps, cflags, session_libexecdir]]
+ 
+ if enable_session_selector
+   deps = [
+-- 
+GitLab
+
+
+From ffaa739f16721776d78fc64d63a7a6b0cbf4180b Mon Sep 17 00:00:00 2001
+From: Jordan Petridis <jordan@centricular.com>
+Date: Fri, 19 May 2023 21:40:28 +0300
+Subject: [PATCH 2/4] Remove session restroe functionality
+
+This has been dead code ever since we switched to using systemd as
+the default session and it can't be made to work reliably with it.
+---
+ data/gnome-session.convert                   |   1 -
+ data/meson.build                             |   8 -
+ data/org.gnome.SessionManager.gschema.xml.in |  10 -
+ data/session-selector.ui                     | 195 ------
+ doc/man/gnome-session-selector.xml           |  52 --
+ doc/man/gnome-session.1                      |   5 -
+ doc/man/meson.build                          |   4 -
+ gnome-session/gsm-manager.c                  |  57 --
+ gnome-session/gsm-session-fill.c             |  33 +-
+ gnome-session/gsm-session-save.c             | 293 --------
+ gnome-session/gsm-session-save.h             |  34 -
+ gnome-session/gsm-util.c                     |  93 +--
+ gnome-session/gsm-util.h                     |   8 +-
+ gnome-session/gsm-xsmp-client.c              |   3 +-
+ gnome-session/meson.build                    |   1 -
+ meson.build                                  |   3 -
+ meson_options.txt                            |   1 -
+ tools/gnome-session-custom-session           |   4 -
+ tools/gnome-session-selector.c               | 698 -------------------
+ tools/meson.build                            |  16 -
+ 20 files changed, 10 insertions(+), 1509 deletions(-)
+ delete mode 100644 data/session-selector.ui
+ delete mode 100644 doc/man/gnome-session-selector.xml
+ delete mode 100644 gnome-session/gsm-session-save.c
+ delete mode 100644 gnome-session/gsm-session-save.h
+ delete mode 100755 tools/gnome-session-custom-session
+ delete mode 100644 tools/gnome-session-selector.c
+
+diff --git a/data/gnome-session.convert b/data/gnome-session.convert
+index fd4dfab17..8ab35ed22 100644
+--- a/data/gnome-session.convert
++++ b/data/gnome-session.convert
+@@ -1,3 +1,2 @@
+ [org.gnome.SessionManager]
+-auto-save-session = /apps/gnome-session/options/auto_save_session
+ logout-prompt = /apps/gnome-session/options/logout_prompt
+diff --git a/data/meson.build b/data/meson.build
+index 37862e077..c282fd542 100644
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -31,10 +31,6 @@ required_components = {
+   ],
+ }
+ 
+-if enable_session_selector
+-  desktops += 'gnome-custom-session'
+-endif
+-
+ foreach name: desktops
+   desktop_conf = configuration_data()
+   desktop_conf.set('bindir', session_bindir)
+@@ -185,10 +181,6 @@ endforeach
+ 
+ data = files('hardware-compatibility')
+ 
+-if enable_session_selector
+-  data += files('session-selector.ui')
+-endif
+-
+ install_data(
+   data,
+   install_dir: session_pkgdatadir
+diff --git a/data/org.gnome.SessionManager.gschema.xml.in b/data/org.gnome.SessionManager.gschema.xml.in
+index b2b220d0d..8ce451dbc 100644
+--- a/data/org.gnome.SessionManager.gschema.xml.in
++++ b/data/org.gnome.SessionManager.gschema.xml.in
+@@ -1,15 +1,5 @@
+ <schemalist gettext-domain="gnome-session-3.0">
+   <schema id="org.gnome.SessionManager" path="/org/gnome/gnome-session/">
+-    <key name="auto-save-session" type="b">
+-      <default>false</default>
+-      <summary>Save sessions</summary>
+-      <description>If enabled, gnome-session will save the session automatically.</description>
+-    </key>
+-    <key name="auto-save-session-one-shot" type="b">
+-      <default>false</default>
+-      <summary>Save this session</summary>
+-      <description>When enabled, gnome-session will automatically save the next session at log out even if auto saving is disabled.</description>
+-    </key>
+     <key name="logout-prompt" type="b">
+       <default>true</default>
+       <summary>Logout prompt</summary>
+diff --git a/data/session-selector.ui b/data/session-selector.ui
+deleted file mode 100644
+index 1c55712db..000000000
+--- a/data/session-selector.ui
++++ /dev/null
+@@ -1,195 +0,0 @@
+-<?xml version="1.0"?>
+-<interface>
+-  <requires lib="gtk+" version="2.16"/>
+-  <!-- interface-naming-policy project-wide -->
+-  <object class="GtkListStore" id="session-store">
+-    <columns>
+-      <!-- column-name name -->
+-      <column type="gchararray"/>
+-    </columns>
+-  </object>
+-  <object class="GtkTreeModelSort" id="sort-model">
+-    <property name="model">session-store</property>
+-  </object>
+-  <object class="GtkWindow" id="main-window">
+-    <property name="title" translatable="yes">Custom Session</property>
+-    <property name="window_position">center</property>
+-    <property name="default_width">500</property>
+-    <property name="default_height">310</property>
+-    <property name="decorated">False</property>
+-    <child>
+-      <object class="GtkFrame" id="frame1">
+-        <property name="visible">True</property>
+-        <property name="label_xalign">0.5</property>
+-        <property name="shadow_type">out</property>
+-        <child>
+-          <object class="GtkAlignment" id="alignment3">
+-            <property name="visible">True</property>
+-            <property name="border_width">12</property>
+-            <child>
+-              <object class="GtkVBox" id="vbox3">
+-                <property name="visible">True</property>
+-                <property name="orientation">vertical</property>
+-                <property name="spacing">6</property>
+-
+-                <child>
+-                  <object class="GtkInfoBar" id="info-bar">
+-                    <property name="visible">True</property>
+-                    <property name="message-type">other</property>
+-
+-                    <child internal-child="content_area">
+-                      <object class="GtkHBox" id="info-bar-content_area">
+-                        <property name="visible">True</property>
+-                        <property name="orientation">vertical</property>
+-                        <property name="spacing">0</property>
+-                        <child>
+-                          <object class="GtkLabel" id="info-label">
+-                            <property name="visible">True</property>
+-                            <property name="xalign">0.0</property>
+-                            <property name="yalign">0.5</property>
+-                            <property name="label" translatable="yes">Please select a custom session to run</property>
+-                          </object>
+-                          <packing>
+-                            <property name="expand">True</property>
+-                            <property name="fill">True</property>
+-                            <property name="position">0</property>
+-                          </packing>
+-                        </child>
+-                      </object>
+-                    </child>
+-                  </object>
+-                  <packing>
+-                    <property name="expand">False</property>
+-                    <property name="fill">True</property>
+-                    <property name="position">0</property>
+-                  </packing>
+-                </child>
+-                <child>
+-                  <object class="GtkVBox" id="vbox4">
+-                    <property name="visible">True</property>
+-                    <property name="orientation">vertical</property>
+-                    <property name="spacing">12</property>
+-                    <child>
+-                      <object class="GtkHBox" id="hbox3">
+-                        <property name="visible">True</property>
+-                        <property name="spacing">12</property>
+-                        <child>
+-                          <object class="GtkScrolledWindow" id="scrolledwindow2">
+-                            <property name="visible">True</property>
+-                            <property name="can_focus">True</property>
+-                            <property name="hscrollbar_policy">never</property>
+-                            <property name="vscrollbar_policy">automatic</property>
+-                            <property name="shadow_type">in</property>
+-                            <child>
+-                              <object class="GtkTreeView" id="session-list">
+-                                <property name="visible">True</property>
+-                                <property name="can_focus">True</property>
+-                                <property name="headers_visible">False</property>
+-                                <property name="search_column">0</property>
+-                                <property name="model">sort-model</property>
+-                              </object>
+-                            </child>
+-                          </object>
+-                          <packing>
+-                            <property name="position">0</property>
+-                          </packing>
+-                        </child>
+-                        <child>
+-                          <object class="GtkVButtonBox" id="vbuttonbox2">
+-                            <property name="visible">True</property>
+-                            <property name="orientation">vertical</property>
+-                            <property name="spacing">6</property>
+-                            <property name="layout_style">start</property>
+-                            <child>
+-                              <object class="GtkButton" id="new-session">
+-                                <property name="label" translatable="yes">_New Session</property>
+-                                <property name="visible">True</property>
+-                                <property name="can_focus">True</property>
+-                                <property name="receives_default">True</property>
+-                                <property name="use_underline">True</property>
+-                              </object>
+-                              <packing>
+-                                <property name="expand">False</property>
+-                                <property name="fill">False</property>
+-                                <property name="position">0</property>
+-                              </packing>
+-                            </child>
+-                            <child>
+-                              <object class="GtkButton" id="remove-session">
+-                                <property name="label" translatable="yes">_Remove Session</property>
+-                                <property name="visible">True</property>
+-                                <property name="can_focus">True</property>
+-                                <property name="receives_default">True</property>
+-                                <property name="use_underline">True</property>
+-                              </object>
+-                              <packing>
+-                                <property name="expand">False</property>
+-                                <property name="fill">False</property>
+-                                <property name="position">1</property>
+-                              </packing>
+-                            </child>
+-                            <child>
+-                              <object class="GtkButton" id="rename-session">
+-                                <property name="label" translatable="yes">Rena_me Session</property>
+-                                <property name="visible">True</property>
+-                                <property name="can_focus">True</property>
+-                                <property name="receives_default">True</property>
+-                                <property name="use_underline">True</property>
+-                              </object>
+-                              <packing>
+-                                <property name="expand">False</property>
+-                                <property name="fill">False</property>
+-                                <property name="position">2</property>
+-                              </packing>
+-                            </child>
+-                          </object>
+-                          <packing>
+-                            <property name="expand">False</property>
+-                            <property name="position">1</property>
+-                          </packing>
+-                        </child>
+-                      </object>
+-                      <packing>
+-                        <property name="position">1</property>
+-                      </packing>
+-                    </child>
+-                  </object>
+-                  <packing>
+-                    <property name="position">1</property>
+-                  </packing>
+-                </child>
+-                <child>
+-                  <object class="GtkHButtonBox" id="hbuttonbox2">
+-                    <property name="visible">True</property>
+-                    <property name="spacing">6</property>
+-                    <property name="layout_style">end</property>
+-                    <child>
+-                      <object class="GtkButton" id="continue-button">
+-                        <property name="label" translatable="yes">_Continue</property>
+-                        <property name="visible">True</property>
+-                        <property name="can_focus">True</property>
+-                        <property name="can_default">True</property>
+-                        <property name="has_default">True</property>
+-                        <property name="receives_default">True</property>
+-                        <property name="use_underline">True</property>
+-                      </object>
+-                      <packing>
+-                        <property name="expand">False</property>
+-                        <property name="fill">False</property>
+-                        <property name="position">0</property>
+-                      </packing>
+-                    </child>
+-                  </object>
+-                  <packing>
+-                    <property name="expand">False</property>
+-                    <property name="position">2</property>
+-                  </packing>
+-                </child>
+-              </object>
+-            </child>
+-          </object>
+-        </child>
+-      </object>
+-    </child>
+-  </object>
+-</interface>
+diff --git a/doc/man/gnome-session-selector.xml b/doc/man/gnome-session-selector.xml
+deleted file mode 100644
+index 7beb1e47b..000000000
+--- a/doc/man/gnome-session-selector.xml
++++ /dev/null
+@@ -1,52 +0,0 @@
+-<refentry id="gnome-session-selector" lang="en">
+-
+-<refentryinfo>
+-<title>gnome-session-selector</title>
+-<productname>gnome-session</productname>
+-</refentryinfo>
+-
+-<refmeta>
+-<refentrytitle>gnome-session-selector</refentrytitle>
+-<manvolnum>1</manvolnum>
+-<refmiscinfo class="manual">User Commands</refmiscinfo>
+-</refmeta>
+-
+-<refnamediv>
+-<refname>gnome-session-selector</refname>
+-<refpurpose>Selects a session to use with gnome-session</refpurpose>
+-</refnamediv>
+-
+-<refsynopsisdiv>
+-<cmdsynopsis>
+-<command>gnome-session-selector</command>
+-<arg choice="opt">session</arg>
+-</cmdsynopsis>
+-</refsynopsisdiv>
+-
+-<refsect1><title>Description</title>
+-<para><command>gnome-session-selector</command> can be used from a
+-xsession desktop file to select a session before gnome-session is run.
+-gnome-session reads and stores its session in the
+-<filename><envar>$XDG_DATA_HOME</envar>/gnome-session/saved-session</filename>
+-directory. <command>gnome-session-selector</command> works by replacing
+-the saved-session directory by a symlink to another directory. Since the
+-session name is used as the directory name, it may not contain '/' characters
+-or begin with a '.'.
+-</para>
+-<para>
+-When a session name is specified, <command>gnome-session-selector</command>
+-will create a symlink to select this session.
+-</para>
+-<para>
+-When started without arguments, <command>gnome-session-selector</command>
+-will present a dialog that allows to choose one of the existing sessions
+-or create a new one.
+-</para>
+-</refsect1>
+-
+-<refsect1><title>See also</title>
+-<para>
+-<citerefentry><refentrytitle>gnome-session</refentrytitle><manvolnum>1</manvolnum></citerefentry>
+-</para>
+-</refsect1>
+-</refentry>
+diff --git a/doc/man/gnome-session.1 b/doc/man/gnome-session.1
+index 305454513..be0931619 100644
+--- a/doc/man/gnome-session.1
++++ b/doc/man/gnome-session.1
+@@ -25,11 +25,6 @@ file that is looked for in
+ \fB$XDG_CONFIG_DIRS/gnome-session/sessions\fP and
+ \fB$XDG_DATA_DIRS/gnome-session/sessions\fP.
+ .PP
+-When saving a session, \fIgnome-session\fP saves the currently running
+-applications in the \fB$XDG_CONFIG_HOME/gnome-session/saved-session\fP
+-directory. Saving sessions is only supported with the legacy non-systemd
+-startup method.
+-.PP
+ \fIgnome-session\fP is an X11R6 session manager. It can manage GNOME
+ applications as well as any X11R6 SM compliant application.
+ .SH OPTIONS
+diff --git a/doc/man/meson.build b/doc/man/meson.build
+index 4a389bcbd..f3537eefa 100644
+--- a/doc/man/meson.build
++++ b/doc/man/meson.build
+@@ -15,10 +15,6 @@ xsltproc_cmd = [
+ 
+ mans = ['gnome-session-inhibit']
+ 
+-if enable_session_selector
+-  mans += 'gnome-session-selector'
+-endif
+-
+ foreach man: mans
+   output = man + '.1'
+ 
+diff --git a/gnome-session/gsm-manager.c b/gnome-session/gsm-manager.c
+index 9c9ffe82a..d62ed7edf 100644
+--- a/gnome-session/gsm-manager.c
++++ b/gnome-session/gsm-manager.c
+@@ -58,7 +58,6 @@
+ #include "gsm-util.h"
+ #include "gsm-icon-names.h"
+ #include "gsm-system.h"
+-#include "gsm-session-save.h"
+ #include "gsm-shell-extensions.h"
+ #include "gsm-fail-whale.h"
+ 
+@@ -88,8 +87,6 @@
+ #define KEY_SESSION_NAME          "session-name"
+ 
+ #define GSM_MANAGER_SCHEMA        "org.gnome.SessionManager"
+-#define KEY_AUTOSAVE              "auto-save-session"
+-#define KEY_AUTOSAVE_ONE_SHOT     "auto-save-session-one-shot"
+ #define KEY_LOGOUT_PROMPT         "logout-prompt"
+ #define KEY_SHOW_FALLBACK_WARNING "show-fallback-warning"
+ 
+@@ -187,9 +184,6 @@ static guint signals [LAST_SIGNAL] = { 0 };
+ static void     gsm_manager_class_init  (GsmManagerClass *klass);
+ static void     gsm_manager_init        (GsmManager      *manager);
+ 
+-static gboolean auto_save_is_enabled (GsmManager *manager);
+-static void     maybe_save_session   (GsmManager *manager);
+-
+ static gboolean _log_out_is_locked_down     (GsmManager *manager);
+ 
+ static void     _handle_client_end_session_response (GsmManager *manager,
+@@ -558,7 +552,6 @@ end_phase (GsmManager *manager)
+                         start_next_phase = FALSE;
+                 break;
+         case GSM_MANAGER_PHASE_END_SESSION:
+-                maybe_save_session (manager);
+                 break;
+         case GSM_MANAGER_PHASE_EXIT:
+                 start_next_phase = FALSE;
+@@ -887,9 +880,6 @@ do_phase_end_session (GsmManager *manager)
+         if (priv->logout_mode == GSM_MANAGER_LOGOUT_MODE_FORCE) {
+                 data.flags |= GSM_CLIENT_END_SESSION_FLAG_FORCEFUL;
+         }
+-        if (auto_save_is_enabled (manager)) {
+-                data.flags |= GSM_CLIENT_END_SESSION_FLAG_SAVE;
+-        }
+ 
+         if (priv->phase_timeout_id > 0) {
+                 g_source_remove (priv->phase_timeout_id);
+@@ -921,9 +911,6 @@ do_phase_end_session_part_2 (GsmManager *manager)
+         if (priv->logout_mode == GSM_MANAGER_LOGOUT_MODE_FORCE) {
+                 data.flags |= GSM_CLIENT_END_SESSION_FLAG_FORCEFUL;
+         }
+-        if (auto_save_is_enabled (manager)) {
+-                data.flags |= GSM_CLIENT_END_SESSION_FLAG_SAVE;
+-        }
+         data.flags |= GSM_CLIENT_END_SESSION_FLAG_LAST;
+ 
+         /* keep the timeout that was started at the beginning of the
+@@ -1953,50 +1940,6 @@ on_xsmp_client_register_confirmed (GsmXSMPClient *client,
+         }
+ }
+ 
+-static gboolean
+-auto_save_is_enabled (GsmManager *manager)
+-{
+-        GsmManagerPrivate *priv = gsm_manager_get_instance_private (manager);
+-
+-        /* Note that saving/restoring sessions is not really possible on systemd, as
+-         * XSMP clients cannot be reliably mapped to .desktop files. */
+-        if (priv->systemd_managed)
+-                return FALSE;
+-
+-        return g_settings_get_boolean (priv->settings, KEY_AUTOSAVE_ONE_SHOT)
+-            || g_settings_get_boolean (priv->settings, KEY_AUTOSAVE);
+-}
+-
+-static void
+-maybe_save_session (GsmManager *manager)
+-{
+-        GsmManagerPrivate *priv = gsm_manager_get_instance_private (manager);
+-        GError *error;
+-
+-        if (gsm_system_is_login_session (priv->system))
+-                return;
+-
+-        /* We only allow session saving when session is running or when
+-         * logging out */
+-        if (priv->phase != GSM_MANAGER_PHASE_RUNNING &&
+-            priv->phase != GSM_MANAGER_PHASE_END_SESSION) {
+-                return;
+-        }
+-
+-        if (!auto_save_is_enabled (manager)) {
+-                gsm_session_save_clear ();
+-                return;
+-        }
+-
+-        error = NULL;
+-        gsm_session_save (priv->clients, priv->apps, &error);
+-
+-        if (error) {
+-                g_warning ("Error saving session: %s", error->message);
+-                g_error_free (error);
+-        }
+-}
+-
+ static void
+ _handle_client_end_session_response (GsmManager *manager,
+                                      GsmClient  *client,
+diff --git a/gnome-session/gsm-session-fill.c b/gnome-session/gsm-session-fill.c
+index 93a6dbc0b..a056a113a 100644
+--- a/gnome-session/gsm-session-fill.c
++++ b/gnome-session/gsm-session-fill.c
+@@ -40,7 +40,6 @@ typedef void (*GsmFillHandleComponent) (const char *component,
+ 
+ static void
+ handle_required_components (GKeyFile               *keyfile,
+-                            gboolean                look_in_saved_session,
+                             GsmFillHandleComponent  callback,
+                             gpointer                user_data)
+ {
+@@ -62,7 +61,7 @@ handle_required_components (GKeyFile               *keyfile,
+                 char *app_path;
+ 
+                 app_path = gsm_util_find_desktop_file_for_app_name (required_components[i],
+-                                                                    look_in_saved_session, TRUE);
++                                                                    TRUE);
+                 callback (required_components[i], app_path, user_data);
+                 g_free (app_path);
+         }
+@@ -90,30 +89,15 @@ check_required (GKeyFile *keyfile)
+ 
+         g_debug ("fill: *** Checking required components");
+ 
+-        handle_required_components (keyfile, FALSE,
+-                                    check_required_components_helper, &error);
++        handle_required_components (keyfile,
++                                    check_required_components_helper,
++                                    &error);
+ 
+         g_debug ("fill: *** Done checking required components");
+ 
+         return !error;
+ }
+ 
+-static void
+-maybe_load_saved_session_apps (GsmManager *manager)
+-{
+-        GsmSystem *system;
+-        gboolean is_login;
+-
+-        system = gsm_get_system ();
+-        is_login = gsm_system_is_login_session (system);
+-        g_object_unref (system);
+-
+-        if (is_login)
+-                return;
+-
+-        gsm_manager_add_autostart_apps_from_dir (manager, gsm_util_get_saved_session_dir ());
+-}
+-
+ static void
+ append_required_components_helper (const char *component,
+                                    const char *app_path,
+@@ -132,12 +116,10 @@ static void
+ load_standard_apps (GsmManager *manager,
+                     GKeyFile   *keyfile)
+ {
+-        /* Note that saving/restoring sessions is not really possible on systemd, as
+-         * XSMP clients cannot be reliably mapped to .desktop files. */
+         g_debug ("fill: *** Adding required components");
+         handle_required_components (keyfile,
+-                                    !gsm_manager_get_failsafe (manager) && !gsm_manager_get_systemd_managed (manager),
+-                                    append_required_components_helper, manager);
++                                    append_required_components_helper,
++                                    manager);
+         g_debug ("fill: *** Done adding required components");
+ 
+         if (!gsm_manager_get_failsafe (manager)) {
+@@ -146,9 +128,6 @@ load_standard_apps (GsmManager *manager,
+ 
+                 autostart_dirs = gsm_util_get_autostart_dirs ();
+ 
+-                if (!gsm_manager_get_systemd_managed (manager))
+-                        maybe_load_saved_session_apps (manager);
+-
+                 for (i = 0; autostart_dirs[i]; i++) {
+                         gsm_manager_add_autostart_apps_from_dir (manager,
+                                                                  autostart_dirs[i]);
+diff --git a/gnome-session/gsm-session-save.c b/gnome-session/gsm-session-save.c
+deleted file mode 100644
+index e7f3653a5..000000000
+--- a/gnome-session/gsm-session-save.c
++++ /dev/null
+@@ -1,293 +0,0 @@
+-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+- * gsm-session-save.c
+- * Copyright (C) 2008 Lucas Rocha.
+- *
+- * This program is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU General Public License as
+- * published by the Free Software Foundation; either version 2 of the
+- * License, or (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful, but
+- * WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+- * Lesser General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, see <http://www.gnu.org/licenses/>.
+- */
+-
+-#include <config.h>
+-
+-#include <glib.h>
+-#include <glib/gstdio.h>
+-#include <gio/gio.h>
+-
+-#include "gsm-app.h"
+-#include "gsm-util.h"
+-#include "gsm-autostart-app.h"
+-#include "gsm-client.h"
+-
+-#include "gsm-session-save.h"
+-
+-#define GSM_MANAGER_SCHEMA        "org.gnome.SessionManager"
+-#define KEY_AUTOSAVE_ONE_SHOT     "auto-save-session-one-shot"
+-
+-
+-static gboolean gsm_session_clear_saved_session (const char *directory,
+-                                                 GHashTable *discard_hash);
+-
+-typedef struct {
+-        const char  *dir;
+-        GHashTable  *discard_hash;
+-        GsmStore    *app_store;
+-        GError     **error;
+-} SessionSaveData;
+-
+-static gboolean
+-_app_has_app_id (const char   *id,
+-                 GsmApp       *app,
+-                 const char   *app_id_a)
+-{
+-        const char *app_id_b;
+-
+-        app_id_b = gsm_app_peek_app_id (app);
+-        return g_strcmp0 (app_id_a, app_id_b) == 0;
+-}
+-
+-static gboolean
+-save_one_client (char            *id,
+-                 GObject         *object,
+-                 SessionSaveData *data)
+-{
+-        GsmClient  *client;
+-        GKeyFile   *keyfile;
+-        GsmApp     *app = NULL;
+-        const char *app_id;
+-        char       *path = NULL;
+-        char       *filename = NULL;
+-        char       *contents = NULL;
+-        gsize       length = 0;
+-        char       *discard_exec;
+-        g_autoptr(GError) local_error = NULL;
+-
+-        client = GSM_CLIENT (object);
+-
+-        app_id = gsm_client_peek_app_id (client);
+-        if (!IS_STRING_EMPTY (app_id)) {
+-                if (g_str_has_suffix (app_id, ".desktop"))
+-                        filename = g_strdup (app_id);
+-                else
+-                        filename = g_strdup_printf ("%s.desktop", app_id);
+-
+-                path = g_build_filename (data->dir, filename, NULL);
+-
+-                app = (GsmApp *)gsm_store_find (data->app_store,
+-                                                (GsmStoreFunc)_app_has_app_id,
+-                                                (char *)app_id);
+-        }
+-        keyfile = gsm_client_save (client, app, &local_error);
+-
+-        if (keyfile == NULL || local_error) {
+-                goto out;
+-        }
+-
+-        contents = g_key_file_to_data (keyfile, &length, &local_error);
+-
+-        if (local_error) {
+-                goto out;
+-        }
+-
+-        if (!path || g_file_test (path, G_FILE_TEST_EXISTS)) {
+-                if (filename)
+-                        g_free (filename);
+-                if (path)
+-                        g_free (path);
+-
+-                filename = g_strdup_printf ("%s.desktop",
+-                                            gsm_client_peek_startup_id (client));
+-                path = g_build_filename (data->dir, filename, NULL);
+-        }
+-
+-        g_file_set_contents (path,
+-                             contents,
+-                             length,
+-                             &local_error);
+-
+-        if (local_error) {
+-                goto out;
+-        }
+-
+-        discard_exec = g_key_file_get_string (keyfile,
+-                                              G_KEY_FILE_DESKTOP_GROUP,
+-                                              GSM_AUTOSTART_APP_DISCARD_KEY,
+-                                              NULL);
+-        if (discard_exec) {
+-                g_hash_table_insert (data->discard_hash,
+-                                     discard_exec, discard_exec);
+-        }
+-
+-        g_debug ("GsmSessionSave: saved client %s to %s", id, filename);
+-
+-out:
+-        if (keyfile != NULL) {
+-                g_key_file_free (keyfile);
+-        }
+-
+-        g_free (contents);
+-        g_free (filename);
+-        g_free (path);
+-
+-        /* in case of any error, stop saving session */
+-        if (local_error) {
+-                g_propagate_error (data->error, g_steal_pointer (&local_error));
+-
+-                return TRUE;
+-        }
+-
+-        return FALSE;
+-}
+-
+-void
+-gsm_session_save (GsmStore  *client_store,
+-                  GsmStore  *app_store,
+-                  GError   **error)
+-{
+-        GSettings       *settings;
+-        const char      *save_dir;
+-        SessionSaveData  data;
+-
+-        g_debug ("GsmSessionSave: Saving session");
+-
+-        /* Clear one shot key autosave in the event its set (so that it's actually
+-         * one shot only)
+-         */
+-        settings = g_settings_new (GSM_MANAGER_SCHEMA);
+-        g_settings_set_boolean (settings, KEY_AUTOSAVE_ONE_SHOT, FALSE);
+-        g_object_unref (settings);
+-
+-        save_dir = gsm_util_get_saved_session_dir ();
+-        if (save_dir == NULL) {
+-                g_warning ("GsmSessionSave: cannot create saved session directory");
+-                return;
+-        }
+-
+-        data.dir = save_dir;
+-        data.discard_hash = g_hash_table_new_full (g_str_hash, g_str_equal,
+-                                                   g_free, NULL);
+-        data.app_store = app_store;
+-
+-        /* remove old saved session */
+-        gsm_session_clear_saved_session (save_dir, data.discard_hash);
+-        data.error = error;
+-
+-        gsm_store_foreach (client_store,
+-                           (GsmStoreFunc) save_one_client,
+-                           &data);
+-
+-        g_hash_table_destroy (data.discard_hash);
+-}
+-
+-static gboolean
+-gsm_session_clear_one_client (const char *filename,
+-                              GHashTable *discard_hash)
+-{
+-        gboolean  result = TRUE;
+-        GKeyFile *key_file;
+-        char     *discard_exec = NULL;
+-        char    **envp;
+-
+-        g_debug ("GsmSessionSave: removing '%s' from saved session", filename);
+-
+-        envp = (char **) gsm_util_listenv ();
+-        key_file = g_key_file_new ();
+-        if (g_key_file_load_from_file (key_file, filename,
+-                                       G_KEY_FILE_NONE, NULL)) {
+-                char **argv;
+-                int    argc;
+-
+-                discard_exec = g_key_file_get_string (key_file,
+-                                                      G_KEY_FILE_DESKTOP_GROUP,
+-                                                      GSM_AUTOSTART_APP_DISCARD_KEY,
+-                                                      NULL);
+-                if (!discard_exec)
+-                        goto out;
+-
+-                if (discard_hash && g_hash_table_lookup (discard_hash, discard_exec))
+-                        goto out;
+-
+-                if (!g_shell_parse_argv (discard_exec, &argc, &argv, NULL))
+-                        goto out;
+-
+-                result = g_spawn_async (NULL, argv, envp, G_SPAWN_SEARCH_PATH,
+-                                        NULL, NULL, NULL, NULL) && result;
+-
+-                g_strfreev (argv);
+-        } else {
+-                result = FALSE;
+-        }
+-
+-out:
+-        if (key_file)
+-                g_key_file_free (key_file);
+-        if (discard_exec)
+-                g_free (discard_exec);
+-
+-        result = (g_unlink (filename) == 0) && result;
+-
+-        return result;
+-}
+-
+-static gboolean
+-gsm_session_clear_saved_session (const char *directory,
+-                                 GHashTable *discard_hash)
+-{
+-        GDir       *dir;
+-        const char *filename;
+-        gboolean    result = TRUE;
+-        GError     *error;
+-
+-        g_debug ("GsmSessionSave: clearing currently saved session at %s",
+-                 directory);
+-
+-        if (directory == NULL) {
+-                return FALSE;
+-        }
+-
+-        error = NULL;
+-        dir = g_dir_open (directory, 0, &error);
+-        if (error) {
+-                g_warning ("GsmSessionSave: error loading saved session directory: %s", error->message);
+-                g_error_free (error);
+-                return FALSE;
+-        }
+-
+-        while ((filename = g_dir_read_name (dir))) {
+-                char *path = g_build_filename (directory,
+-                                               filename, NULL);
+-
+-                result = gsm_session_clear_one_client (path, discard_hash)
+-                         && result;
+-
+-                g_free (path);
+-        }
+-
+-        g_dir_close (dir);
+-
+-        return result;
+-}
+-
+-void
+-gsm_session_save_clear (void)
+-{
+-        const char *save_dir;
+-
+-        g_debug ("GsmSessionSave: Clearing saved session");
+-
+-        save_dir = gsm_util_get_saved_session_dir ();
+-        if (save_dir == NULL) {
+-                g_warning ("GsmSessionSave: cannot create saved session directory");
+-                return;
+-        }
+-
+-        gsm_session_clear_saved_session (save_dir, NULL);
+-}
+diff --git a/gnome-session/gsm-session-save.h b/gnome-session/gsm-session-save.h
+deleted file mode 100644
+index f55c9c167..000000000
+--- a/gnome-session/gsm-session-save.h
++++ /dev/null
+@@ -1,34 +0,0 @@
+-/* gsm-session-save.h
+- * Copyright (C) 2008 Lucas Rocha.
+- *
+- * This program is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU General Public License as
+- * published by the Free Software Foundation; either version 2 of the
+- * License, or (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful, but
+- * WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+- * Lesser General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, see <http://www.gnu.org/licenses/>.
+- */
+-
+-#ifndef __GSM_SESSION_SAVE_H__
+-#define __GSM_SESSION_SAVE_H__
+-
+-#include <glib.h>
+-
+-#include "gsm-store.h"
+-
+-G_BEGIN_DECLS
+-
+-void      gsm_session_save                 (GsmStore  *client_store,
+-                                            GsmStore  *app_store,
+-                                            GError   **error);
+-void      gsm_session_save_clear           (void);
+-
+-G_END_DECLS
+-
+-#endif /* __GSM_SESSION_SAVE_H__ */
+diff --git a/gnome-session/gsm-util.c b/gnome-session/gsm-util.c
+index dfc7b08d6..b16f606c0 100644
+--- a/gnome-session/gsm-util.c
++++ b/gnome-session/gsm-util.c
+@@ -32,7 +32,6 @@
+ 
+ #include "gsm-util.h"
+ 
+-static gchar *_saved_session_dir = NULL;
+ static gchar **child_environment;
+ 
+ /* These are variables that will not be passed on to subprocesses
+@@ -86,7 +85,6 @@ static const char * const variable_unsetlist[] = {
+ 
+ char *
+ gsm_util_find_desktop_file_for_app_name (const char *name,
+-                                         gboolean    look_in_saved_session,
+                                          gboolean    autostart_first)
+ {
+         char     *app_path;
+@@ -97,7 +95,7 @@ gsm_util_find_desktop_file_for_app_name (const char *name,
+ 
+         app_path = NULL;
+ 
+-        app_dirs = gsm_util_get_desktop_dirs (look_in_saved_session, autostart_first);
++        app_dirs = gsm_util_get_desktop_dirs (autostart_first);
+ 
+         key_file = g_key_file_new ();
+ 
+@@ -144,84 +142,6 @@ gsm_util_find_desktop_file_for_app_name (const char *name,
+         return app_path;
+ }
+ 
+-static gboolean
+-ensure_dir_exists (const char *dir)
+-{
+-        if (g_mkdir_with_parents (dir, 0700) == 0)
+-                return TRUE;
+-
+-        g_warning ("GsmSessionSave: Failed to create directory %s: %s", dir, strerror (errno));
+-
+-        return FALSE;
+-}
+-
+-gchar *
+-gsm_util_get_empty_tmp_session_dir (void)
+-{
+-        char *tmp;
+-        gboolean exists;
+-
+-        tmp = g_build_filename (g_get_user_config_dir (),
+-                                "gnome-session",
+-                                "saved-session.new",
+-                                NULL);
+-
+-        exists = ensure_dir_exists (tmp);
+-
+-        if (G_UNLIKELY (!exists)) {
+-                g_warning ("GsmSessionSave: could not create directory for saved session: %s", tmp);
+-                g_free (tmp);
+-                return NULL;
+-        } else {
+-                /* make sure it's empty */
+-                GDir       *dir;
+-                const char *filename;
+-
+-                dir = g_dir_open (tmp, 0, NULL);
+-                if (dir) {
+-                        while ((filename = g_dir_read_name (dir))) {
+-                                char *path = g_build_filename (tmp, filename,
+-                                                               NULL);
+-                                g_unlink (path);
+-                        }
+-                        g_dir_close (dir);
+-                }
+-        }
+-
+-        return tmp;
+-}
+-
+-const gchar *
+-gsm_util_get_saved_session_dir (void)
+-{
+-        if (_saved_session_dir == NULL) {
+-                gboolean exists;
+-
+-                _saved_session_dir =
+-                        g_build_filename (g_get_user_config_dir (),
+-                                          "gnome-session",
+-                                          "saved-session",
+-                                          NULL);
+-
+-                exists = ensure_dir_exists (_saved_session_dir);
+-
+-                if (G_UNLIKELY (!exists)) {
+-                        static gboolean printed_warning = FALSE;
+-
+-                        if (!printed_warning) {
+-                                g_warning ("GsmSessionSave: could not create directory for saved session: %s", _saved_session_dir);
+-                                printed_warning = TRUE;
+-                        }
+-
+-                        _saved_session_dir = NULL;
+-
+-                        return NULL;
+-                }
+-        }
+-
+-        return _saved_session_dir;
+-}
+-
+ static char ** autostart_dirs;
+ 
+ void
+@@ -301,8 +221,7 @@ gsm_util_get_app_dirs ()
+ }
+ 
+ char **
+-gsm_util_get_desktop_dirs (gboolean include_saved_session,
+-                           gboolean autostart_first)
++gsm_util_get_desktop_dirs (gboolean autostart_first)
+ {
+         char **apps;
+         char **autostart;
+@@ -326,17 +245,12 @@ gsm_util_get_desktop_dirs (gboolean include_saved_session,
+         for (i = 0; autostart[i] != NULL; i++) { size++; }
+         if (standard_autostart != NULL)
+                 for (i = 0; standard_autostart[i] != NULL; i++) { size++; }
+-        if (include_saved_session)
+-                size += 1;
+ 
+         result = g_new (char *, size + 1); /* including last NULL */
+ 
+         size = 0;
+ 
+         if (autostart_first) {
+-                if (include_saved_session)
+-                        result[size++] = g_strdup (gsm_util_get_saved_session_dir ());
+-
+                 for (i = 0; autostart[i] != NULL; i++, size++) {
+                         result[size] = autostart[i];
+                 }
+@@ -360,9 +274,6 @@ gsm_util_get_desktop_dirs (gboolean include_saved_session,
+                 for (i = 0; autostart[i] != NULL; i++, size++) {
+                         result[size] = autostart[i];
+                 }
+-
+-                if (include_saved_session)
+-                        result[size++] = g_strdup (gsm_util_get_saved_session_dir ());
+         }
+ 
+         g_free (apps);
+diff --git a/gnome-session/gsm-util.h b/gnome-session/gsm-util.h
+index bd32e05f9..011454ea6 100644
+--- a/gnome-session/gsm-util.h
++++ b/gnome-session/gsm-util.h
+@@ -25,20 +25,14 @@ G_BEGIN_DECLS
+ #define IS_STRING_EMPTY(x) ((x)==NULL||(x)[0]=='\0')
+ 
+ char *      gsm_util_find_desktop_file_for_app_name (const char *app_name,
+-                                                     gboolean    look_in_saved_session,
+                                                      gboolean    autostart_first);
+ 
+-gchar      *gsm_util_get_empty_tmp_session_dir      (void);
+-
+-const char *gsm_util_get_saved_session_dir          (void);
+-
+ gchar**     gsm_util_get_app_dirs                   (void);
+ 
+ gchar**     gsm_util_get_autostart_dirs             (void);
+ void        gsm_util_set_autostart_dirs             (char **dirs);
+ 
+-gchar **    gsm_util_get_desktop_dirs               (gboolean include_saved_session,
+-                                                     gboolean autostart_first);
++gchar **    gsm_util_get_desktop_dirs               (gboolean autostart_first);
+ 
+ gboolean    gsm_util_text_is_blank                  (const char *str);
+ 
+diff --git a/gnome-session/gsm-xsmp-client.c b/gnome-session/gsm-xsmp-client.c
+index 8a30926f2..2ed26c737 100644
+--- a/gnome-session/gsm-xsmp-client.c
++++ b/gnome-session/gsm-xsmp-client.c
+@@ -527,8 +527,7 @@ get_desktop_file_path (GsmXSMPClient *client)
+ 
+         program_name = prop->vals[0].value;
+         desktop_file_path =
+-                gsm_util_find_desktop_file_for_app_name (program_name,
+-                                                         TRUE, FALSE);
++                gsm_util_find_desktop_file_for_app_name (program_name, FALSE);
+ 
+ out:
+         g_debug ("GsmXSMPClient: desktop file for client %s is %s",
+diff --git a/gnome-session/meson.build b/gnome-session/meson.build
+index 8c221e8c4..d00f42a24 100644
+--- a/gnome-session/meson.build
++++ b/gnome-session/meson.build
+@@ -30,7 +30,6 @@ sources = files(
+   'gsm-presence.c',
+   'gsm-process-helper.c',
+   'gsm-session-fill.c',
+-  'gsm-session-save.c',
+   'gsm-shell-extensions.c',
+   'gsm-shell.c',
+   'gsm-store.c',
+diff --git a/meson.build b/meson.build
+index 75c33a348..7c49e778f 100644
+--- a/meson.build
++++ b/meson.build
+@@ -108,9 +108,6 @@ session_bin_deps = session_deps + [
+   sm_dep
+ ]
+ 
+-# Check for session selector GTK+ UI
+-enable_session_selector = get_option('session_selector')
+-
+ session_bin_deps += dependency('gio-unix-2.0', version: glib_req_version)
+ 
+ # Check for systemd
+diff --git a/meson_options.txt b/meson_options.txt
+index f146c55c9..54da4d9b7 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -1,5 +1,4 @@
+ option('deprecation_flags', type: 'boolean', value: false, description: 'use *_DISABLE_DEPRECATED flags')
+-option('session_selector', type: 'boolean', value: false, description: 'enable building a custom session selector dialog')
+ option('systemduserunitdir', type: 'string', description: 'Directory for systemd user service files')
+ option('docbook', type: 'boolean', value: true, description: 'build documentation')
+ option('man', type: 'boolean', value: true, description: 'build documentation (requires xmlto)')
+diff --git a/tools/gnome-session-custom-session b/tools/gnome-session-custom-session
+deleted file mode 100755
+index 07fdb0ccc..000000000
+--- a/tools/gnome-session-custom-session
++++ /dev/null
+@@ -1,4 +0,0 @@
+-#! /bin/sh
+-
+-gnome-session-selector
+-exec gnome-session
+diff --git a/tools/gnome-session-selector.c b/tools/gnome-session-selector.c
+deleted file mode 100644
+index 71892c43d..000000000
+--- a/tools/gnome-session-selector.c
++++ /dev/null
+@@ -1,698 +0,0 @@
+-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+- *
+- * Copyright 2010, 2013  Red Hat, Inc,
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 2 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, see <http://www.gnu.org/licenses/>.
+- *
+- * Written by: Matthias Clasen <mclasen@redhat.com>
+- */
+-
+-#include "config.h"
+-
+-#include <fcntl.h>
+-#include <stdlib.h>
+-#include <string.h>
+-#include <sys/types.h>
+-#include <sys/stat.h>
+-#include <unistd.h>
+-
+-#include <glib.h>
+-#include <gtk/gtk.h>
+-#include <gio/gio.h>
+-
+-#include <glib/gi18n.h>
+-#include <glib/gstdio.h>
+-
+-#define GSM_MANAGER_SCHEMA        "org.gnome.SessionManager"
+-#define KEY_AUTOSAVE_ONE_SHOT     "auto-save-session-one-shot"
+-
+-static GtkBuilder *builder;
+-static GtkWidget *session_list;
+-static GtkListStore *store;
+-static GtkTreeModelSort *sort_model;
+-
+-static void select_session (const char *name);
+-
+-static char *
+-get_session_path (const char *name)
+-{
+-        return g_build_filename (g_get_user_config_dir (), "gnome-session", name, NULL);
+-}
+-
+-static char *
+-find_new_session_name (void)
+-{
+-        char *name;
+-        char *path;
+-        int i;
+-
+-        for (i = 1; i < 20; i++) {
+-                name = g_strdup_printf (_("Session %d"), i);
+-                path = get_session_path (name);
+-                if (!g_file_test (path, G_FILE_TEST_EXISTS)) {
+-                        g_free (path);
+-                        return name;
+-                }
+-                g_free (path);
+-                g_free (name);
+-        }
+-
+-        return NULL;
+-}
+-
+-static gboolean
+-is_valid_session_name (const char *name)
+-{
+-        GtkTreeIter iter;
+-        char *n;
+-        const char *info_text;
+-        char *warning_text;
+-        gboolean user_tried_dot;
+-        gboolean user_tried_slash;
+-        GtkWidget *info_bar;
+-        GtkWidget *label;
+-
+-        if (name[0] == 0) {
+-                return FALSE;
+-        }
+-
+-        if (name[0] == '.') {
+-            user_tried_dot = TRUE;
+-        } else {
+-            user_tried_dot = FALSE;
+-        }
+-
+-        if (strchr (name, '/') != NULL) {
+-            user_tried_slash = TRUE;
+-        } else {
+-            user_tried_slash = FALSE;
+-        }
+-
+-        info_text = _("Please select a custom session to run");
+-        warning_text = NULL;
+-        if (user_tried_dot && user_tried_slash) {
+-            warning_text = g_strdup_printf ("%s\n<small><b>Note:</b> <i>%s</i></small>",
+-                                            info_text,
+-                                            _("Session names are not allowed to start with â€œ.â€ or contain â€œ/â€ characters"));
+-        } else if (user_tried_dot) {
+-            warning_text = g_strdup_printf ("%s\n<small><b>Note:</b> <i>%s</i></small>",
+-                                            info_text,
+-                                            _("Session names are not allowed to start with â€œ.â€"));
+-        } else if (user_tried_slash) {
+-            warning_text = g_strdup_printf ("%s\n<small><b>Note:</b> <i>%s</i></small>",
+-                                            info_text,
+-                                            _("Session names are not allowed to contain â€œ/â€ characters"));
+-        }
+-
+-        gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
+-        do {
+-                gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, 0, &n, -1);
+-                if (strcmp (n, name) == 0) {
+-                        char *message;
+-                        message = g_strdup_printf (_("A session named â€œ%sâ€ already exists"), name);
+-                        warning_text = g_strdup_printf ("%s\n<small><b>Note:</b> <i>%s</i></small>", info_text, message);
+-                        g_free (message);
+-                        g_free (n);
+-                        break;
+-                }
+-                g_free (n);
+-        } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter));
+-
+-        info_bar = (GtkWidget *) gtk_builder_get_object (builder, "info-bar");
+-        label = (GtkWidget*) gtk_builder_get_object (builder, "info-label");
+-
+-        if (warning_text != NULL) {
+-            gtk_info_bar_set_message_type (GTK_INFO_BAR (info_bar), GTK_MESSAGE_WARNING);
+-            gtk_label_set_markup (GTK_LABEL (label), warning_text);
+-            g_free (warning_text);
+-            return FALSE;
+-        }
+-
+-        gtk_info_bar_set_message_type (GTK_INFO_BAR (info_bar), GTK_MESSAGE_OTHER);
+-        gtk_label_set_markup (GTK_LABEL (label), info_text);
+-
+-        return TRUE;
+-}
+-
+-static void
+-populate_session_list (GtkWidget *session_list)
+-{
+-        GtkTreeIter iter;
+-        char *path;
+-        const char *name;
+-        GDir *dir;
+-        GError *error;
+-        char *saved_session;
+-        char *default_session;
+-        char *default_name;
+-        char last_session[PATH_MAX] = "";
+-
+-        saved_session = get_session_path ("saved-session");
+-
+-        if (!g_file_test (saved_session, G_FILE_TEST_IS_SYMLINK)) {
+-                default_name = find_new_session_name ();
+-                default_session = get_session_path (default_name);
+-                rename (saved_session, default_session);
+-                if (symlink (default_name, saved_session) < 0)
+-                        g_warning ("Failed to convert saved-session to symlink");
+-                g_free (default_name);
+-                g_free (default_session);
+-        }
+-
+-        path = g_build_filename (g_get_user_config_dir (), "gnome-session", NULL);
+-        error = NULL;
+-        dir = g_dir_open (path, 0, &error);
+-        if (dir == NULL) {
+-                g_warning ("Failed to open %s: %s", path, error->message);
+-                g_error_free (error);
+-                goto out;
+-        }
+-
+-        default_name = NULL;
+-        if (readlink (saved_session, last_session, PATH_MAX - 1) > 0) {
+-                default_name = g_path_get_basename (last_session);
+-        }
+-
+-        while ((name = g_dir_read_name (dir)) != NULL) {
+-                if (strcmp (name, "saved-session") == 0)
+-                        continue;
+-
+-                gtk_list_store_insert_with_values (store, &iter, 100, 0, name, -1);
+-
+-                if (g_strcmp0 (default_name, name) == 0) {
+-                        GtkTreeSelection *selection;
+-                        GtkTreeIter child_iter;
+-
+-                        gtk_tree_model_sort_convert_child_iter_to_iter (GTK_TREE_MODEL_SORT (sort_model), &child_iter, &iter);
+-                        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (session_list));
+-                        gtk_tree_selection_select_iter (selection, &child_iter);
+-                }
+-        }
+-
+-        g_free (default_name);
+-        g_dir_close (dir);
+-
+- out:
+-        g_free (saved_session);
+-        g_free (path);
+-}
+-
+-static char *
+-get_selected_session (void)
+-{
+-        GtkTreeSelection *selection;
+-        GtkTreeModel *model;
+-        GtkTreeIter iter;
+-        gchar *name;
+-
+-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (session_list));
+-        if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+-                gtk_tree_model_get (model, &iter, 0, &name, -1);
+-                return name;
+-        }
+-
+-        return NULL;
+-}
+-
+-static void
+-remove_session (const char *name)
+-{
+-        char *path1, *path2;
+-        char *n, *path;
+-        const char *d;
+-        GDir *dir;
+-        GError *error;
+-
+-        path1 = get_session_path ("saved-session");
+-        path2 = get_session_path (name);
+-
+-        error = NULL;
+-        n = g_file_read_link (path1, &error);
+-        if (n == NULL) {
+-                g_warning ("Failed to read link: %s", error->message);
+-                g_error_free (error);
+-        }
+-        else if (strcmp (n, name) == 0) {
+-                unlink (path1);
+-        }
+-        g_free (n);
+-
+-        dir = g_dir_open (path2, 0, NULL);
+-        while ((d = g_dir_read_name (dir)) != NULL) {
+-                path = g_build_filename (path2, d, NULL);
+-                unlink (path);
+-                g_free (path);
+-        }
+-        g_dir_close (dir);
+-
+-        remove (path2);
+-
+-        g_free (path1);
+-        g_free (path2);
+-}
+-
+-static void
+-on_remove_session_clicked (GtkButton *button,
+-                           gpointer   data)
+-{
+-        GtkTreeSelection *selection;
+-        GtkTreeModel *model;
+-        GtkTreeIter iter;
+-        char *name;
+-
+-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (session_list));
+-        if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+-                GtkTreeIter child_iter;
+-                gtk_tree_model_get (model, &iter, 0, &name, -1);
+-                remove_session (name);
+-                g_free (name);
+-
+-                gtk_tree_model_sort_convert_iter_to_child_iter (GTK_TREE_MODEL_SORT (model), &child_iter, &iter);
+-                gtk_list_store_remove (GTK_LIST_STORE (store), &child_iter);
+-
+-                if (!gtk_tree_selection_get_selected (selection, NULL, NULL)) {
+-                        gtk_tree_model_get_iter_first (model, &iter);
+-                        gtk_tree_model_get (model, &iter, 0, &name, -1);
+-                        select_session (name);
+-                        g_free (name);
+-                }
+-        }
+-}
+-
+-static void
+-begin_rename (void)
+-{
+-        GtkTreePath *path;
+-        GtkTreeViewColumn *column;
+-        GList *cells;
+-
+-        gtk_widget_grab_focus (session_list);
+-
+-        gtk_tree_view_get_cursor (GTK_TREE_VIEW (session_list),
+-                                  &path, &column);
+-
+-        cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (column));
+-
+-        if (cells != NULL) {
+-            GtkCellRenderer *cell;
+-
+-            cell = (GtkCellRenderer *) cells->data;
+-            g_list_free (cells);
+-
+-            g_object_set (cell, "editable", TRUE, NULL);
+-            gtk_tree_view_set_cursor_on_cell (GTK_TREE_VIEW (session_list), path,
+-                                              column, cell, TRUE);
+-        }
+-        gtk_tree_path_free (path);
+-}
+-
+-static void
+-on_rename_session_clicked (GtkButton *button,
+-                           gpointer   data)
+-{
+-    begin_rename ();
+-}
+-
+-static void
+-on_continue_clicked (GtkButton *button,
+-                     gpointer    data)
+-{
+-        char *name;
+-
+-        name = get_selected_session ();
+-        g_free (name);
+-
+-        gtk_main_quit ();
+-}
+-
+-static void
+-create_session (const char *name)
+-{
+-        char *path;
+-        GtkTreeIter iter;
+-
+-        path = get_session_path (name);
+-
+-        if (mkdir (path, 0755) < 0) {
+-                g_warning ("Failed to create directory %s", path);
+-        }
+-        else {
+-                char *marker;
+-
+-                gtk_list_store_insert_with_values (store, &iter, 100, 0, name, -1);
+-
+-                marker = g_build_filename (path, ".new-session", NULL);
+-                creat (marker, 0600);
+-                g_free (marker);
+-        }
+-
+-        g_free (path);
+-}
+-
+-static gboolean
+-rename_session (const char *old_name,
+-                const char *new_name)
+-{
+-        char *old_path, *new_path;
+-        int result;
+-
+-        if (g_strcmp0 (old_name, new_name) == 0) {
+-                return TRUE;
+-        }
+-
+-        if (!is_valid_session_name (new_name)) {
+-               return FALSE;
+-        }
+-
+-        old_path = get_session_path (old_name);
+-        new_path = get_session_path (new_name);
+-
+-        result = g_rename (old_path, new_path);
+-
+-        if (result < 0) {
+-                g_warning ("Failed to rename session from '%s' to '%s': %m", old_name, new_name);
+-        }
+-
+-        g_free (old_path);
+-        g_free (new_path);
+-
+-        return result == 0;
+-}
+-
+-static gboolean
+-make_session_current (const char *name)
+-{
+-        char *path1;
+-        gboolean ret = TRUE;
+-
+-        path1 = g_build_filename (g_get_user_config_dir (), "gnome-session", "saved-session", NULL);
+-
+-        unlink (path1);
+-        if (symlink (name, path1) < 0) {
+-                g_warning ("Failed to make session '%s' current", name);
+-                ret = FALSE;
+-        }
+-
+-        g_free (path1);
+-
+-        return ret;
+-}
+-
+-static gboolean
+-create_and_select_session (const char *name)
+-{
+-        gchar *path;
+-
+-        if (name[0] == 0 || name[0] == '.' || strchr (name, '/')) {
+-                g_warning ("Invalid session name");
+-                return FALSE;
+-        }
+-
+-        path = g_build_filename (g_get_user_config_dir (), "gnome-session", name, NULL);
+-        if (!g_file_test (path, G_FILE_TEST_IS_DIR)) {
+-                if (mkdir (path, 0755) < 0) {
+-                        g_warning ("Failed to create directory %s", path);
+-                        g_free (path);
+-                        return FALSE;
+-                }
+-        }
+-
+-        g_free (path);
+-
+-        return make_session_current (name);
+-}
+-
+-static void
+-select_session (const char *name)
+-{
+-        GtkTreeIter iter;
+-        char *n;
+-
+-        make_session_current (name);
+-
+-        /* now select it in the list */
+-        gtk_tree_model_get_iter_first (GTK_TREE_MODEL (sort_model), &iter);
+-        do {
+-                gtk_tree_model_get (GTK_TREE_MODEL (sort_model), &iter, 0, &n, -1);
+-                if (strcmp (n, name) == 0) {
+-                        GtkTreePath *path;
+-
+-                        path = gtk_tree_model_get_path (GTK_TREE_MODEL (sort_model), &iter);
+-                        gtk_tree_view_set_cursor (GTK_TREE_VIEW (session_list), path, NULL, FALSE);
+-                        gtk_tree_path_free (path);
+-                        g_free (n);
+-                        break;
+-                }
+-                g_free (n);
+-        } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (sort_model), &iter));
+-}
+-
+-static void
+-on_new_session_clicked (GtkButton *button,
+-                        gpointer   data)
+-{
+-        gchar *name;
+-
+-        name = find_new_session_name ();
+-        create_session (name);
+-        select_session (name);
+-
+-        begin_rename ();
+-}
+-
+-static void
+-on_selection_changed (GtkTreeSelection *selection,
+-                      gpointer          data)
+-{
+-        char *name;
+-
+-        name = get_selected_session ();
+-
+-        if (name == NULL) {
+-                return;
+-        }
+-
+-        make_session_current (name);
+-
+-        g_free (name);
+-}
+-
+-static void
+-update_remove_button (void)
+-{
+-        GtkWidget *button;
+-
+-        button = (GtkWidget *)gtk_builder_get_object (builder, "remove-session");
+-        if (gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store), NULL) > 1) {
+-                gtk_widget_set_sensitive (button, TRUE);
+-        } else {
+-                gtk_widget_set_sensitive (button, FALSE);
+-        }
+-}
+-
+-static void
+-on_row_edited (GtkCellRendererText *cell,
+-               const char          *path_string,
+-               const char          *new_name,
+-               gpointer             data)
+-{
+-        GtkTreePath *path;
+-        GtkTreeIter  sort_iter, items_iter;
+-        char        *old_name;
+-        gboolean     was_renamed;
+-
+-        path = gtk_tree_path_new_from_string (path_string);
+-        gtk_tree_model_get_iter (GTK_TREE_MODEL (sort_model), &sort_iter, path);
+-
+-        gtk_tree_model_get (GTK_TREE_MODEL (sort_model), &sort_iter, 0, &old_name, -1);
+-
+-        was_renamed = rename_session (old_name, new_name);
+-
+-        if (was_renamed) {
+-                gtk_tree_model_sort_convert_iter_to_child_iter (sort_model, &items_iter, &sort_iter);
+-
+-                gtk_list_store_set (store, &items_iter, 0, g_strdup (new_name), -1);
+-                g_free (old_name);
+-                make_session_current (new_name);
+-        } else {
+-                begin_rename ();
+-        }
+-
+-        gtk_tree_path_free (path);
+-
+-        g_object_set (cell, "editable", FALSE, NULL);
+-}
+-
+-static void
+-on_row_deleted (GtkTreeModel *model,
+-                GtkTreePath  *path,
+-                gpointer      data)
+-{
+-        update_remove_button ();
+-}
+-
+-static void
+-on_row_inserted (GtkTreeModel *model,
+-                 GtkTreePath  *path,
+-                 GtkTreeIter  *iter,
+-                 gpointer      data)
+-{
+-        update_remove_button ();
+-}
+-
+-static void
+-on_row_activated (GtkTreeView       *tree_view,
+-                  GtkTreePath       *path,
+-                  GtkTreeViewColumn *column,
+-                  gpointer           data)
+-{
+-        char *name;
+-
+-        name = get_selected_session ();
+-        g_free (name);
+-
+-        gtk_main_quit ();
+-}
+-
+-static void
+-auto_save_next_session (void)
+-{
+-        GSettings *settings;
+-
+-        settings = g_settings_new (GSM_MANAGER_SCHEMA);
+-        g_settings_set_boolean (settings, KEY_AUTOSAVE_ONE_SHOT, TRUE);
+-        g_object_unref (settings);
+-}
+-
+-static void
+-auto_save_next_session_if_needed (void)
+-{
+-        char *marker;
+-
+-        marker = g_build_filename (g_get_user_config_dir (),
+-                                   "gnome-session", "saved-session",
+-                                   ".new-session", NULL);
+-
+-        if (g_file_test (marker, G_FILE_TEST_EXISTS)) {
+-                auto_save_next_session ();
+-                unlink (marker);
+-        }
+-        g_free (marker);
+-}
+-
+-static int
+-compare_sessions (GtkTreeModel *model,
+-                  GtkTreeIter  *a,
+-                  GtkTreeIter  *b,
+-                  gpointer      data)
+-{
+-    char *name_a, *name_b;
+-    int result;
+-
+-    gtk_tree_model_get (model, a, 0, &name_a, -1);
+-    gtk_tree_model_get (model, b, 0, &name_b, -1);
+-
+-    result = g_utf8_collate (name_a, name_b);
+-
+-    g_free (name_a);
+-    g_free (name_b);
+-
+-    return result;
+-}
+-
+-static void
+-on_map (GtkWidget *widget,
+-        gpointer   data)
+-{
+-        gdk_window_focus (gtk_widget_get_window (widget), GDK_CURRENT_TIME);
+-}
+-
+-int
+-main (int argc, char *argv[])
+-{
+-        GtkWidget *window;
+-        GtkWidget *widget;
+-        GtkCellRenderer *cell;
+-        GtkTreeViewColumn *column;
+-        GtkTreeSelection *selection;
+-        GError *error;
+-
+-        if (getenv ("SESSION_MANAGER") != NULL)
+-            return 1;
+-
+-        gtk_init (&argc, &argv);
+-        if (argc > 1) {
+-                g_print ("create and select session\n");
+-                if (!create_and_select_session (argv[1]))
+-                        return 1;
+-                else
+-                        return 0;
+-        }
+-
+-        builder = gtk_builder_new ();
+-        gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
+-
+-        error = NULL;
+-        if (!gtk_builder_add_from_file (builder, GTKBUILDER_DIR "/" "session-selector.ui",  &error)) {
+-                g_warning ("Could not load file 'session-selector.ui': %s", error->message);
+-                exit (1);
+-        }
+-
+-        window = (GtkWidget *) gtk_builder_get_object (builder, "main-window");
+-
+-        store = (GtkListStore *) gtk_builder_get_object (builder, "session-store");
+-        sort_model = (GtkTreeModelSort *) gtk_builder_get_object (builder, "sort-model");
+-
+-        gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model),
+-                                         0, compare_sessions, NULL, NULL);
+-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
+-                                              0, GTK_SORT_ASCENDING);
+-        g_signal_connect (store, "row-deleted", G_CALLBACK (on_row_deleted), NULL);
+-        g_signal_connect (store, "row-inserted", G_CALLBACK (on_row_inserted), NULL);
+-        session_list = (GtkWidget *) gtk_builder_get_object (builder, "session-list");
+-
+-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (session_list));
+-        gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+-
+-        populate_session_list (session_list);
+-
+-        cell = gtk_cell_renderer_text_new ();
+-        g_signal_connect (cell, "edited", G_CALLBACK (on_row_edited), NULL);
+-
+-        column = gtk_tree_view_column_new_with_attributes ("", cell, "text", 0, NULL);
+-        gtk_tree_view_append_column (GTK_TREE_VIEW (session_list), GTK_TREE_VIEW_COLUMN (column));
+-
+-        g_signal_connect (session_list, "row-activated", G_CALLBACK (on_row_activated), NULL);
+-
+-        g_signal_connect (selection, "changed",
+-                          G_CALLBACK (on_selection_changed), NULL);
+-
+-        widget = (GtkWidget *) gtk_builder_get_object (builder, "new-session");
+-        g_signal_connect (widget, "clicked", G_CALLBACK (on_new_session_clicked), NULL);
+-        widget = (GtkWidget *) gtk_builder_get_object (builder, "remove-session");
+-        g_signal_connect (widget, "clicked", G_CALLBACK (on_remove_session_clicked), NULL);
+-        widget = (GtkWidget *) gtk_builder_get_object (builder, "rename-session");
+-        g_signal_connect (widget, "clicked", G_CALLBACK (on_rename_session_clicked), NULL);
+-        widget = (GtkWidget *) gtk_builder_get_object (builder, "continue-button");
+-        g_signal_connect (widget, "clicked", G_CALLBACK (on_continue_clicked), NULL);
+-
+-        g_signal_connect (window, "map", G_CALLBACK (on_map), NULL);
+-        gtk_widget_show (window);
+-
+-        gtk_main ();
+-
+-        auto_save_next_session_if_needed ();
+-
+-        return 0;
+-}
+diff --git a/tools/meson.build b/tools/meson.build
+index 6ea37b621..3e63b28f3 100644
+--- a/tools/meson.build
++++ b/tools/meson.build
+@@ -13,22 +13,6 @@ programs = [
+ 
+ programs += [['gnome-session-ctl', session_bin_deps, cflags, session_libexecdir]]
+ 
+-if enable_session_selector
+-  deps = [
+-    glib_dep,
+-    gtk_dep
+-  ]
+-
+-  install_data(
+-    'gnome-session-custom-session',
+-    install_dir: session_bindir
+-  )
+-
+-  cflags += '-DGTKBUILDER_DIR="@0@"'.format(session_pkgdatadir)
+-
+-  programs += [['gnome-session-selector', deps, cflags, session_bindir]]
+-endif
+-
+ deps = [
+   gtk_dep,
+   x11_dep,
+-- 
+GitLab
+
+
+From 8459027ca44345a264147c1f0e7312f32b41c4ba Mon Sep 17 00:00:00 2001
+From: Jordan Petridis <jordan@centricular.com>
+Date: Fri, 19 May 2023 22:23:33 +0300
+Subject: [PATCH 3/4] build: fix meson warnings and require meson 0.60
+
+---
+ data/meson.build                                      | 11 ++---------
+ ...ma.xml.in => org.gnome.SessionManager.gschema.xml} |  0
+ doc/dbus/meson.build                                  |  2 +-
+ meson.build                                           | 10 +++++-----
+ 4 files changed, 8 insertions(+), 15 deletions(-)
+ rename data/{org.gnome.SessionManager.gschema.xml.in => org.gnome.SessionManager.gschema.xml} (100%)
+
+diff --git a/data/meson.build b/data/meson.build
+index c282fd542..13244729d 100644
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -99,16 +99,9 @@ foreach session: sessions
+   )
+ endforeach
+ 
+-schema_conf = configuration_data()
+-
+-schema = 'org.gnome.SessionManager.gschema.xml'
+-
+-configure_file(
+-  input: schema + '.in',
+-  output: schema,
+-  install: true,
++install_data(
++  'org.gnome.SessionManager.gschema.xml',
+   install_dir: join_paths(session_datadir, 'glib-2.0', 'schemas'),
+-  configuration: schema_conf
+ )
+ 
+ install_data(
+diff --git a/data/org.gnome.SessionManager.gschema.xml.in b/data/org.gnome.SessionManager.gschema.xml
+similarity index 100%
+rename from data/org.gnome.SessionManager.gschema.xml.in
+rename to data/org.gnome.SessionManager.gschema.xml
+diff --git a/doc/dbus/meson.build b/doc/dbus/meson.build
+index 12ebce6bb..0b70cea39 100644
+--- a/doc/dbus/meson.build
++++ b/doc/dbus/meson.build
+@@ -8,7 +8,7 @@ ifaces = [
+   'org.gnome.SessionManager.Presence'
+ ]
+ 
+-gnome_session_dir = join_paths(meson.source_root(), 'gnome-session')
++gnome_session_dir = join_paths(meson.project_source_root(), 'gnome-session')
+ spec_to_docbook = files('spec-to-docbook.xsl')
+ 
+ foreach iface: ifaces
+diff --git a/meson.build b/meson.build
+index 7c49e778f..e1c79eb51 100644
+--- a/meson.build
++++ b/meson.build
+@@ -3,7 +3,7 @@ project(
+   version: '44.0',
+   license: 'GPL2+',
+   default_options: 'buildtype=debugoptimized',
+-  meson_version: '>= 0.53.0'
++  meson_version: '>= 0.60.0'
+ )
+ 
+ prefix = get_option('prefix')
+@@ -114,8 +114,8 @@ session_bin_deps += dependency('gio-unix-2.0', version: glib_req_version)
+ systemd_userunitdir = get_option('systemduserunitdir')
+ if systemd_userunitdir == ''
+   systemd_dep = dependency('systemd', version: '>= 242', required: true)
+-  systemd_userunitdir = systemd_dep.get_pkgconfig_variable('systemduserunitdir',
+-                                                            define_variable: ['prefix', prefix])
++  systemd_userunitdir = systemd_dep.get_variable(pkgconfig: 'systemduserunitdir',
++                                                 pkgconfig_define: ['prefix', prefix])
+ endif
+ 
+ libsystemd_dep = dependency('libsystemd', version: '>= 209', required: false)
+@@ -142,7 +142,7 @@ gnome = import('gnome')
+ i18n = import('i18n')
+ pkg = import('pkgconfig')
+ 
+-po_dir = join_paths(meson.source_root(), 'po')
++po_dir = join_paths(meson.project_source_root(), 'po')
+ 
+ top_inc = include_directories('.')
+ 
+@@ -173,7 +173,7 @@ output += '        sbindir:                  ' + session_sbindir + '\n'
+ output += '        sysconfdir:               ' + session_sysconfdir + '\n'
+ output += '        localstatedir:            ' + session_localstatedir + '\n'
+ output += '        datadir:                  ' + session_datadir + '\n'
+-output += '        source code location:     ' + meson.source_root() + '\n'
++output += '        source code location:     ' + meson.project_source_root() + '\n'
+ output += '        compiler:                 ' + cc.get_id() + '\n'
+ output += '        cflags:                   ' + ' '.join(compiler_flags) + '\n'
+ output += '        Debug mode:               ' + session_debug.to_string() + '\n'
+-- 
+GitLab
+
+
+From 3207d676c646bf0f10f54dd124ae44b061eec63e Mon Sep 17 00:00:00 2001
+From: Jordan Petridis <jordan@centricular.com>
+Date: Sat, 20 May 2023 02:30:42 +0300
+Subject: [PATCH 4/4] build: drop gconf migration file
+
+---
+ data/gnome-session.convert | 2 --
+ data/meson.build           | 5 -----
+ 2 files changed, 7 deletions(-)
+ delete mode 100644 data/gnome-session.convert
+
+diff --git a/data/gnome-session.convert b/data/gnome-session.convert
+deleted file mode 100644
+index 8ab35ed22..000000000
+--- a/data/gnome-session.convert
++++ /dev/null
+@@ -1,2 +0,0 @@
+-[org.gnome.SessionManager]
+-logout-prompt = /apps/gnome-session/options/logout_prompt
+diff --git a/data/meson.build b/data/meson.build
+index 13244729d..bd157aad5 100644
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -104,11 +104,6 @@ install_data(
+   install_dir: join_paths(session_datadir, 'glib-2.0', 'schemas'),
+ )
+ 
+-install_data(
+-  'gnome-session.convert',
+-  install_dir: join_paths(session_datadir, 'GConf', 'gsettings')
+-)
+-
+ unit_conf = configuration_data()
+ unit_conf.set('libexecdir', session_libexecdir)
+ 
+-- 
+GitLab
+

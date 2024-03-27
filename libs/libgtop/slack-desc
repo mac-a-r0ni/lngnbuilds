@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
        |-----handy-ruler------------------------------------------------------|
-libgusb: libgusb (Glib Wrapper)
-libgusb:
-libgusb: GUsb is a GObject wrapper for libusb1 that makes it easy to do
-libgusb: asynchronous control, bulk and interrupt transfers with proper
-libgusb: cancellation and integration into a mainloop.
-libgusb:
-libgusb: This makes it easy to integrate low level USB transfers with your
-libgusb: high-level application or system daemon.
-libgusb:
-libgusb: Project URL: https://github.com/hughsie/libgusb
-libgusb:
+libgtop: libgtop (a top-like library)
+libgtop:
+libgtop: A library that fetches information about the running system such as
+libgtop: CPU and memory usage, active processes, etc. The information is taken
+libgtop: directly from the /proc filesystem.
+libgtop:
+libgtop: http://library.gnome.org/devel/libgtop/
+libgtop:
+libgtop:
+libgtop:
+libgtop:
