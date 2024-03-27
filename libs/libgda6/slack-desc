@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description. Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in. You must
+# make exactly 11 lines for the formatting to be correct. It's also
+# customary to leave one space after the ':'.
+
+       |-----handy-ruler------------------------------------------------------|
+libgda6: libgda6 (Database access library)
+libgda6:
+libgda6: GNU Data Access (GDA) is an attempt to provide uniform access to
+libgda6: different kinds of data sources (databases, information servers, mail
+libgda6: spools, etc). It is a complete architecture that provides all you
+libgda6: need to access your data.
+libgda6:
+libgda6: Homepage: https://gitlab.gnome.org/GNOME/libgda
+libgda6:
+libgda6:
+libgda6:
