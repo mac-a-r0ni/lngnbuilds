@@ -104,6 +104,16 @@ find -L . \
 
 sed -i "s|\ -Werror||" configure.ac
 
+# need to symlink older ver numbers to make configure happy
+# I should prob edit the config instead but meh
+if [ -f /usr/bin/aclocal-1.14 ]; then
+    rm /usr/bin/aclocal-1.14
+elif [ -f /usr/bin/automake-1.14 ]; then
+    rm /usr/bin/automake-1.14
+fi
+ln -s /usr/bin/aclocal-1.16 /usr/bin/aclocal-1.14
+ln -s /usr/bin/automake-1.16 /usr/bin/automake-1.14
+
 #autoreconf -i
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
@@ -133,6 +143,10 @@ find $PKG -name perllocal.pod \
   -o -name ".packlist" \
   -o -name "*.bs" \
   | xargs rm -f
+
+# cleanup symlinks created to build pkg
+rm /usr/bin/aclocal-1.14
+rm /usr/bin/automake-1.14
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
