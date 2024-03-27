@@ -1,4 +1,6 @@
+gnome-bluetooth
+gnome-desktop
 gnome-panel
-libgtop
-libgweather4
-tracker-miners
+gnome-session
+gnome-backgrounds
+gnome-control-center
