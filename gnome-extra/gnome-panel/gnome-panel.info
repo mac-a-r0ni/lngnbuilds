@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-panel/3.52/gnome-panel-3.52.0
 MD5SUM="b31f81ec510d0a4aadf80e048af1728f"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="evolution-data-server gnome-desktop gnome-menus nautilus alacarte gnome-applets"
+REQUIRES="evolution-data-server gnome-desktop gnome-menus nautilus alacarte"
 MAINTAINER=""
 EMAIL=""
