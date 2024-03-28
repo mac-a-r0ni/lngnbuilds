@@ -134,7 +134,20 @@ cd ..
 #make
 #make install-strip DESTDIR=$PKG
 
-gzip -9 $PKG/usr/man/man*/*
+# Compress and link manpages, if any:
+if [ -d $PKG/usr/man ]; then
+  ( cd $PKG/usr/man
+    for manpagedir in $(find . -type d -name "man*") ; do
+      ( cd $manpagedir
+        for eachpage in $( find . -type l -maxdepth 1) ; do
+          ln -s $( readlink $eachpage ).gz $eachpage.gz
+          rm $eachpage
+        done
+    gzip -9 *.*
+      )
+    done
+  )
+fi
 
 # Don't ship .la files:
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
