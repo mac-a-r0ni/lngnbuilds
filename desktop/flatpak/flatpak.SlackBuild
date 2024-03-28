@@ -104,7 +104,7 @@ cd build
     -Dstrip=true \
     -Dsystem_bubblewrap \
     -Dsystem_dbus_proxy \
-    -Dsystem_helper_user=flatpak \
+    -Dsystem_helper_user=flatpak
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
