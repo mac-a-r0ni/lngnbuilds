@@ -104,7 +104,11 @@ cd build
     -Dstrip=true \
     -Dsystem_bubblewrap=/usr/bin/bwrap \
     -Dsystem_dbus_proxy=/usr/bin/xdg-dbus-proxy \
-    -Dsystem_helper_user=flatpak
+    -Dsystem_helper_user=flatpak \
+    -Dsystem_fusermount \
+    -Ddocbook_docs=disabled \
+    -Dgtkdoc=disabled \
+    -Dtests=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
