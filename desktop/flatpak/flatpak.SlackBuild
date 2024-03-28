@@ -74,6 +74,8 @@ if ! grep -q ^flatpak: /etc/group ; then
   useradd -d /var/lib/flatpak -u 372 -g flatpak -s /bin/false flatpak
 fi
 
+export $MESON_INSTALL_DESTDIR_PREFIX=$PKG
+
 set -e
 
 rm -rf $PKG
@@ -106,6 +108,7 @@ cd build
     -Dsystem_dbus_proxy=/usr/bin/xdg-dbus-proxy \
     -Dsystem_helper_user=flatpak \
     -Dsystem_fusermount=/usr/sbin/mount.fuse3 \
+    -Ddbus_config_dir=/usr/share/dbus-1/system.d \
     -Ddocbook_docs=disabled \
     -Dgtkdoc=disabled \
     -Dtests=false
