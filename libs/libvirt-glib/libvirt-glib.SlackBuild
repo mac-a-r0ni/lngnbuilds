@@ -89,7 +89,7 @@ cd build
     --buildtype=release \
     --libdir=/usr/lib${LIBDIRSUFFIX} \
     --prefix=/usr \
-    -Dtests=false \
+    -Dtests=disabled \
     -Ddocs=false \
     -Dvapi=true
   "${NINJA:=ninja}"
