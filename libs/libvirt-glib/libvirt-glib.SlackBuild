@@ -90,7 +90,7 @@ cd build
     --libdir=/usr/lib${LIBDIRSUFFIX} \
     --prefix=/usr \
     -Dtests=disabled \
-    -Ddocs=false \
+    -Ddocs=disabled \
     -Dvapi=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
