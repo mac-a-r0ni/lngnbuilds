@@ -105,7 +105,7 @@ cd build
     -Dsystem_bubblewrap=/usr/bin/bwrap \
     -Dsystem_dbus_proxy=/usr/bin/xdg-dbus-proxy \
     -Dsystem_helper_user=flatpak \
-    -Dsystem_fusermount \
+    -Dsystem_fusermount=/usr/sbin/mount.fuse3 \
     -Ddocbook_docs=disabled \
     -Dgtkdoc=disabled \
     -Dtests=false
