@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-online-accounts/3.50/gnome-on
 MD5SUM="d430df363be9549e5403c6af7bb64572"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="librest webkit2gtk4.1"
+REQUIRES="libadwaita librest webkit2gtk4.1"
 MAINTAINER="Ozan Türkyılmaz"
 EMAIL="ozan.turkyilmaz@gmail.com"
