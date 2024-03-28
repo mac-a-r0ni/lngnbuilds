@@ -102,8 +102,8 @@ cd build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
-    -Dsystem_bubblewrap \
-    -Dsystem_dbus_proxy \
+    -Dsystem_bubblewrap=/usr/bin/bwrap \
+    -Dsystem_dbus_proxy=/usr/bin/xdg-dbus-proxy \
     -Dsystem_helper_user=flatpak
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
