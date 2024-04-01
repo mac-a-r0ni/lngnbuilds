@@ -95,10 +95,7 @@ cd build
     --sysconfdir=/etc \
     -Dstrip=true \
     -Ddocbook=false \
-    -Dsystemd=false \
-    -Dsystemd_session=disable \
-    -Delogind=true \
-    -Dsystemd_journal=false
+    -Dlogind_provider=elogind
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
