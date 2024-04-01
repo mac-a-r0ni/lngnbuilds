@@ -1,7 +1,7 @@
 PRGNAM="LibreOffice"
 VERSION="24.2.2.2"
 HOMEPAGE="https://www.libreoffice.org"
-DOWNLOAD="https://download.documentfoundation.org/libreoffice/src/24.2.1/libreoffice-24.2.2.2.tar.xz \
+DOWNLOAD="https://download.documentfoundation.org/libreoffice/src/24.2.2/libreoffice-24.2.2.2.tar.xz \
           https://slackware.lngn.net/pub/source/libreoffice/libreoffice-24.2.2.2-srcs.tar.xz"
 MD5SUM="72d05d00734c6921a47c369b8d7ef8cf \
         82d41198e5709426c881c079d6e7a64c"
