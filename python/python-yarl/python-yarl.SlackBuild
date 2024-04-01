@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for python3-yarl
+# Slackware build script for python-yarl
 
 # Copyright 2019-2023 Isaac Yu <isaacyu@protonmail.com>
 # Maintained 2023 by Jay Lanagan (j@lngn.net), Detroit, MI, USA.
@@ -25,7 +25,7 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=python3-yarl
+PRGNAM=python-yarl
 VERSION=${VERSION:-1.9.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
