@@ -1,16 +1,9 @@
 PRGNAM="i3status-rust"
-VERSION="0.33.0"
+VERSION="0.33.1"
 HOMEPAGE="https://i3wm.org/i3status/"
-DOWNLOAD="https://github.com/greshake/i3status-rust/archive/v0.33.0/i3status-rust-0.33.0.tar.gz \
+DOWNLOAD="https://github.com/greshake/i3status-rust/archive/v0.33.1/i3status-rust-0.33.1.tar.gz \
           https://raw.githubusercontent.com/greshake/i3status-rust/master/examples/config.toml"
-#          http://static.crates.io/crates/addr2line/addr2line-0.21.0.crate \
-#          http://static.crates.io/crates/adler/adler-1.0.2.crate \
-#          http://static.crates.io/crates/aho-corasick/aho-corasick-1.0.5.crate \
-#          http://static.crates.io/crates/android-tzdata/android-tzdata-0.1.1.crate \
-#          http://static.crates.io/crates/android_system_properties/android_system_properties-0.1.5.crate \
-#          http://static.crates.io/crates/anstream/anstream-0.5.0.crate \
-#          http://static.crates.io/crates/anstyle-parse/anstyle-parse-0.2.1.crate \
-MD5SUM="0a85e74a09f092a713cea95c8a3d7bfb \
+MD5SUM="abb0f90963bae728fae8848f07bce495 \
         b58a325a8349a630c8ca1a532fe07b01"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
