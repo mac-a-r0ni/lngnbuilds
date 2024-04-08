@@ -5,48 +5,6 @@ DOWNLOAD=""
 MD5SUM=""
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="
-kvantum-qt5 \
-libfm \
-libfm-extra \
-libfm-qt \
-liblxqt \
-libqtxdg \
-libstatgrab \
-libsysstat \
-lximage-qt \
-lxqt-about \
-lxqt-admin \
-lxqt-archiver \
-lxqt-build-tools \
-lxqt-config \
-lxqt-globalkeys \
-lxqt-menu-data \
-lxqt-notificationd \
-lxqt-openssh-askpass \
-lxqt-panel \
-lxqt-policykit \
-lxqt-powermanagement \
-lxqt-qtplugin \
-lxqt-runner \
-lxqt-session \
-lxqt-sudo \
-lxqt-themes \
-lxqt.info \
-menu-cache \
-muParser \
-obconf \
-obconf-qt \
-openbox \
-openbox-themes \
-openbox-themes-extra \
-pavucontrol-qt \
-pcmanfm-qt \
-qps \
-qterminal \
-qtermwidget \
-qtxdg-tools \
-screengrab \
-xdg-desktop-portal-lxqt"
+REQUIRES="kvantum-qt5 libfm libfm-extra libfm-qt liblxqt libqtxdg libstatgrab libsysstat lximage-qt lxqt-about lxqt-admin lxqt-archiver lxqt-build-tools lxqt-config lxqt-globalkeys lxqt-menu-data lxqt-notificationd lxqt-openssh-askpass lxqt-panel lxqt-policykit lxqt-powermanagement lxqt-qtplugin lxqt-runner lxqt-session lxqt-sudo lxqt-themes  menu-cache muParser obconf obconf-qt openbox openbox-themes openbox-themes-extra pavucontrol-qt pcmanfm-qt qps qterminal qtermwidget qtxdg-tools screengrab xdg-desktop-portal-lxqt"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
