@@ -81,7 +81,7 @@ find -L . \
 
 # A couple patches taken from Artix Linux:
 patch -Np1 -i $CWD/0001-Xsession-Don-t-start-ssh-agent-by-default.patch
-#patch -Np1 -i $CWD/9257ef1f6e106bdedc40e34588b31bec39d6b5b1.patch
+patch -Np1 -i $CWD/0002-meson-allow-building-with-elogind.patch
 patch -Np1 -i $CWD/0003-add-wayland-session-script.patch
 patch -Np1 -i $CWD/0004-fix-Xsession-language-in-gnome.patch
 
@@ -114,6 +114,9 @@ cd build
   DESTDIR=$PKG $NINJA install
 cd ..
 
+# insert slackware logo
+install -vDm 0644 $CWD/slackware_whitelogo_med.png -t $PKG/usr/share/pixmaps/
+install -vDm 0644 $CWD/org.gnome.login-screen.gschema.override -t $PKG/usr/share/glib-2.0/schemas || exit 1
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
@@ -122,11 +125,6 @@ cat $CWD/gdm-autologin.pam > $PKG/etc/pam.d/gdm-autologin
 cat $CWD/gdm-password.pam > $PKG/etc/pam.d/gdm-password
 cat $CWD/gdm-launch-environment.pam > $PKG/etc/pam.d/gdm-launch-environment
 cat $CWD/wayland-session > $PKG/etc/gdm/wayland-session
-
-# Install GDM wrapper script:
-# This has been fixed on -current, commenting out...
-# mv $PKG/usr/sbin/{gdm,gdm-bin}
-# cat $CWD/gdm.wrap > $PKG/usr/sbin/gdm
 
 # Handle /etc/gdm/custom.conf a little nicer:
 mv $PKG/etc/gdm/{custom.conf,custom.conf.new}
