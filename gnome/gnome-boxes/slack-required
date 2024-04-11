@@ -1,5 +1,6 @@
 gtk-vnc
 libosinfo
+libportal
 libvirt-glib
 spice-gtk
 tracker
