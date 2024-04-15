@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for python3-async-timeout
+# Slackware build script for python-async-timeout
 
 # Copyright 2019-2023 Isaac Yu <isaacyu@protonmail.com>
 # Maintained 2023 by Jay Lanagan (j@lngn.net), Detroit, MI, USA.
@@ -25,8 +25,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=python3-async-timeout
-VERSION=${VERSION:-4.0.2}
+PRGNAM=python-async-timeout
+VERSION=${VERSION:-4.0.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
