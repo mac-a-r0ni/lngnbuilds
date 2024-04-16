@@ -1,6 +1,6 @@
 PRGNAM="rpi-imager"
 VERSION="1.8.5"
-HOMEPAGE="https://github.com/"
+HOMEPAGE="https://github.com/raspberrypi/rpi-imager/"
 DOWNLOAD="https://github.com/raspberrypi/rpi-imager/archive/v1.8.5/rpi-imager-1.8.5.tar.gz"
 MD5SUM="6d09b83ff545135bc2cec405df186bcb"
 DOWNLOAD_x86_64=""
