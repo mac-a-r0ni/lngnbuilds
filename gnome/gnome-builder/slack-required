@@ -2,6 +2,7 @@ d-spy
 gtksourceview4
 jsonrpc-glib
 libpeas2
+libportal
 template-glib
 webkit2gtk
 cmark
