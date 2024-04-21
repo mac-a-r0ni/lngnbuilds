@@ -30,7 +30,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=flatpak
-VERSION=${VERSION:-1.15.7}
+VERSION=${VERSION:-1.15.8}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -150,7 +150,7 @@ install -D -m 0644 -t $PKG/etc/flatpak/remotes.d $CWD/flathub.flatpakrepo
 chmod 0755 $PKG/etc/profile.d/flatpak.sh
 
 # Preserve customized profile script:
-mv -i $PKG/etc/profile.d/flatpak.sh{,.new}
+mv $PKG/etc/profile.d/flatpak.sh $PKG/etc/profile.d/flatpak.sh.new
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a README.md COPYING NEWS $PKG/usr/doc/$PRGNAM-$VERSION
