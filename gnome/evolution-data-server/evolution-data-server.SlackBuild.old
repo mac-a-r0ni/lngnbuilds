@@ -118,7 +118,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 #This is patch to fix build with gtkdoc from Gentoo
-#patch -p1 < $CWD/3.36.5-gtk-doc-1.32-compat.patch
+patch -p1 < $CWD/3.36.5-gtk-doc-1.32-compat.patch
 
 mkdir -p build
 cd build
@@ -133,9 +133,15 @@ cd build
     -DENABLE_INSTALLED_TESTS="$TESTSP" \
     -DENABLE_GTK_DOC="$GTKDOCP" \
     -DWITH_SYSTEMDUSERUNITDIR=no \
-    -DWITH_GWEATHER4=ON \
+    -DENABLE_GOA=ON \
+    -DENABLE_GTK=ON \
+    -DENABLE_GTK4=ON \
+    -DENABLE_CODE_COVERAGE="$GCOVP" \
+    -DENABLE_SMIME=ON \
+    -DENABLE_IPV6=ON \
     -DENABLE_EXAMPLES=OFF \
     -DBUILD_TESTING=OFF \
+    -DENABLE_OAUTH2_WEBKITGTK4=ON \
     -DCMAKE_BUILD_TYPE=Release ..\
     -G Ninja
   "${NINJA:=ninja}"
