@@ -1,5 +1,0 @@
-libgtop (a top-like library)
-
-A library that fetches information about the running system such as
-CPU and memory usage, active processes, etc. The information is taken
-directly from the /proc filesystem.
