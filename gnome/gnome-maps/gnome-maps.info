@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-maps/46/gnome-maps-46.10.tar.
 MD5SUM="ecbc0b13a988ae2fbb6d102fafbee451"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="geoclue2 libadwaita libgweather4 libshumate librest"
+REQUIRES="geoclue2 libadwaita libgweather4 libportal libshumate librest"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
