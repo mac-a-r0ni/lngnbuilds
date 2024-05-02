@@ -1,7 +1,7 @@
 PRGNAM="regreet"
 VERSION="0.1.1"
 HOMEPAGE="https://github.com/rharish101/ReGreet/"
-DOWNLOAD="https://github.com/rharish101/ReGreet/archive/0.1.1/regreet-0.1.1.tar.gz" \
+DOWNLOAD="https://github.com/rharish101/ReGreet/archive/0.1.1/regreet-0.1.1.tar.gz"
 MD5SUM="50289eeab82c3e007733ca7edfbac2d5"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
