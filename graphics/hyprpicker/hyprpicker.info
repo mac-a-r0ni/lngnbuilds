@@ -1,7 +1,7 @@
 PRGNAM="hyprpicker"
 VERSION="0.2.0"
 HOMEPAGE="https://github.com/hyprwm/hyprpicker/"
-DOWNLOAD="https://github.com/hyprwm/hyprpicker/archive/refs/tags/v0.2.0.tar.gz"
+DOWNLOAD="https://github.com/hyprwm/hyprpicker/archive/v0.2.0/hyprpicker-0.2.0.tar.gz"
 MD5SUM="542ec2931d1b44cdb2953adefa7f1acd"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
