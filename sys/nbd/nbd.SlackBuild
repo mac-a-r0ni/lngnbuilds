@@ -89,8 +89,19 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-autoreconf -fiv
+cat > systemd/sh.tmpl <<EOF
+#!/bin/sh
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+sysconfdir=@sysconfdir@
+
+cat <<EOF
+EOF
+
 sed -i -e 's|../man/sh.tmpl|sh.tmpl|' systemd/Makefile.am
+
+autoreconf -fiv
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
