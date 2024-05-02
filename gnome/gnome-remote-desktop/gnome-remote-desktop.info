@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-remote-desktop/46/gnome-remot
 MD5SUM="25ad8ec91583cd627391694f7ee5315d"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="libfdk-aac tpm2-tss"
+REQUIRES="libei libfdk-aac tpm2-tss"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
