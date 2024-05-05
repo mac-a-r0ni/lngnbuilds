@@ -1,0 +1,16 @@
+PRGNAM="chromium"
+VERSION="124.0.6367.73"
+HOMEPAGE="https://www.chromium.org"
+DOWNLOAD="https://archive.raspberrypi.org/debian/pool/main/c/chromium-browser/chromium-browser-l10n_124.0.6367.73-rpt1_all.deb \
+          https://archive.raspberrypi.org/debian/pool/main/c/chromium-browser/chromium-browser_124.0.6367.73-rpt1_arm64.deb \
+          https://archive.raspberrypi.org/debian/pool/main/c/chromium-browser/chromium-chromedriver_124.0.6367.73-rpt1_arm64.deb \
+          https://archive.raspberrypi.org/debian/pool/main/c/chromium-browser/chromium-codecs-ffmpeg-extra_124.0.6367.73-rpt1_arm64.deb"
+MD5SUM="4f65883bd2ba17b4ba3a16e41813369a \
+        cd31f15fe172603e0aec6cc7b8f4ad71 \
+        b888cdc05299088d610b5d48c7f9773b \
+        7026dd34105a4508d58457154c1fa703"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""
+MAINTAINER=""
+EMAIL=""
