@@ -96,6 +96,8 @@ cd meson-build
     -Dcompose=true \
     -Dapidocs=false \
     -Dsystemd=false \
+    -Dqt=true \
+    -Dqt-versions=5,6 \
     -Dinstall-docs=false
 
 "${NINJA:=ninja}"
