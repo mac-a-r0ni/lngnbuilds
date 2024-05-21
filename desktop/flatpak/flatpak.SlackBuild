@@ -107,7 +107,6 @@ cd build
     -Dsystem_bubblewrap=/usr/bin/bwrap \
     -Dsystem_dbus_proxy=/usr/bin/xdg-dbus-proxy \
     -Dsystem_helper_user=flatpak \
-    -Dsystem_fusermount=/usr/sbin/mount.fuse3 \
     -Ddbus_config_dir=/usr/share/dbus-1/system.d \
     -Ddocbook_docs=disabled \
     -Dgtkdoc=disabled \
@@ -116,6 +115,9 @@ cd build
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
+
+# removed conf option... is this whats killing system installs, Nate?
+#    -Dsystem_fusermount=/usr/sbin/mount.fuse3 \
 
 # disabled manpage generation, too many nested dirs error
 
