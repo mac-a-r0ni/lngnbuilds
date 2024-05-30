@@ -84,6 +84,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+patch -Np1 -i $CWD/osinfo-db-tools-libxml2-2.12.patch
+
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
