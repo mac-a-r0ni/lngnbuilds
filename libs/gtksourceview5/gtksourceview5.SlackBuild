@@ -26,7 +26,7 @@
 
 PRGNAM=gtksourceview5
 SRCNAM=gtksourceview
-VERSION=${VERSION:-5.10.0}
+VERSION=${VERSION:-5.12.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 
