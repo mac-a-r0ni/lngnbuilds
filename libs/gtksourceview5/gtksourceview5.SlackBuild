@@ -88,7 +88,7 @@ cd meson-build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
-    -Dgtk_doc=false
+    -Ddocumentation=false
   ninja $JOBS || ninja
   DESTDIR=$PKG ninja install
 cd ..
