@@ -54,10 +54,8 @@ OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "x86_64" ]; then
   SRCARCH=amd64
-if [ "$ARCH" = "aarch64" ]; then
+elif [ "$ARCH" = "aarch64" ]; then
   SRCARCH=arm64
-else
-  SRCARCH=386
 fi
 
 set -e
