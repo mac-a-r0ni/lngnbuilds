@@ -26,8 +26,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=zulu-openjdk17
-VERSION=${VERSION:-17.0.10}
-ZULUVERSION=${ZULUVERSION:-17.48.15}
+VERSION=${VERSION:-17.0.11}
+ZULUVERSION=${ZULUVERSION:-17.50.19}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -50,15 +50,19 @@ PKG=${TMP}/package-${PRGNAM}
 OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i686" ]; then
+  ZULU_SUFFIX=""
   ZULU_ARCH=i686
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
+  ZULU_SUFFIX=""
   ZULU_ARCH=x64
   LIBDIRSUFFIX="64"
 elif  [ "$ARCH" = "arm" ]; then
+  ZULU_SUFFIX="-c2"
   ZULU_ARCH=aarch32hf
   LIBDIRSUFFIX=""
 elif  [ "$ARCH" = "aarch64" ]; then
+  ZULU_SUFFIX=""
   ZULU_ARCH=aarch64
   LIBDIRSUFFIX="64"
 else
@@ -66,7 +70,7 @@ else
   exit 1
 fi
 
-SRCNAM=zulu${ZULUVERSION}-ca-jdk${VERSION}-linux_$ZULU_ARCH
+SRCNAM=zulu${ZULUVERSION}-ca-jdk${VERSION}$ZULU_SUFFIX-linux_$ZULU_ARCH
 
 set -e
 
