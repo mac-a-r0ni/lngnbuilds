@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=chromium
-VERSION=${VERSION:-124.0.6367.73}
+VERSION=${VERSION:-125.0.6422.133}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -97,10 +97,10 @@ cp $CWD/00-rpi-vars $PKG/etc/chromium.d
 cp $CWD/master_preferences $PKG/etc/chromium
 
 chmod 0755 $PKG/usr/lib/chromium-browser/*.so*
-#rm $PKG/usr/share/pixmaps/chromium-browser.png
+rm $PKG/usr/share/pixmaps/chromium-browser.png
 #( cd $PKG/usr/share/pixmaps ; ln -sf /usr/share/icons/hicolor/256x256/apps/chromium-browser.png . )
 
-#ln -sf $PKG/usr/share/icons/hicolor/256x256/apps/chromium-browser.png $PKG/usr/share/pixmaps/chromium-browser.png
+ln -sf /usr/share/icons/hicolor/256x256/apps/chromium-browser.png ../../../../pixmaps/chromium-browser.png
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
