@@ -91,6 +91,7 @@ CXXFLAGS="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SYSTEM_LIBRARY_PATH=/usr/lib${LIBDIRSUFFIX} \
+    -DMAN_INSTALL_DIR=/usr/man \
     -DCMAKE_BUILD_TYPE=Release .. \
     --no-warn-unused-cli \
     -G Ninja
