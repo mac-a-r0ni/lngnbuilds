@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/evolution-data-server/3.52/evolutio
 MD5SUM="35ab9c0ee5bca3ebac74828341308503"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gnome-online-accounts libgweather4 libgdata webkit2gtk4.1 webkitgtk-6.0"
+REQUIRES="gnome-online-accounts libgweather4 libgdata webkit2gtk4.1 webkitgtk6.0"
 MAINTAINER="Ozan Türkyılmaz"
 EMAIL="ozan.turkyilmaz@gmail.com"
