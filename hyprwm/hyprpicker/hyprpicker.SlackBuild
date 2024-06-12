@@ -83,10 +83,10 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # change paths and add SLKCFLAGS in Makefile
-sed -i -e "/-std=/s,= ,= $SLKCFLAGS ," \
-       -e 's,share/man,man,g' \
-       -e 's,usr/local,usr,g' \
-       Makefile
+#sed -i -e "/-std=/s,= ,= $SLKCFLAGS ," \
+#       -e 's,share/man,man,g' \
+#       -e 's,usr/local,usr,g' \
+#       Makefile
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
