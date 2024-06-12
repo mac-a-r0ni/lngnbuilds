@@ -99,8 +99,10 @@ CXXFLAGS="$SLKCFLAGS" \
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
+
 # package isn't installing manpages correctly
-mv $PKG/man $PKG/usr
+mkdir -p $PKG/usr/man
+mv $PKG/man1 $PKG/usr/man
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
