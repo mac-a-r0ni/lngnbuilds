@@ -82,28 +82,22 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# change paths and add SLKCFLAGS in Makefile
-#sed -i -e "/-std=/s,= ,= $SLKCFLAGS ," \
-#       -e 's,share/man,man,g' \
-#       -e 's,usr/local,usr,g' \
-#       Makefile
-
+mkdir -p build
+cd build
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-cmake \
---no-warn-unused-cli \
--DCMAKE_BUILD_TYPE:STRING=Release \
--DCMAKE_INSTALL_PREFIX:PATH=/usr \
--S . \
--B ./build
+  cmake \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SYSTEM_LIBRARY_PATH=/usr/lib${LIBDIRSUFFIX} \
+    -DCMAKE_BUILD_TYPE=Release .. \
+    --no-warn-unused-cli \
+    -G Ninja
 
-cmake --build ./build \
---config Release \
---target hyprpicker \
--j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF`
-
-#make || exit 1
-make install DESTDIR=$PKG || exit 1
+"${NINJA:=ninja}"
+  DESTDIR=$PKG $NINJA install
+cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
