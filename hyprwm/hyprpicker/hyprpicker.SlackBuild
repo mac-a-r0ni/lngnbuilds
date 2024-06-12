@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=hyprpicker
-VERSION=${VERSION:-0.2.0}
+VERSION=${VERSION:-0.3.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -90,8 +90,19 @@ sed -i -e "/-std=/s,= ,= $SLKCFLAGS ," \
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
+cmake \
+--no-warn-unused-cli \
+-DCMAKE_BUILD_TYPE:STRING=Release \
+-DCMAKE_INSTALL_PREFIX:PATH=/usr \
+-S . \
+-B ./build
 
-make || exit 1
+cmake --build ./build \
+--config Release \
+--target hyprpicker \
+-j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF`
+
+#make || exit 1
 make install DESTDIR=$PKG || exit 1
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
