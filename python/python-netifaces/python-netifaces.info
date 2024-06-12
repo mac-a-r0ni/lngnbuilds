@@ -1,4 +1,4 @@
-PRGNAM="python3-netifaces"
+PRGNAM="python-netifaces"
 VERSION="0.11.0"
 HOMEPAGE="https://alastairs-place.net/projects/netifaces/"
 DOWNLOAD="https://pypi.io/packages/source/n/netifaces/netifaces-0.11.0.tar.gz"
