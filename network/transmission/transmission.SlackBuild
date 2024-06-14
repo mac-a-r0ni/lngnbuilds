@@ -143,6 +143,8 @@ cd build
     -DLIB_SUFFIX=${LIBDIRSUFFIX} \
     -DCMAKE_INSTALL_MANDIR=/usr/man \
     -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION \
+    -DUSE_SYSTEM_MINIUPNPC=OFF \
+    -DUES_SYSTEM_NATPMP=OFF \
     -DCMAKE_BUILD_TYPE=Release ..
   make -j5 VERBOSE=1
   make install/strip DESTDIR=$PKG
