@@ -129,6 +129,9 @@ chown -R root:root .
 find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
         \! -perm /111 -a \! -perm 644 -a -exec chmod 644 {} \+
 
+( cd  third-party ; find fast_float/ libb64/ libdeflate/ libevent/ libnatpmp/ libpsl/ \
+     miniupnpc/ utfcpp/ -type f -delete ; cd .. )
+
 mkdir -p build
 cd build
   cmake \
@@ -144,7 +147,7 @@ cd build
     -DLIB_SUFFIX=${LIBDIRSUFFIX} \
     -DCMAKE_INSTALL_MANDIR=/usr/man \
     -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION \
-    -DUSE_SYSTEM_MINIUPNPC=OFF \
+    -DUSE_SYSTEM_MINIUPNPC=ON \
     -DUSE_SYSTEM_NATPMP=ON \
     -DCMAKE_BUILD_TYPE=Release ..
   make -j5 VERBOSE=1
