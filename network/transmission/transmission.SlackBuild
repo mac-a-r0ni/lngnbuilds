@@ -148,7 +148,7 @@ cd build
     -DCMAKE_INSTALL_MANDIR=/usr/man \
     -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION \
     -DUSE_SYSTEM_MINIUPNPC=ON \
-    -DUSE_SYSTEM_NATPMP=OFF \
+    -DUSE_SYSTEM_NATPMP=ON \
     -DCMAKE_BUILD_TYPE=Release ..
   make -j5 VERBOSE=1
   make install/strip DESTDIR=$PKG
