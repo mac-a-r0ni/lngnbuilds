@@ -139,7 +139,6 @@ cd build
     -DENABLE_DAEMON=$DAEMOPT \
     -DENABLE_QT=$QTOPT \
     -DENABLE_GTK=$GTKOPT \
-    -DUSE_GTK_VERSION=4 \
     -DENABLE_CLI=$CLIOPT \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
@@ -153,6 +152,8 @@ cd build
   make -j5 VERBOSE=1
   make install/strip DESTDIR=$PKG
 cd ..
+# commented out to see if gtk3 version feels more 'standard'.
+#    -DUSE_GTK_VERSION=4 \
 
 gzip -9 $PKG/usr/man/man?/*
 
