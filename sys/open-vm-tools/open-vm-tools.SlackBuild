@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=open-vm-tools
-VERSION=${VERSION:-12.4.0_23259341} # Remember to change VERSION - to _ !!!
+VERSION=${VERSION:-12.4.5_23787635} # Remember to change VERSION - to _ !!!
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -104,17 +104,18 @@ find -L . \
 
 sed -i "s|\ -Werror||" configure.ac
 
+# I'll keep around this hack in case I need again in the future
 # need to symlink older ver numbers to make configure happy
 # I should prob edit the config instead but meh
-if [ -f /usr/bin/aclocal-1.14 ]; then
-    rm /usr/bin/aclocal-1.14
-elif [ -f /usr/bin/automake-1.14 ]; then
-    rm /usr/bin/automake-1.14
-fi
-ln -s /usr/bin/aclocal-1.16 /usr/bin/aclocal-1.14
-ln -s /usr/bin/automake-1.16 /usr/bin/automake-1.14
+#if [ -f /usr/bin/aclocal-1.14 ]; then
+#    rm /usr/bin/aclocal-1.14
+#elif [ -f /usr/bin/automake-1.14 ]; then
+#    rm /usr/bin/automake-1.14
+#fi
+#ln -s /usr/bin/aclocal-1.16 /usr/bin/aclocal-1.14
+#ln -s /usr/bin/automake-1.16 /usr/bin/automake-1.14
 
-#autoreconf -i
+autoreconf -i
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 LIBS=-lcrypt \
@@ -145,12 +146,11 @@ find $PKG -name perllocal.pod \
   | xargs rm -f
 
 # cleanup symlinks created to build pkg
-rm /usr/bin/aclocal-1.14
-rm /usr/bin/automake-1.14
+#rm /usr/bin/aclocal-1.14
+#rm /usr/bin/automake-1.14
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a \
-	INSTALL LICENSE README docs/ \
+cp -a INSTALL LICENSE README docs/ \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
