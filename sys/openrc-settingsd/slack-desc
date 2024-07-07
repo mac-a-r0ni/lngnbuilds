@@ -12,8 +12,8 @@ openrc-settingsd: OpenRC-settingsd provides an implementation of the the hostnam
 openrc-settingsd: localed, and timedated D-Bus services for OpenRC-based systems - in
 openrc-settingsd: particular, for typical installations of Gentoo or Slackware Linux.
 openrc-settingsd:
-openrc-settingsd:
 openrc-settingsd: Homepage: https://gitweb.gentoo.org/proj/openrc-settingsd.git
 openrc-settingsd: Updated Version: https://gitlab.com/postmarketOS/openrc-settingsd/
+openrc-settingsd:
 openrc-settingsd:
 openrc-settingsd:

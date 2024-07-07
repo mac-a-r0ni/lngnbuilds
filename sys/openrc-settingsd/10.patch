@@ -1,7 +1,7 @@
-From 41f3ab780280476d9c3adf4369ca9d57635fe31a Mon Sep 17 00:00:00 2001
+From c0def65125f460489b9a03e0cb5cf0909203438c Mon Sep 17 00:00:00 2001
 From: Nathaniel Russell <naterussell83@gmail.com>
 Date: Tue, 20 Feb 2024 02:40:00 +0000
-Subject: [PATCH]  Implement Slackware specific information
+Subject: [PATCH 1/3]  Implement Slackware specific information
 
 ---
  meson.build       |  9 +++++++++
@@ -12,7 +12,7 @@ Subject: [PATCH]  Implement Slackware specific information
  5 files changed, 77 insertions(+), 2 deletions(-)
 
 diff --git a/meson.build b/meson.build
-index f975f8f..bf2b70e 100644
+index 5fc1174..70a4e6c 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -57,6 +57,15 @@ endif
@@ -184,6 +184,70 @@ index 54636e6..5f7eb3c 100644
  
      local_rtc = get_local_rtc (&err);
      if (err != NULL) {
+-- 
+GitLab
+
+
+From 5cc5e2ce61afcefefab8b336894afa58f91a8bc9 Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <naterussell83@gmail.com>
+Date: Sat, 6 Jul 2024 19:16:51 +0000
+Subject: [PATCH 2/3] Update localed.c to Add in the file permission 0755 and
+ resourcing of the /etc/profile
+
+---
+ src/localed.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/src/localed.c b/src/localed.c
+index 2739875..cd259cf 100644
+--- a/src/localed.c
++++ b/src/localed.c
+@@ -1292,6 +1292,20 @@ localed_init (gboolean _read_only)
+     kbd_model_map_file = g_file_new_for_path (PKGDATADIR "/openrc-settingsd/kbd-model-map");
+     locale_file = g_file_new_for_path (SYSCONFDIR "/profile.d/locale.sh");
+     keymaps_file = g_file_new_for_path (SYSCONFDIR "/conf.d/keymaps");
++
++    const char *locale_path = g_file_get_path(locale_file);
++    if (locale_path) {
++        if (chmod(locale_path, 0755) != 0) {
++            g_printerr("Failed to set permissions on locale_file\n");
++        }
++        g_free((gpointer)locale_path);
++    } else {
++        g_printerr("Failed to get path for locale_file\n");
++    }
++
++    if (system("source /etc/profile") != 0) {
++        g_printerr("Failed to source /etc/profile\n");
++    }
+ #else
+     kbd_model_map_file = g_file_new_for_path (PKGDATADIR "/openrc-settingsd/kbd-model-map");
+     locale_file = g_file_new_for_path (SYSCONFDIR "/profile.d/locale.sh");
+-- 
+GitLab
+
+
+From 5cbf0b6d066ffbd6a7720bf7898cada9aa7744fc Mon Sep 17 00:00:00 2001
+From: Nathaniel Russell <naterussell83@gmail.com>
+Date: Sat, 6 Jul 2024 19:29:46 +0000
+Subject: [PATCH 3/3] Update localed.c
+
+---
+ src/localed.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/localed.c b/src/localed.c
+index cd259cf..ec63227 100644
+--- a/src/localed.c
++++ b/src/localed.c
+@@ -24,6 +24,7 @@
+ #include <dbus/dbus-protocol.h>
+ #include <glib.h>
+ #include <gio/gio.h>
++#include <sys/stat.h>
+ 
+ #include "localed.h"
+ #include "locale1-generated.h"
 -- 
 GitLab
 
