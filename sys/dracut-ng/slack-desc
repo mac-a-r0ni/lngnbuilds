@@ -12,8 +12,8 @@ dracut-ng: dracut (the tool) is used to create an initramfs image by copying
 dracut-ng: tools and files from an installed system and combining it with the
 dracut-ng: dracut framework, usually found in /usr/lib/dracut/modules.d.
 dracut-ng:
+dracut-ng: Homepage: https://github.com/dracut-ng/dracut-ng
 dracut-ng:
 dracut-ng:
 dracut-ng:
 dracut-ng:
-dracut-ng: https://github.com/dracut-ng/dracut-ng
