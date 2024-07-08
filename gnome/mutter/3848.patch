@@ -1,0 +1,66 @@
+From 0699835e6bc4b6825523e55bc40ffffd0c99eb80 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Michel=20D=C3=A4nzer?= <mdaenzer@redhat.com>
+Date: Fri, 28 Jun 2024 17:12:45 +0200
+Subject: [PATCH] Require libdrm >= 2.4.122
+
+And drop workarounds for older versions.
+---
+ meson.build                                       |  2 +-
+ src/backends/native/meta-kms-impl-device-atomic.c | 10 ----------
+ src/backends/native/meta-kms-plane.c              |  6 ------
+ 3 files changed, 1 insertion(+), 17 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 70ac5c231bb..9b5c9f9d27c 100644
+--- a/meson.build
++++ b/meson.build
+@@ -51,7 +51,7 @@ wayland_protocols_req = '>= 1.36'
+ # native backend version requirements
+ libinput_req = '>= 1.19.0'
+ gbm_req = '>= 21.3'
+-libdrm_req = '>= 2.4.118'
++libdrm_req = '>= 2.4.122'
+ 
+ # screen cast version requirements
+ libpipewire_req = '>= 0.3.33'
+diff --git a/src/backends/native/meta-kms-impl-device-atomic.c b/src/backends/native/meta-kms-impl-device-atomic.c
+index a4ffd70b6a3..beaa7b7cb69 100644
+--- a/src/backends/native/meta-kms-impl-device-atomic.c
++++ b/src/backends/native/meta-kms-impl-device-atomic.c
+@@ -48,16 +48,6 @@ static GInitableIface *initable_parent_iface;
+ static void
+ initable_iface_init (GInitableIface *iface);
+ 
+-/*
+- * Fallback while the patch updating the uAPI header has not landed.
+- * Should be removed afterward.
+- * Clients which do set cursor hotspot and treat the cursor plane
+- * like a mouse cursor should set this property.
+- */
+-#ifndef DRM_CLIENT_CAP_CURSOR_PLANE_HOTSPOT
+-#define DRM_CLIENT_CAP_CURSOR_PLANE_HOTSPOT	6
+-#endif
+-
+ G_DEFINE_TYPE_WITH_CODE (MetaKmsImplDeviceAtomic, meta_kms_impl_device_atomic,
+                          META_TYPE_KMS_IMPL_DEVICE,
+                          G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE,
+diff --git a/src/backends/native/meta-kms-plane.c b/src/backends/native/meta-kms-plane.c
+index 699dc02dbe1..0c811d6d3c0 100644
+--- a/src/backends/native/meta-kms-plane.c
++++ b/src/backends/native/meta-kms-plane.c
+@@ -63,12 +63,6 @@ struct _MetaKmsPlane
+   MetaKmsDevice *device;
+ };
+ 
+-/* Shall be removed once available on libdrm.*/
+-struct drm_plane_size_hint {
+-  __u16 width;
+-  __u16 height;
+-};
+-
+ G_DEFINE_TYPE (MetaKmsPlane, meta_kms_plane, G_TYPE_OBJECT)
+ 
+ MetaKmsDevice *
+-- 
+GitLab
+
