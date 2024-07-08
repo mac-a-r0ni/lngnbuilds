@@ -1,0 +1,197 @@
+From a495d045bbbad4e64e5701a75c243d55d0c9a8c0 Mon Sep 17 00:00:00 2001
+From: Qiu Wenbo <qiuwenbo@kylinos.com.cn>
+Date: Wed, 12 Jul 2023 14:52:19 +0800
+Subject: [PATCH] shell,libview: Remove gspell feature for spell checking
+
+GSpell is not going to be ported to GTK4. We should drop this feature
+before moving to GTK4. We are going to bring back spellchecking feature
+through libspelling hence the spellchecking code path is not removed
+completely.
+
+Signed-off-by: Qiu Wenbo <qiuwenbo@kylinos.com.cn>
+---
+ libview/ev-annotation-window.c | 31 -------------------------------
+ libview/ev-view.c              |  4 ----
+ libview/meson.build            |  1 -
+ meson.build                    |  6 ------
+ meson_options.txt              |  1 -
+ shell/ev-window.c              | 12 +-----------
+ 6 files changed, 1 insertion(+), 54 deletions(-)
+
+diff --git a/libview/ev-annotation-window.c b/libview/ev-annotation-window.c
+index 0fb83e1a6..3cffa64df 100644
+--- a/libview/ev-annotation-window.c
++++ b/libview/ev-annotation-window.c
+@@ -29,11 +29,6 @@
+ #include "ev-view-marshal.h"
+ #include "ev-document-misc.h"
+ 
+-#if WITH_GSPELL
+-#include <glib/gi18n.h>
+-#include <gspell/gspell.h>
+-#endif
+-
+ enum {
+ 	PROP_0,
+ 	PROP_ANNOTATION,
+@@ -296,12 +286,6 @@ ev_annotation_window_init (EvAnnotationWindow *window)
+ 	swindow = gtk_scrolled_window_new (NULL, NULL);
+ 	window->text_view = gtk_text_view_new ();
+ 
+-#if WITH_GSPELL
+-	window->spellcheck_view = NULL;
+-	window->spellcheck_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (window->text_view));
+-	gspell_text_view_basic_setup (window->spellcheck_view);
+-#endif
+-
+ 	gtk_container_set_border_width (GTK_CONTAINER (window->text_view), 6);
+ 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (window->text_view), GTK_WRAP_WORD);
+ 	g_signal_connect (window->text_view, "state-flags-changed",
+@@ -394,9 +378,6 @@ ev_annotation_window_constructor (GType                  type,
+ 			  G_CALLBACK (ev_annotation_window_opacity_changed),
+ 			  window);
+ 
+-#if WITH_GSPELL
+-        gspell_text_view_set_inline_spell_checking (window->spellcheck_view, ev_annotation_window_get_enable_spellchecking (window));
+-#endif
+ 	return object;
+ }
+ 
+@@ -576,23 +557,11 @@ ev_annotation_window_set_enable_spellchecking (EvAnnotationWindow *window,
+                                                gboolean enable_spellchecking)
+ {
+         g_return_if_fail (EV_IS_ANNOTATION_WINDOW (window));
+-
+-#if WITH_GSPELL
+-        if (enable_spellchecking == ev_annotation_window_get_enable_spellchecking (window))
+-                return;
+-
+-        window->enable_spellchecking = enable_spellchecking;
+-        gspell_text_view_set_inline_spell_checking (window->spellcheck_view, enable_spellchecking);
+-#endif
+ }
+ 
+ gboolean
+ ev_annotation_window_get_enable_spellchecking (EvAnnotationWindow *window)
+ {
+         g_return_val_if_fail (EV_IS_ANNOTATION_WINDOW (window), FALSE);
+-#if WITH_GSPELL
+-        return window->enable_spellchecking;
+-#else
+         return FALSE;
+-#endif
+ }
+ 
+diff --git a/libview/ev-annotation-window.c b/libview/ev-annotation-window.c
+index 09e43eb81..2383aa2df 100644
+--- a/libview/ev-annotation-window.c
++++ b/libview/ev-annotation-window.c
+@@ -67,11 +67,6 @@ struct _EvAnnotationWindow {
+ 	gint          y;
+ 	gint          orig_x;
+ 	gint          orig_y;
+-
+-#if WITH_GSPELL
+-	GspellTextView *spellcheck_view;
+-	gboolean      enable_spellchecking;
+-#endif
+ };
+ 
+ struct _EvAnnotationWindowClass {
+diff --git a/libview/ev-view.c b/libview/ev-view.c
+index 5df27e710..98431156b 100644
+--- a/libview/ev-view.c
++++ b/libview/ev-view.c
+@@ -6424,11 +6424,7 @@ ev_view_get_enable_spellchecking (EvView *view)
+ {
+         g_return_val_if_fail (EV_IS_VIEW (view), FALSE);
+ 
+-#ifdef WITH_GSPELL
+-        return view->enable_spellchecking;
+-#else
+         return FALSE;
+-#endif
+ }
+ 
+ static gboolean
+diff --git a/libview/meson.build b/libview/meson.build
+index 1b3ec6bb4..e645d59cf 100644
+--- a/libview/meson.build
++++ b/libview/meson.build
+@@ -59,7 +59,6 @@ enum_sources = gnome.mkenums(
+ )
+ 
+ deps = [
+-  gspell_dep,
+   gstreamer_base_dep,
+   gstreamer_dep,
+   gstreamer_video_dep,
+diff --git a/meson.build b/meson.build
+index ce9225d0b..cce3072f9 100644
+--- a/meson.build
++++ b/meson.build
+@@ -245,11 +245,6 @@ gstreamer_video_dep = dependency('gstreamer-video-1.0', required: get_option('mu
+ enable_multimedia = gstreamer_dep.found() and gstreamer_base_dep.found() and gstreamer_video_dep.found()
+ config_h.set('ENABLE_MULTIMEDIA', enable_multimedia)
+ 
+-# *** Gspell ***
+-gspell_dep = dependency('gspell-1', version: '>= 1.6.0', required: get_option('gspell'))
+-enable_gspell = gspell_dep.found()
+-config_h.set10('WITH_GSPELL', enable_gspell)
+-
+ # *** systemd user unit dir ***
+ systemd_user_unit_dir = get_option('systemduserunitdir')
+ install_systemd_user_unit_dir = (systemd_user_unit_dir != 'no')
+@@ -557,6 +552,5 @@ summary({'Gtk-doc reference..........': enable_gtk_doc,
+          'GTK+ Unix print ...........': enable_gtk_unix_print,
+          'Thumbnail cache ...........': enable_thumbnail_cache,
+          'Multimedia ................': enable_multimedia,
+-         'Spell checker .............': enable_gspell,
+          'SyncTex ...................': external_synctex.to_string('external', 'internal'),
+         }, section: 'Features', bool_yn: true)
+diff --git a/meson_options.txt b/meson_options.txt
+index 7b1a2b93b..9ed0bdb93 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -22,7 +22,6 @@ option('keyring', type: 'feature', value: 'auto', description: 'whether keyring
+ option('gtk_unix_print', type: 'feature', value: 'auto', description: 'whether gtk+-unix-print support is requested')
+ option('thumbnail_cache', type: 'feature', value: 'auto', description: 'whether GNOME Desktop (Thumbnail cache) is requested')
+ option('multimedia', type: 'feature', value: 'auto', description: 'whether multimedia support is requested')
+-option('gspell', type: 'feature', value: 'auto', description: 'whether gpsell support is requested')
+ 
+ option('internal_synctex', type: 'combo', value: 'auto', choices : ['auto', 'true', 'false'], description: 'whether to use the internal synctex')
+ 
+diff --git a/shell/ev-window.c b/shell/ev-window.c
+index ac7b1fd7e..5b1a692ef 100644
+--- a/shell/ev-window.c
++++ b/shell/ev-window.c
+@@ -546,11 +546,7 @@ ev_window_update_actions_sensitivity (EvWindow *ev_window)
+ 				      !recent_view_mode);
+ 	ev_window_set_action_enabled (ev_window, "inverted-colors",
+ 				      has_pages && !recent_view_mode);
+-#if WITH_GSPELL
+-	ev_window_set_action_enabled (ev_window, "enable-spellchecking", TRUE);
+-#else
+ 	ev_window_set_action_enabled (ev_window, "enable-spellchecking", FALSE);
+-#endif
+ 
+ 	/* Bookmarks menu */
+ 	ev_window_set_action_enabled (ev_window, "add-bookmark",
+@@ -1601,13 +1597,7 @@ ev_window_setup_default (EvWindow *ev_window)
+ 	g_simple_action_set_state (
+ 		G_SIMPLE_ACTION (g_action_map_lookup_action (G_ACTION_MAP (ev_window),
+ 		                                             "enable-spellchecking")),
+-		g_variant_new_boolean (
+-#ifdef WITH_GSPELL
+-		g_settings_get_boolean (settings, "enable-spellchecking")
+-#else
+-		FALSE
+-#endif
+-		)
++		g_variant_new_boolean (FALSE)
+ 	);
+ 	ev_view_set_enable_spellchecking (EV_VIEW (priv->view),
+ 		g_settings_get_boolean (settings, "enable-spellchecking"));
+-- 
+GitLab
+

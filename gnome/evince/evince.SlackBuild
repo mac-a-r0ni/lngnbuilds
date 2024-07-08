@@ -71,12 +71,12 @@ else
 fi
 
 # Detect nautilus is installed and enable building the plugin:
-if ( pkg-config --exists libnautilus-extension-4 ); then
-  NAUTILUS_PLUGIN=true
-  echo "nautilus found, enabling plugin."
-else
-  NAUTILUS_PLUGIN=false
-fi
+#if ( pkg-config --exists libnautilus-extension-4 ); then
+#  NAUTILUS_PLUGIN=true
+#  echo "nautilus found, enabling plugin."
+#else
+#  NAUTILUS_PLUGIN=false
+#fi
 
 #set -e
 
@@ -91,6 +91,9 @@ find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
         \! -perm /111 -a \! -perm 644 -a -exec chmod 644 {} \+
 # Moving set -e here since the build pukes over the above find
 set -e
+
+# disables gspell
+#patch -Np1 -i $CWD/601.patch
 
 mkdir build
 cd build
@@ -112,7 +115,7 @@ cd build
     -Dpdf=enabled \
     -Dps=enabled \
     -Dtiff=enabled \
-    -Dnautilus=${NAUTILUS_PLUGIN} \
+    -Dnautilus=false \
     -Dgspell=enabled \
     -Dgtk_doc=false \
     -Dsystemduserunitdir=no
