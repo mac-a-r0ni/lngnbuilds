@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for tracker3-miners
+# Slackware build script for localsearch
 
 # Copyright 2022 Bob Funk Winnipeg, Canada
 # All rights reserved.
@@ -24,8 +24,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=tracker-miners
-VERSION=${VERSION:-3.7.3}
+PRGNAM=localsearch
+VERSION=${VERSION:-3.8.alpha}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
