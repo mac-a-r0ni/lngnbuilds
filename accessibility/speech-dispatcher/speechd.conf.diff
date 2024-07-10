@@ -1,0 +1,27 @@
+In Slint we set at system level libao as default audio output method, then in
+/etc/libao.conf alsa as default driver.
+We also set espeak-ng as default output module as it provides voices for more
+languages that any other one
+Didier Spaier
+
+diff -ru speech-dispatcher-0.11.5/config/speechd.conf speech-dispatcher-0.11.5.new/config/speechd.conf
+--- speech-dispatcher-0.11.5/config/speechd.conf	2023-08-06 18:25:02.000000000 +0200
++++ speech-dispatcher-0.11.5.new/config/speechd.conf	2024-02-12 11:37:29.179239863 +0100
+@@ -205,7 +205,7 @@
+ # different sound systems and provides alternative output for Pulse Audio
+ # and ALSA as well as for other backends.
+ 
+-# AudioOutputMethod "pulse"
++AudioOutputMethod "libao"
+ 
+ # -- Pulse Audio parameters --
+ 
+@@ -289,7 +289,7 @@
+ # The DefaultModule selects which output module is the default.  You
+ # must use one of the names of the modules loaded with AddModule.
+ 
+-# DefaultModule espeak-ng
++DefaultModule espeak-ng
+ 
+ # The LanguageDefaultModule selects which output modules are preferred
+ # for specified languages.
