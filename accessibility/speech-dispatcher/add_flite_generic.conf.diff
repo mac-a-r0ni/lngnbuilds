@@ -1,0 +1,124 @@
+diff -aNru speechd-master/config/modules/flite-generic.conf speech-dispatcher-20181125.new/config/modules/flite-generic.conf
+--- speechd-master/config/modules/flite-generic.conf	1970-01-01 01:00:00.000000000 +0100
++++ speech-dispatcher-20181125.new/config/modules/flite-generic.conf	2018-11-25 11:50:57.928203000 +0100
+@@ -0,0 +1,120 @@
++# Usage of this module requires that the flite speech synthesizer be
++# installed as well as at least one of the voices listed below.
++# The flite package should be built without restricting its scope, i.e.
++# not using any of the --with-lang, --with-vox, --with-lex or
++# --with-langvox options.
++# This has been tested with flite pulled on 23 November 2018 fom git:
++# https://github.com/festvox/flite
++# and voices downloaded from:
++# http://festvox.org/flite/packed/flite-2.1/voices/
++
++# The flite output module is based on the generic plugin for Speech
++# Dispatcher. It means that there is no code written explicitly for
++# this plugin, all the specifics are handled in this configuration
++# and we call a simple command line client to perform the actual
++# synthesis. Use this config file with the sd_generic output module.
++#
++# GenericExecuteSynth is the shell command that should be
++# executed in order to say some message. This command must
++# stop saying the message on SIGKILL, otherwise it's useless.
++# You can use the variables $LANGUAGE, $VOICE and $PITCH and $RATE
++# which will be substituted for the appropriate value (you
++# can modify this value, see other parameters).
++# The command can be split into more lines, if necessary, using '\'.
++GenericExecuteSynth "flite -voice /usr/share/flite/voices/$VOICE \
++--setf duration_stretch=$RATE --setf int_f0_target_mean=$PITCH -t \'$DATA\'"
++
++GenericPunctNone " "
++GenericPunctSome "--punct=\"()[]{};:\""
++GenericPunctAll "--punct"
++
++GenericLanguage	  "en" "en" "utf-8"
++GenericLanguage	  "bn" "bn" "utf-8"
++GenericLanguage	  "gu" "gu" "utf-8"
++GenericLanguage	  "hi" "hi" "utf-8"
++GenericLanguage	  "kn" "kn" "utf-8"
++GenericLanguage	  "mr" "mr" "utf-8"
++GenericLanguage	  "pa" "pr" "utf-8"
++GenericLanguage	  "ta" "ta" "utf-8"
++GenericLanguage	  "te" "te" "utf-8"
++
++# Each voice is available if and only if a corresponding file exist.
++# These files must be listed *before* the voices.
++# You should store the voices in /usr/share/flite/voices/, renamed with
++# their short name. For instance, the voice named:
++# cmu_us_aew.flitevox
++# should be stored as: /usr/share/flite/voices/aew
++# Other example:
++# cmu_indic_guj_dp.flitevox
++# should be stored as:
++# guj_dp
++# At time of writing, all voices listed below can be downloaded from:
++# http://festvox.org/flite/packed/flite-2.1/voices/
++
++# The renaming can be done with this small script (remove the first #
++# from the next 5 lines before saving it).
++##!/bin/sh
++#(cd /usr/share/flite/voices
++#for i in cmu_us*.flitevox; do mv $i  $(echo $i|sed "s/cmu_us_//;s/.flitevox//"); done
++#for i in cmu_indic_*.flitevox; do mv $i $(echo $i|sed "s/cmu_indic_//;s/.flitevox//"); done
++#)
++
++# The line below insures that only actually installed voices will be
++# proposed. It should be written before the lines beginning with
++# AddVoice for this restriction to be effective.
++VoiceFileDependency "/usr/share/flite/voices/$VOICE"
++
++# AddVoice specifies which $VOICE string should be assigned to each
++# language and symbolic voice name. All the voices that you want to use
++# must be specified here.
++# In the list below, the ISO 639-1 language code is in the second field,
++# the voice name in the fourth field.
++
++AddVoice "en" "MALE1" "aew"
++AddVoice "en" "MALE1" "ahw"
++AddVoice "en" "MALE1" "aup"
++AddVoice "en" "MALE1" "awb" # Scottish English
++AddVoice "en" "FEMALE1" "axb"
++AddVoice "en" "MALE1" "bdl"
++AddVoice "en" "FEMALE1" "clb"
++AddVoice "en" "FEMALE1" "eey"
++AddVoice "en" "MALE1" "fem"
++AddVoice "en" "MALE1" "gka"
++AddVoice "en" "MALE1" "jmk" # Canadian English
++AddVoice "en" "MALE1" "ksp" # Indian English
++AddVoice "en" "FEMALE1" "ljm"
++AddVoice "en" "MALE1" "lnh"
++AddVoice "en" "MALE1" "rms"
++AddVoice "en" "MALE1" "rxr"
++AddVoice "en" "FEMALE1" "slp"
++AddVoice "en" "FEMALE1" "slt"
++AddVoice "bn" "MALE1" "ben_rm"  # Bengali 
++AddVoice "gu" "MALE1" "guj-ad"  # Gujarati
++AddVoice "gu" "MALE1" "guj_dp"  # Gujarati
++AddVoice "gu" "MALE1" "guj_kt"  # Gujarati
++AddVoice "hi" "MALE1" "hin_ab"  # Hindi
++AddVoice "kn" "MALE1" "kan_plv" # Kannada
++AddVoice "mr" "MALE1" "mar_aup" # Marathi
++AddVoice "mr" "MALE1" "mar_slp" # Marathi
++AddVoice "pa" "MALE1" "pan_amp" # Panjabi (*)
++AddVoice "ta" "MALE1" "tam_sdr" # Tamil
++AddVoice "te" "MALE1" "tel_kpn" # Telugu
++AddVoice "te" "MALE1" "tel_sk"  # Telugu
++AddVoice "te" "MALE1" "tel_ss"  # Telugu
++
++# (*) On 25 November 2018 using the pan_amp voice crashes Orca.
++
++# These parameters set _rate_ and  _pitch_ conversion. We don't do any
++# volume conversion, because the flite binary does not provide a volume
++# setting.
++# These values below are multiplied by 100, because DotConf currently
++# doesn't support floats (numbers written using decimal points).
++# So by default we multiply the rate by 0.5 and the pitch by 10. 
++GenericRateMultiply     50
++GenericPitchMultiply    1000
++# These default settings should be adjusted if the global settings in
++# /etc/speech-dispatcher/speechd.conf are modified.
++
++# Debug turns debugging on or off
++# See speechd.conf for information where debugging information is stored
++Debug 1
