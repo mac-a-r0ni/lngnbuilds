@@ -79,6 +79,9 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+# install calls for libadwaita beta, which doesn't exist (yet)
+sed -i -- 's/1.6.beta/1.6.alpha/g' meson.build
+
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
