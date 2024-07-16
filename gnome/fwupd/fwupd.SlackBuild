@@ -106,7 +106,6 @@ meson setup --prefix=/usr \
   -Dlvfs=true \
   -Dman=true \
   -Dpassim=disabled \
-  -Dplugin_flashrom=enabled \
   -Dplugin_amdgpu=disabled \
   -Dplugin_redfish=disabled \
   -Dplugin_uefi_capsule=$uefi_capsule \
