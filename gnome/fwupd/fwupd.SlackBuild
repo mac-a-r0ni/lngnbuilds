@@ -149,7 +149,7 @@ mv $PKG/etc/fwupd/remotes.d/lvfs-testing.conf $PKG/etc/fwupd/remotes.d/lvfs-test
 mv $PKG/etc/fwupd/remotes.d/lvfs.conf $PKG/etc/fwupd/remotes.d/lvfs.conf.new
 mv $PKG/etc/fwupd/remotes.d/vendor-directory.conf $PKG/etc/fwupd/remotes.d/vendor-directory.conf.new
 mv $PKG/etc/fwupd/remotes.d/vendor.conf $PKG/etc/fwupd/remotes.d/vendor.conf.new
-mv $PKG/etc/grub.d/35_fwupd $PKG/etc/grub.d/35_fwupd.new
+#mv $PKG/etc/grub.d/35_fwupd $PKG/etc/grub.d/35_fwupd.new
 
 rm -rf $PKG/usr/share/installed-tests
 
