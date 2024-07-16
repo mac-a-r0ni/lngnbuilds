@@ -116,7 +116,7 @@ CXXFLAGS="$SLKCFLAGS -Wl,-s" \
   --localstatedir=/var \
   --with-audio=alsa \
   --enable-shared \
-  --build=$ARCH-slackware-linux
+  --build=$ARCH-unknown-linux-gnu
 
 make
 make install prefix=$PKG/usr INSTALLLIBDIR=$PKG/usr/lib${LIBDIRSUFFIX}
