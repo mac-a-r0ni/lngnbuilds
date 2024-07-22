@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for wlroots0.16
+# Slackware build script for wlroots0.17
 
-# Copyright 2022 Damian Perticone  Berisso,Argentina
+# Copyright 2024 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,9 +24,9 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PKGNAM=wlroots0.16
+PKGNAM=wlroots0.17
 SRCNAM=wlroots
-VERSION=${VERSION:-0.16.2}
+VERSION=${VERSION:-0.17.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -73,9 +73,6 @@ cd $TMP
 rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$SRCNAM-$VERSION.tar.gz
 cd $SRCNAM-$VERSION
-# Allow a minor protocol violation until phosh is fixed without this patch
-# phosh crashes on launch.
-patch -Np1 -i $CWD/Revert-layer-shell-error-on-0-dimension-without-anch.patch
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -90,8 +87,8 @@ cd build
   meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
-    --includedir=/usr/include/wlroots0.16 \
-    --libdir=/usr/lib${LIBDIRSUFFIX}/wlroots0.16 \
+    --includedir=/usr/include/wlroots0.17 \
+    --libdir=/usr/lib${LIBDIRSUFFIX}/wlroots0.17 \
     --localstatedir=/var \
     --mandir=/usr/man \
     --prefix=/usr \
@@ -114,7 +111,7 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 
 cd $PKG
 # Move libs to /usr/lib, except the .so symlinks
-for f in usr/lib${LIBDIRSUFFIX}/wlroots0.16/*; do
+for f in usr/lib${LIBDIRSUFFIX}/wlroots0.17/*; do
   if [[ $f == *.so ]]; then
     ln -srf -- usr/lib${LIBDIRSUFFIX}/"$(readlink "$f")" "$f"
   elif [[ ! -d $f ]]; then

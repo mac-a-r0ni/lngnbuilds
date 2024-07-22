@@ -6,14 +6,14 @@
 # customary to leave one space after the ':'.
 
            |-----handy-ruler------------------------------------------------------|
-wlroots0.16: wlroots0.16 (wayland compositor library v0.16)
-wlroots0.16:
-wlroots0.16: Wlroots is a modular wayland compositor library.
-wlroots0.16:
-wlroots0.16: Homepage: https://gitlab.freedesktop.org/wlroots/wlroots/
-wlroots0.16:
-wlroots0.16:
-wlroots0.16:
-wlroots0.16:
-wlroots0.16:
-wlroots0.16:
+wlroots0.17: wlroots0.17 (wayland compositor library v0.17)
+wlroots0.17:
+wlroots0.17: Wlroots is a modular wayland compositor library.
+wlroots0.17:
+wlroots0.17: Homepage: https://gitlab.freedesktop.org/wlroots/wlroots/
+wlroots0.17:
+wlroots0.17:
+wlroots0.17:
+wlroots0.17:
+wlroots0.17:
+wlroots0.17:
