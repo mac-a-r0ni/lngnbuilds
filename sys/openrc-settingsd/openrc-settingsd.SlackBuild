@@ -73,6 +73,7 @@ rm -rf $PRGNAM-v$VERSION
 tar xvf $CWD/$PRGNAM-v$VERSION.tar.?z || exit 1
 cd $PRGNAM-v$VERSION || exit 1
 patch -Np1 -i $CWD/10.patch
+patch -Np1 -i $CWD/11.patch
 chown -R root:root .
 find . \
  \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -109,7 +110,6 @@ install -vDm 0755 $CWD/openrc-listener -t $PKG/bin/
 install -vDm 0755 $CWD/gnome-remote-desktop -t $PKG/etc/config
 install -vDm 0755 $CWD/gnome-user-share-webdav -t $PKG/etc/config
 install -vDm 0755 $CWD/rygel -t $PKG/etc/config
-# install -vDm 0644 $CWD/locale.conf.new $PKG/etc
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
