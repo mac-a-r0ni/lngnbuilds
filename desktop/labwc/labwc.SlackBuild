@@ -83,7 +83,7 @@ mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
-  PKG_CONFIG_PATH="/usr/lib/wlroots0.17/pkgconfig" \
+  PKG_CONFIG_PATH="/usr/lib${LIBDIRSUFFIX}/wlroots0.17/pkgconfig" \
   meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
