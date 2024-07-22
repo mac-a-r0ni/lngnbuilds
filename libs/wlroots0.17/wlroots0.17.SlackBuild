@@ -40,12 +40,12 @@ if [ -z "$ARCH" ]; then
 fi
 
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  echo "$PKGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
 fi
 
 TMP=${TMP:-/tmp/lngn}
-PKG=$TMP/package-$PRGNAM
+PKG=$TMP/package-$PKGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i586" ]; then
