@@ -21,5 +21,4 @@ preserve_perms() {
   config $NEW
 }
 
-config etc/locale.conf.new
 preserve_perms etc/rc.d/rc.openrc-settingsd.new
