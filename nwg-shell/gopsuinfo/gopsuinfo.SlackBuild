@@ -76,7 +76,7 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
 # vendor info is broken in this release
-tar xvf $CWD/gopsuinfo-vendor-$VERSION.tar.?z
+#tar xvf $CWD/gopsuinfo-vendor-$VERSION.tar.?z
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -86,8 +86,8 @@ find -L . \
 
 CGO_CFLAGS="$SLKCFLAGS" \
 CGO_CXXFLAGS="$SLKCFLAGS" \
-go build -mod vendor -mod=readonly -o bin/$PRGNAM *.go || exit 1
-#go build -mod=readonly -o bin/$PRGNAM *.go || exit 1
+#go build -mod vendor -mod=readonly -o bin/$PRGNAM *.go || exit 1
+go build -mod=readonly -o bin/$PRGNAM *.go || exit 1
 
 install -D -t $PKG/usr/share/$PRGNAM/icons_light icons_light/*
 install -D -t $PKG/usr/share/$PRGNAM/icons_dark icons_dark/*
