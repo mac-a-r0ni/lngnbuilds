@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for python3-multidict
+# Slackware build script for python-multidict
 # Copyright 2019-2022 Isaac Yu <isaacyu@protonmail.com>
 # Maintained 2023 by Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
@@ -24,8 +24,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=python3-multidict
-VERSION=${VERSION:-6.0.4}
+PRGNAM=python-multidict
+VERSION=${VERSION:-6.0.5}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
