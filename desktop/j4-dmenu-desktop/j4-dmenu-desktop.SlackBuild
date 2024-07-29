@@ -89,31 +89,6 @@ chown -R root:root .
 find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
         \! -perm /111 -a \! -perm 644 -a -exec chmod 644 {} \+
 
-# For some reason, j4-dmenu-desktop uses "bash -i -c <command>" to execute
-# the user's choice. bash -i means interactive shell... which causes it to
-# hang if there's no controlling terminal. No idea why upstream wanted the -i
-# option in the first place, I've asked but not gotten an answer.
-#sed -i '/execl(shell/s|"-i", *||' src/*.hh
-
-# For users who don't use i3, let them pick the default terminal.
-# If TERMINAL not set, and i3-sensible-terminal not installed, just
-# default to xterm.
-if which i3-sensible-terminal &>/dev/null; then
-  DEFTERM="i3-sensible-terminal"
-else
-  DEFTERM="foot"
-fi
-
-TERMINAL="${TERMINAL:-$DEFTERM}"
-MANTERM="$( echo $TERMINAL | sed 's,-,\\\\-,g' )"
-echo "Using TERMINAL=$TERMINAL"
-sed -i "s,i3-sensible-terminal,$TERMINAL,g" src/Main.hh
-
-# Don't use 'make install', it wants to run the tests, which require
-# something called 'catch', which isn't shipped in the src (it tries to
-# download it, but fails, and I can't make myself care why). For the same
-# reason, have to use 'make $PRGNAM' instead of plain make.
-
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
@@ -134,8 +109,7 @@ cd ..
 
 # Tell the user what the default terminal is, in the man page.
 mkdir -p $PKG/usr/man/man1
-sed "s,to start terminal apps *\$,& (default: $MANTERM)," < $PRGNAM.1 | \
-  gzip -9c > $PKG/usr/man/man1/$PRGNAM.1.gz
+ gzip -9c > $PKG/usr/man/man1/$PRGNAM.1.gz
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a CHANGELOG LICENSE README* $PKG/usr/doc/$PRGNAM-$VERSION
