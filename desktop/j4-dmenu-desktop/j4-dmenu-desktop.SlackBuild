@@ -102,6 +102,7 @@ cd build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Denable-tests=false \
+    -Dset-debug=off \
     -Dstrip=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
@@ -116,7 +117,7 @@ cp -a CHANGELOG LICENSE README* $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
-sed "s,_TERMINAL_,$TERMINAL,g" $CWD/slack-desc > $PKG/install/slack-desc
+$CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
