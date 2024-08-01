@@ -6,39 +6,10 @@
 
 # Licensed under the WTFPL. See http://www.wtfpl.net/txt/copying/ for details.
 
-# 20201103 bkw: update for 2.18 release
-# 20191128 bkw:
-# - Update for 2.17 release.
-# - Upstream now includes the man page in the tarball, use that
-#   instead the old one that used to be here. Means this script can't
-#   build older versions.
-
-# 20180112 bkw: Update for 2.16 release.
-# 20170301 bkw: Update for 2.15 release, use github long-form URL.
-# 20160726 bkw: Update for 2.14 release.
-# 20150914 bkw: Update for 2.13 release.
-
-# 20150512 bkw:
-# - Update for 2.12 release.
-# - Replace my man page with upstream's (from git).
-# - Escape dashes in terminal name, in man page (MANTERM).
-# - Replace no_interactive_shell.diff with sed -i.
-
-# 20140724 bkw: updated to 20140724 snapshot.
-# - Default to TERMINAL=xterm if i3-sensible-terminal not installed
-#   on build host. Can still set TERMINAL in env to override.
-# - Fix hangs caused by using an interactive shell when there's no
-#   controlling terminal. Thanks to crumb on ##slackware for the
-#   bug report.
-
-# 20140310 bkw: updated to 20140310 snapshot.
-# - Added man page
-# - Added default terminal selection
-
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=j4-dmenu-desktop
-VERSION=${VERSION:-3.0}
+VERSION=${VERSION:-3.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
