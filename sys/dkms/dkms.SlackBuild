@@ -28,7 +28,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=dkms
-VERSION=${VERSION:-3.0.12}
+VERSION=${VERSION:-3.0.13}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -86,6 +86,21 @@ CFLAGS="$SLKCFLAGS" make install DESTDIR=$PKG
 
 mv $PKG/usr/share/man $PKG/usr/man
 rm -Rf $PKG/etc/kernel $PKG/usr/share
+
+# Compress and link manpages, if any:
+if [ -d $PKG/usr/man ]; then
+  ( cd $PKG/usr/man
+    for manpagedir in $(find . -type d -name "man*") ; do
+      ( cd $manpagedir
+        for eachpage in $( find . -type l -maxdepth 1) ; do
+          ln -s $( readlink $eachpage ).gz $eachpage.gz
+          rm $eachpage
+        done
+        gzip -9 *.*
+      )
+    done
+  )
+fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a README.md COPYING $PKG/usr/doc/$PRGNAM-$VERSION/
