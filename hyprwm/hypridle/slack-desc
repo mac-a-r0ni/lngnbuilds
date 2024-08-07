@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+        |-----handy-ruler------------------------------------------------------|
+hypridle: hypridle (Hyprland's idle daemon)
+hypridle:
+hypridle:  - based on the ext-idle-notify-v1 wayland protocol
+hypridle:  - support for dbus' loginctl commands (lock / unlock / before-sleep)
+hypridle:  - support for dbus' inhibit (used by e.g. firefox / steam)
+hypridle:
+hypridle: Homepage: https://hyprland.org/
+hypridle:
+hypridle:
+hypridle:
+hypridle:
