@@ -83,7 +83,7 @@ DEST="$PKG/usr/src/${PRGNAM/-dkms/}-$VERSION"
   install -Dm644 -t "$DEST/patches" $CWD/*.patch
   cp -a src "$DEST"
   install -Dm644 lib/wlc_hybrid.o_shipped \
-    "$PKG/lib/$PRGNAM/wlc_hybrid.o_shipped"
+    "$PKG/usr/lib/$PRGNAM/wlc_hybrid.o_shipped"
   install -Dm644 $CWD/broadcom-wl-dkms.conf \
     "$PKG/lib/modprobe.d/broadcom-wl-dkms.conf"
 
