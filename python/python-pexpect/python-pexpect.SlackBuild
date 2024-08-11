@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for python3-pexpect
+# Slackware build script for python-pexpect
 
 # Copyright (c) 2007 Javier Rojas <jerojasro@gmail.com>
 # Copyright 2014-2017 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
@@ -26,8 +26,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=python3-pexpect
-VERSION=${VERSION:-4.8.0}
+PRGNAM=python-pexpect
+VERSION=${VERSION:-4.9.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
