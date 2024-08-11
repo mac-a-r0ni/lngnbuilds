@@ -1,4 +1,4 @@
-PRGNAM="python3-xlib"
+PRGNAM="python-xlib"
 VERSION="0.33"
 HOMEPAGE="https://github.com/python-xlib/python-xlib"
 DOWNLOAD="https://github.com/python-xlib/python-xlib/releases/download/0.33/python-xlib-0.33.tar.gz"
