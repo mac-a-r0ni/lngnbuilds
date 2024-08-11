@@ -1,4 +1,4 @@
-PRGNAM="python3-ptyprocess"
+PRGNAM="python-ptyprocess"
 VERSION="0.7.0"
 HOMEPAGE="https://pypi.python.org/pypi/ptyprocess"
 DOWNLOAD="https://files.pythonhosted.org/packages/source/p/ptyprocess/ptyprocess-0.7.0.tar.gz"
