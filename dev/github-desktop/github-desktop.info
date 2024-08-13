@@ -1,10 +1,10 @@
 PRGNAM="github-desktop"
-VERSION="3.4.2"
+VERSION="3.4.3"
 HOMEPAGE="https://github.com/shiftkey/desktop/"
-DOWNLOAD="https://github.com/shiftkey/desktop/releases/download/release-3.4.2-linux1/GitHubDesktop-linux-amd64-3.4.2-linux1.deb \
-          https://github.com/shiftkey/desktop/releases/download/release-3.4.2-linux1/GitHubDesktop-linux-arm64-3.4.2-linux1.deb"
-MD5SUM="fb9c3ac5d457f5a3b1de1d98d0c96bb3 \
-        49f8432dcce2e7ef88bb6db9abf5409d"
+DOWNLOAD="https://github.com/shiftkey/desktop/releases/download/release-3.4.3-linux1/GitHubDesktop-linux-amd64-3.4.3-linux1.deb \
+          https://github.com/shiftkey/desktop/releases/download/release-3.4.3-linux1/GitHubDesktop-linux-arm64-3.4.3-linux1.deb"
+MD5SUM="334a153d77ff4812d64d539508e7fa1a \
+        4fcc46166ad04410e79a948afccad2b5"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
