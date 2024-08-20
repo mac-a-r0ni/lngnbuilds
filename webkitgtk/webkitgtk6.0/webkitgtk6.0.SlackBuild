@@ -31,7 +31,7 @@ BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
-TMP=${TMP:-/build/lngn}
+TMP=${TMP:-/home/tmp}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
