@@ -112,7 +112,7 @@ cd build
     -Dpdf=enabled \
     -Dps=enabled \
     -Dtiff=enabled \
-    -Dnautilus=${NAUTILUS_PLUGIN} \
+    -Dnautilus=false \
     -Dgspell=enabled \
     -Dgtk_doc=false \
     -Dsystemduserunitdir=no
