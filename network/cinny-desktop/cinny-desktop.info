@@ -4,7 +4,7 @@ HOMEPAGE="https://cinny.in/"
 DOWNLOAD="https://github.com/cinnyapp/cinny-desktop/releases/download/v4.1.0/Cinny_desktop-x86_64.deb \
           https://slackware.lngn.net/pub/source/cinny-desktop/cinny_4.1.0_arm64.deb"
 MD5SUM="99c88170124f1e5acecf39670949e5fd \
-        "
+        074a3c03b057c326fd2d9b2943c17da3"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="libayatana-appindicator webkit2gtk"
