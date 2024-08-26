@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-software/46/gnome-software-46
 MD5SUM="d6630583e0ed1d2f5271aa9fe070f0f4"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="flatpak fwupd gnome-shell malcontent sysprof"
+REQUIRES="flatpak gnome-shell sysprof"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"

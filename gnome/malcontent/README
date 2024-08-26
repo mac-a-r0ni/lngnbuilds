@@ -1,5 +1,0 @@
-malcontent (Parental Controls Library)
-
-libmalcontent implements parental controls support which can be used
-by applications to filter or limit the access of child accounts to
-inappropriate content.
