@@ -92,7 +92,7 @@ cd meson-build
     --sysconfdir=/etc \
     -Dstrip=true \
     -Dpam=enabled \
-    -Dgdk-pixbuf=true \
+    -Dgdk-pixbuf=enabled \
     -Dman-pages=true
 
    "${NINJA:=ninja}"
