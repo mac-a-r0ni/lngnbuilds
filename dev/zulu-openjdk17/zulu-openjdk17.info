@@ -1,10 +1,10 @@
 PRGNAM="zulu-openjdk17"
-VERSION="17.0.11"
+VERSION="17.0.12"
 HOMEPAGE="https://www.azul.com/downloads/"
-DOWNLOAD="https://cdn.azul.com/zulu/bin/zulu17.50.19-ca-jdk17.0.11-linux_x64.tar.gz \
-          https://cdn.azul.com/zulu/bin/zulu17.50.19-ca-jdk17.0.11-linux_aarch64.tar.gz"
-MD5SUM="6497ded4396d535611ec401d785d440e \
-        1d5a9cd2a7831ed7311194722b431269"
+DOWNLOAD="https://cdn.azul.com/zulu/bin/zulu17.52.17-ca-jdk17.0.12-linux_x64.tar.gz \
+          https://cdn.azul.com/zulu/bin/zulu17.52.17-ca-jdk17.0.12-linux_aarch64.tar.gz"
+MD5SUM="2d5e94d6f8b0127a9ed3f779f936fdc5 \
+        eb0f7456341611dd4da9f5292cd24eb1"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
