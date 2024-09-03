@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-disk-utility
-VERSION=${VERSION:-46.0}
+VERSION=${VERSION:-46.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -80,7 +80,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Detect if gnome-settings-daemon is installed and disable building 
+# Detect if gnome-settings-daemon is installed and disable building
 # the plugin if its not installed:
 if ( pkg-config --exists gnome-settings-daemon); then
   GSD_PLUGIN=true
