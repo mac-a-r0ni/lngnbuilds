@@ -24,7 +24,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=geoclue2
-VERSION=${VERSION:-2.7.1}
+VERSION=${VERSION:-2.7.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -98,8 +98,8 @@ cd meson-build
     --mandir=/usr/man \
     --infodir=/usr/info \
     --buildtype=release \
-    -Dnmea-source=$avahi_opts \
-    -Dgtk-doc=$doc_opts \
+    -Dnmea-source=true \
+    -Dgtk-doc=false \
     -Dstrip=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
