@@ -4,4 +4,4 @@ gnome-shell-extension-appindicator
 gnome-terminal
 libnma-gtk4
 openrc-settingsd
-vte-gtk4
+python-hatch_fancy_pypi_readme
