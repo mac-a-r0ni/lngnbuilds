@@ -1,7 +1,6 @@
 #!/bin/bash
 #
 # ex:set ai shiftwidth=4 inputtab=spaces smarttab noautotab:
-#
 # Edits for aarch64 builds by Jay Lanagan (j@lngn.net)
 # 24.8.0.1 removed icu patch, not needed. Added wayland patch.
 # 24.2.0.3 uncommented --with-system-lxml
@@ -36,7 +35,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-24.8.0.1}
+VERSION=${VERSION:-24.8.1.2}
 SHORT_VERSION=${VERSION%.*.*}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
@@ -60,7 +59,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
 fi
 
 # build outside my 4gb zram /tmp location
-TMP=${TMP:-/build}
+TMP=${TMP:-/build/}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -71,10 +70,10 @@ elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -march=x86-64 -mtune=generic -fPIC"
+  SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-O2 -march=armv8-a -mtune=generic -fPIC"
+  SLKCFLAGS="-O2 -fPIC"
   LDFLAGS="-lz"
   LIBDIRSUFFIX="64"
 else
@@ -106,7 +105,6 @@ fi
 #patch -p1 < $CWD/libreoffice-7.5.8.2-icu-74-compatibility.patch
 # fix for wayland egl
 patch -p1 < $CWD/libreoffice-7.6-qt6-wayland-egl.patch
-
 
 chown -R root:root .
 find -L . \
@@ -234,6 +232,7 @@ fi
     --enable-release-build=yes  \
     --enable-gtk3 \
     --enable-qt5 \
+    --enable-lto \
     --enable-python=system \
     --enable-gio \
     $extct2n \
