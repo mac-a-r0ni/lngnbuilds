@@ -31,7 +31,7 @@ BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
-TMP=${TMP:-/home/tmp}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -49,16 +49,16 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
 fi
 
 if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686 -g1 -fcf-protection=none"
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686 -g1 -fcf-protection=none -Wno-error"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686 -g1 -fcf-protection=none"
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686 -g1 -fcf-protection=none -Wno-error"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC -g1 -fcf-protection=none"
+  SLKCFLAGS="-O2 -fPIC -g1 -fcf-protection=none -Wno-error"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-O2 -fPIC -g1 -fcf-protection=none"
+  SLKCFLAGS="-O2 -fPIC -g1 -fcf-protection=none -Wno-error"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
