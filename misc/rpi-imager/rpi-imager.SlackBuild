@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=rpi-imager
-VERSION=${VERSION:-1.9.0}
+VERSION=${VERSION:-1.8.5}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -101,36 +101,31 @@ cd ..
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
-mv $PKG/usr/share/man $PKG/usr
-
-rm $PKG/usr/bin/{curl-config,lzmadec,lzmainfo,mk-ca-bundle.pl,xz,xzdec,xzdiff,xzgrep,xzless,xzmore}
-rm $PKG/usr/include
-rm $PKG/usr/{lib,lib64}
-rm $PKG/usr/share/doc
+#mv $PKG/usr/share/man $PKG/usr
+#rm $PKG/usr/bin/{curl-config,lzmadec,lzmainfo,mk-ca-bundle.pl,xz,xzdec,xzdiff,xzgrep,xzless,xzmore}
+#rm $PKG/usr/include
+#rm $PKG/usr/{lib,lib64}
+#rm $PKG/usr/share/doc
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
-
 # Compress and link manpages, if any:
-#if [ -d $PKG/usr/man ]; then
-#  ( cd $PKG/usr/man
-#    for manpagedir in $(find . -type d -name "man*") ; do
-#      ( cd $manpagedir
-#        for eachpage in $( find . -type l -maxdepth 1) ; do
-#          ln -s $( readlink $eachpage ).gz $eachpage.gz
-#          rm $eachpage
-#        done
-#        gzip -9 *.*
-#      )
-#    done
-#  )
-#fi
+if [ -d $PKG/usr/man ]; then
+  ( cd $PKG/usr/man
+    for manpagedir in $(find . -type d -name "man*") ; do
+      ( cd $manpagedir
+        for eachpage in $( find . -type l -maxdepth 1) ; do
+          ln -s $( readlink $eachpage ).gz $eachpage.gz
+          rm $eachpage
+        done
+        gzip -9 *.*
+      )
+    done
+  )
+fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-#mv $PKG/usr/share/doc/xz $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a license.txt README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
