@@ -102,6 +102,7 @@ cd build
 	-DUSE_GTK4=OFF \
 	-DUSE_JPEGXL=ON \
 	-DUSE_LIBBACKTRACE=OFF \
+	-DUSE_SYSTEM_SYSPROF_CAPTURE=NO \
 	-Wno-dev \
 	-G Ninja \
 	..

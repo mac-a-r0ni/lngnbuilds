@@ -101,6 +101,7 @@ cd build
         -DUSE_GSTREAMER_TRANSCODER=ON \
         -DUSE_JPEGXL=ON \
         -DUSE_LIBBACKTRACE=OFF \
+        -DUSE_SYSTEM_SYSPROF_CAPTURE=NO \
         -Wno-dev \
         -G Ninja \
         ..
