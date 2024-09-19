@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libjxl
-VERSION=${VERSION:-0.10.3}
+VERSION=${VERSION:-0.11.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -57,7 +57,7 @@ elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-march=x86-64 -mtune=generic -pipe -O2 -fPIC"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-pipe -O2 -fPIC"
+  SLKCFLAGS="-march=armv8-a -mtune=generic -pipe -O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
@@ -104,7 +104,6 @@ cmake  -B build -S $TMP/$PRGNAM-$VERSION \
 	-DJPEGXL_ENABLE_DOXYGEN:BOOL='false' \
 	-DJPEGXL_ENABLE_MANPAGES:BOOL='true' \
 	-DJPEGXL_ENABLE_SKCMS:BOOL='false' \
-	-DJPEGXL_BUNDLE_SKCMS:BOOL='false' \
 	-DJPEGXL_ENABLE_BENCHMARK:BOOL='false' \
 	-DJPEGXL_ENABLE_EXAMPLES:BOOL='false' \
 	-DJPEGXL_ENABLE_FUZZERS:BOOL='false' \
@@ -115,7 +114,6 @@ cmake  -B build -S $TMP/$PRGNAM-$VERSION \
 	-DJPEGXL_ENABLE_TCMALLOC:BOOL='true' \
 	-DJPEGXL_WARNINGS_AS_ERRORS:BOOL='false' \
 	-DJPEGXL_FORCE_SYSTEM_BROTLI:BOOL='true' \
-	-DJPEGXL_FORCE_SYSTEM_GTEST:BOOL='false' \
 	-DJPEGXL_FORCE_SYSTEM_HWY:BOOL='true' \
 	-DJPEGXL_FORCE_SYSTEM_LCMS2:BOOL='true' \
 	-DJPEGXL_ENABLE_SJPEG:BOOL='false' \
