@@ -1,5 +1,5 @@
---- libfm-1.3.0.2/configure.ac.moduledir	2018-04-29 05:06:53.000000000 +0900
-+++ libfm-1.3.0.2/configure.ac	2018-04-29 17:54:40.014818903 +0900
+--- a/configure.ac.moduledir	2018-04-29 05:06:53.000000000 +0900
++++ b/configure.ac	2018-04-29 17:54:40.014818903 +0900
 @@ -117,12 +117,14 @@ if test x"$ac_with_gtk" != xno; then
        LIBFM_GTK_LTLIBRARIES=libfm-gtk3.la
        LIBFM_GTK_PC=libfm-gtk3.pc
@@ -31,8 +31,8 @@
  AM_CONDITIONAL([ENABLE_GTK], [test x$ac_with_gtk != xnone])
  
  dnl pango_modules="pango >= 1.16.0"
---- libfm-1.3.0.2/src/Makefile.am.moduledir	2018-04-29 04:15:18.000000000 +0900
-+++ libfm-1.3.0.2/src/Makefile.am	2018-04-29 17:54:40.014818903 +0900
+--- a/src/Makefile.am.moduledir	2018-04-29 04:15:18.000000000 +0900
++++ b/src/Makefile.am	2018-04-29 17:54:40.014818903 +0900
 @@ -315,6 +315,7 @@ libfm_gtk_la_CFLAGS = \
  	-I$(srcdir)/gtk \
  	-DPACKAGE_UI_DIR=\""$(datadir)/libfm/ui"\" \
@@ -41,8 +41,8 @@
  	$(GTK_CFLAGS) \
  	$(MENU_CACHE_CFLAGS) \
  	$(NULL)
---- libfm-1.3.0.2/src/fm-gtk.c.moduledir	2018-04-17 04:11:33.000000000 +0900
-+++ libfm-1.3.0.2/src/fm-gtk.c	2018-04-29 17:54:40.014818903 +0900
+--- a/src/fm-gtk.c.moduledir	2018-04-17 04:11:33.000000000 +0900
++++ b/src/fm-gtk.c	2018-04-29 17:54:40.014818903 +0900
 @@ -57,6 +57,7 @@ gboolean fm_gtk_init(FmConfig* config)
         if no theme was selected and GTK fallback isn't available then no icons
         are shown - we should add folder and file icons as fallbacks theme */
@@ -51,8 +51,8 @@
      _fm_icon_pixbuf_init();
      _fm_thumbnail_init();
      _fm_file_properties_init();
---- libfm-1.3.0.2/src/modules/Makefile.am.moduledir	2018-04-29 05:00:55.000000000 +0900
-+++ libfm-1.3.0.2/src/modules/Makefile.am	2018-04-29 17:57:06.097345230 +0900
+--- a/src/modules/Makefile.am.moduledir	2018-04-29 05:00:55.000000000 +0900
++++ b/src/modules/Makefile.am	2018-04-29 17:57:06.097345230 +0900
 @@ -19,6 +19,7 @@ LIBS += $(top_builddir)/src/libfm.la
  
  # change default and put modules below usual place
