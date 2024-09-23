@@ -92,6 +92,7 @@ cd build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
+    -Dsnap=false \
     -Ddistributor_logo=/usr/share/pixmaps/slackware_logo_med.png \
     -Ddark_mode_distributor_logo=/usr/share/pixmaps/slackware_whitelogo_med.png \
     -Dstrip=true
