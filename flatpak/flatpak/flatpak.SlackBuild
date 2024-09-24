@@ -110,31 +110,11 @@ cd build
     -Ddbus_config_dir=/usr/share/dbus-1/system.d \
     -Ddocbook_docs=disabled \
     -Dgtkdoc=disabled \
-    -Dman=disabled \
+    -Dman=enabled \
     -Dtests=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
-
-# removed conf option... is this whats killing system installs, Nate?
-#    -Dsystem_fusermount=/usr/sbin/mount.fuse3 \
-
-# disabled manpage generation, too many nested dirs error
-
-# Compress and link manpages, if any:
-if [ -d $PKG/usr/man ]; then
-  ( cd $PKG/usr/man
-    for manpagedir in $(find . -type d -name "man*") ; do
-      ( cd $manpagedir
-        for eachpage in $( find . -type l -maxdepth 1) ; do
-          ln -s $( readlink $eachpage ).gz $eachpage.gz
-          rm $eachpage
-        done
-    gzip -9 *.*
-      )
-    done
-  )
-fi
 
 # Don't ship .la files:
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
@@ -153,6 +133,9 @@ chmod 0755 $PKG/etc/profile.d/flatpak.sh
 
 # Preserve customized profile script:
 mv $PKG/etc/profile.d/flatpak.sh $PKG/etc/profile.d/flatpak.sh.new
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a README.md COPYING NEWS $PKG/usr/doc/$PRGNAM-$VERSION
