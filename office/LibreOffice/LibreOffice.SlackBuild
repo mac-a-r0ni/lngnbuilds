@@ -35,7 +35,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-24.8.1.2}
+VERSION=${VERSION:-24.8.2.1}
 SHORT_VERSION=${VERSION%.*.*}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
@@ -231,7 +231,9 @@ fi
     --with-lang="$LOLANGS" \
     --enable-release-build=yes  \
     --enable-gtk3 \
+    --enable-gtk4 \
     --enable-qt5 \
+    --enable-qt6 \
     --enable-lto \
     --enable-python=system \
     --enable-gio \
