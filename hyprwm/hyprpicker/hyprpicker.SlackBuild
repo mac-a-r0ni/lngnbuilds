@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=hyprpicker
-VERSION=${VERSION:-0.3.0}
+VERSION=${VERSION:-0.4.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -91,7 +91,7 @@ CXXFLAGS="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SYSTEM_LIBRARY_PATH=/usr/lib${LIBDIRSUFFIX} \
-    -DMAN_INSTALL_DIR=/usr/man \
+    -DCMAKE_INSTALL_MANDIR=/usr/man \
     -DCMAKE_BUILD_TYPE=Release .. \
     --no-warn-unused-cli \
     -G Ninja
@@ -99,10 +99,6 @@ CXXFLAGS="$SLKCFLAGS" \
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
-
-# package isn't installing manpages correctly
-mkdir -p $PKG/usr/man
-mv $PKG/man1 $PKG/usr/man
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
