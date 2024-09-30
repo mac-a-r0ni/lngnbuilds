@@ -1,5 +1,5 @@
 PRGNAM="x264"
-VERSION="git_20210613_5db6aa6c"
+VERSION="git_20240227_c24e06c2"
 HOMEPAGE="http://www.videolan.org/developers/x264.html"
 DOWNLOAD="https://slackware.lngn.net/pub/source/x264/x264-git_20240227_c24e06c2.tar.lz"
 MD5SUM="9accb190a563513e12bf74d4f2acf1ae"
