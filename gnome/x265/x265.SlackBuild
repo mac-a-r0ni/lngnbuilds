@@ -88,6 +88,12 @@ for d in 8 $([ "$ARCH" = "x86_64" ] && echo "10 12"); do
   fi
   mkdir build-$d
 done
+for d in 8 $([ "$ARCH" = "aarch64" ] && echo "10 12"); do
+  if [[ -d build-$d ]]; then
+    rm -rf build-$d
+  fi
+  mkdir build-$d
+done
 
 if [ "$ARCH" = "x86_64" ]; then
 
@@ -103,7 +109,8 @@ if [ "$ARCH" = "x86_64" ]; then
     -DEXPORT_C_API=OFF \
     -DENABLE_CLI=OFF \
     -DENABLE_SHARED=OFF \
-    -DCMAKE_BUILD_TYPE=Release ../source
+    -DCMAKE_BUILD_TYPE=Release ../source \
+    -Wno-dev
   make
 
   cd ../build-10
@@ -117,7 +124,8 @@ if [ "$ARCH" = "x86_64" ]; then
     -DEXPORT_C_API=OFF \
     -DENABLE_CLI=OFF \
     -DENABLE_SHARED=OFF \
-    -DCMAKE_BUILD_TYPE=Release ../source
+    -DCMAKE_BUILD_TYPE=Release ../source \
+    -Wno-dev
   make
 
   cd ../build-8
@@ -135,7 +143,60 @@ if [ "$ARCH" = "x86_64" ]; then
     -DEXTRA_LINK_FLAGS="-L." \
     -DLINKED_10BIT=ON \
     -DLINKED_12BIT=ON \
-    -DCMAKE_BUILD_TYPE=Release ../source
+    -DCMAKE_BUILD_TYPE=Release ../source \
+    -Wno-dev
+  make
+
+elif [ "$ARCH" = "aarch64" ]; then
+
+  cd build-12
+
+  cmake \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DLIB_INSTALL_DIR=lib${LIBDIRSUFFIX} \
+    -DHIGH_BIT_DEPTH=ON \
+    -DMAIN12=ON \
+    -DEXPORT_C_API=OFF \
+    -DENABLE_CLI=OFF \
+    -DENABLE_SHARED=OFF \
+    -DCMAKE_BUILD_TYPE=Release ../source \
+    -Wno-dev
+  make
+
+  cd ../build-10
+
+  cmake \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DLIB_INSTALL_DIR=lib${LIBDIRSUFFIX} \
+    -DHIGH_BIT_DEPTH=ON \
+    -DEXPORT_C_API=OFF \
+    -DENABLE_CLI=OFF \
+    -DENABLE_SHARED=OFF \
+    -DCMAKE_BUILD_TYPE=Release ../source \
+    -Wno-dev
+  make
+
+  cd ../build-8
+
+  ln -s ../build-10/libx265.a libx265_main10.a
+  ln -s ../build-12/libx265.a libx265_main12.a
+
+  cmake \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DLIB_INSTALL_DIR=lib${LIBDIRSUFFIX} \
+    -DENABLE_SHARED=ON \
+    -DEXTRA_LIB="x265_main10.a;x265_main12.a" \
+    -DEXTRA_LINK_FLAGS="-L." \
+    -DLINKED_10BIT=ON \
+    -DLINKED_12BIT=ON \
+    -DCMAKE_BUILD_TYPE=Release ../source \
+    -Wno-dev
   make
 
 else
@@ -148,7 +209,8 @@ else
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DLIB_INSTALL_DIR=lib${LIBDIRSUFFIX} \
     -DENABLE_SHARED=ON \
-    -DCMAKE_BUILD_TYPE=Release ../source
+    -DCMAKE_BUILD_TYPE=Release ../source \
+    -Wno-dev
   make
 
 fi
