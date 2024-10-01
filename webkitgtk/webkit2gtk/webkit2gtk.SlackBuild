@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=webkit2gtk
 SRCNAM=webkitgtk
-VERSION=${VERSION:-2.46.0}
+VERSION=${VERSION:-2.46.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -49,16 +49,16 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
 fi
 
 if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686 -g1 -fcf-protection=none -Wno-error"
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686 -g1 -fcf-protection=none"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686 -g1 -fcf-protection=none -Wno-error"
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686 -g1 -fcf-protection=none"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC -g1 -fcf-protection=none -Wno-error"
+  SLKCFLAGS="-O2 -fPIC -march=x86-64 -mtune=generic -g1 -fcf-protection=none"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-O2 -fPIC -g1 -fcf-protection=none -Wno-error"
+  SLKCFLAGS="-O2 -fPIC -march=armv8-a -mtune=generic -g1 -fcf-protection=none"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
@@ -79,6 +79,8 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+patch -p1 < $CWD/3d5373575695b293b8559155431d0079a6153aff.patch
 
 mkdir -p build
 cd build
@@ -122,6 +124,16 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 # remove the unneeded binary since all 3 packages create one
 # we just need the libs for epiphany & gnome
 rm -R $PKG/usr/bin
+
+#add vala bindings
+mkdir -p $PKG/$VALADIR
+echo -e "gtk+-3.0\njavascriptcoregtk-4.1\nlibsoup-3.0\n">$PKG/$VALADIR/webkit2gtk-4.1.deps
+chmod 644 $PKG/$VALADIR/webkit2gtk-4.1.deps
+cp -a $PKG/$VALADIR/webkit2gtk-4.1.deps $PKG/$VALADIR/webkit2gtk-web-extension-4.1.deps
+cp -a $CWD/webkit2gtk-4.1.vapi $PKG/$VALADIR/webkit2gtk-4.1.vapi
+cp -a $CWD/webkit2gtk-web-extension-4.1.vapi $PKG/$VALADIR/webkit2gtk-web-extension-4.1.vapi
+cp -a $CWD/javascriptcoregtk-4.1.vapi $PKG/$VALADIR/javascriptcoregtk-4.1.vapi
+chmod 644 $PKG/$VALADIR/webkit2gtk-4.1.vapi $PKG/$VALADIR/webkit2gtk-web-extension-4.1.vapi $PKG/$VALADIR/javascriptcoregtk-4.1.vapi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a NEWS $PKG/usr/doc/$PRGNAM-$VERSION
