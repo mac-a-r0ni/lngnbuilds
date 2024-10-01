@@ -8,12 +8,13 @@
      |-----handy-ruler------------------------------------------------------|
 d-spy: d-spy (D-Bus Debugger)
 d-spy:
-d-spy: D-Spy can be used to inspect D-Bus interfaces of running programs and 
+d-spy: D-Spy can be used to inspect D-Bus interfaces of running programs and
 d-spy: invoke methods on those interfaces.
 d-spy:
+d-spy: Homepage: https://gitlab.gnome.org/GNOME/d-spy
 d-spy:
 d-spy:
 d-spy:
 d-spy:
-d-spy: https://gitlab.gnome.org/GNOME/d-spy
+d-spy:
 d-spy:

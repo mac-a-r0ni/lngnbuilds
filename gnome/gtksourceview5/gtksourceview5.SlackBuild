@@ -26,7 +26,7 @@
 
 PRGNAM=gtksourceview5
 SRCNAM=gtksourceview
-VERSION=${VERSION:-5.12.1}
+VERSION=${VERSION:-5.14.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 
@@ -88,7 +88,8 @@ cd meson-build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
-    -Ddocumentation=false
+    -Ddocumentation=false \
+    -Dbuild-testsuite=false
   ninja $JOBS || ninja
   DESTDIR=$PKG ninja install
 cd ..

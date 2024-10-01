@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=evolution-data-server
-VERSION=${VERSION:-3.52.4}
+VERSION=${VERSION:-3.54.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -117,9 +117,6 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-#This is patch to fix build with gtkdoc from Gentoo
-#patch -p1 < $CWD/3.36.5-gtk-doc-1.32-compat.patch
-
 mkdir -p build
 cd build
   cmake \
@@ -133,7 +130,7 @@ cd build
     -DENABLE_INSTALLED_TESTS="$TESTSP" \
     -DENABLE_GTK_DOC="$GTKDOCP" \
     -DWITH_SYSTEMDUSERUNITDIR=no \
-    -DWITH_GWEATHER4=ON \
+    -DWITH_WEATHER=ON \
     -DENABLE_EXAMPLES=OFF \
     -DBUILD_TESTING=OFF \
     -DCMAKE_BUILD_TYPE=Release ..\

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Slackware build script for gnome-menus.
+# Slackware build script for gnome-menus
 #
 # Copyright 2020 Donald Cooley, South Haven, Indiana, USA
 # Copyright 2015-2019 Edinaldo P. Silva, Rio de Janeiro, Brazil.
@@ -113,6 +113,7 @@ rm -f $PKG/usr/lib*/*.la
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/slack-required > $PKG/install/slack-required
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

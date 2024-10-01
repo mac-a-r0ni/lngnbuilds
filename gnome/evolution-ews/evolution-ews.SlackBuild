@@ -25,8 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=evolution-ews
-VERSION=${VERSION:-3.52.4}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-3.54.0}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
