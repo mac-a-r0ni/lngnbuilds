@@ -30,7 +30,6 @@ VERSION=${VERSION:-2.46.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
-VALADIR="usr/share/"$( ls /usr/share/|grep "vala-"|awk -F"/" '{print $1}' )"/vapi"
 
 TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
@@ -125,16 +124,6 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 # remove the unneeded binary since all 3 packages create one
 # we just need the libs for epiphany & gnome
 rm -R $PKG/usr/bin
-
-#add vala bindings
-mkdir -p $PKG/$VALADIR
-echo -e "gtk+-3.0\njavascriptcoregtk-4.0\nlibsoup-2.0\n">$PKG/$VALADIR/webkit2gtk-4.0.deps
-chmod 644 $PKG/$VALADIR/webkit2gtk-4.0.deps
-cp -a $PKG/$VALADIR/webkit2gtk-4.0.deps $PKG/$VALADIR/webkit2gtk-web-extension-4.0.deps
-cp -a $CWD/webkit2gtk-4.0.vapi $PKG/$VALADIR/webkit2gtk-4.0.vapi
-cp -a $CWD/webkit2gtk-web-extension-4.0.vapi $PKG/$VALADIR/webkit2gtk-web-extension-4.0.vapi
-cp -a $CWD/javascriptcoregtk-4.0.vapi $PKG/$VALADIR/javascriptcoregtk-4.0.vapi
-chmod 644 $PKG/$VALADIR/webkit2gtk-4.0.vapi $PKG/$VALADIR/webkit2gtk-web-extension-4.0.vapi $PKG/$VALADIR/javascriptcoregtk-4.0.vapi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a NEWS $PKG/usr/doc/$PRGNAM-$VERSION
