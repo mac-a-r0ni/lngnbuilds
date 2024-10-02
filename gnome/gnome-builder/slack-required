@@ -9,6 +9,6 @@ template-glib
 webkit2gtk
 cmark
 libgit2-glib
-gspell
+libspelling
 sysprof
 webkitgtk6.0
