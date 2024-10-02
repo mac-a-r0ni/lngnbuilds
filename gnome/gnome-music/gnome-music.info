@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-music/47/gnome-music-47.0.tar
 MD5SUM="1ab21b2d026f25ef54332992f36dd55a"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gnome-online-accounts grilo grilo-plugins libadwaita libmediaart tracker"
+REQUIRES="gnome-online-accounts grilo grilo-plugins libadwaita libmediaart localsearch"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
