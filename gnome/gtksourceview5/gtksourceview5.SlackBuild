@@ -26,7 +26,7 @@
 
 PRGNAM=gtksourceview5
 SRCNAM=gtksourceview
-VERSION=${VERSION:-5.14.0}
+VERSION=${VERSION:-5.14.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 
@@ -42,7 +42,6 @@ CWD=$(pwd)
 TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
-JOBS=${JOBS:-" -j$(expr $(getconf _NPROCESSORS_ONLN) \* 2 ) "}
 
 if [ "$ARCH" = "i586" ]; then
   SLKCFLAGS="-O2 -march=i586 -mtune=i686"
@@ -90,8 +89,9 @@ cd meson-build
     --sysconfdir=/etc \
     -Ddocumentation=false \
     -Dbuild-testsuite=false
-  ninja $JOBS || ninja
-  DESTDIR=$PKG ninja install
+
+  "${NINJA:=ninja}"
+  DESTDIR=$PKG $NINJA install
 cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
