@@ -2,7 +2,7 @@
 
 # Slackware build script for xdg-desktop-portal-hyprland
 
-# Copyright 2023 Jay Lanagan (j@lngn.net), Detroit, MI, USA,
+# Copyright 2023-2024 Jay Lanagan (j@lngn.net), Detroit, MI, USA,
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -89,7 +89,8 @@ cd build
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib${LIBDIRSUFFIX} \
+    -DCMAKE_INSTALL_LIBDIR=/usr/lib${LIBDIRSUFFIX} \
+    -DCMAKE_INSTALL_LIBEXECDIR=/usr/libexec \
     -DCMAKE_BUILD_TYPE=Release .. \
     -G Ninja
 
@@ -97,7 +98,6 @@ cd build
   DESTDIR=$PKG $NINJA install
 cd ..
 
-#install -Dm0755 -t $PKG/usr/bin $TMP/$PRGNAM-$VERSION/hyprland-share-picker/build/hyprland-share-picker
 install -Dm0644 -t $PKG/usr/share/xdg-desktop-portal $CWD/hyprland-portals.conf
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
