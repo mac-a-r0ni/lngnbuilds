@@ -1,5 +1,5 @@
 PRGNAM="open-vm-tools"
-VERSION="12.5.0-24276846"
+VERSION="12.5.0_24276846"
 HOMEPAGE="https://github.com/vmware/open-vm-tools"
 DOWNLOAD="https://github.com/vmware/open-vm-tools/releases/download/stable-12.5.0/open-vm-tools-12.5.0-24276846.tar.gz"
 MD5SUM="e0f334b142a73a57de5d1adfb5173f12"
