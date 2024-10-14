@@ -5,3 +5,4 @@ xdg-dbus-proxy
 unifdef
 libavif
 libjxl
+sysprof
