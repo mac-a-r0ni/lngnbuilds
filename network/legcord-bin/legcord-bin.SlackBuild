@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for discord
+# Slackware build script for Legcord
 #
 # Copyright 2016-2021  Jeremy Hansen <jebrhansen+SBo -at- gmail.com>
 # All rights reserved.
@@ -24,9 +24,9 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=armcord-bin
-SRCNAM=ArmCord
-VERSION=${VERSION:-3.3.1}
+PRGNAM=legcord-bin
+SRCNAM=Legcord
+VERSION=${VERSION:-1.0.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -50,6 +50,7 @@ fi
 TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
+
 if [ "$ARCH" = "i586" ]; then
   DEBARCH="i386"
   LIBDIRSUFFIX=""
@@ -86,7 +87,7 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/bin
-( cd $PKG/usr/bin ; ln -sf /opt/$SRCNAM/armcord armcord )
+( cd $PKG/usr/bin ; ln -sf /opt/$SRCNAM/legcord legcord )
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild

@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-armcord-bin: armcord-bin (custom Discord client)
-armcord-bin:
-armcord-bin: armcord is a custom client designed to enhance your Discord
-armcord-bin: experience while keeping everything lightweight.
-armcord-bin:
-armcord-bin:
-armcord-bin: Homepage: https://github.com/ArmCord/ArmCord
-armcord-bin:
-armcord-bin:
-armcord-bin:
-armcord-bin:
+legcord-bin: legcord-bin (custom Discord client)
+legcord-bin:
+legcord-bin: legcord is a custom client designed to enhance your Discord
+legcord-bin: experience while keeping everything lightweight.
+legcord-bin:
+legcord-bin:
+legcord-bin: Homepage: https://legcord.app
+legcord-bin:
+legcord-bin:
+legcord-bin:
+legcord-bin:
