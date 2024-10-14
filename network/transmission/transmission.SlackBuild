@@ -24,6 +24,7 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# 20240730 bkw: update for v4.0.6.
 # 20231219 bkw: update for v4.0.5, minor man page tweaks.
 # 20230912 bkw: update for v4.0.4.
 # 20230510 bkw: update for v4.0.3. remove the warning about D-Bus from README,
@@ -129,13 +130,39 @@ chown -R root:root .
 find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
         \! -perm /111 -a \! -perm 644 -a -exec chmod 644 {} \+
 
-patch -p1 < $CWD/miniupnpc.patch || exit
-patch -p1 < $CWD/system-gtest.patch || exit
+# 20231219 bkw: make the man pages slightly nicer looking: replace
+# 'BSD General Commands Manual' with 'SlackBuilds.org', and replace
+# the 'BSD' at the bottom with the version number.
+for i in $( find . -maxdepth 2 -name 'transmission*.1' ); do
+  sed -i -e '/^\.Os/d' \
+         -e '/^\.Dt/s,1 *$,\\\&1 "slackware.lngn.net",' \
+         -e '/^\.Dt/a.Os '$VERSION \
+      $i
+done
 
+# 20240731 bkw: vendor miniupnpc src in wrong place...
+if [ ! -e third-party/miniupnpc/CMakeLists.txt ]; then
+  cp -a third-party/miniupnp/miniupnpc/* third-party/miniupnpc/
+fi
+
+# 20240731 bkw: USE_SYSTEM_*=OFF for everything that ships in the
+# third-party/ dir. Avoids surprises (aka hidden dependencies), and
+# also, makes transmission use the versions it was tested with.
 mkdir -p build
 cd build
   cmake \
     -DREBUILD_WEB=OFF \
+    -DUSE_SYSTEM_EVENT2=OFF \
+    -DUSE_SYSTEM_DEFLATE=OFF \
+    -DUSE_SYSTEM_DHT=OFF \
+    -DUSE_SYSTEM_MINIUPNPC=OFF \
+    -DUSE_SYSTEM_NATPMP=OFF \
+    -DUSE_SYSTEM_UTP=OFF \
+    -DUSE_SYSTEM_B64=OFF \
+    -DUSE_SYSTEM_PSL=OFF \
+    -DWITH_SYSTEMD=OFF \
+    -DUSE_GTK_VERSION=${GTKVER:-AUTO} \
+    -DUSE_QT_VERSION=${QTVER:-AUTO} \
     -DENABLE_DAEMON=$DAEMOPT \
     -DENABLE_QT=$QTOPT \
     -DENABLE_GTK=$GTKOPT \
@@ -146,14 +173,10 @@ cd build
     -DLIB_SUFFIX=${LIBDIRSUFFIX} \
     -DCMAKE_INSTALL_MANDIR=/usr/man \
     -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION \
-    -DUSE_SYSTEM_MINIUPNPC=ON \
-    -DUSE_SYSTEM_NATPMP=ON \
     -DCMAKE_BUILD_TYPE=Release ..
-  make -j5 VERBOSE=1
+  make VERBOSE=1
   make install/strip DESTDIR=$PKG
 cd ..
-# commented out to see if gtk3 version feels more 'standard'.
-#    -DUSE_GTK_VERSION=4 \
 
 gzip -9 $PKG/usr/man/man?/*
 
