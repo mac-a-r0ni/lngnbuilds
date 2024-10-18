@@ -71,9 +71,11 @@ elif [ "$ARCH" = "i686" ]; then
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-O2 -march=x86-64 -mtune=generic -fPIC"
+  LDFLAGS="-lz"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
   SLKCFLAGS="-O2 -march=armv8-a -mtune=generic -fPIC"
+  LDFLAGS="-lz"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
@@ -214,6 +216,7 @@ else
   boost="--with-system-boost"
 fi
 
+export qt6_libexec_dirs="/usr/lib$LIBDIRSUFFIX/qt6/bin"
 
 ./configure \
     CFLAGS="$SLKCFLAGS" \
