@@ -27,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=seahorse
-VERSION=${VERSION:-43.0}
+VERSION=${VERSION:-47.0.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -82,10 +82,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-patch -Np1 -i $CWD/gpgme.patch
-patch -Np1 -i $CWD/pkcs11.patch
-patch -Np1 -i $CWD/seahorse-ssh-return-type.patch
-patch -Np1 -i $CWD/ssh-key_parsing.patch
+#patch -Np1 -i $CWD/gpgme.patch
+#patch -Np1 -i $CWD/pkcs11.patch
+#patch -Np1 -i $CWD/seahorse-ssh-return-type.patch
+#patch -Np1 -i $CWD/ssh-key_parsing.patch
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
