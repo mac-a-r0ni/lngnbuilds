@@ -26,12 +26,12 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=webkit2gtk4.1
 SRCNAM=webkitgtk
-VERSION=${VERSION:-2.46.1}
+VERSION=${VERSION:-2.46.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
-TMP=${TMP:-/tmp/lngn}
+TMP=${TMP:-/home/tmp}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
