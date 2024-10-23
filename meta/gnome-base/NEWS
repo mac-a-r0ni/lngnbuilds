@@ -1,0 +1,772 @@
+The following modules have a new version:
+ - epiphany (47.0 => 47.1)
+ - evolution-data-server (3.54.0 => 3.54.1)
+ - gjs (1.82.0 => 1.82.1)
+ - glib (2.82.0 => 2.82.2)
+ - gnome-bluetooth (47.0 => 47.1)
+ - gnome-builder (47.0 => 47.2)
+ - gnome-clocks (46.0 => 47.0)
+ - gnome-console (47.0 => 47.1)
+ - gnome-contacts (47.alpha => 47.0) (*)
+ - gnome-control-center (47.0.1 => 47.1.1)
+ - gnome-initial-setup (47.0 => 47.1)
+ - gnome-maps (47.0 => 47.1)
+ - gnome-online-accounts (3.52.0 => 3.52.1)
+ - gnome-remote-desktop (47.0 => 47.1)
+ - gnome-session (46.0 => 47.0.1)
+ - gnome-shell (47.0 => 47.1)
+ - gnome-shell-extensions (47.0 => 47.1)
+ - gnome-software (47.0 => 47.1)
+ - gnome-text-editor (47.0 => 47.1)
+ - gtk (4.16.1 => 4.16.3)
+ - gtksourceview (5.14.0 => 5.14.1)
+ - gupnp (1.6.6 => 1.6.7)
+ - gvfs (1.56.0 => 1.56.1)
+ - libadwaita (1.6.0 => 1.6.1)
+ - libdex (0.8.0 => 0.8.1)
+ - libgsf (1.14.52 => 1.14.53)
+ - libpanel (1.8.0 => 1.8.1)
+ - librsvg (2.59.0 => 2.59.1)
+ - loupe (47.0 => 47.1)
+ - mutter (47.0 => 47.1)
+ - rygel (0.44.0 => 0.44.1)
+ - snapshot (47.0.1 => 47.1) (*)
+ - vte (0.78.0 => 0.78.1) (*)
+ - xdg-desktop-portal-gnome (47.0 => 47.1)
+(*) No summarized news available
+
+The following modules weren't upgraded in this release:
+   adwaita-icon-theme, at-spi2-core, baobab, calls, cantarell-fonts, d-spy,
+   dconf, dconf-editor, devhelp, evince, folks, gcab, gcr, gdk-pixbuf, gdm,
+   geocode-glib, gexiv2, gi-docgen, glib-networking, glibmm, gnome-autoar,
+   gnome-backgrounds, gnome-boxes, gnome-calculator, gnome-calendar,
+   gnome-characters, gnome-color-manager, gnome-connections, gnome-desktop,
+   gnome-disk-utility, gnome-font-viewer, gnome-keyring, gnome-logs,
+   gnome-menus, gnome-music, gnome-settings-daemon, gnome-system-monitor,
+   gnome-tour, gnome-user-docs, gnome-user-share, gnome-weather,
+   gobject-introspection, gom, grilo, grilo-plugins,
+   gsettings-desktop-schemas, gsound, gspell, gssdp, gtk+, gtk-doc, gtk-vnc,
+   gtkmm, gupnp-av, gupnp-dlna, json-glib, jsonrpc-glib, libgee, libgtop,
+   libgweather, libgxps, libhandy, libmediaart, libnma, libnotify, libpeas,
+   libsecret, libshumate, libsigc++, libsoup, localsearch, mm-common,
+   nautilus, orca, pango, pangomm, phodav, pyatspi, pygobject, rest,
+   simple-scan, sushi, sysprof, tecla, template-glib, tinysparql, totem,
+   totem-pl-parser, vala, yelp, yelp-tools, yelp-xsl
+
+========================================
+  epiphany
+========================================
+
+47.1 - October 14, 2024
+=======================
+
+ * Allow adding bookmarks in incognito mode (#1250)
+ * Disable tab navigation shortcuts in tab overview (#2148, Arak)
+ * Don't store page snapshots in web app mode (#2442, Arak)
+ * Fix ephy-about suggestions not using pretty URL (#2451, Arak)
+ * Fix crash in save password popover (#2464)
+ * Fix crash when opening multiple preferences or history dialogs (#2468, Arak)
+ * Fix crash when long pressing page (#2477)
+ * Fix target origin property when using CSV password import (#2479, Harshavardhan Navalli)
+ * Add tooltips to bookmarks tag rows (#2480, Arak)
+ * Fix crash in history dialog (#2488, Arak)
+ * Improve certificate selection dialog (!1625)
+ * Fix non-translatable strings in autofill preferences (!1628, Aleksandr Melman)
+ * Stop setting web view background color (!1630)
+ * Fix failure to unregister autofill message handler (!1635)
+
+
+========================================
+  evolution-data-server
+========================================
+
+Evolution-Data-Server 3.54.1 2024-10-18
+---------------------------------------
+
+Bug Fixes:
+	I#562 - Pass GError instead of CamelException to camel_movemail_solaris (Niveditha Rau)
+	I#563 - Fix argument types in ENABLE_BROKEN_SPOOL code (Alan Coopersmith)
+	I#564 - Use GIConv instead of iconv_t with iconv wrappers (Alan Coopersmith)
+	I#566 - ESoupSession: Sometimes accesses server without OAuth2 token
+
+Translations:
+	Juliano de Souza Camargo (pt_BR)
+
+
+========================================
+  gjs
+========================================
+
+Version 1.82.1
+--------------
+
+- Closed bugs and merge requests:
+
+  * gnome-shell crash when switching user after upgrade from Fedora 40 to Fedora
+    41 [#647, !955, Philip Chimento]
+
+
+========================================
+  glib
+========================================
+
+Overview of changes in GLib 2.82.2, 2024-10-17
+==============================================
+
+* Bugs fixed:
+  - #3480 glib/gvariant: incorrect use of G_ANALYZER_ANALYZING (Christian
+    Hergert)
+  - #3489 Multicast cannot be joined on Mac OS on non-default interface
+    (Nirbheek Chauhan)
+  - !4285 Update Catalan translation
+  - !4306 Backport !4291 “glib/gvariant: Fix check for G_ANALYZER_ANALYZING” to
+    glib-2-82
+  - !4314 Backport !4312 “macos: Fix URL launcher” to glib-2-82
+  - !4325 Backport !4176 “gopenuriportal: Fix two memory leaks” to glib-2-82
+  - !4336 Backport !4333 “gio: Fix multicast iface selection on macOS” to
+    glib-2-82
+  - !4349 Backport !4348 “gdatainputstream: Fix length return value on UTF-8
+    validation failure“ to glib-2-82
+
+* Translation updates:
+  - Catalan (Jordi Mas)
+
+
+Overview of changes in GLib 2.82.1, 2024-09-19
+==============================================
+
+* Fix a potential buffer overflow in `GSocks4aProxy` (#3461, work by
+  Michael Catanzaro)
+
+* Bugs fixed:
+  - #3456 Test /unix-mounts/get-mount-entries fails unless libmount is enabled
+    (Philip Withnall)
+  - #3461 Buffer overflow in set_connect_msg() (Michael Catanzaro)
+  - !4220 Backport !4217 “tests: Test against a sample mtab file in unix-mounts
+    for getmntent()” to glib-2-82
+  - !4221 Backport !4219 “tests: Run lint tests with detected bash” to glib-2-82
+  - !4229 Update Polish translation for glib-2-82
+  - !4230 Update Czech translation [glib-2-82]
+  - !4231 Update Portuguese translation
+  - !4233 Update fa.po
+  - !4234 Update Brazilian Portuguese translation
+  - !4238 Backport !4237 “Update french translation” to glib-2-82
+  - !4240 Update Galician translations for glib-2-82
+  - !4241 Update German translation
+  - !4251 Update Bulgarian translation
+  - !4255 Update British English translation
+  - !4258 Update Hungarian translation
+  - !4259 Update Indonesian translation
+  - !4263 Updated Lithuanian translation
+  - !4265 Update Danish translation (2-82)
+  - !4270 Update Russian translation for 2-82
+  - !4271 Backport !4269 “docs(glib): Fix link in string-utils ref” to glib-2-82
+  - !4274 Update Georgian translation (glib-2-82)
+  - !4276 Backport !3965 “Move to Apple Silicon based runner” to glib-2-82
+  - !4282 Backport !4281 “gsocks4aproxy: Fix a single byte buffer overflow in
+    connect messages” to glib-2-82
+
+* Translation updates:
+  - Bulgarian (twlvnn kraftwerk)
+  - Czech (AsciiWolf)
+  - Danish (Ask Hjorth Larsen)
+  - English (United Kingdom) (Bruce Cowan)
+  - French (Vincent Chatelain)
+  - Galician (Fran Diéguez)
+  - Georgian (NorwayFun)
+  - German (Tim Sabsch)
+  - Hungarian (Balázs Úr)
+  - Indonesian (Andika Triwidada)
+  - Lithuanian (Aurimas Černius)
+  - Persian (Danial Behzadi)
+  - Polish (Piotr Drąg)
+  - Portuguese (Hugo Carvalho)
+  - Portuguese (Brazil) (Rafael Fontenelle)
+  - Russian (jtux270)
+
+
+
+========================================
+  gnome-bluetooth
+========================================
+
+ver 47.1:
+This version contains a fix for the devices page staying empty on load
+in some circumstances, as well as translation updates.
+
+
+========================================
+  gnome-builder
+========================================
+
+# GNOME Builder 47.2
+
+ * Fix private flatpak installation directory when using FLATPAK_CONFIG_DIR.
+   This ensures previously "missing" runtimes are found.
+ * Allow showing new greeter when a greeter is busy cloning/etc.
+ * Fix GError usage in codespell plugin when disabled
+ * Fix python3 as language identifier with pylsp
+ * Fix cmake with use from Flatpak
+ * Support SourceKit for Swift 6
+ * Use GtkTextBuffer commit_notify for plugins which require accurate
+   notification of buffer changes such as git, highlighting, and IdeLspClient.
+ * Translation updates
+
+# GNOME Builder 47.1
+
+Changes since 47.0
+
+ * libspelling fixes
+ * Safety fixes in git change monitoring
+ * Use gtk_window_present() to better handle strict-mode window ordering
+ * Translation updates
+
+
+========================================
+  gnome-clocks
+========================================
+
+gnome-clocks 47.0
+=================
+ * Port to new libadwaita widgets
+ * Translations updates
+
+gnome-clocks 46.0
+=================
+ * Translations updates
+
+
+========================================
+  gnome-console
+========================================
+
+Version 47.1
+~~~~~~~~~~~~
+
+Some minor build issues on certain platforms have been ironed out
+
+
+========================================
+  gnome-control-center
+========================================
+
+==============
+Version 47.1.1
+==============
+
+- Fix crash on display scales > 1 due to conflicting type registration
+
+============
+Version 47.1
+============
+
+- Various translation updates
+- Require gsettings-desktop-schemas >= 47.0
+
+About
+- Allow FQDN hostnames
+
+Appearance
+- Fix thumbnailing of backgrounds causing OOM kills
+
+Date and Time
+- Fix resize issue in the time format row when shown in small window sizes
+
+Online Accounts
+- Fix untranslated account provider info string
+
+Region and Language
+- Update language row after closing language selector
+
+Remote Desktop
+- Hide "Remote Desktop" row when gnome-remote-desktop is not available
+
+Wacom
+- Don't crash when handling an unknown stylus ID
+- Don't show Map Buttons for fallback devices
+- Handle all external remotes like an external TV remote-like device
+- Make assets recolaborable, supporting dark-style, high-contrast, and accent colors
+- Support HDPI for tablet/stylus illustration images
+
+
+========================================
+  gnome-initial-setup
+========================================
+
+47.1
+----
+
+The (hidden) password hint field is now labelled as such, rather than as a
+“password reminder”.
+
+Translation updates:
+
+- Belarusian (Vasil Pupkin)
+- Bulgarian (Alexander Shopov)
+- Chinese (China) (Luming Zh)
+- Czech (Daniel Rusek)
+- Finnish (Jiri Grönroos)
+- Georgian (Ekaterine Papava)
+- German (Jürgen Benvenuti)
+- Latvian (Rūdolfs Mazurs)
+- Occitan (post 1500) (Quentin PAGÈS)
+- Persian (Danial Behzadi)
+- Polish (Piotr Drąg)
+- Portuguese (Hugo Carvalho)
+- Portuguese (Brazil) (Juliano de Souza Camargo)
+- Russian (Artur S0)
+- Slovenian (Martin)
+- Swedish (Anders Jonsson)
+- Ukrainian (Yuri Chornoivan)
+
+
+========================================
+  gnome-maps
+========================================
+
+47.1 - Oct 11, 2024
+=========================
+
+Changes since 47.0
+ - Fix leaking map bubble popover widgets
+ - Fix showing public transit operator names containing characters needing
+   markup-escaping
+
+Added/updated/fixed translations
+ - Latvian
+ - Brazilian Portuguese
+ - Kabyle
+
+All contributors to this release
+Athmane MOKRAOUI <butterflyoffire@protonmail.com>
+Jordi Mas i Hernandez <jmas@softcatala.org>
+Juliano de Souza Camargo <julianosc@protonmail.com>
+Marcus Lundblad <ml@dfupdate.se>
+Rūdolfs Mazurs <alta.liepa@gmail.com>
+
+
+========================================
+  gnome-online-accounts
+========================================
+
+Overview of changes in 3.52.1
+=============================
+* Bugs fixed:
+  - !285 goakerberosprovider: don't assume all errors are auth errors
+  - !285 goaoauthprovider: fix expected NULL GError
+
+* Translation updates:
+  - Catalan (Jordi Mas i Hernandez)
+  - Latvian (Rūdolfs Mazurs)
+  - Thai (Aefgh Threenine)
+
+
+========================================
+  gnome-remote-desktop
+========================================
+
+47.1
+====
+* General code improvements
+
+Contributors:
+  Pascal Nowack
+
+Translators:
+  Hugo Carvalho [pt], Jordi Mas i Hernandez [ca],
+  Juliano de Souza Camargo [pt_BR], Rūdolfs Mazurs [lv],
+  Ahmed Noor Kader Mustajir Md Eusoff [ms]
+
+
+
+========================================
+  gnome-session
+========================================
+
+==============
+Version 47.0.1
+==============
+	Add back gnome-session-ctl (oops)
+
+============
+Version 47.0
+============
+	Allow to disable X11 sessions
+	CI updates
+	Translation updates
+
+
+========================================
+  gnome-shell
+========================================
+
+47.1
+====
+* Improve quick settings accessibility [Lukáš; !3477, !3481, !3484, !3485]
+* Use accent color in tablet configuration UI [Alice; !3480]
+* Improve accuracy of inset box shadows [Daniel; !3488]
+* Fix `PopupSwitchMenuItem::toggled` passing wrong state [Andrew; !3493]
+* Consider text direction when handling arrow keys in sliders [Sundeep; !3500]
+* Fix layout issues with new dialog style [Sam; !3473]
+* Fix uneven padding in notification headers [Sam; !3486]
+* Fixed crash [Florian; #7912]
+* Misc. cleanups and bug fixes [Florian, Marco, Bilal; !3478, !3479, !3490,
+  !3495, !3499, !3504, !3505, !3507, !3508, !3506, !3511, !3514]
+
+Contributors:
+  Bilal Elmoussaoui, Sam Hewitt, Sundeep Mediratta, Alice Mikhaylenko,
+  Florian Müllner, Marco Trevisan (Treviño), Lukáš Tyrychtr, Daniel van Vugt,
+  Andrew Zaech
+
+Translators:
+  Aefgh Threenine [th], Daniel Mustieles [es]
+
+
+========================================
+  gnome-shell-extensions
+========================================
+
+47.1
+====
+* classic: Add missing top-bar indicators [Florian; !339]
+* window-list: Fix window state styling [Florian; !342]
+* window-list: Fix "ignore-workspace" setting getting reset [Florian; !341]
+* Misc. bug fixes and cleanups [Florian; !337, !338, !345, !347, !349]
+
+Contributors:
+  Florian Müllner
+
+
+========================================
+  gnome-software
+========================================
+
+Version 47.1
+~~~~~~~~~~~~
+Released: 2024-10-10
+
+This is a stable release with the following changes:
+ * Fix crash in snap plugin when launching apps
+ * Fix display of versions for packages being installed as part of an update
+ * Various minor improvements to the review submission dialog
+ * Fix a crash in the DKMS plugin
+
+This release also updates translations:
+ * Catalan (Jordi Mas i Hernandez, Jordi Mas)
+ * French (Guillaume Bernard)
+ * Indonesian (Andika Triwidada)
+ * Russian (Artur S0)
+ * Slovak (Jose Riha)
+ * Thai (Aefgh Threenine)
+
+
+========================================
+  gnome-text-editor
+========================================
+
+# Text Editor 47.1
+
+ * Fix document to default to implicit trailing newlines
+ * Improve text wrapping for banners on small form factors
+
+
+========================================
+  gtk
+========================================
+
+Overview of Changes in 4.16.3, 04-10-2024
+=========================================
+
+* GtkScrolledWindow
+ - Fix criticals in size allocation code
+
+* GtkFileChooser
+ - Fix a crash in the portal code
+
+* GtkPicture
+ - Avoid unnecessary resizes
+
+* GtkVideo
+ - Make dmabufs work without GL
+
+* Accessibility:
+ - Always realized non-widget accessibles
+
+* Wayland:
+ - Improve settings portal handling
+ - Improve fallback for cursor themes
+ - Sync default values for settings with schema defaults
+
+* Translation updates:
+ Brazilian Portuguese
+ Galician
+ Swedish
+
+
+Overview of Changes in 4.16.2, 25-09-2024
+=========================================
+
+* GtkLabel:
+ - Fix centered text in RTL
+
+* Gsk:
+ - Speed up some Vulkan operations
+ - Improve startup speed by avoiding initialization
+   of GL and Vulkan in most cases
+ - Reduce critials at startup to warnings
+ - Fix a crash on startup with some Vulkan drivers
+ - Fix a big texture leak in NGL
+
+* Gdk:
+ - Speed up memory format conversions
+
+* Wayland:
+ - Be more careful with mimetypes during DND or copy-paste
+
+* Tools:
+ - builder-tool: Improve conversion of boxes
+
+* Translation updates:
+ Brazilian Portuguese
+ Bulgarian
+ Catalan
+ Chinese (China)
+ Georgian
+ German
+ Hebrew
+ Indonesian
+ Persian
+ Polish
+ Portuguese
+ Slovenian
+ Spanish
+ Turkish
+ Ukrainian
+
+
+Overview of Changes in 4.16.1, 16-09-2024
+
+========================================
+  gtksourceview
+========================================
+
+News in 5.14.1, 2024-10-04
+--------------------------
+
+This is a bug-fix release for GNOME 47
+
+ * Ensure you cannot show context menu from GtkSourceMap which otherwise
+   has a limited FontMap containing only the BuilderBlocks font.
+
+
+========================================
+  gupnp
+========================================
+
+1.6.7 (stable)
+==============
+ - Fix compatiblity with libxml2 2.12.x
+ - Improve reproducability
+ - ControlPoint: Fix re-scan
+ - ContextManager: Fix boot-id update
+ - Context: Fix crash if served URI is not an IP address
+
+All contributors to this release:
+ - Jens Georg <mail@jensge.org>
+ - Markus Volk <f_l_k@t-online.de>
+
+
+========================================
+  gvfs
+========================================
+
+Major changes in 1.56.1
+=======================
+* udisks2: Increasing reference count when updating volume to fix crashes (Ondrej Holy)
+* onedrive: Use names instead of id for events to fix monitoring (Jan-Michael Brummer)
+* onedrive: Add missing replace stream to fix crashes (Jan-Michael Brummer)
+* onedrive: Fix double free during cache rebuild to fix crashes (Jan-Michael Brummer)
+* dav: Recognize the 409 status to fix creation of parent directories (Michael Terry)
+* Translation updates (GNOME Translation Project contributors)
+
+
+========================================
+  libadwaita
+========================================
+
+=============
+Version 1.6.1
+=============
+
+- Fix meson syntax in readme
+- AdwAboutDialog/Window
+  - Fix natural width
+- AdwAlertDialog
+  - Fix a crash when setting content-width/height before present()
+- AdwBottomSheet
+  - Fix natural height
+  - Fix criticals in dispose in some cases
+- AdwBreakpointBin
+  - Fix natural size
+- AdwClamp
+  - Fix get/set_unit() version
+- AdwExpanderRow
+  - Make suffix spacing match action rows and entry rows
+- AdwTabBar
+  - Don't select tabs when clicking close or indicator buttons
+  - Only handle middle clicks started and ended on the same tab
+- AdwTabOverview
+  - Only handle middle clicks started and ended on the same thumbnail
+- AdwViewSwitcher
+  - Have a minimum height outside header bars
+- Docs
+  - Indicate and explain out of gamut colors on CSS variables page
+  - Update deprecated meson syntax
+  - Typo fixes
+  - Link clamp/layout/scrollable docs between each other
+- Translation updates
+  - Latvian
+  - Thai
+
+
+========================================
+  libdex
+========================================
+
+libdex 0.8.1
+============
+
+This is a stable release for GNOME 47.0
+
+ * Fix disabling of assertions in production builds
+
+
+========================================
+  libgsf
+========================================
+
+libgsf 1.14.53
+
+Morten:
+	* Compilation fixes for libxml 2.13
+	* Fix ABR in gsf-vba-dump.
+	* Teach gsf (the tool) to handle odf properties.
+	* Fix integer overflows affecting memory allocation.  [#34]
+
+ThomasK:
+	* Add missing "DocumentStatus" ole2 property.  [#35]
+
+Zander Brown:
+	* Avoid some undefined C behaviour in overflow checks.
+	(Part of merge request 16; blame Morten for problems with
+	the hand edits.)
+
+--------------------------------------------------------------------------
+
+========================================
+  libpanel
+========================================
+
+libpanel 1.8.1
+==============
+
+ * Fix DnD of widgets in cases where libadwaita holds reference
+   via AdwBin.
+
+
+========================================
+  librsvg
+========================================
+
+Version 2.59.1
+==============
+
+librsvg crate version 2.59.1
+
+librsvg-rebind crate version 0.1.0
+
+Two mitigations for crashes found throuh fuzz testing:
+
+- #1088, #1118 - Cairo is easy to crash by giving it path coordinates
+  that are outside of the range that it can represent internally with
+  its fixed-point arithmetic.  Fuzzers usually produce SVGs with very
+  large numbers for coordinates, which overflow Cairo's arithmetic.
+  This is just a *mitigation*, not a complete fix: librsvg will now
+  check if path coordinates are outside of Cairo's supported range,
+  and it will not render shapes with problematic coordinates.
+  However, fuzzers may still produce coordinates that are in range but
+  that still make Cairo crash.  I am starting to learn Cairo's code to
+  see if this can be fixed gradually.
+
+
+
+========================================
+  loupe
+========================================
+
+## 47.1 (2024-10-16)
+
+### Added
+
+- Add `<branding><color>`s instead of just using `GnomeSoftware::key-colors`. That they weren't set was an oversight.
+
+### Fixed
+
+- Make the string "Error Details" translatable.
+- Require glycin 2.0.1 crate to detect SVGZ files properly.
+
+
+========================================
+  mutter
+========================================
+
+47.1
+====
+* gwakeup: Reduce wake-ups to only first item in queue [Christian; !4007]
+* x11: Reduce chances XPending does recvmsg() syscall [Christian; !4006]
+* Fix grabbing tablet devices [Jonas; !4033]
+* Fix misplaced windows and random resizes on scaled monitors [Jonas; !4041]
+* Fix explicit sync with virtual monitors w/o pipewire streams [Doğukan; !4056]
+* Improve detecting preferred primary devices [Kamil; !4055]
+* Fixed crashes [Michel, Jonas, Daniel, José, Jason, Bilal; !4028, !4032,
+  !4019, !4030, !4029, !4059, !4070, !4034]
+* Misc. bug fixes and cleanups [Sebastian, Florian, Jonas, José, Michel;
+  !4036, !4040, !4016, !3926, !4031, !4047, !4058, !4068, !3980, !3980]
+
+Contributors:
+  Jonas Ådahl, Michel Dänzer, Bilal Elmoussaoui, José Expósito, Jason Gerecke,
+  Christian Hergert, Doğukan Korkmaztürk, Florian Müllner, Kamil Szczęk,
+  Joan Torres, Daniel van Vugt, Sebastian Wick
+
+Translators:
+  Vincent Chatelain [fr], Jordi Mas i Hernandez [ca], Daniel Mustieles [es],
+  Jürgen Benvenuti [de]
+
+
+========================================
+  rygel
+========================================
+
+0.44.1 (stable)
+===============
+
+Server:
+ - Fix progress reporting for ImportResource
+
+MediaExport:
+ - Fix a critical when unable to detect mime type
+
+All contributors to this release:
+ - Jens Georg <mail@jensge.org>
+
+
+========================================
+  xdg-desktop-portal-gnome
+========================================
+
+Changes in 47.1
+=================
+
+- Fix the capabilities for the print dialog
+
+
