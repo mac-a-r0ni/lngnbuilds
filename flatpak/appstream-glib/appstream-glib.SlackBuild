@@ -89,7 +89,6 @@ meson setup .. \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --sysconfdir=/etc \
   --mandir=/usr/man \
-  -Dbuilder=false \
   -Drpm=false
 
 # not sure why this is necessary
