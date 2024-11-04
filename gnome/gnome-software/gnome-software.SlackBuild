@@ -123,6 +123,9 @@ cp -a AUTHORS COPYING COMMITMENT NEWS README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 rm -r $PKG/usr/share/doc
+# remove default app-list, replace with gnome-app-list generated listing
+rm $PKG/usr/share/swcatalog/xml/*
+cp $CWD/org.gnome.App-list.xml $PKG/usr/share/swcatalog/xml/
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
