@@ -72,7 +72,8 @@ else
   LIBDIRSUFFIX=""
 fi
 
-TMP=${TMP:-/tmp}
+TMP=${TMP:-/tmp/lngn}
+OUTPUT=${OUTPUT:-/tmp}
 PKG=$TMP/package-$PKGNAM
 
 rm -rf $PKG
@@ -121,4 +122,4 @@ mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
-/sbin/makepkg -l y -c n $TMP/$PKGNAM-$VERSION-$ARCH-$BUILD$TAG.txz
+/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$VERSION-$ARCH-$BUILD$TAG.txz
