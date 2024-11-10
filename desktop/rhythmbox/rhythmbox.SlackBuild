@@ -8,7 +8,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=rhythmbox
-VERSION=${VERSION:-3.4.7}
+VERSION=${VERSION:-3.4.8}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -79,6 +79,8 @@ cd build
   --mandir=/usr/man  \
   --prefix=/usr \
   --sysconfdir=/etc \
+  -Dhelp=false \
+  -Dtests=false \
   -Dstrip=true
 
   "${NINJA:=ninja}"
