@@ -79,7 +79,7 @@ cd build
   --mandir=/usr/man  \
   --prefix=/usr \
   --sysconfdir=/etc \
-  -Dhelp=false \
+  -Dhelp=disabled \
   -Dtests=false \
   -Dstrip=true
 
