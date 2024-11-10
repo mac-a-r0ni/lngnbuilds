@@ -79,8 +79,8 @@ cd build
   --mandir=/usr/man  \
   --prefix=/usr \
   --sysconfdir=/etc \
-  -Dhelp=disabled \
-  -Dtests=false \
+  -Dhelp=false \
+  -Dtests=disabled \
   -Dstrip=true
 
   "${NINJA:=ninja}"
