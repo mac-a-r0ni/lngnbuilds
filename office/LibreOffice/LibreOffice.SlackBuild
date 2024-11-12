@@ -35,7 +35,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-24.8.3.1}
+VERSION=${VERSION:-24.8.3.2}
 SHORT_VERSION=${VERSION%.*.*}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
@@ -233,10 +233,9 @@ export qt6_libexec_dirs="/usr/lib$LIBDIRSUFFIX/qt6/bin"
     --with-lang="$LOLANGS" \
     --enable-release-build=yes  \
     --enable-gtk3 \
-    --enable-gtk4 \
     --enable-gtk3-kde5 \
     --enable-qt5 \
-    --disable-kf5 \
+    --enable-kf5 \
     --enable-qt6 \
     --enable-kf6 \
     --enable-lto \
