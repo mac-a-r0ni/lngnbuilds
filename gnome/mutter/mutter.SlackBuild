@@ -79,14 +79,6 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# das a-lot 'o patches from the get-go!
-patch -Np1 -i $CWD/0001-window-actor-Special-case-shaped-Java-windows.patch
-patch -Np1 -i $CWD/mutter-42.alpha-disable-tegra.patch
-patch -Np1 -i $CWD/0001-meson-Update-the-syprof-wrap-to-45.alpha-and-sysprof.patch
-patch -Np1 -i $CWD/0001-gschema-Enable-scale-monitor-framebuffer-experimenta.patch
-patch -Np1 -i $CWD/0001-Revert-x11-Use-input-region-from-frame-window-for-de.patch
-#patch -Np1 -i $CWD/3329.patch
-
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
