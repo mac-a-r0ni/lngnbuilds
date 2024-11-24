@@ -30,7 +30,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=postgresql
-VERSION=${VERSION:-16.4}
+VERSION=${VERSION:-16.6}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -219,4 +219,4 @@ sed -e "s%@PG_VERSION@%$PG_VERSION%" \
   $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+/sbin/makepkg -l y -c n --remove-tmp-rpaths $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
