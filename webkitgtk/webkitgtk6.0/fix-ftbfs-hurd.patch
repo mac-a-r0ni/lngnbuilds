@@ -1,0 +1,45 @@
+From: Alberto Garcia <berto@igalia.com>
+Subject: Don't try to use PATH_MAX in the Hurd
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=978098
+Bug: https://bugs.webkit.org/show_bug.cgi?id=219572
+Index: webkitgtk/Source/WebCore/platform/text/hyphen/HyphenationLibHyphen.cpp
+===================================================================
+--- webkitgtk.orig/Source/WebCore/platform/text/hyphen/HyphenationLibHyphen.cpp
++++ webkitgtk/Source/WebCore/platform/text/hyphen/HyphenationLibHyphen.cpp
+@@ -73,11 +73,21 @@ static void scanDirectoryForDictionaries
+             continue;
+ 
+         auto filePath = FileSystem::pathByAppendingComponent(directoryPathString, fileName);
++#if OS(HURD)
++        char *normalizedPath;
++        normalizedPath = realpath(FileSystem::fileSystemRepresentation(filePath).data(), NULL);
++        if (!normalizedPath)
++            continue;
++
++        filePath = FileSystem::stringFromFileSystemRepresentation(normalizedPath);
++        free(normalizedPath);
++#else
+         char normalizedPath[PATH_MAX];
+         if (!realpath(FileSystem::fileSystemRepresentation(filePath).data(), normalizedPath))
+             continue;
+ 
+         filePath = FileSystem::stringFromFileSystemRepresentation(normalizedPath);
++#endif
+         availableLocales.add(locale, Vector<String>()).iterator->value.append(filePath);
+ 
+         String localeReplacingUnderscores = makeStringByReplacingAll(locale, '_', '-');
+Index: webkitgtk/Source/WTF/wtf/posix/FileSystemPOSIX.cpp
+===================================================================
+--- webkitgtk.orig/Source/WTF/wtf/posix/FileSystemPOSIX.cpp
++++ webkitgtk/Source/WTF/wtf/posix/FileSystemPOSIX.cpp
+@@ -51,6 +51,10 @@
+ #include <glib.h>
+ #endif
+ 
++#if OS(HURD)
++#define PATH_MAX 4096
++#endif
++
+ namespace WTF {
+ 
+ namespace FileSystemImpl {
