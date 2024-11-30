@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-session
-VERSION=${VERSION:-46.0}
+VERSION=${VERSION:-47.0.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -72,14 +72,16 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
-patch -Np1 -i $CWD/0001-meson-add-elogind-support.patch
-patch -Np1 -i $CWD/0002-gnome-session-add-profile-sourcing.patch
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+patch -Np1 -i $CWD/0001-meson-add-elogind-support.patch
+patch -Np1 -i $CWD/0002-gnome-session-add-profile-sourcing.patch
+#patch -Np1 -i $CWD/0003-revert-systemd-hard-dep.patch
 
 mkdir build
 cd build
@@ -95,6 +97,7 @@ cd build
     --sysconfdir=/etc \
     -Dstrip=true \
     -Ddocbook=false \
+    -Dx11=false \
     -Dlogind_provider=elogind
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
@@ -106,8 +109,8 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
-mkdir -p $PKG/etc/X11/xinit
-install -vDm 0755 $CWD/xinitrc.gnome -t $PKG/etc/X11/xinit
+#mkdir -p $PKG/etc/X11/xinit
+#install -vDm 0755 $CWD/xinitrc.gnome -t $PKG/etc/X11/xinit
 
 # Remove duplicate display manager entries:
 rm "$PKG/usr/share/wayland-sessions/gnome.desktop"
