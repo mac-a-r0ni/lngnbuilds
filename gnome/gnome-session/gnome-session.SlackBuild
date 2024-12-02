@@ -97,7 +97,7 @@ cd build
     --sysconfdir=/etc \
     -Dstrip=true \
     -Ddocbook=false \
-    -Dx11=false \
+    -Dx11=true \
     -Dlogind_provider=elogind
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
@@ -109,8 +109,8 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
-#mkdir -p $PKG/etc/X11/xinit
-#install -vDm 0755 $CWD/xinitrc.gnome -t $PKG/etc/X11/xinit
+mkdir -p $PKG/etc/X11/xinit
+install -vDm 0755 $CWD/xinitrc.gnome -t $PKG/etc/X11/xinit
 
 # Remove duplicate display manager entries:
 rm "$PKG/usr/share/wayland-sessions/gnome.desktop"
