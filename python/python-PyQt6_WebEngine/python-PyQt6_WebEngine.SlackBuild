@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for python3-PyQtWebEngine
+# Slackware build script for python-PyQtWebEngine
 #
 # Copyright 2020 David Woodfall <dave@slackbuilds.org>
 # All rights reserved.
@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=python-PyQt6_WebEngine
 SRCNAM=${PRGNAM#*-}
-VERSION=${VERSION:-6.7.0}
+VERSION=${VERSION:-6.8.0.dev2411020930}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -85,25 +85,15 @@ export QT6DIR=/usr/lib${LIBDIRSUFFIX}/qt6
 export CFLAGS="$SLKCFLAGS"
 export CXXFLAGS="$SLKCFLAGS"
 
-#python3 configure.py \
-#  --verbose \
-#  -q /usr/bin/qmake-qt5 \
-#  --sip=/usr/bin/sip3 \
-#  --sip-incdir=$(pkg-config --cflags-only-I python3 | sed 's/^-I//')
-
-#make
-#make -j1 install DESTDIR=$PKG INSTALL_ROOT=$PKG
-
 sip-build \
     --no-make \
     --qmake=/usr/lib${LIBDIRSUFFIX}/qt6/bin/qmake6 \
-    --api-dir=/usr/share/qt6/qsci/api/python
+    --api-dir=/usr/share/qt6/qsci/api/python \
+    --pep484-pyi
   cd build
   make
   make INSTALL_ROOT=$PKG install
 cd ..
-#  /usr/bin/python3 -m compileall -d / $PKG/usr/lib${LIBDIRSUFFIX}
-#  /usr/bin/python3 -O -m compileall -d / $PKG/usr/lib${LIBDIRSUFFIX}
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -116,6 +106,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
