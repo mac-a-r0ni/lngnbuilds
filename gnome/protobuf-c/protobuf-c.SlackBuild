@@ -79,6 +79,7 @@ patch -Np1 -i $CWD/protobuf26.patch
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
+  --sysconfdir=/etc \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --disable-static \
