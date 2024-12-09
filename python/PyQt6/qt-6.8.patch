@@ -1,0 +1,291 @@
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qabstractitemmodel.sip PyQt6-6.7.1/sip/QtCore/qabstractitemmodel.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qabstractitemmodel.sip	2024-10-09 00:00:33.208879573 +0200
++++ PyQt6-6.7.1/sip/QtCore/qabstractitemmodel.sip	2024-10-09 08:55:48.655723839 +0200
+@@ -56,9 +56,6 @@
+     QModelIndex sibling(int arow, int acolumn) const;
+     QModelIndex siblingAtColumn(int column) const;
+     QModelIndex siblingAtRow(int row) const;
+-    bool operator==(const QModelIndex &other) const;
+-    bool operator<(const QModelIndex &other) const;
+-    bool operator!=(const QModelIndex &other) const;
+     Py_hash_t __hash__() const;
+ %MethodCode
+         sipRes = qHash(*sipCpp);
+@@ -86,11 +83,6 @@
+     bool isValid() const;
+     void swap(QPersistentModelIndex &other /Constrained/);
+     operator QModelIndex() const;
+-    bool operator<(const QPersistentModelIndex &other) const;
+-    bool operator==(const QPersistentModelIndex &other) const;
+-    bool operator==(const QModelIndex &other) const;
+-    bool operator!=(const QPersistentModelIndex &other) const;
+-    bool operator!=(const QModelIndex &other) const;
+     Py_hash_t __hash__() const;
+ %MethodCode
+         sipRes = qHash(*sipCpp);
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qbitarray.sip PyQt6-6.7.1/sip/QtCore/qbitarray.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qbitarray.sip	2024-10-09 00:00:33.208879573 +0200
++++ PyQt6-6.7.1/sip/QtCore/qbitarray.sip	2024-10-09 08:52:45.167936813 +0200
+@@ -51,8 +51,6 @@
+     // This was changed to be a global operator in Qt v6.7 but this isn't supported by SIP v6.8.
+     QBitArray operator~() const;
+ %End
+-    bool operator==(const QBitArray &a) const;
+-    bool operator!=(const QBitArray &a) const;
+     void fill(bool val, qsizetype first, qsizetype last);
+     bool fill(bool val, qsizetype size = -1);
+     void truncate(qsizetype pos);
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qbytearray.sip PyQt6-6.7.1/sip/QtCore/qbytearray.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qbytearray.sip	2024-10-09 00:00:33.208879573 +0200
++++ PyQt6-6.7.1/sip/QtCore/qbytearray.sip	2024-10-09 08:54:09.231764902 +0200
+@@ -160,12 +160,6 @@
+     QByteArray &replace(qsizetype index, qsizetype len, QByteArrayView s);
+     QList<QByteArray> split(char sep /Encoding="None"/) const;
+     QByteArray &operator+=(QByteArrayView a);
+-    bool operator==(const QString &s2) const;
+-    bool operator!=(const QString &s2) const;
+-    bool operator<(const QString &s2) const;
+-    bool operator>(const QString &s2) const;
+-    bool operator<=(const QString &s2) const;
+-    bool operator>=(const QString &s2) const;
+     short toShort(bool *ok = 0, int base = 10) const;
+     ushort toUShort(bool *ok = 0, int base = 10) const;
+     int toInt(bool *ok = 0, int base = 10) const;
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qdir.sip PyQt6-6.7.1/sip/QtCore/qdir.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qdir.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qdir.sip	2024-10-09 08:56:09.589193775 +0200
+@@ -169,8 +169,6 @@
+     bool isRelative() const;
+     bool isAbsolute() const;
+     bool makeAbsolute();
+-    bool operator==(const QDir &dir) const;
+-    bool operator!=(const QDir &dir) const;
+     bool remove(const QString &fileName);
+     bool rename(const QString &oldName, const QString &newName);
+     bool exists(const QString &name) const;
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qeasingcurve.sip PyQt6-6.7.1/sip/QtCore/qeasingcurve.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qeasingcurve.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qeasingcurve.sip	2024-10-09 08:52:16.791111244 +0200
+@@ -216,8 +216,6 @@
+     QEasingCurve(QEasingCurve::Type type = QEasingCurve::Linear);
+     QEasingCurve(const QEasingCurve &other);
+     ~QEasingCurve();
+-    bool operator==(const QEasingCurve &other) const;
+-    bool operator!=(const QEasingCurve &other) const;
+     qreal amplitude() const;
+     void setAmplitude(qreal amplitude);
+     qreal period() const;
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qfileinfo.sip PyQt6-6.7.1/sip/QtCore/qfileinfo.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qfileinfo.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qfileinfo.sip	2024-10-09 08:53:09.531409967 +0200
+@@ -33,8 +33,6 @@
+     QFileInfo(const QDir &dir, const QString &file);
+     QFileInfo(const QFileInfo &fileinfo);
+     ~QFileInfo();
+-    bool operator==(const QFileInfo &fileinfo) const;
+-    bool operator!=(const QFileInfo &fileinfo) const;
+     void setFile(const QString &file);
+     void setFile(const QFileDevice &file);
+     void setFile(const QDir &dir, const QString &file);
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qitemselectionmodel.sip PyQt6-6.7.1/sip/QtCore/qitemselectionmodel.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qitemselectionmodel.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qitemselectionmodel.sip	2024-10-09 08:54:29.275221064 +0200
+@@ -43,8 +43,6 @@
+     bool contains(const QModelIndex &index) const;
+     bool contains(int row, int column, const QModelIndex &parentIndex) const;
+     bool intersects(const QItemSelectionRange &other) const;
+-    bool operator==(const QItemSelectionRange &other) const;
+-    bool operator!=(const QItemSelectionRange &other) const;
+     bool isValid() const;
+     QModelIndexList indexes() const;
+     QItemSelectionRange intersected(const QItemSelectionRange &other) const;
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qjsondocument.sip PyQt6-6.7.1/sip/QtCore/qjsondocument.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qjsondocument.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qjsondocument.sip	2024-10-09 08:51:15.270782484 +0200
+@@ -80,8 +80,6 @@
+     QJsonArray array() const;
+     void setObject(const QJsonObject &object);
+     void setArray(const QJsonArray &array);
+-    bool operator==(const QJsonDocument &other) const;
+-    bool operator!=(const QJsonDocument &other) const;
+     bool isNull() const;
+     void swap(QJsonDocument &other /Constrained/);
+     const QJsonValue operator[](qsizetype i) const;
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qjsonvalue.sip PyQt6-6.7.1/sip/QtCore/qjsonvalue.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qjsonvalue.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qjsonvalue.sip	2024-10-09 08:51:48.450957021 +0200
+@@ -66,8 +66,6 @@
+     QJsonArray toArray(const QJsonArray &defaultValue) const;
+     QJsonObject toObject() const;
+     QJsonObject toObject(const QJsonObject &defaultValue) const;
+-    bool operator==(const QJsonValue &other) const;
+-    bool operator!=(const QJsonValue &other) const;
+     QString toString() const;
+     QString toString(const QString &defaultValue) const;
+     void swap(QJsonValue &other /Constrained/);
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qline.sip PyQt6-6.7.1/sip/QtCore/qline.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qline.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qline.sip	2024-10-09 09:08:02.754467534 +0200
+@@ -31,7 +31,6 @@
+ %End
+ 
+ public:
+-    bool operator!=(const QLine &d) const;
+     QLine();
+     QLine(const QPoint &pt1_, const QPoint &pt2_);
+     QLine(int x1pos, int y1pos, int x2pos, int y2pos);
+@@ -65,7 +64,6 @@
+     int dy() const;
+     void translate(const QPoint &point);
+     void translate(int adx, int ady);
+-    bool operator==(const QLine &d) const;
+     QLine translated(const QPoint &p) const;
+     QLine translated(int adx, int ady) const;
+     void setP1(const QPoint &aP1);
+@@ -109,7 +107,6 @@
+     qreal length() const;
+     QLineF unitVector() const;
+     QLineF::IntersectionType intersects(const QLineF &l, QPointF *intersectionPoint /Out/ = 0) const;
+-    bool operator!=(const QLineF &d) const;
+     QLineF();
+     QLineF(const QPointF &apt1, const QPointF &apt2);
+     QLineF(qreal x1pos, qreal y1pos, qreal x2pos, qreal y2pos);
+@@ -153,7 +150,6 @@
+     void setLength(qreal len);
+     QPointF pointAt(qreal t) const;
+     QLine toLine() const;
+-    bool operator==(const QLineF &d) const;
+     static QLineF fromPolar(qreal length, qreal angle);
+     qreal angle() const;
+     void setAngle(qreal angle);
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qmimetype.sip PyQt6-6.7.1/sip/QtCore/qmimetype.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qmimetype.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qmimetype.sip	2024-10-12 09:43:29.357035987 +0200
+@@ -31,8 +31,6 @@
+     QMimeType(const QMimeType &other);
+     ~QMimeType();
+     void swap(QMimeType &other /Constrained/);
+-    bool operator==(const QMimeType &other) const;
+-    bool operator!=(const QMimeType &other) const;
+     bool isValid() const;
+     bool isDefault() const;
+     QString name() const;
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qprocess.sip PyQt6-6.7.1/sip/QtCore/qprocess.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qprocess.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qprocess.sip	2024-10-12 09:44:27.700706014 +0200
+@@ -281,8 +281,6 @@
+     QProcessEnvironment();
+     QProcessEnvironment(const QProcessEnvironment &other);
+     ~QProcessEnvironment();
+-    bool operator==(const QProcessEnvironment &other) const;
+-    bool operator!=(const QProcessEnvironment &other) const;
+     bool isEmpty() const;
+     void clear();
+     bool contains(const QString &name) const;
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qregularexpression.sip PyQt6-6.7.1/sip/QtCore/qregularexpression.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qregularexpression.sip	2024-10-09 00:00:33.212212935 +0200
++++ PyQt6-6.7.1/sip/QtCore/qregularexpression.sip	2024-10-12 09:45:15.550983288 +0200
+@@ -106,8 +106,6 @@
+ %End
+     static QString escape(const QString &str);
+     QStringList namedCaptureGroups() const;
+-    bool operator==(const QRegularExpression &re) const;
+-    bool operator!=(const QRegularExpression &re) const;
+     void optimize() const;
+     Py_hash_t __hash__() const;
+ %MethodCode
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qurlquery.sip PyQt6-6.7.1/sip/QtCore/qurlquery.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qurlquery.sip	2024-10-09 00:00:33.215546297 +0200
++++ PyQt6-6.7.1/sip/QtCore/qurlquery.sip	2024-10-12 09:45:50.177851187 +0200
+@@ -32,8 +32,6 @@
+     explicit QUrlQuery(const QString &queryString);
+     QUrlQuery(const QUrlQuery &other);
+     ~QUrlQuery();
+-    bool operator==(const QUrlQuery &other) const;
+-    bool operator!=(const QUrlQuery &other) const;
+     void swap(QUrlQuery &other /Constrained/);
+     bool isEmpty() const;
+     bool isDetached() const;
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qurl.sip PyQt6-6.7.1/sip/QtCore/qurl.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qurl.sip	2024-10-09 00:00:33.215546297 +0200
++++ PyQt6-6.7.1/sip/QtCore/qurl.sip	2024-10-12 09:46:10.684637244 +0200
+@@ -131,9 +131,6 @@
+ %End
+     void detach();
+     bool isDetached() const;
+-    bool operator<(const QUrl &url) const;
+-    bool operator==(const QUrl &url) const;
+-    bool operator!=(const QUrl &url) const;
+     static QString fromPercentEncoding(const QByteArray &);
+     static QByteArray toPercentEncoding(const QString &input, const QByteArray &exclude = QByteArray(), const QByteArray &include = QByteArray());
+     bool hasQuery() const;
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/quuid.sip PyQt6-6.7.1/sip/QtCore/quuid.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/quuid.sip	2024-10-09 00:00:33.215546297 +0200
++++ PyQt6-6.7.1/sip/QtCore/quuid.sip	2024-10-12 09:46:31.158089925 +0200
+@@ -87,10 +87,6 @@
+ 
+     QString toString(QUuid::StringFormat mode = QUuid::WithBraces) const;
+     bool isNull() const;
+-    bool operator==(const QUuid &orig) const;
+-    bool operator!=(const QUuid &orig) const;
+-    bool operator<(const QUuid &other) const;
+-    bool operator>(const QUuid &other) const;
+     static QUuid createUuid();
+     static QUuid createUuidV3(const QUuid &ns, const QByteArray &baseData);
+     static QUuid createUuidV5(const QUuid &ns, const QByteArray &baseData);
+diff -ru PyQt6-6.7.1.orig/sip/QtCore/qxmlstream.sip PyQt6-6.7.1/sip/QtCore/qxmlstream.sip
+--- PyQt6-6.7.1.orig/sip/QtCore/qxmlstream.sip	2024-10-09 00:00:33.215546297 +0200
++++ PyQt6-6.7.1/sip/QtCore/qxmlstream.sip	2024-10-12 10:00:35.323090858 +0200
+@@ -36,8 +36,6 @@
+     QStringView prefix() const;
+     QStringView value() const;
+     bool isDefault() const;
+-    bool operator==(const QXmlStreamAttribute &other) const;
+-    bool operator!=(const QXmlStreamAttribute &other) const;
+ };
+ 
+ class QXmlStreamNamespaceDeclaration
+@@ -51,8 +49,6 @@
+     QXmlStreamNamespaceDeclaration(const QString &prefix, const QString &namespaceUri);
+     QStringView prefix() const;
+     QStringView namespaceUri() const;
+-    bool operator==(const QXmlStreamNamespaceDeclaration &other) const;
+-    bool operator!=(const QXmlStreamNamespaceDeclaration &other) const;
+ };
+ 
+ typedef QList<QXmlStreamNamespaceDeclaration> QXmlStreamNamespaceDeclarations;
+@@ -68,8 +64,6 @@
+     QStringView name() const;
+     QStringView systemId() const;
+     QStringView publicId() const;
+-    bool operator==(const QXmlStreamNotationDeclaration &other) const;
+-    bool operator!=(const QXmlStreamNotationDeclaration &other) const;
+ };
+ 
+ typedef QList<QXmlStreamNotationDeclaration> QXmlStreamNotationDeclarations;
+@@ -87,13 +81,11 @@
+     QStringView systemId() const;
+     QStringView publicId() const;
+     QStringView value() const;
+-    bool operator==(const QXmlStreamEntityDeclaration &other) const;
+-    bool operator!=(const QXmlStreamEntityDeclaration &other) const;
+ };
+ 
+ typedef QList<QXmlStreamEntityDeclaration> QXmlStreamEntityDeclarations;
+ 
+-class QXmlStreamEntityResolver
++class QXmlStreamEntityResolver /NoDefaultCtors/
+ {
+ %TypeHeaderCode
+ #include <qxmlstream.h>
+diff -ru PyQt6-6.7.1.orig/sip/QtTest/QtTestmod.sip PyQt6-6.7.1/sip/QtTest/QtTestmod.sip
+--- PyQt6-6.7.1.orig/sip/QtTest/QtTestmod.sip	2024-10-09 00:00:33.228879743 +0200
++++ PyQt6-6.7.1/sip/QtTest/QtTestmod.sip	2024-10-12 10:42:40.281752360 +0200
+@@ -48,7 +48,6 @@
+ %DefaultSupertype PyQt6.sip.simplewrapper
+ 
+ %Include qabstractitemmodeltester.sip
+-%Include qsignalspy.sip
+ %Include qtestkeyboard.sip
+ %Include qtestmouse.sip
+ %Include qtestsystem.sip
