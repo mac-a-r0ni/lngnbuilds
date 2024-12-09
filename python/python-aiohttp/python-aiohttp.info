@@ -5,6 +5,6 @@ DOWNLOAD="https://files.pythonhosted.org/packages/source/a/aiohttp/aiohttp-3.11.
 MD5SUM="93ad05a76d839040d6061221b837be91"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=" python-aiohappyeyeballs python-aiosignal python-async-timeout python-attrs python-yarl"
+REQUIRES="python-aiohappyeyeballs python-aiosignal python-async-timeout python-attrs python-yarl"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
