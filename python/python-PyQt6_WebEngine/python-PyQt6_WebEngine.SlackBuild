@@ -44,6 +44,8 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
+LIBDIRSUFFIX=64
+
 TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
