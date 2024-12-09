@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mold
-VERSION=${VERSION:-2.34.1}
+VERSION=${VERSION:-2.35.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -85,6 +85,9 @@ cd build
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_MANDIR=/usr/man \
     -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION \
+    -DMOLD_USE_SYSTEM_TBB=OFF \
+    -DMOLD_LTO=ON \
+    -DMOLD_USE_MOLD=ON \
     -DCMAKE_BUILD_TYPE=Release ..
   make -j $(nproc)
   make install DESTDIR=$PKG
