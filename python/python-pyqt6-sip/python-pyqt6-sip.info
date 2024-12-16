@@ -1,7 +1,7 @@
 PRGNAM="python-pyqt6-sip"
 VERSION="13.9.1"
 HOMEPAGE="https://riverbankcomputing.com/software/pyqt/intro"
-DOWNLOAD="https://files.pythonhosted.org/packages/2a/e4/f39ca1fd6de7d4823d964a3ec33e85b6f51a9c2a7a1e95956b7a92c8acc9/pyqt6_sip-13.9.1.tar.gz"
+DOWNLOAD="https://pypi.org/packages/source/p/pyqt6_sip/pyqt6_sip-13.9.1.tar.gz"
 MD5SUM="43f2c56293c48b4fbc62021844e017b6"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
