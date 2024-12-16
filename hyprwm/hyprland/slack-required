@@ -1,6 +1,5 @@
 hyprcursor
 hyprwayland-scanner
-libdisplay-info
 libliftoff
 seatd
 jq
