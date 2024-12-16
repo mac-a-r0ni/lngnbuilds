@@ -1,0 +1,24 @@
+diff --git a/sip/QtWebEngineCore/qwebengineframe.sip b/sip/QtWebEngineCore/qwebengineframe.sip
+index d5420e6..55f2685 100644
+--- a/sip/QtWebEngineCore/qwebengineframe.sip
++++ b/sip/QtWebEngineCore/qwebengineframe.sip
+@@ -25,6 +25,7 @@
+ class QWebEngineFrame /NoDefaultCtors/
+ {
+ %TypeHeaderCode
++#include <qvariant.h>
+ #include <qwebengineframe.h>
+ %End
+ 
+diff --git a/sip/QtWebEngineCore/qwebenginepage.sip b/sip/QtWebEngineCore/qwebenginepage.sip
+index ba7b0bc..8ed67bc 100644
+--- a/sip/QtWebEngineCore/qwebenginepage.sip
++++ b/sip/QtWebEngineCore/qwebenginepage.sip
+@@ -23,6 +23,7 @@
+ class QWebEnginePage : public QObject
+ {
+ %TypeHeaderCode
++#include <qvariant.h>
+ #include <qwebenginepage.h>
+ %End
+ 
