@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/ErikReider/SwayNotificationCenter/archive/v0.10.1/S
 MD5SUM="f3d7c0ec134907cb2782eba9375f15c4"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gtk-layer-shell granite"
+REQUIRES="granite"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
