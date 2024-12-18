@@ -8,5 +8,5 @@ MD5SUM="32be836211582659897e8308d81471b0 \
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
-MAINTAINER="Willy Sudiarto Raharjo"
-EMAIL="willysr@slackbuilds.org"
+MAINTAINER=""
+EMAIL=""
