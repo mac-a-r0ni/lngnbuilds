@@ -1,10 +1,10 @@
 PRGNAM="hugo"
-VERSION="0.137.0"
+VERSION="0.140.0"
 HOMEPAGE="https://gohugo.io"
-DOWNLOAD="https://github.com/gohugoio/hugo/archive/v0.137.0/hugo-0.137.0.tar.gz \
-          https://slackware.lngn.net/pub/source/hugo/hugo-0.137.0-vendor.tar.xz"
-MD5SUM="0eb6c0015a422687067a84a25fc5a38e \
-        2b842689650c15d8e92a19208d81d6af"
+DOWNLOAD="https://github.com/gohugoio/hugo/archive/v0.140.0/hugo-0.140.0.tar.gz \
+          https://slackware.lngn.net/pub/source/hugo/hugo-0.140.0-vendor.tar.xz"
+MD5SUM="a17d065fc80727143aef819fc2ad581a \
+        d3417edc881eb623f460cd3edeb081da"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="google-go-lang"
