@@ -1,12 +1,12 @@
 PRGNAM="google-go-lang"
-VERSION="1.23.2"
-HOMEPAGE="http://go.dev"
-DOWNLOAD="https://go.dev/dl/go1.23.2.src.tar.gz \
-          https://go.dev/dl/go1.23.2.linux-amd64.tar.gz \
-          https://go.dev/dl/go1.23.2.linux-arm64.tar.gz"
-MD5SUM="12f74843bb7a1d0abfcd41c65c0e6372 \
-        cefc091ace139627c04dbda518e5b67f \
-        3dd5ee5e38c6717706a8085f44c12a13"
+VERSION="1.23.4"
+HOMEPAGE="http://go.dev/"
+DOWNLOAD="https://go.dev/dl/go1.23.4.src.tar.gz \
+          https://go.dev/dl/go1.23.4.linux-amd64.tar.gz \
+          https://go.dev/dl/go1.23.4.linux-arm64.tar.gz"
+MD5SUM="b62bddca6359237a49a7857cf5cd0510 \
+        8e8e23e5ca5d7d8841616414dd0ff890 \
+        b73d30ed72321dc0b6192d10b206cb28"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
