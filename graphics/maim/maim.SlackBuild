@@ -29,7 +29,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=maim
-VERSION=${VERSION:-5.7.4}
+VERSION=${VERSION:-5.8.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -42,9 +42,6 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
@@ -87,7 +84,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-cmake -DCMAKE_INSTALL_PREFIX="/usr/" -DCMAKE_INSTALL_MANDIR="/usr/man/" ./
+sed -e 's|CXX_STANDARD 11|CXX_STANDARD 17|g' -i CMakeLists.txt
+cmake -DCMAKE_INSTALL_PREFIX="/usr/" -DCMAKE_INSTALL_MANDIR="/usr/man/" -Wno-dev ./
 
 make
 make install DESTDIR=$PKG
