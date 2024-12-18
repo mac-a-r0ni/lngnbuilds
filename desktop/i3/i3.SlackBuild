@@ -144,7 +144,11 @@ perl Makefile.PL \
   INSTALLVENDORMAN1DIR=/usr/man/man1 \
   INSTALLVENDORMAN3DIR=/usr/man/man3
 make
-make test
+
+if [ -n "$DISPLAY" ]; then
+  make test
+fi
+
 make install DESTDIR=$PKG
 
 find $PKG -name perllocal.pod -o -name ".packlist" -o -name "*.bs" | xargs rm -f || true
