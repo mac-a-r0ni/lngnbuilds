@@ -3,6 +3,7 @@ hyprgraphics
 hyprwayland-scanner
 libliftoff
 jq
+re2
 tomlplusplus
 wlroots
 xdg-desktop-portal-hyprland
