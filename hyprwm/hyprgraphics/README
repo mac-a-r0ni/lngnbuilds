@@ -1,11 +1,10 @@
-hyprlock
+------------------------------------------------------------------------
+hyprgraphics
 
-Hyprland's simple, yet multi-threaded and GPU-accelerated screen locking utility.
+Hyprgraphics is a small C++ library with graphics / resource related
+utilities used across the hypr* ecosystem.
 
-Features:
-
- - uses the secure ext-session-lock protocol
- - full support for fractional-scale
- - fully GPU accelerated
- - multi-threaded resource acquisition for no hitches
-
+Stability
+Hyprgraphics depends on the ABI stability of the stdlib implementation
+of your compiler. Sover bumps will be done only for hyprgraphics ABI
+breaks, not stdlib.
