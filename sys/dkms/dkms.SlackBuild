@@ -83,15 +83,13 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 make \
-CFLAGS="$SLKCFLAGS" \
-DESTDIR="$PKG" \
-    SBIN=/sbin \
-    KCONF=/../trash \
-    LIBDIR=/../trash \
-    MODDIR=/lib/modules \
-    install
-
-#make install DESTDIR=$PKG
+  CFLAGS="$SLKCFLAGS" \
+  DESTDIR="$PKG" \
+  SBIN=/sbin \
+  KCONF=/../trash \
+  LIBDIR=/../trash \
+  MODDIR=/lib/modules \
+  install
 
 mv $PKG/usr/share/man $PKG/usr/man
 rm -Rf $PKG/etc/kernel $PKG/usr/share
