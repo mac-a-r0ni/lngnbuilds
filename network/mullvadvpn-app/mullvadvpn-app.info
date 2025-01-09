@@ -1,10 +1,10 @@
 PRGNAM="mullvadvpn-app"
-VERSION="2025.1"
+VERSION="2025.2"
 HOMEPAGE="https://mullvad.net/"
-DOWNLOAD="https://github.com/mullvad/mullvadvpn-app/releases/download/2025.1/MullvadVPN-2025.1_amd64.deb \
-          https://github.com/mullvad/mullvadvpn-app/releases/download/2025.1/MullvadVPN-2025.1_arm64.deb"
-MD5SUM="4d0939638884aa10d40ec5e4b3a09e8e \
-        418174490670c7f95598ef6f32774906"
+DOWNLOAD="https://github.com/mullvad/mullvadvpn-app/releases/download/2025.2/MullvadVPN-2025.2_amd64.deb \
+          https://github.com/mullvad/mullvadvpn-app/releases/download/2025.2/MullvadVPN-2025.2_arm64.deb"
+MD5SUM="5e60adee13868a1acc6254e53a5d0004 \
+        6ef18c5f722b00f0beac7c63640916a9"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
