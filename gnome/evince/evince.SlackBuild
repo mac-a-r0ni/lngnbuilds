@@ -31,7 +31,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=evince
-VERSION=${VERSION:-46.3.1}
+VERSION=${VERSION:-47.alpha}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -113,7 +113,6 @@ cd build
     -Dps=enabled \
     -Dtiff=enabled \
     -Dnautilus=false \
-    -Dgspell=enabled \
     -Dgtk_doc=false \
     -Dsystemduserunitdir=no
   "${NINJA:=ninja}"
