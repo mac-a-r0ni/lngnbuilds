@@ -61,6 +61,7 @@ find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
         \! -perm /111 -a \! -perm 644 -a -exec chmod 644 {} \+
 
 patch -Np1 < $CWD/0001-fix-wrong-math.patch
+patch -Np1 < $CWD/gcc14.patch
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
