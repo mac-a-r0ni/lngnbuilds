@@ -2,7 +2,7 @@
 
 # Slackware build script for meld
 
-# Copyright 2022 Jay Lanagan (j@lngn.net), Detroit, MI, USA
+# Copyright 2022-2025 Jay Lanagan (j@lngn.net), Detroit, MI, USA
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=meld
-VERSION=${VERSION:-3.22.2}
+VERSION=${VERSION:-3.22.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
