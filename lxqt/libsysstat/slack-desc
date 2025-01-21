@@ -6,11 +6,11 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|
-libsysstat: libsysstat (libs to query system statistics (net, resource usage,..)
+libsysstat: libsysstat (Library used to query system info and statistics)
 libsysstat:
+libsysstat: libsysstat is a library to query system information like CPU and
+libsysstat: memory usage or network traffic. Conceptually it's roughly similar to
+libsysstat: libstatgrab, a third-party library used by LXQt as well.
 libsysstat:
-libsysstat:
-libsysstat:
-libsysstat:
-libsysstat: https://github.com/lxqt/libsysstat 
+libsysstat: Homepage: https://github.com/lxqt/libsysstat
 libsysstat:

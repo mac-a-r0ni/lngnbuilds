@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|
-lxqt-about: lxqt-about (LXQt about dialog.)
+lxqt-about: lxqt-about (information about LXQt and the system)
 lxqt-about:
+lxqt-about: is a dialogue window providing information about LXQt and the system
+lxqt-about: it's running on.
 lxqt-about:
-lxqt-about:
-lxqt-about:
-lxqt-about: https://github.com/lxqt/lxqt-about 
+lxqt-about: Homepage: https://github.com/lxqt/lxqt-about
 lxqt-about:

@@ -8,9 +8,9 @@
               |-----handy-ruler------------------------------------------------------|
 lxqt-policykit: lxqt-policykit (The LXQt policykit authentication agent)
 lxqt-policykit:
+lxqt-policykit: A native polkit calling interface for LXQt.
+lxqt-policykit:
+lxqt-policykit: Homepage: https://github.com/lxqt/lxqt-policykit
 lxqt-policykit:
 lxqt-policykit:
-lxqt-policykit:
-lxqt-policykit:
-lxqt-policykit: https://github.com/lxqt/lxqt-policykit 
 lxqt-policykit:

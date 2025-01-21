@@ -6,11 +6,11 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
                 |-----handy-ruler------------------------------------------------------|
-lxqt-build-tools: lxqt-build-tools (packaging tools and scripts for LXQt applications)
+lxqt-build-tools: lxqt-build-tools (packaging tools and scripts for LXQt)
 lxqt-build-tools:
-lxqt-build-tools: Various packaging tools and scripts for LXQt applications 
+lxqt-build-tools: This repository is providing several tools needed to build LXQt
+lxqt-build-tools: itself as well as other components maintained by the LXQt project.
 lxqt-build-tools:
 lxqt-build-tools:
-lxqt-build-tools:
-lxqt-build-tools: https://github.com/lxqt/lxqt-build-tools
+lxqt-build-tools: Homepage: https://github.com/lxqt/lxqt-build-tools
 lxqt-build-tools:

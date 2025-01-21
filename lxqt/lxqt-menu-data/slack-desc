@@ -6,13 +6,13 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
               |-----handy-ruler------------------------------------------------------|
-lxqt-menu-data: lxqt-menu-data ( LXQt menu files )
+lxqt-menu-data: lxqt-menu-data (Menu files for LXQt)
+lxqt-menu-data:
+lxqt-menu-data: Freedesktop.org compliant menu files for LXQt Panel, Configuration
+lxqt-menu-data: Center and PCManFM-Qt/libfm-qt.
+lxqt-menu-data:
+lxqt-menu-data: Homepage: https://github.com/lxqt/lxqt-menu-data
 lxqt-menu-data:
 lxqt-menu-data:
-lxqt-menu-data: Replacement for and partially based on lxmenu-data
-lxqt-menu-data: (LXDE).
-lxqt-menu-data:
-lxqt-menu-data:
-lxqt-menu-data: https://github.com/lxqt/lxqt-menu-data
 lxqt-menu-data:
 lxqt-menu-data:

@@ -6,13 +6,13 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
    |-----handy-ruler------------------------------------------------------|
-qps: qps ( a visual process manager, an X11 version of 'top' or 'ps'. )
+qps: qps (Qt process viewer and manager)
+qps:
+qps: LXQt QT-based process viewer and manager.
+qps:
+qps: Homepage: https://github.com/lxqt/qps
 qps:
 qps:
-qps:
-qps:
-qps:
-qps: https://github.com/lxqt/qps
 qps:
 qps:
 qps:

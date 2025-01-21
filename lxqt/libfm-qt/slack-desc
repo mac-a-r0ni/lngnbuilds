@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
         |-----handy-ruler------------------------------------------------------|
-libfm-qt: libfm-qt (Core library of PCManFM-Qt (Qt binding for libfm)
+libfm-qt: libfm-qt (Qt binding for libfm)
 libfm-qt:
+libfm-qt: Core library of PCManFM-Qt.
 libfm-qt:
+libfm-qt: Homepage: https://github.com/lxqt/libfm-qt
 libfm-qt:
-libfm-qt:
-libfm-qt: https://github.com/lxqt/libfm-qt 
 libfm-qt:

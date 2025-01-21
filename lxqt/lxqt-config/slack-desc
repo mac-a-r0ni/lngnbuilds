@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-lxqt-config: lxqt-config (LXQt system configuration.)
+lxqt-config: lxqt-config (Tools to configure LXQt & the operating system)
 lxqt-config:
+lxqt-config: This repository is providing several tools involved in the
+lxqt-config: configuration of both LXQt and the underlying operating system.
 lxqt-config:
-lxqt-config:
-lxqt-config:
-lxqt-config: https://github.com/lxqt/lxqt-config 
+lxqt-config: Homepage: https://github.com/lxqt/lxqt-config
 lxqt-config:

@@ -6,11 +6,11 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|
-pcmanfm-qt: pcmanfm-qt (The LXQt file manager, Qt port of PCManFM)
+pcmanfm-qt: pcmanfm-qt (File manager and desktop icon manager)
 pcmanfm-qt:
+pcmanfm-qt: PCManFM-Qt is a Qt-based file manager which uses GLib for file
+pcmanfm-qt: management. It was started as the Qt port of PCManFM, the file
+pcmanfm-qt: manager of LXDE.
 pcmanfm-qt:
-pcmanfm-qt:
-pcmanfm-qt:
-pcmanfm-qt:
-pcmanfm-qt: https://github.com/lxqt/pcmanfm-qt 
+pcmanfm-qt: Homepage: https://github.com/lxqt/pcmanfm-qt
 pcmanfm-qt:

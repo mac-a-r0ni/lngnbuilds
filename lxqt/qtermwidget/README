@@ -1,4 +1,19 @@
-A terminal emulator widget for Qt 5.
-QTermWidget is an open-source project originally based on the KDE4 Konsole application, 
-but it took its own direction later on. The main goal of this project is to provide a unicode-enabled, 
-embeddable Qt widget for using as a built-in console (or terminal emulation widget).
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+           |-----handy-ruler------------------------------------------------------|
+qtermwidget: qtermwidget (terminal widget for QTerminal)
+qtermwidget:
+qtermwidget: QTermWidget is an open-source project originally based on the KDE4
+qtermwidget: Konsole application, but it took its own direction later on. The main
+qtermwidget: goal of this project is to provide a Unicode-enabled, embeddable Qt
+qtermwidget: widget for using as a built-in console (or terminal emulation
+qtermwidget: widget).
+qtermwidget:
+qtermwidget: Homepage: https://github.com/lxqt/qtermwiget
+qtermwidget:
+qtermwidget:

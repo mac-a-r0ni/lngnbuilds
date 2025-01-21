@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
          |-----handy-ruler------------------------------------------------------|
-obconf-qt: obconf-qt (Openbox configuration tool. Qt port of ObConf)
+obconf-qt: obconf-qt (Qt port of obconf, the Openbox configuration tool)
 obconf-qt:
+obconf-qt: ObConf-Qt is a Qt port of ObConf, a configuration editor for window
+obconf-qt: manager OpenBox.
 obconf-qt:
-obconf-qt:
-obconf-qt:
-obconf-qt: https://github.com/lxqt/obconf-qt 
+obconf-qt: Homepage: https://github.com/lxqt/obconf-qt
 obconf-qt:

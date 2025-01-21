@@ -8,9 +8,9 @@
              |-----handy-ruler------------------------------------------------------|
 lxqt-qtplugin: lxqt-qtplugin (LXQt platform integration for Qt)
 lxqt-qtplugin:
+lxqt-qtplugin: With this plugin, all Qt-based programs can adopt settings of LXQt,
+lxqt-qtplugin: such as the icon theme and Qt style.
 lxqt-qtplugin:
 lxqt-qtplugin:
-lxqt-qtplugin:
-lxqt-qtplugin:
-lxqt-qtplugin: https://github.com/lxqt/lxqt-qtplugin 
+lxqt-qtplugin: Homepage: https://github.com/lxqt/lxqt-qtplugin
 lxqt-qtplugin:

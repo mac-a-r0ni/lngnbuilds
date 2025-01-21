@@ -1,3 +1,4 @@
-ObConf-Qt is a Qt port of ObConf, a configuration editor for window manager OpenBox.
+obconf-qt (Qt port of obconf, the Openbox configuration tool)
 
-It is maintained by the LXQt project but can be used independently from this desktop environment.
+ObConf-Qt is a Qt port of ObConf, a configuration editor for window
+manager OpenBox.

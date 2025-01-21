@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|
-screengrab: screengrab ( A program for fast creating screenshots )
+screengrab: screengrab (Crossplatform tool for fast making screenshots)
 screengrab:
+screengrab: An application for creating screenshots. ScreenGrab uses the Qt
+screengrab: framework and thus, it is independent from any desktop environment.
 screengrab:
-screengrab:
-screengrab:
-screengrab: https://github.com/lxqt/screengrab 
+screengrab: Homepage: https://github.com/lxqt/screengrab
 screengrab:

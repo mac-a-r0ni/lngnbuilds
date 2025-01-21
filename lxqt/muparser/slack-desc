@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
         |-----handy-ruler------------------------------------------------------|
-muParser: muParser (A math parser library)
-muParser:
-muParser: muParser is an extensible high performance math expression parser
-muParser: library written in C++. It works by transforming a mathematical
-muParser: expression into bytecode and precalculating constant parts of the
-muParser: expression.
-muParser:
-muParser: Home: http://beltoforion.de/article.php?a=muparser
-muParser:
-muParser:
-muParser:
+muparser: muparser (A math parser library)
+muparser:
+muparser: muparser is an extensible high performance math expression parser
+muparser: library written in C++. It works by transforming a mathematical
+muparser: expression into bytecode and precalculating constant parts of the
+muparser: expression.
+muparser:
+muparser: Home: http://beltoforion.de/article.php?a=muparser
+muparser:
+muparser:
+muparser:

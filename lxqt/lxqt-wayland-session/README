@@ -1,0 +1,5 @@
+lxqt-wayland-session (wayland session files)
+
+Files needed for the LXQt Wayland Session: Wayland session start
+script, its desktop entry for display managers and default
+configurations for actually supported compositor

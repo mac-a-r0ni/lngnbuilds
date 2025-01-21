@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
             |-----handy-ruler------------------------------------------------------|
-lxqt-session: lxqt-session (The LXQt session manager)
+lxqt-session: lxqt-session (LXQt session manager)
+lxqt-session:
+lxqt-session: lxqt-session is providing tools to handle LXQt sessions.
 lxqt-session:
 lxqt-session:
-lxqt-session:
-lxqt-session:
-lxqt-session: https://github.com/lxqt/lxqt-session 
+lxqt-session: Homepage: https://github.com/lxqt/lxqt-session
 lxqt-session:

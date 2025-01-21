@@ -6,10 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-qtermwidget: qtermwidget (A terminal widget for Qt, used by QTerminal)
+qtermwidget: qtermwidget (terminal widget for QTerminal)
 qtermwidget:
+qtermwidget: QTermWidget is an open-source project originally based on the KDE4
+qtermwidget: Konsole application, but it took its own direction later on. The main
+qtermwidget: goal of this project is to provide a Unicode-enabled, embeddable Qt
+qtermwidget: widget for using as a built-in console (or terminal emulation
+qtermwidget: widget).
 qtermwidget:
+qtermwidget: Homepage: https://github.com/lxqt/qtermwiget
 qtermwidget:
-qtermwidget:
-qtermwidget: https://github.com/lxqt/qtermwiget 
 qtermwidget:

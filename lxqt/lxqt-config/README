@@ -1,3 +1,4 @@
-On the one hand it is featuring several GUI tools to configure topics like general appearance, 
-pointer devices or screen resolutions. On the other hand there's a GUI "Configuration Center" 
-which summarizes all those configuration tools as well as counterparts of other LXQt components or third-party applications.
+lxqt-config (Tools to configure LXQt & the operating system)
+
+This repository is providing several tools involved in the
+configuration of both LXQt and the underlying operating system.

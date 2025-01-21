@@ -6,9 +6,12 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
                |-----handy-ruler------------------------------------------------------|
-lxqt-globalkeys: lxqt-globalkeys (LXQt daemon and library for keyboard shortcuts.)
+lxqt-globalkeys: lxqt-globalkeys (Daemon to register global keyboard shortcuts)
 lxqt-globalkeys:
-lxqt-globalkeys: LXQt daemon and library for global keyboard shortcuts registration. 
+lxqt-globalkeys: This repository is providing tools to set global keyboard shortcuts
+lxqt-globalkeys: in LXQt sessions, that is shortcuts which apply to the LXQt session
+lxqt-globalkeys: as a whole and are not limited to distinct applications.
 lxqt-globalkeys:
-lxqt-globalkeys: https://github.com/lxqt/lxqt-globalkeys
+lxqt-globalkeys: Homepage: https://github.com/lxqt/lxqt-globalkeys
+lxqt-globalkeys:
 lxqt-globalkeys:

@@ -6,11 +6,11 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-lxqt-themes: lxqt-themes (LXQt themes, graphics and icons.)
+lxqt-themes: lxqt-themes (Themes, graphics and icons for LXQt)
 lxqt-themes:
+lxqt-themes: This package comprises a number of graphic files, wallpapers and
+lxqt-themes: themes.
 lxqt-themes:
+lxqt-themes: Homepage: https://github.com/lxqt/lxqt-themes
 lxqt-themes:
-lxqt-themes:
-lxqt-themes:
-lxqt-themes: https://github.com/lxqt/lxqt-themes 
 lxqt-themes:

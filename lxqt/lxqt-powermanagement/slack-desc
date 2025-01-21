@@ -6,10 +6,13 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
                     |-----handy-ruler------------------------------------------------------|
-lxqt-powermanagement: lxqt-powermanagement (LXQt power management daemon)
+lxqt-powermanagement: lxqt-powermanagement (Power management module for LXQt)
+lxqt-powermanagement:
+lxqt-powermanagement: This package is providing tools to monitor power management events
+lxqt-powermanagement: and optionally trigger actions like e. g. shut down a system when
+lxqt-powermanagement: laptop batteries are low on power.
+lxqt-powermanagement:
+lxqt-powermanagement: Homepage: https://github.com/lxqt/lxqt-powermanagement
 lxqt-powermanagement:
 lxqt-powermanagement:
-lxqt-powermanagement:
-lxqt-powermanagement:
-lxqt-powermanagement: https://github.com/lxqt/lxqt-powermanagement 
 lxqt-powermanagement:

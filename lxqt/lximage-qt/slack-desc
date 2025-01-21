@@ -6,10 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|
-lximage-qt: lximage-qt (The LXQt image viewer and screenshot tool)
+lximage-qt: lximage-qt (image viewer and screenshot tool)
+lximage-qt:
+lximage-qt: LXImage-Qt is the Qt port of LXImage, a simple and fast image viewer.
+lximage-qt:
+lximage-qt: Homepage: https://github.com/lxqt/lximage-qt
 lximage-qt:
 lximage-qt:
 lximage-qt:
 lximage-qt:
-lximage-qt: https://github.com/lxqt/lximage-qt 
+lximage-qt:
 lximage-qt:

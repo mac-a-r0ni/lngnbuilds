@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
          |-----handy-ruler------------------------------------------------------|
-qterminal: qterminal (A lightweight Qt-based terminal emulator)
+qterminal: qterminal (lightweight Qt-based terminal emulator)
 qterminal:
+qterminal: QTerminal is a lightweight Qt terminal emulator based on QTermWidget.
 qterminal:
+qterminal: Homepage: https://github.com/lxqt/qterminal
 qterminal:
-qterminal:
-qterminal: https://github.com/lxqt/qterminal 
 qterminal:

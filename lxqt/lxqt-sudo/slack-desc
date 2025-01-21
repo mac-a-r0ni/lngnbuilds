@@ -6,10 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
          |-----handy-ruler------------------------------------------------------|
-lxqt-sudo: lxqt-sudo (LXQt privilege program (lxsu).)
+lxqt-sudo: lxqt-sudo (GUI frontend for sudo/su)
+lxqt-sudo:
+lxqt-sudo: lxqt-sudo is a graphical front-end of commands sudo and su
+lxqt-sudo: respectively. As such it enables regular users to launch applications
+lxqt-sudo: with permissions of other users including root.
+lxqt-sudo:
+lxqt-sudo: Homepage: https://github.com/lxqt/lxqt-sudo
 lxqt-sudo:
 lxqt-sudo:
 lxqt-sudo:
-lxqt-sudo:
-lxqt-sudo: https://github.com/lxqt/lxqt-sudo 
 lxqt-sudo:

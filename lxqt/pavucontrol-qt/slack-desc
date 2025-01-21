@@ -6,10 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
               |-----handy-ruler------------------------------------------------------|
-pavucontrol-qt: pavucontrol-qt ( is the Qt port of volume control pavucontrol )
+pavucontrol-qt: pavucontrol-qt (pulseaudio mixer in Qt)
 pavucontrol-qt:
+pavucontrol-qt: pavucontrol-qt is the Qt port of the volume control pavucontrol for
+pavucontrol-qt: the sound server PulseAudio.
 pavucontrol-qt:
-pavucontrol-qt:
-pavucontrol-qt:
-pavucontrol-qt: https://github.com/lxqt/pavucontrol-qt 
+pavucontrol-qt: Homepage: https://github.com/lxqt/pavucontrol-qt
 pavucontrol-qt:

@@ -6,12 +6,12 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
        |-----handy-ruler------------------------------------------------------|
-liblxqt: liblxqt (Common base library for LXQt components)
+liblxqt: liblxqt (Core utility library for all LXQt components)
+liblxqt:
+liblxqt: liblxqt represents the core library of LXQt providing essential
+liblxqt: functionality needed by nearly all of its components.
+liblxqt:
+liblxqt: Homepage: https://github.com/lxqt/liblxqt
 liblxqt:
 liblxqt:
-liblxqt:
-liblxqt:
-liblxqt:
-liblxqt:
-liblxqt: https://github.com/lxqt/liblxqt 
 liblxqt:

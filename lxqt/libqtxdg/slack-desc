@@ -6,11 +6,11 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
         |-----handy-ruler--------------------------------------------------------------|
-libqtxdg: libqtxdg (Library providing freedesktop.org XDG specs implementations for Qt)
+libqtxdg: libqtxdg (library of FDO-QT specs)
+libqtxdg:
+libqtxdg: Library providing freedesktop.org XDG specs implementations for Qt.
+libqtxdg:
+libqtxdg: Homepage: https://github.com/lxqt/libqtxdg
 libqtxdg:
 libqtxdg:
-libqtxdg:
-libqtxdg:
-libqtxdg:
-libqtxdg: https://github.com/lxqt/libqtxdg
 libqtxdg:

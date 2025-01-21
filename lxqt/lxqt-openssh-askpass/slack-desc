@@ -8,9 +8,10 @@
                     |-----handy-ruler------------------------------------------------------|
 lxqt-openssh-askpass: lxqt-openssh-askpass (LXQt openssh password prompt)
 lxqt-openssh-askpass:
+lxqt-openssh-askpass: A GUI to query credentials on behalf of other programs. As indicated
+lxqt-openssh-askpass: by its name it's primarily targeted at ssh-agent, the SSH agent of
+lxqt-openssh-askpass: OpenSSH, but it works with other applications like e. g. EncFS as
+lxqt-openssh-askpass: well.
 lxqt-openssh-askpass:
-lxqt-openssh-askpass:
-lxqt-openssh-askpass:
-lxqt-openssh-askpass:
-lxqt-openssh-askpass: https://github.com/lxqt/lxqt-openssh-askpass 
+lxqt-openssh-askpass: Homepage: https://github.com/lxqt/lxqt-openssh-askpass
 lxqt-openssh-askpass:

@@ -1,3 +1,5 @@
-The core components are two binaries lxqt-powermanagement and lxqt-config-powermanagement.
-lxqt-powermanagement is running in a daemon-like manner as so-called "LXQt Module" and doing the actual work. 
-GUI "Power Management Settings (binary lxqt-config-powermanagement) is used to customize settings.
+lxqt-powermanagement (Power management module for LXQt)
+
+This package is providing tools to monitor power management events
+and optionally trigger actions like e. g. shut down a system when
+laptop batteries are low on power.

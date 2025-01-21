@@ -6,9 +6,10 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
                        |-----handy-ruler------------------------------------------------------|
-xdg-desktop-portal-lxqt: xdg-desktop-portal-lxqt ( A xdg-desktop-portal backend for LXQt )
+xdg-desktop-portal-lxqt: xdg-desktop-portal-lxqt (xdg-desktop-portal backend for LXQt)
 xdg-desktop-portal-lxqt:
+xdg-desktop-portal-lxqt: A backend implementation for xdg-desktop-portal that is using
+xdg-desktop-portal-lxqt: Qt/KF5/libfm-qt.
 xdg-desktop-portal-lxqt:
-xdg-desktop-portal-lxqt:
-xdg-desktop-portal-lxqt: https://github.com/lxqt/xdg-desktop-portal-lxqt
+xdg-desktop-portal-lxqt: Homepage: https://github.com/lxqt/xdg-desktop-portal-lxqt
 xdg-desktop-portal-lxqt:
