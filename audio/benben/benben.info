@@ -1,7 +1,6 @@
 PRGNAM="benben"
 VERSION="0.6.2"
 HOMEPAGE="https://chiselapp.com/user/MistressRemilia/repository/benben"
-
 DOWNLOAD="https://chiselapp.com/user/MistressRemilia/repository/benben/uv/benben-0.6.2.tar.bz2 \
           https://chiselapp.com/user/MistressRemilia/repository/Haematite/uv/haematite-0.5.4.tar.bz2 \
           https://chiselapp.com/user/MistressRemilia/repository/libremiliacr/uv/libremiliacr-0.92.5.tar.bz2 \
@@ -11,17 +10,17 @@ DOWNLOAD="https://chiselapp.com/user/MistressRemilia/repository/benben/uv/benben
           https://nanako.mooo.com/fossil/remixmp/uv/remixmp-1.0.1.tar.bz2 \
           https://chiselapp.com/user/MistressRemilia/repository/yunosynth/uv/yunosynth-0.5.2.tar.bz2 \
           https://github.com/didactic-drunk/zstd.cr/archive/v1.2.0/zstd.cr-1.2.0.tar.gz"
-
 MD5SUM="f8b2edd0ac7d2a3af99ea6bf850418ac \
         a3499512f9f545ac0baef6c6b6bded41 \
         1a564ecb5253e11c6eab8f99ad0d9f7e \
         f36ad4a3967a55c9f7131df9ae3523c7 \
         8db1d832c820963fd6b8eba3aa7eb326 \
+        743aea2e5bf6fb64f76330afbb8988a2 \
         06b17e6037988ae8e57f7460fc51d814 \
-        0a44da8195959906323e082fb10e55e8"
-
+        0a44da8195959906323e082fb10e55e8 \
+        7ea965124bad09458a32cf5b9174e1e3"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="crystal-lang libsidplayfp libxmp"
+REQUIRES="crystal-lang libsidplayfp libxmp portaudio"
 MAINTAINER="Remilia Scarlet"
 EMAIL="remilia@sdf.org"
