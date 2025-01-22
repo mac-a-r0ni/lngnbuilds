@@ -72,6 +72,7 @@ cd build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
+    --force-fallback-for=spdlog,fmt \
     -Dgenerate-shell-completions=disabled \
     -Denable-tests=false \
     -Dset-debug=off \
