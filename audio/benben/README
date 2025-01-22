@@ -1,0 +1,27 @@
+Benben is a fast and efficient command line audio player and audio converter for
+Linux and other Unix-like systems with an oldschool-inspired interface. It
+supports multiple formats, and is especially suited to people who organize their
+music in folders, and for those who prefer to use terminals instead of GUIs. It
+is written almost entirely in the Crystal programming language.
+
+Supported input formats include:
+* VGM
+  * Uncompressed (.vgm)
+  * GZip compressed (.vgz)
+  * ZStandard compressed (.vgzst)
+  * BZip2 compressed (.vgb)
+* MPEG-1
+  * MPEG-1 Layer III (.mp3)
+  * MPEG-1 Layer II (.mp1)
+  * MPEG-1 Layer I (.mp1)
+* Ogg Vorbis
+* Opus
+* FLAC
+* General MIDI (.mid)
+* MUS (.mus)
+* All module formats supported by libxmp
+* Commodore 64 SID (.sid)
+* QOA, the Quite OK Audio format
+* WavPack
+* RIFF WAVE (.wav)
+* Sun Au (.au)

@@ -1,0 +1,228 @@
+#!/bin/bash
+
+# Slackware build script for Benben
+#
+# Copyright 2023-2024 Remilia Scarlet, Colorado, United States
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+cd $(dirname $0) ; CWD=$(pwd)
+
+PRGNAM=benben
+VERSION=${VERSION:-0.6.2}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_lngn}
+PKGTYPE=${PKGTYPE:-txz}
+
+# The way Crystal builds stuff is at odds with SlackBuild scripts.  These are
+# our individual vendored dependencies.
+BENBEN_DEP_SOURCES="libremiliacr-0.92.5.tar.bz2 \
+                    haematite-0.5.4.tar.bz2 \
+                    remiaudio-0.9.1.tar.bz2 \
+                    remislang-0.1.2.tar.bz2 \
+                    racodecs-0.1.1.tar.bz2 \
+                    remixmp-1.0.1.tar.bz2 \
+                    yunosynth-0.5.2.tar.bz2 \
+                    zstd.cr-1.2.0.tar.gz"
+
+# Automatically determine the architecture we're building on:
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i586 ;;
+    arm*) ARCH=arm ;;
+    # Unless $ARCH is already set, use uname -m for all other archs:
+    *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
+# the name of the created package would be, and then exit. This information
+# could be useful to other scripts.
+if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
+  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  exit 0
+fi
+
+TMP=${TMP:-/tmp/lngn}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i686" ]; then
+  CRYSTAL_SLACK_FLAGS="--mcpu=x86"
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
+elif [ "$ARCH" = "x86_64" ]; then
+  CRYSTAL_SLACK_FLAGS="--mcpu=x86-64"
+  SLKCFLAGS="-O2 -fPIC"
+elif [ "$ARCH" = "aarch64" ]; then
+  CRYSTAL_SLACK_FLAGS="--mcpu=aarch64"
+  SLKCFLAGS="-O2 -fPIC"
+else
+  CRYSTAL_SLACK_FLAGS=""
+fi
+
+set -e # Exit on most errors
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
+cd $PRGNAM-$VERSION
+chown -R root:root .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+# Make a lib directory, then unpack dependencies into the correct place, and add
+# a required symlink.  This replicates what the Shards command normally does
+# when building Crystal software.
+#
+# NOTE: Technically the zstd.cr bindings have a postinstall script specified in
+# shard.yml that creates a local copy of the ZStandard library.  However, this
+# isn't needed for Slackware and is thus skipped.
+mkdir -p lib
+for depSrc in $BENBEN_DEP_SOURCES; do
+    cp $CWD/$depSrc lib
+    (
+        cd lib
+        tar xvzf $depSrc || tar xvjf $depSrc
+    )
+done
+(
+    cd lib
+
+    mv libremiliacr-0.92.5 libremiliacr
+    mv haematite-0.5.4 haematite
+    mv remiaudio-0.9.1 remiaudio
+    mv remislang-0.1.2 remislang
+    mv racodecs-0.1.1 racodecs
+    mv remixmp-1.0.1 remixmp
+    mv yunosynth-0.5.2 yunosynth
+    mv zstd.cr-1.2.0 zstd
+
+    # The ../ actually points to the lib directory we've created
+    ln -sf ../ libremiliacr/lib
+    ln -sf ../ haematite/lib
+    ln -sf ../ remiaudio/lib
+    ln -sf ../ remislang/lib
+    ln -sf ../ racodecs/lib
+    ln -sf ../ remixmp/lib
+    ln -sf ../ yunosynth/lib
+    ln -sf ../ zstd/lib
+)
+
+# Configuration is done with a configure.rb Ruby script.
+mkdir bin
+./configure.rb --prefix=/usr --sharedir=share/benben
+
+# We must build a C-wrapper for libsidplayfp.
+echo "Building libsidplayfp C wrapper"
+(
+    cd src/audio-formats/lib
+    CFLAGS="$SLKCFLAGS" CXXFLAGS="$SLKCFLAGS" make -j1
+)
+
+# We must build RemiAudio's resampler tables as well.
+echo "Building resampler tables"
+(
+    cd lib/remiaudio/src/remiaudio/resampler/
+    CFLAGS="$SLKCFLAGS" CXXFLAGS="$SLKCFLAGS" make -j1
+)
+
+# Build the program.  We don't use rake here since the Rakefile will attempt to
+# download dependencies.  The way we call the compiler is the same as how
+# rake/shards does anyway.
+echo "Building Benben directly with Crystal (this may take a while)"
+CRYSTAL_OPTS="$CRYSTAL_SLACK_FLAGS" \
+  crystal \
+    build \
+    -p \
+    -Dpreview_mt \
+    --release \
+    --no-debug \
+    -Dyunosynth_wd40 \
+    -Dremiaudio_wd40 \
+    -Dhaematite_wd40 \
+    -Dstrict_multi_assign \
+    -Dno_number_autocast \
+    -o bin/$PRGNAM \
+    src/main.cr
+
+# Build the remote-benben program.  We don't use rake here either.
+
+CRYSTAL_OPTS="$CRYSTAL_SLACK_FLAGS" \
+  crystal \
+    build \
+    -p \
+    -Dpreview_mt \
+    --release \
+    --no-debug \
+    -Dyunosynth_wd40 \
+    -Dremiaudio_wd40 \
+    -Dhaematite_wd40 \
+    -Dstrict_multi_assign \
+    -Dno_number_autocast \
+    -Dcompile_benben_remote \
+    tools/remote-benben/main.cr \
+    -o bin/remote-$PRGNAM
+
+# Build man page.  We can use the Rakefile for this.
+rake man
+
+# Build info manual and PDF manual.  We can use the Rakefile for this.
+rake info
+rake pdf
+gzip -9 man/texi/$PRGNAM.info
+
+# Copy the program, man pages, etc. into the $PKG directory
+mkdir -p $PKG/usr/bin
+cp -v bin/$PRGNAM $PKG/usr/bin
+cp -v bin/remote-$PRGNAM $PKG/usr/bin
+mkdir -p $PKG/usr/man/man1
+cp -v man/$PRGNAM.1.gz $PKG/usr/man/man1
+mkdir -p $PKG/usr/info
+cp -v man/texi/$PRGNAM.info.gz $PKG/usr/info
+
+# Strip binaries and libraries - this can be done with 'make install-strip'
+# in many source trees, and that's usually acceptable if so, but if not,
+# use this:
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+# Copy program documentation into the package
+# The included documentation varies from one application to another, so be sure
+# to adjust your script as needed
+# Also, include the SlackBuild script in the documentation directory
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+cat $CWD/README > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+cat man/texi/$PRGNAM.html > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.html
+cat man/texi/$PRGNAM.pdf > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.pdf
+
+# Copy the slack-desc into ./install
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+# Make the package; be sure to leave it in $OUTPUT
+# If package symlinks need to be created during install *before*
+# your custom contents of doinst.sh runs, then add the -p switch to
+# the makepkg command below -- see makepkg(8) for details
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

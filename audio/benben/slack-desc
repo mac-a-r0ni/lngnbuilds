@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+      |-----handy-ruler------------------------------------------------------|
+benben: Benben (a command line audio player and converter)
+benben:
+benben: Benben is a fast and efficient command line audio player and converter
+benben: that is especially suited to people who organize their music in
+benben: folders, and  for those who prefer to use terminals instead of GUIs.
+benben: It has a retro-inspired TUI, and supports a wide variety of formats.
+benben: Also included is the remote-benben program for controlling Benben
+benben: remotely.
+benben:
+benben: Homepage:
+benben:   https://chiselapp.com/user/MistressRemilia/repository/benben/
