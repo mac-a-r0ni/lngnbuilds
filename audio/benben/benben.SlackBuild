@@ -70,7 +70,7 @@ elif [ "$ARCH" = "x86_64" ]; then
   CRYSTAL_SLACK_FLAGS="--mcpu=x86-64"
   SLKCFLAGS="-O2 -fPIC"
 elif [ "$ARCH" = "aarch64" ]; then
-  CRYSTAL_SLACK_FLAGS="--mcpu=arm64"
+  CRYSTAL_SLACK_FLAGS="--mcpu=aarch64"
   SLKCFLAGS="-O2 -fPIC"
 else
   CRYSTAL_SLACK_FLAGS=""
