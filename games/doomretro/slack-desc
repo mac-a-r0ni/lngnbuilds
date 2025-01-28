@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+         |-----handy-ruler------------------------------------------------------|
+doomretro: doomretro (a classic, refined DOOM source port)
+doomretro:
+doomretro: DOOM Retro is the classic, refined DOOM source port for any PC. It
+doomretro: represents how I like my DOOM to be today, in all its dark and
+doomretro: gritty, unapologetically pixelated glory. I have strived to craft a
+doomretro: unique and cohesive set of compelling features, while continuing to
+doomretro: uphold my respect for that classic, nostalgic DOOM experience many
+doomretro: of us, after all this time, still hold dear.
+doomretro:
+doomretro: https://doomretro.com/
+doomretro:
