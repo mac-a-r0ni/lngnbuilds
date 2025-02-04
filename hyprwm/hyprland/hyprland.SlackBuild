@@ -80,7 +80,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-    sed -i -e '/^release:/{n;s/-D/-DCMAKE_SKIP_RPATH=ON -D/}' Makefile
+    sed -i -e '/^release:/{n;s/-D/-DCMAKE_SKIP_RPATH=ON -DNO_SYSTEMD:STRING=true -D/}' Makefile
     rm -fv scripts/generateVersion.sh
     make release PREFIX=/usr
     make DESTDIR="$PKG" install
@@ -91,8 +91,9 @@ find -L . \
     mkdir -p $PKG/usr/man/man1
     mv $PKG/usr/share/man/man1/* $PKG/usr/man/man1
     rm -rf $PKG/usr/share/man
-# remove unneeded sysd desktop session file
-    rm $PKG/usr/share/wayland-sessions/$PRGNAM-uwsm.desktop
+# remove unneeded uwsm desktop session file & replace with dbus calling desktop file
+    rm $PKG/usr/share/wayland-sessions/*.desktop
+    cp $CWD/hyprland.desktop $PKG/usr/share/wayland-sessions/
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
