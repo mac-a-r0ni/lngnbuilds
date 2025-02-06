@@ -9,6 +9,19 @@
 
 # Licensed under the WTFPL. See http://www.wtfpl.net/txt/copying/ for details.
 
+# 20241216 bkw: Updated for v0.272 (incl. groovy patch).
+# 20241101 bkw: Updated for v0.271 (incl. groovy patch).
+# 20241009 bkw:
+# - Updated for v0.270 (incl. groovy patch).
+# - Add SLKCFLAGS for aarch64, courtesy of stormtracknole.
+
+# 20240907 bkw: Updated for v0.269 (incl. groovy patch).
+# 20240805 bkw: add groovy patch for v0.268 (no other changes).
+# 20240802 bkw: Updated for v0.268.
+# 20240330 bkw: Updated for v0.264.
+# 20231031 bkw: Updated for v0.260, add WAYLAND option.
+# 20230710 bkw: Updated for v0.256.
+# 20230428 bkw: Updated for v0.254.
 # 20230103 bkw: Updated for v0.251.
 # 20220205 bkw: Updated for v0.240.
 
@@ -44,10 +57,10 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mame
-VERSION=${VERSION:-0.271}
+VERSION=${VERSION:-0.272}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_lngn}
-PKGTYPE=${PKGTYPE:-txz}
+TAG=${TAG:-_SBo}
+PKGTYPE=${PKGTYPE:-tgz}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -62,27 +75,22 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/lngn}
-PKG=$TMP/package-${PRGNAM}
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
 # NB nonstandard flags here. Upstream defaults to -O3, so we'll leave
 # that as-is. Only the arch-specific stuff goes here.
 if [ "$ARCH" = "i586" ]; then
   SLKCFLAGS="-march=i586 -mtune=i686"
-  LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-march=i686 -mtune=i686"
-  LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-fPIC"
-  LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
   SLKCFLAGS="-fPIC"
-  LIBDIRSUFFIX="64"
 else
   SLKCFLAGS=""
-  LIBDIRSUFFIX=""
 fi
 
 # Source extracts to e.g. mame-mame0175/
@@ -103,6 +111,15 @@ done
 if [ -n "$MISSING" ]; then
   echo "*** Missing required dependencies:$MISSING" 1>&2
   exit 1
+fi
+
+# 20211112 bkw: GroovyMAME support has changed, see README_groovy.txt.
+# This part of it has to run in $CWD.
+GROOVY="${GROOVY:-no}"
+
+if [ "$GROOVY" = "update" ]; then
+  sh mkgroovy.sh $VERSION
+  GROOVY=yes
 fi
 
 rm -rf $PKG
@@ -134,7 +151,7 @@ find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
 # Where possible, use system libraries instead of building the ones
 # bundled with the mame source. However, SBo's lua is (still!) too old
 # for mame.
-USE_SYSTEM_LIB_LUA=1 \
+#USE_SYSTEM_LIB_LUA=1 \
 
 # Upstream dropped sqlite as a dependency, this no longer matters.
 #USE_SYSTEM_LIB_SQLITE3=1 \
@@ -144,6 +161,26 @@ USE_SYSTEM_LIB_LUA=1 \
 # tree. Using an external portmidi dep would make mame require Oracle's
 # JDK! In case you're wondering, only the C code in the bundled portmidi
 # is built (no Java needed).
+
+# Version-specific patches & sed fixes. We do it this way to keep this
+# script compatible with older versions.
+PATCHES=""
+case "$VERSION" in
+  0.200) # couple files missing an include...
+    sed -i '1i#include <cmath>' \
+           src/devices/cpu/mips/ps2vif1.cpp \
+           src/devices/cpu/mips/mips3.cpp
+           ;;
+  0.204)
+    sed -i '1i#include <cmath>' src/mame/video/xavix.cpp
+    ;;
+  *) ;;
+esac
+
+[ -n "$PATCHES" ] && \
+  for i in "$PATCHES"; do
+    [ -f "$CWD/$i" ] && patch -p1 < "$CWD/$i"
+  done
 
 # This is purely cosmetic, and can't be set on the make command line.
 sed -i 's,ubuntu-intrepid,slackware,g' scripts/genie.lua
@@ -165,6 +202,7 @@ else
   QTOPT=0
 fi
 
+
 # Build option notes:
 
 # Having ARCH set in the env will break the build, hence ARCH="".
@@ -182,7 +220,7 @@ fi
 # with py3, but it won't hurt anything either.
 
 # 20211111 bkw: make ccache handle precompiled headers
-#export CCACHE_SLOPPINESS=pch_defines,time_macros,include_file_mtime,include_file_ctime
+export CCACHE_SLOPPINESS=pch_defines,time_macros,include_file_mtime,include_file_ctime
 
 # 20211111 bkw: undocumented option, build a mame that only supports
 # pac-man and its clones. used for testing only.
@@ -190,15 +228,28 @@ if [ "${PACONLY:-no}" = "yes" ]; then
   PACOPT="SOURCES=src/mame/drivers/pacman.cpp"
 fi
 
+# 20231031 bkw: build option for wayland, see README
+if [ "${WAYLAND:-no}" = "yes" ]; then
+  WAYLOPT="USE_WAYLAND=1"
+fi
+
+# 20211111 bkw: build with ccache by default, now that it works.
+if [ "${USE_CCACHE:-yes}" = "yes" ]; then
+  CC="/usr/bin/ccache /usr/bin/clang"
+  CXX="/usr/bin/ccache /usr/bin/clang++"
+else
+  CC="${CC:-$( which gcc )}"
+  CXX="${CXX:-$( which g++ )}"
+fi
+
 make USE_QTDEBUG=$QTOPT \
      USE_SYSTEM_LIB_EXPAT=1 \
      USE_SYSTEM_LIB_ZLIB=1 \
      USE_SYSTEM_LIB_JPEG=1 \
      USE_SYSTEM_LIB_FLAC=1 \
-     USE_WAYLAND=1 \
      PYTHON_EXECUTABLE="/usr/bin/python3 -S" \
      OPT_FLAGS="$SLKCFLAGS" \
-     LDOPTS="-fuse-ld=mold" \
+     LDOPTS="-fuse-ld=gold" \
      OVERRIDE_CC="$CC" \
      OVERRIDE_CXX="$CXX" \
      CC="$CC" \
@@ -210,6 +261,7 @@ make USE_QTDEBUG=$QTOPT \
      TOOLS=1 \
      TARGET=$PRGNAM \
      $PACOPT \
+     USE_WAYLANG=1 \
      SUBTARGET=$PRGNAM
 
 # No 'make install' target, do it manually.
@@ -279,8 +331,9 @@ rm -f docs/CONTRIBUTING.md docs/update.sh
 PKGDOC=$PKG/usr/doc/$PRGNAM-$VERSION
 mkdir -p $PKGDOC
 # can't just "cp docs/* ..." because man/ is a dir, set -e kills the script
+# 20240330 bkw: docs/swlist is gone in 0.264.
 cp docs/L* docs/*.* $PKGDOC
-cp -a docs/swlist docs/legal $PKGDOC
+cp -a docs/legal $PKGDOC
 cat $CWD/$PRGNAM.SlackBuild > $PKGDOC/$PRGNAM.SlackBuild
 
 # in case someone finds these useful...
@@ -288,8 +341,6 @@ cp -a ini/examples ini/presets $PKGDOC
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cat $CWD/slack-required > $PKG/install/slack-required
-
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
