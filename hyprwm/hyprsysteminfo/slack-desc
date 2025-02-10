@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+              |-----handy-ruler------------------------------------------------------|
+hyprsysteminfo: hyprsysteminfo (hypr systeminfo utility)
+hyprsysteminfo:
+hyprsysteminfo: A tiny qt6/qml application to display information about the running
+hyprsysteminfo: system, or copy diagnostics data, without the terminal.
+hyprsysteminfo:
+hyprsysteminfo:
+hyprsysteminfo: Homepage: https://hyprland.org/
+hyprsysteminfo:
+hyprsysteminfo:
+hyprsysteminfo:
+hyprsysteminfo:
