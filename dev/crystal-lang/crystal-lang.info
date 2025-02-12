@@ -1,10 +1,10 @@
 PRGNAM="crystal-lang"
-VERSION="1.15.0"
+VERSION="1.15.1_260"
 HOMEPAGE="https://github.com/crystal-lang/"
-DOWNLOAD="https://slackware.lngn.net/pub/source/crystal-lang/crystal_1.15.0-251_amd64.deb \
-          https://slackware.lngn.net/pub/source/crystal-lang/crystal_1.15.0-251_arm64.deb"
-MD5SUM="f5e1b0b18a67630363cc76b575b8136b \
-        d686ab5d89a89776490ee31398c59e0e"
+DOWNLOAD="https://slackware.lngn.net/pub/source/crystal-lang/crystal_1.15.1-260_amd64.deb \
+          https://slackware.lngn.net/pub/source/crystal-lang/crystal_1.15.1-260_arm64.deb"
+MD5SUM="18f008358e3ba2c8f0eaed08755a90b9 \
+        906dab7cb825b6b41c09473a187cacfe"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""

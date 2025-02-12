@@ -26,8 +26,8 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=crystal-lang
 SRCNAM=crystal
-VERSION=${VERSION:-1.15.0}
-RELEASE=${RELEASE:-251}
+VERSION=${VERSION:-1.15.1}
+RELEASE=${RELEASE:-260}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -106,4 +106,4 @@ cat $CWD/slack-required > $PKG/install/slack-required
 #cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-${VERSION}_$RELEASE-$ARCH-$BUILD$TAG.$PKGTYPE
