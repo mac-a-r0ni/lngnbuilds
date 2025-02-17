@@ -1,6 +1,0 @@
-polkit-qt-1-qt6 (Qt polkit API wrapper)
-
-polkit-qt-1 aims to make it easy for Qt developers to take advantage
-of the polkit API. It is a convenience wrapper around QAction and
-QAbstractButton that lets you integrate those two components easily
-with polkit.
