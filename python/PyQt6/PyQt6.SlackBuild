@@ -24,6 +24,7 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
+SRCNAM=pyqt6
 PRGNAM=PyQt6
 VERSION=${VERSION:-6.8.1}
 BUILD=${BUILD:-1}
@@ -54,9 +55,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
-cd $PRGNAM-$VERSION
+rm -rf $SRCNAM-$VERSION
+tar xvf $CWD/$SRCNAM-$VERSION.tar.gz
+cd $SRCNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
