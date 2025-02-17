@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description. Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in. You must
+# make exactly 11 lines for the formatting to be correct. It's also
+# customary to leave one space after the ':'.
+
+                     |-----handy-ruler------------------------------------------------------|
+xfce4-cpugraph-plugin: xfce4-cpugraph-plugin (Graphical representation of the CPU load)
+xfce4-cpugraph-plugin:
+xfce4-cpugraph-plugin: This panel plugin offers multiple display modes (LED, gradient, fire,
+xfce4-cpugraph-plugin: etc…) to show the current CPU load of the system. Various appearance
+xfce4-cpugraph-plugin: options, like colors or size, are customizable.
+xfce4-cpugraph-plugin:
+xfce4-cpugraph-plugin: https://docs.xfce.org/panel-plugins/xfce4-cpugraph-plugin/start
+xfce4-cpugraph-plugin:
+xfce4-cpugraph-plugin:
+xfce4-cpugraph-plugin:
+xfce4-cpugraph-plugin:
