@@ -1,0 +1,4 @@
+python-argcomplete (Bash tab completion for argparse)
+
+Argcomplete provides easy, extensible command line tab completion of
+arguments for your Python application.
