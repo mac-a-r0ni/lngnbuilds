@@ -87,7 +87,7 @@ YAZI_GEN_COMPLETIONS=true cargo build --release -p $PRGNAM-cli
 
 install -Dm0755 -t "$PKG/usr/bin/" "target/release/$PRGNAM"
 install -Dm0755 -t "$PKG/usr/bin/" "target/release/ya"
-install -Dm0755 -t "$PKG/usr/share/applications/yazi.desktop" "assets/yazi.desktop"
+install -Dm0644 "$PKG/usr/share/applications/yazi.desktop" "assets/yazi.desktop"
 
 cd $TMP/$PRGNAM-$VERSION
 
