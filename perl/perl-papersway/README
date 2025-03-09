@@ -1,0 +1,6 @@
+perl-papersway (PaperWM-like scrollable tiling window mgmt for Sway)
+
+This is an implementation of PaperWM-like scrollable tiling window
+management for Sway/i3wm. If you like Sway/i3wm's commitments to
+stability, avoiding scope creep etc. but dislike the window management
+model, papersway is an alternative.
