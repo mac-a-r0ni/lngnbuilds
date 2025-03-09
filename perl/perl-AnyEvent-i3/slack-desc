@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                |-----handy-ruler------------------------------------------------------|
+perl-AnyEvent-i3: perl-AnyEvent-i3 (communicate with the i3 window manager)
+perl-AnyEvent-i3:
+perl-AnyEvent-i3: This module connects to the i3 window manager using the UNIX socket
+perl-AnyEvent-i3: based IPC interface it provides (if enabled in the configuration
+perl-AnyEvent-i3: file). You can then subscribe to events or send messages and receive
+perl-AnyEvent-i3: their replies.
+perl-AnyEvent-i3:
+perl-AnyEvent-i3:
+perl-AnyEvent-i3:
+perl-AnyEvent-i3:
+perl-AnyEvent-i3:
