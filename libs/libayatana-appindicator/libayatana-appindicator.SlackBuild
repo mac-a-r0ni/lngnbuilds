@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libayatana-appindicator
-VERSION=${VERSION:-0.5.93}
+VERSION=${VERSION:-0.5.94}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -83,7 +83,6 @@ mkdir build
 cd build
 cmake \
   -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-  -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
   -DCMAKE_INSTALL_PREFIX=/usr \
   -DCMAKE_INSTALL_LIBDIR=lib$LIBDIRSUFFIX \
   -DENABLE_BINDINGS_MONO=OFF \
@@ -96,7 +95,6 @@ cmake \
   -DFLAVOUR_GTK3=ON \
   -DGLIB_GENMARSHAL=/usr/bin/glib-genmarshal \
   -DGLIB_MKENUMS=/usr/bin/glib-mkenums \
-  -DGTKDOC=/usr/bin/gtkdoc-scan \
   ..
 make
 make install DESTDIR=$PKG
