@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=fcft
-VERSION=${VERSION:-3.1.10}
+VERSION=${VERSION:-3.3.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -92,11 +92,13 @@ cd meson-build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
+    --wrap-mode=nofallback \
     -Dstrip=true \
     -Ddocs=enabled \
     -Dgrapheme-shaping=enabled \
     -Drun-shaping=enabled \
     -Dtest-text-shaping=true \
+    -Dsvg-backend=nanosvg \
     -Dexamples=false
 
   "${NINJA:=ninja}"
