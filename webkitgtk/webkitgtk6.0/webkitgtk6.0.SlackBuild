@@ -57,10 +57,10 @@ elif [ "$ARCH" = "i686" ]; then
 elif [ "$ARCH" = "x86_64" ]; then
   OPT='-flto=thin -march=x86-64-v3'
   LDOPT='-flto=thin -Wl,-O1,--sort-common,--icf=safe'
-  SLKCFLAGS="-O2 -fPIC -march=x86-64 -mtune=generic -g1 -fcf-protection=none"
+  SLKCFLAGS="-O2 -fPIC -march=x86-64 -mtune=generic"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-O2 -fPIC -march=armv8-a -mtune=generic -Wno-error"
+  SLKCFLAGS="-O2 -fPIC -march=armv8-a -mtune=generic"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
@@ -86,11 +86,11 @@ find -L . \
 #  CFLAGS="$OPT -fdata-sections -ffunction-sections" \
 #  CXXFLAGS="$OPT -fdata-sections -ffunction-sections" \
 #  LDFLAGS="$LDOPT -fuse-ld=lld -Wl,--gc-sections" \
+#  CC=clang \
+#  CXX=clang++ \
 
 mkdir -p build
 cd build
-  CC=clang \
-  CXX=clang++ \
   cmake -DPORT=GTK \
 	-DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
 	-DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
