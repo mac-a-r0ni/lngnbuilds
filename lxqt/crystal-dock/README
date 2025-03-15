@@ -1,0 +1,7 @@
+crystal-dock (a cool dock for your desktop)
+
+Crystal Dock is a cool dock (desktop panel) for Linux desktop, with
+the focus on attractive user interface, being simple and easy to
+customize, and cross-desktop support.
+
+Supports kwin_wayland with Plasma 6 or LXQt.
