@@ -84,13 +84,15 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+# removed flags as causing failure
+#  CFLAGS="$OPT -fdata-sections -ffunction-sections" \
+#  CXXFLAGS="$OPT -fdata-sections -ffunction-sections" \
+#  LDFLAGS="$LDOPT -fuse-ld=lld -Wl,--gc-sections" \
+
 mkdir -p build
 cd build
   CC=clang \
   CXX=clang++ \
-  CFLAGS="$OPT -fdata-sections -ffunction-sections" \
-  CXXFLAGS="$OPT -fdata-sections -ffunction-sections" \
-  LDFLAGS="$LDOPT -fuse-ld=lld -Wl,--gc-sections" \
   cmake -DPORT=GTK \
 	-DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
 	-DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
