@@ -83,7 +83,7 @@ cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
 cargo build --frozen --release --features default
 
   install -vDm 755 {target/release/$PRGNAM,resources/$PRGNAM-session} -t "$PKG/usr/bin/"
-  install -vDm 644 resources/$PRGNAM.desktop -t "$PKG/usr/share/wayland-sessions/"
+  install -vDm 644 $CWD/$PRGNAM.desktop -t "$PKG/usr/share/wayland-sessions/"
   install -vDm 644 resources/$PRGNAM-portals.conf -t "$PKG/usr/share/xdg-desktop-portal/"
   install -vDm 644 resources/default-config.kdl -t "$PKG/etc/skel/$PRGNAM/"
 
