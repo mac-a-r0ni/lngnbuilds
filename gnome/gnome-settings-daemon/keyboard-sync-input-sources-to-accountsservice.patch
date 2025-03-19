@@ -181,7 +181,7 @@ index a357100..4963791 100644
  }
  
 diff --git a/plugins/xsettings/meson.build b/plugins/xsettings/meson.build
-index 49ed70f..2975c40 100644
+index 9cde0a13..5202ffc3 100644
 --- a/plugins/xsettings/meson.build
 +++ b/plugins/xsettings/meson.build
 @@ -12,6 +12,7 @@ sources = gsd_xsettings_gtk + fc_monitor + wm_button_layout_translation + files(
@@ -189,6 +189,6 @@ index 49ed70f..2975c40 100644
  
  deps = plugins_deps + [
 +  accountsservice_dep,
+   gsd_enums_dep,
    gtk_dep,
    x11_dep,
-   xfixes_dep,
