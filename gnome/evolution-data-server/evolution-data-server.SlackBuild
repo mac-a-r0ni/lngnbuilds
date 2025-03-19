@@ -133,7 +133,6 @@ cd build
     -DENABLE_INSTALLED_TESTS="$TESTSP" \
     -DENABLE_GTK_DOC="$GTKDOCP" \
     -DWITH_SYSTEMDUSERUNITDIR=no \
-    -DWITH_WEATHER=ON \
     -DENABLE_EXAMPLES=OFF \
     -DBUILD_TESTING=OFF \
     -DCMAKE_BUILD_TYPE=Release ..\
@@ -159,4 +158,4 @@ cat $CWD/slack-required > $PKG/install/slack-required
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+/sbin/makepkg -l y -c n --remove-tmp-rpaths $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
