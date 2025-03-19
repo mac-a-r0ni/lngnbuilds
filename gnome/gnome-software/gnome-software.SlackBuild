@@ -99,7 +99,6 @@ CFLAGS="$SLKCFLAGS" \
     -Dmalcontent=false \
     -Dpackagekit=false \
     -Dgtk_doc=false \
-    -Dsoup2=false \
     -Dprofile=slackware64-current
 
 "${NINJA:=ninja}"
