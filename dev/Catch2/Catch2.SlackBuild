@@ -90,7 +90,7 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-
+# testing some changes, gnome-system-monitor fails (using this)
 mkdir -p build
 cd build
   cmake \
@@ -99,6 +99,10 @@ cd build
     -DCMAKE_INSTALL_LIBDIR=lib${LIBDIRSUFFIX} \
     -DCATCH_INSTALL_DOCS=$DOCS \
     -DCATCH_INSTALL_EXTRAS=$EXTRAS \
+    -DCATCH_ENABLE_COVERAGE=OFF \
+    -DCATCH_ENABLE_WERROR=OFF \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_SHARED_LIBS=OFF \
     -DCMAKE_BUILD_TYPE=Release ..
   make
   make install/strip DESTDIR=$PKG
