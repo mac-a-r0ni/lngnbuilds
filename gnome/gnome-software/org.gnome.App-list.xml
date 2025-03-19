@@ -26,11 +26,14 @@
     </categories>
   </component>
   <component merge="append">
-    <id>app.drey.Doggo</id>
+    <id>app.drey.EarTag</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
-    <categories>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
       <category>Featured</category>
     </categories>
   </component>
@@ -68,6 +71,36 @@
     </categories>
   </component>
   <component merge="append">
+    <id>app.fotema.Fotema</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>ca.vlacroix.Tally</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>com.belmoussaoui.Decoder</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>com.boxy_svg.BoxySVG</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -86,6 +119,18 @@
     </categories>
   </component>
   <component merge="append">
+    <id>com.cassidyjames.clairvoyant</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>com.cassidyjames.plausible</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -95,7 +140,25 @@
     </categories>
   </component>
   <component merge="append">
-    <id>com.github.cassidyjames.clairvoyant</id>
+    <id>com.dz4k.FruitCredits</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>com.endlessnetwork.fablemaker</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>com.github.ADBeveridge.Raider</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -112,6 +175,18 @@
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
     <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>com.github.finefindus.eyedropper</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
       <category>Featured</category>
     </categories>
   </component>
@@ -167,6 +242,24 @@
     </categories>
   </component>
   <component merge="append">
+    <id>com.github.joseexposito.touche</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>com.github.marhkb.Pods</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>com.github.neithern.g4music</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -212,7 +305,34 @@
     </categories>
   </component>
   <component merge="append">
+    <id>com.google.AndroidStudio</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>com.jeffser.Alpaca</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>com.konstantintutsch.Caffeine</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>com.konstantintutsch.Lock</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -238,6 +358,24 @@
       <kudo>GnomeSoftware::popular</kudo>
     </kudos>
   <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>com.obsproject.Studio</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>com.play0ad.zeroad</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
       <category>Featured</category>
     </categories>
   </component>
@@ -284,7 +422,7 @@
     </categories>
   </component>
   <component merge="append">
-    <id>com.slack.Slack</id>
+    <id>com.toolstack.Folio</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -293,7 +431,25 @@
     </categories>
   </component>
   <component merge="append">
-    <id>com.toolstack.Folio</id>
+    <id>com.usebottles.bottles</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>cz.krupkat.Xpano</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>de.gonicus.gonnect</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -315,6 +471,18 @@
   </component>
   <component merge="append">
     <id>de.haeckerfelix.Fragments</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>de.haeckerfelix.Shortwave</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -356,6 +524,33 @@
     </categories>
   </component>
   <component merge="append">
+    <id>de.schmidhuberj.Flare</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>de.schmidhuberj.tubefeeder</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>de.swsnr.turnon</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>de.wagnermartin.Plattenalbum</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -381,7 +576,10 @@
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
-    <categories>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
       <category>Featured</category>
     </categories>
   </component>
@@ -428,6 +626,24 @@
     </categories>
   </component>
   <component merge="append">
+    <id>dev.qwery.AddWater</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>dev.serebit.Waycheck</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>dev.tchx84.Gameeky</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -446,14 +662,29 @@
     </categories>
   </component>
   <component merge="append">
+    <id>eu.nokun.MirrorHall</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>fr.romainvigier.MetadataCleaner</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  <categories>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>fr.sgued.ten_forward</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
       <category>Featured</category>
     </categories>
   </component>
@@ -497,7 +728,28 @@
     </categories>
   </component>
   <component merge="append">
+    <id>io.bassi.Amberol</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>io.frama.tractor.carburetor</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.alainm23.planify</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -572,6 +824,33 @@
     </categories>
   </component>
   <component merge="append">
+    <id>io.github.dzheremi2.lrcmake-gtk</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.efogdev.mpris-timer</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.fabrialberio.pinapp</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>io.github.finefindus.Hieroglyphic</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -585,6 +864,18 @@
   </component>
   <component merge="append">
     <id>io.github.fizzyizzy05.binary</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.flattool.Ignition</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -611,6 +902,24 @@
     </categories>
   </component>
   <component merge="append">
+    <id>io.github.giantpinkrobots.varia</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.hamza_algohary.Coulomb</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>io.github.idevecore.Valuta</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -623,7 +932,34 @@
     </categories>
   </component>
   <component merge="append">
-    <id>io.github.lawstorant.boxflat</id>
+    <id>io.github.josephmawa.Bella</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.josephmawa.Egghead</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.kelvinnovais.Kasasa</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.kotatogram</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -707,7 +1043,7 @@
     </categories>
   </component>
   <component merge="append">
-    <id>io.github.nokse22.ultimate-tic-tac-toe</id>
+    <id>io.github.philippkosarev.bmi</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -734,11 +1070,35 @@
     </categories>
   </component>
   <component merge="append">
+    <id>io.github.revisto.drum-machine</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>io.github.ronniedroid.concessio</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
     <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.seadve.Mousai</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
       <category>Featured</category>
     </categories>
   </component>
@@ -761,6 +1121,24 @@
     </categories>
   </component>
   <component merge="append">
+    <id>io.github.tfuxu.floodit</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.github.vmkspv.netsleuth</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>io.github.zefr0x.hashes</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -771,6 +1149,18 @@
   </component>
   <component merge="append">
     <id>io.gitlab.adhami3310.Converter</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.gitlab.adhami3310.Impression</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -827,6 +1217,42 @@
     </categories>
   </component>
   <component merge="append">
+    <id>io.gitlab.theevilskeleton.Upscaler</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>io.missioncenter.MissionCenter</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>me.iepure.Ticketbooth</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>me.iepure.devtoolbox</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>me.sanchezrodriguez.passes</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -836,7 +1262,88 @@
     </categories>
   </component>
   <component merge="append">
+    <id>me.sergiotarxz.Exd</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>menu.kando.Kando</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>net.codelogistics.webapps</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>net.hhoney.candy</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>net.hhoney.rota</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>net.hhoney.tinycrate</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>net.krafting.HexColordle</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>net.krafting.Playlifin</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>net.krafting.PlaylifinVoyager</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>net.mkiol.Jupii</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -896,6 +1403,15 @@
     </categories>
   </component>
   <component merge="append">
+    <id>org.gnome.Crosswords.Editor</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>org.gnome.DejaDup</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -918,6 +1434,24 @@
   </component>
   <component merge="append">
     <id>org.gnome.Fractal</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>org.gnome.Loupe</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>org.gnome.Mahjongg</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -972,7 +1506,10 @@
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
-    <categories>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
       <category>Featured</category>
     </categories>
   </component>
@@ -1013,7 +1550,40 @@
     </categories>
   </component>
   <component merge="append">
+    <id>org.gnome.design.IconLibrary</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>org.gnome.design.Lorem</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>org.gnome.gitlab.YaLTeR.Identity</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>org.gnome.gitlab.YaLTeR.VideoTrimmer</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -1055,7 +1625,43 @@
     </categories>
   </component>
   <component merge="append">
+    <id>org.kde.audiotube</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>org.kde.calligra</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>org.kde.marknote</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>org.kde.neochat</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>org.kde.tokodon</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -1073,7 +1679,25 @@
     </categories>
   </component>
   <component merge="append">
-    <id>org.simondalvai.ball2box</id>
+    <id>org.libvips.vipsdisp</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>org.nickvision.tubeconverter</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>org.telegram.desktop</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
@@ -1112,6 +1736,24 @@
     </categories>
   </component>
   <component merge="append">
+    <id>page.tesk.Refine</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>re.sonny.Eloquent</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>re.sonny.Junction</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -1120,6 +1762,15 @@
       <kudo>GnomeSoftware::popular</kudo>
     </kudos>
   <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>re.sonny.OhMySVG</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
       <category>Featured</category>
     </categories>
   </component>
@@ -1169,6 +1820,24 @@
     </categories>
   </component>
   <component merge="append">
+    <id>space.gaiasky.GaiaSky</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
+    <id>space.rirusha.Cassette</id>
+    <custom>
+      <value key="GnomeSoftware::FeatureTile">True</value>
+    </custom>
+    <categories>
+      <category>Featured</category>
+    </categories>
+  </component>
+  <component merge="append">
     <id>tv.kodi.Kodi</id>
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
@@ -1182,7 +1851,10 @@
     <custom>
       <value key="GnomeSoftware::FeatureTile">True</value>
     </custom>
-    <categories>
+    <kudos>
+      <kudo>GnomeSoftware::popular</kudo>
+    </kudos>
+  <categories>
       <category>Featured</category>
     </categories>
   </component>
@@ -1205,19 +1877,7 @@
     </categories>
   </component>
   <component merge="append">
-    <id>app.drey.EarTag</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
     <id>com.belmoussaoui.Authenticator</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
-    <id>com.belmoussaoui.Decoder</id>
     <kudos>
       <kudo>GnomeSoftware::popular</kudo>
     </kudos>
@@ -1229,25 +1889,7 @@
     </kudos>
   </component>
   <component merge="append">
-    <id>com.clarahobbs.chessclock</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
     <id>com.feaneron.Boatswain</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
-    <id>com.github.ADBeveridge.Raider</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
-    <id>com.github.finefindus.eyedropper</id>
     <kudos>
       <kudo>GnomeSoftware::popular</kudo>
     </kudos>
@@ -1259,37 +1901,13 @@
     </kudos>
   </component>
   <component merge="append">
-    <id>de.haeckerfelix.Shortwave</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
     <id>dev.Cogitri.Health</id>
     <kudos>
       <kudo>GnomeSoftware::popular</kudo>
     </kudos>
   </component>
   <component merge="append">
-    <id>io.bassi.Amberol</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
-    <id>io.github.lainsce.Khronos</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
-    <id>io.github.seadve.Mousai</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
-    <id>io.gitlab.adhami3310.Impression</id>
+    <id>eu.fortysixandtwo.chessclock</id>
     <kudos>
       <kudo>GnomeSoftware::popular</kudo>
     </kudos>
@@ -1308,18 +1926,6 @@
   </component>
   <component merge="append">
     <id>org.gnome.Solanum</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
-    <id>org.gnome.gitlab.YaLTeR.Identity</id>
-    <kudos>
-      <kudo>GnomeSoftware::popular</kudo>
-    </kudos>
-  </component>
-  <component merge="append">
-    <id>org.gnome.gitlab.YaLTeR.VideoTrimmer</id>
     <kudos>
       <kudo>GnomeSoftware::popular</kudo>
     </kudos>
