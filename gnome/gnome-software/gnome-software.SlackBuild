@@ -99,6 +99,7 @@ CFLAGS="$SLKCFLAGS" \
     -Dmalcontent=false \
     -Dpackagekit=false \
     -Dgtk_doc=false \
+    -Dfollow_symlinks=true \
     -Dprofile=slackware64-current
 
 "${NINJA:=ninja}"
@@ -107,10 +108,10 @@ cd ..
 
 # remove problematic plugins from package so gnome-software works as intended
 # we want GS to ONLY manage flatpak/fwupd packages and not show ANY system software!
-rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-21/libgs_plugin_appstream.so
-rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-21/libgs_plugin_dpkg.so
-rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-21/libgs_plugin_fedora-*.so
-rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-21/libgs_plugin_provenance-*.so
+rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-22/libgs_plugin_appstream.so
+rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-22/libgs_plugin_dpkg.so
+rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-22/libgs_plugin_fedora-*.so
+rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-22/libgs_plugin_provenance-*.so
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
