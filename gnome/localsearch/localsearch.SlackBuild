@@ -92,7 +92,6 @@ cd build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
-    -Dminer_fs=false \
     -Dsystemd_user_services=false \
     -Dlandlock=disabled
   "${NINJA:=ninja}"
