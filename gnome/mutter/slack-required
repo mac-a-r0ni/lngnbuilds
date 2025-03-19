@@ -1,3 +1,4 @@
 libei
 gnome-settings-daemon
+python-argcomplete
 xvfb-run

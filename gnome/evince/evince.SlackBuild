@@ -31,7 +31,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=evince
-VERSION=${VERSION:-46.3.1}
+VERSION=${VERSION:-48.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -123,7 +123,7 @@ rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 gzip -9 $PKG/usr/man/man1/*.1
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING NEWS *.md MAINTAINERS NEWS NOTES TODO \
+cp -a AUTHORS *.md COPYING MAINTAINERS NEWS* NOTES README* TODO \
       $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
