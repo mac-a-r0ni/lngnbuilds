@@ -81,7 +81,7 @@ find -L . -prune -name 'subprojects/gvc/.gitlab-ci' \
 
 # patches from gfs47
 patch -Np1 -i $CWD/keyboard-Use-ibus-sources-from-locale.patch
-patch -Np1 -i $CWD/keyboard-sync-input-sources-to-accountsservice.patch
+#patch -Np1 -i $CWD/keyboard-sync-input-sources-to-accountsservice.patch
 
 # LFS Patches:
 sed "/  policy,/d" -i plugins/{power,wacom}/meson.build
