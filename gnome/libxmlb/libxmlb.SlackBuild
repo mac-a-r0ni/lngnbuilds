@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libxmlb
-VERSION=${VERSION:-0.3.21}
+VERSION=${VERSION:-0.3.22}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -91,7 +91,9 @@ meson setup .. \
   --localstatedir=/var \
   --mandir=/usr/man \
   --prefix=/usr \
-  --sysconfdir=/etc
+  --sysconfdir=/etc \
+  -Dgtkdoc=false \
+  -Dtests=false
 "${NINJA:=ninja}"
 DESTDIR=$PKG $NINJA install
 cd ..
