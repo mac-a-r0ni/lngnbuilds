@@ -102,7 +102,7 @@ cd build
     -DCATCH_ENABLE_COVERAGE=OFF \
     -DCATCH_ENABLE_WERROR=OFF \
     -DBUILD_TESTING=OFF \
-    -DBUILD_SHARED_LIBS=OFF \
+    -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_BUILD_TYPE=Release ..
   make
   make install/strip DESTDIR=$PKG
@@ -118,6 +118,10 @@ if [ "$COMPAT32" = "yes" ]; then
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCATCH_INSTALL_DOCS=$DOCS \
       -DCATCH_INSTALL_EXTRAS=$EXTRAS \
+      -DCATCH_ENABLE_COVERAGE=OFF \
+      -DCATCH_ENABLE_WERROR=OFF \
+      -DBUILD_TESTING=OFF \
+      -DBUILD_SHARED_LIBS=ON \
       -DCMAKE_BUILD_TYPE=Release ..
     make
     make install/strip DESTDIR=$PKG
