@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-software/48/gnome-software-48
 MD5SUM="e18cb2832c33bb74c626ec8244d1e75c"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="flatpak gnome-shell sysprof gnome-app-list"
+REQUIRES="flatpak gnome-shell sysprof"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
