@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mutter
-VERSION=${VERSION:-48.0}
+VERSION=${VERSION:-48.rc}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -84,7 +84,7 @@ find -L . \
 #patch -Np1 -i $CWD/0001-meson-Update-the-syprof-wrap-to-47.alpha-and-sysprof.patch
 #patch -Np1 -i $CWD/0002-kms-impl-device-Always-catch-pending-KMS-update-in-_.patch
 #patch -Np1 -i $CWD/0003-Revert-onscreen-native-Account-for-all-posted-frames.patch
-patch -Np1 -i $CWD/cbdc3ae9f5fd42887c2ef154a566dccfd3dc6e1f.patch
+#patch -Np1 -i $CWD/cbdc3ae9f5fd42887c2ef154a566dccfd3dc6e1f.patch
 
 mkdir build
 cd build
