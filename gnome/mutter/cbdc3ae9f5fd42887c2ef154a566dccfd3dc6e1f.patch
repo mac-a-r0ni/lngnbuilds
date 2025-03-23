@@ -1,0 +1,161 @@
+From cbdc3ae9f5fd42887c2ef154a566dccfd3dc6e1f Mon Sep 17 00:00:00 2001
+From: Sebastian Wick <sebastian.wick@redhat.com>
+Date: Fri, 28 Feb 2025 13:28:49 +0100
+Subject: [PATCH] wayland/cursor-shape: Enable the protocol by default
+
+We now have tests, a GTK implementation that was tested on it and the
+protocol version 2 changes are upstream. Time to enable it by default.
+
+Part-of: <https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/4307>
+---
+ .../org.gnome.Mutter.DebugControl.xml         |  1 -
+ src/core/meta-debug-control-private.h         |  2 -
+ src/core/meta-debug-control.c                 | 15 ------
+ src/tests/wayland-unit-tests.c                |  1 -
+ src/wayland/meta-wayland-cursor-shape.c       | 47 ++-----------------
+ 5 files changed, 5 insertions(+), 61 deletions(-)
+
+diff --git a/data/dbus-interfaces/org.gnome.Mutter.DebugControl.xml b/data/dbus-interfaces/org.gnome.Mutter.DebugControl.xml
+index 56a271680c..d2c3017f00 100644
+--- a/data/dbus-interfaces/org.gnome.Mutter.DebugControl.xml
++++ b/data/dbus-interfaces/org.gnome.Mutter.DebugControl.xml
+@@ -9,7 +9,6 @@
+     <property name="ForceLinearBlending" type="b" access="readwrite" />
+     <property name="SessionManagementProtocol" type="b" access="readwrite" />
+     <property name="InhibitHwCursor" type="b" access="readwrite" />
+-    <property name="CursorShapeProtocol" type="b" access="readwrite" />
+     <property name="A11yManagerWithoutAccessControl" type="b" access="readwrite" />
+   </interface>
+ 
+diff --git a/src/core/meta-debug-control-private.h b/src/core/meta-debug-control-private.h
+index 0787fed89c..eee7606852 100644
+--- a/src/core/meta-debug-control-private.h
++++ b/src/core/meta-debug-control-private.h
+@@ -28,6 +28,4 @@ gboolean meta_debug_control_is_session_management_protocol_enabled (MetaDebugCon
+ 
+ gboolean meta_debug_control_is_hw_cursor_inhibited (MetaDebugControl *debug_control);
+ 
+-gboolean meta_debug_control_is_cursor_shape_protocol_enabled (MetaDebugControl *debug_control);
+-
+ gboolean meta_debug_control_is_a11y_manager_without_access_control (MetaDebugControl *debug_control);
+diff --git a/src/core/meta-debug-control.c b/src/core/meta-debug-control.c
+index bc97368b92..bdf59d0fad 100644
+--- a/src/core/meta-debug-control.c
++++ b/src/core/meta-debug-control.c
+@@ -170,7 +170,6 @@ meta_debug_control_init (MetaDebugControl *debug_control)
+     META_DBUS_DEBUG_CONTROL (debug_control);
+   gboolean force_hdr, force_linear_blending;
+   gboolean session_management_protocol;
+-  gboolean cursor_shape_protocol;
+   gboolean inhibit_hw_cursor;
+   gboolean a11y_manager_without_access_control;
+ 
+@@ -192,11 +191,6 @@ meta_debug_control_init (MetaDebugControl *debug_control)
+   meta_dbus_debug_control_set_inhibit_hw_cursor (dbus_debug_control,
+                                                  inhibit_hw_cursor);
+ 
+-  cursor_shape_protocol =
+-    g_strcmp0 (getenv ("MUTTER_DEBUG_CURSOR_SHAPE_PROTOCOL"), "1") == 0;
+-  meta_dbus_debug_control_set_cursor_shape_protocol (dbus_debug_control,
+-                                                     cursor_shape_protocol);
+-
+   a11y_manager_without_access_control =
+     g_strcmp0 (getenv ("MUTTER_DEBUG_A11Y_MANAGER_WITHOUT_ACCESS_CONTROL"), "1") == 0;
+   meta_dbus_debug_control_set_a11y_manager_without_access_control (dbus_debug_control,
+@@ -267,15 +261,6 @@ meta_debug_control_is_hw_cursor_inhibited (MetaDebugControl *debug_control)
+   return meta_dbus_debug_control_get_inhibit_hw_cursor (dbus_debug_control);
+ }
+ 
+-gboolean
+-meta_debug_control_is_cursor_shape_protocol_enabled (MetaDebugControl *debug_control)
+-{
+-  MetaDBusDebugControl *dbus_debug_control =
+-    META_DBUS_DEBUG_CONTROL (debug_control);
+-
+-  return meta_dbus_debug_control_get_cursor_shape_protocol (dbus_debug_control);
+-}
+-
+ gboolean
+ meta_debug_control_is_a11y_manager_without_access_control (MetaDebugControl *debug_control)
+ {
+diff --git a/src/tests/wayland-unit-tests.c b/src/tests/wayland-unit-tests.c
+index 84aa45dbd8..d4d5db1767 100644
+--- a/src/tests/wayland-unit-tests.c
++++ b/src/tests/wayland-unit-tests.c
+@@ -1391,7 +1391,6 @@ main (int   argc,
+   MetaTestRunFlags test_run_flags;
+ 
+   g_setenv ("MUTTER_DEBUG_SESSION_MANAGEMENT_PROTOCOL", "1", TRUE);
+-  g_setenv ("MUTTER_DEBUG_CURSOR_SHAPE_PROTOCOL", "1", TRUE);
+ 
+ #ifdef MUTTER_PRIVILEGED_TEST
+   context = meta_create_test_context (META_CONTEXT_TEST_TYPE_VKMS,
+diff --git a/src/wayland/meta-wayland-cursor-shape.c b/src/wayland/meta-wayland-cursor-shape.c
+index 72d3cffe24..172ddf2332 100644
+--- a/src/wayland/meta-wayland-cursor-shape.c
++++ b/src/wayland/meta-wayland-cursor-shape.c
+@@ -20,7 +20,6 @@
+ 
+ #include "wayland/meta-wayland-cursor-shape.h"
+ 
+-#include "core/meta-debug-control-private.h"
+ #include "core/window-private.h"
+ #include "wayland/meta-wayland-private.h"
+ #include "wayland/meta-wayland-xdg-shell.h"
+@@ -282,48 +281,12 @@ bind_cursor_shape (struct wl_client *client,
+                                   NULL, NULL);
+ }
+ 
+-static void
+-update_enabled (MetaWaylandCompositor *compositor)
+-{
+-  MetaDebugControl *debug_control =
+-    meta_context_get_debug_control (compositor->context);
+-  gboolean is_enabled =
+-    meta_debug_control_is_cursor_shape_protocol_enabled (debug_control);
+-  struct wl_global *global;
+-
+-  global = g_object_get_data (G_OBJECT (compositor),
+-                              "-meta-wayland-cursor-shape");
+-
+-  if (is_enabled && global == NULL)
+-    {
+-
+-      global = wl_global_create (compositor->wayland_display,
+-                                 &wp_cursor_shape_manager_v1_interface,
+-                                 META_WP_CURSOR_SHAPE_VERSION,
+-                                 NULL, bind_cursor_shape);
+-      if (global == NULL)
+-        g_error ("Failed to register a global cursor-shape object");
+-    }
+-  else if (!is_enabled)
+-    {
+-      g_clear_pointer (&global, wl_global_destroy);
+-    }
+-
+-  g_object_set_data (G_OBJECT (compositor),
+-                     "-meta-wayland-cursor-shape",
+-                     global);
+-}
+-
+ void
+ meta_wayland_init_cursor_shape (MetaWaylandCompositor *compositor)
+ {
+-  MetaDebugControl *debug_control =
+-    meta_context_get_debug_control (compositor->context);
+-
+-  g_signal_connect_data (debug_control, "notify::cursor-shape-protocol",
+-                         G_CALLBACK (update_enabled),
+-                         compositor, NULL,
+-                         G_CONNECT_SWAPPED | G_CONNECT_AFTER);
+-
+-  update_enabled (compositor);
++  if (wl_global_create (compositor->wayland_display,
++                        &wp_cursor_shape_manager_v1_interface,
++                        META_WP_CURSOR_SHAPE_VERSION,
++                        NULL, bind_cursor_shape) == NULL)
++    g_error ("Failed to register a global cursor-shape object");
+ }
+-- 
+GitLab
+
