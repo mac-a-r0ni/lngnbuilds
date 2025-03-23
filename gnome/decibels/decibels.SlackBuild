@@ -94,6 +94,8 @@ CFLAGS="$SLKCFLAGS" \
 
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
+ln -s org.gnome.Decibels $PKG/usr/bin/decibels
+
 cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
