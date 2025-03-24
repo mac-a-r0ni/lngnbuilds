@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/nwg-piotr/typobuster/archive/v0.2.0/typobuster-0.2.
 MD5SUM="fc577a753ef9a42a6e83843f7e586339"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gtksourceview4"
+REQUIRES=""
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"

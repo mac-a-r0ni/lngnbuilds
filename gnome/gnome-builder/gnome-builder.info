@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-builder/48/gnome-builder-48.0
 MD5SUM="b84daa997b7fccac07ef93cf25e4202e"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="d-spy flatpak gtksourceview4 jsonrpc-glib libpeas2 libportal libostree template-glib gom cmark libgit2-glib libspelling sysprof webkitgtk6.0"
+REQUIRES="d-spy flatpak jsonrpc-glib libpeas2 libportal libostree template-glib gom cmark libgit2-glib libspelling sysprof webkitgtk6.0"
 MAINTAINER="Charadon"
 EMAIL="dev@iotib.net"
