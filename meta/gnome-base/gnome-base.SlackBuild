@@ -59,6 +59,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+mkdir -p $PKG/etc/ld.so.conf.d
+install -Dm644 -t $PKG/etc/ld.so.conf.d/ $CWD/*.conf 
+#eog.conf gnome-software.conf localsearch.conf mutter.conf
+
 # just install the NEWS file to provide a list of updated modules
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a $CWD/NEWS \
