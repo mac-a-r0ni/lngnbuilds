@@ -21,6 +21,8 @@ case "$1" in
   ;;
   'stop')
     pkill -f /usr/bin/mullvad-daemon >/dev/null &
+    # Remove both possible .pid locations:
+    rm -f /var/run/mullvad-vpn.pid /var/run/mullvad-vpn/mullvad-vpn.pid
   ;;
   'restart')
     /usr/bin/mullvad-daemon -v >/dev/null &
