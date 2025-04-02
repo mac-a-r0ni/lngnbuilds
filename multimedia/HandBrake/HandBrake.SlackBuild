@@ -111,7 +111,6 @@ fi
 # machine. Feel free to send any suggestions/fixes.
 # libdovi fails if not forcefully disabled... disabling nvdec/nvenc
 # in case it does the same.
-export -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
