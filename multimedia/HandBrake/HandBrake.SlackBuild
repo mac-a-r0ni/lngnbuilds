@@ -123,6 +123,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --disable-libdovi \
   --disable-nvdec \
   --disable-nvenc \
+  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
   $GTK_GUI \
   --arch=$ARCH
 
