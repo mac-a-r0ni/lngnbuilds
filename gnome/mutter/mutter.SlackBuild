@@ -48,16 +48,16 @@ PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686 -fno-semantic-interposition"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686 -fno-semantic-interposition"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -march=x86-64 -mtune=generic -fPIC"
+  SLKCFLAGS="-O2 -march=x86-64 -mtune=generic -fPIC -fno-semantic-interposition"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-O2 -march=armv8-a -mtune=generic -fPIC"
+  SLKCFLAGS="-O2 -march=armv8-a -mtune=generic -fPIC -fno-semantic-interposition"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
@@ -82,12 +82,13 @@ find -L . \
 #patch -Np1 -i $CWD/0001-cursor-Unify-prepare_func-for-shape-cursors.patch
 #patch -Np1 -i $CWD/0001-gschema-Enable-fractional-scaling-experimental-featu.patch
 #patch -Np1 -i $CWD/0001-meson-Update-the-syprof-wrap-to-47.alpha-and-sysprof.patch
-patch -Np1 -i $CWD/0002-kms-impl-device-Always-catch-pending-KMS-update-in-_.patch
-patch -Np1 -i $CWD/0003-Revert-onscreen-native-Account-for-all-posted-frames.patch
+#patch -Np1 -i $CWD/0002-kms-impl-device-Always-catch-pending-KMS-update-in-_.patch
+#patch -Np1 -i $CWD/0003-Revert-onscreen-native-Account-for-all-posted-frames.patch
 #patch -Np1 -R -i $CWD/cbdc3ae9f5fd42887c2ef154a566dccfd3dc6e1f.patch
 
 mkdir build
 cd build
+  LDFLAGS+=" -Wl,-Bsymbolic-functions" \
   CFLAGS="$SLKCFLAGS" \
   CXXFLAGS="$SLKCFLAGS" \
   meson setup .. \
@@ -104,8 +105,6 @@ cd build
     -Dclutter_tests=false \
     -Dstrip=true \
     -Dprofiler=false \
-    -Dsm=true \
-    -Dx11=false \
     -Dtests=disabled
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
