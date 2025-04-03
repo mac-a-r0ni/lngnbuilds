@@ -100,17 +100,19 @@ cd build
     -Ddbus-sys="/usr/share/dbus-1/system.d" \
     -Ddefault-pam-config=none \
     -Dpam-mod-dir="/lib${LIBDIRSUFFIX}/security" \
-    -Dgdm-xsession=true \
     -Drun-dir=/run/gdm \
     -Dlogind-provider=elogind \
     -Dsystemd-journal=false \
     -Dsystemdsystemunitdir=no \
     -Dsystemduserunitdir=no \
     -Dsysconfsubdir=/etc/gdm \
-    -Dinitial-vt=7
+    -Dwayland-support=true \
+    -Dx11-support=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
+#    -Dgdm-xsession=true \
+#    -Dinitial-vt=7 \
 
 # insert slackware logo
 install -vDm 0644 $CWD/slackware_whitelogo_med.png -t $PKG/usr/share/pixmaps/
