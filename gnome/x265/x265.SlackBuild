@@ -82,6 +82,9 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+# cmake 4 fix
+sed -r '/cmake_policy.*(0025|0054)/d' -i source/CMakeLists.txt
+
 for d in 8 $([ "$ARCH" = "x86_64" ] && echo "10 12"); do
   if [[ -d build-$d ]]; then
     rm -rf build-$d
