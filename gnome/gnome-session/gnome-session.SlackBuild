@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-session
-VERSION=${VERSION:-47.0.1}
+VERSION=${VERSION:-48.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -113,12 +113,12 @@ mkdir -p $PKG/etc/X11/xinit
 install -vDm 0755 $CWD/xinitrc.gnome -t $PKG/etc/X11/xinit
 
 # Remove duplicate display manager entries:
-rm "$PKG/usr/share/wayland-sessions/gnome.desktop"
-rm "$PKG/usr/share/xsessions/gnome.desktop"
+#rm "$PKG/usr/share/wayland-sessions/gnome.desktop"
+#rm "$PKG/usr/share/xsessions/gnome.desktop"
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS HACKING NEWS COPYING MAINTAINERS README \
+  AUTHORS NEWS ChangeLog* COPYING MAINTAINERS README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
