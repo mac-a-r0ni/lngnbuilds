@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+      |-----handy-ruler------------------------------------------------------|
+ptyxis: ptyxis (A container oriented terminal)
+ptyxis:
+ptyxis: Ptyxis is a terminal for GNOME with first-class support for
+ptyxis: containers.
+ptyxis:
+ptyxis: Homepage: https://gitlab.gnome.org/chergert/ptyxis
+ptyxis:
+ptyxis:
+ptyxis:
+ptyxis:
+ptyxis:
