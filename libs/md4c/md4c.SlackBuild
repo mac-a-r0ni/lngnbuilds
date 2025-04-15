@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for <appname>
+# Slackware build script for md4c
 
 # Copyright 2022 Steven Voges <svoges.sbo@gmail.com>
 # All rights reserved.
@@ -29,7 +29,7 @@ SRCNAM=md4c-release
 VERSION=${VERSION:-0.4.8}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
-PKGTYPE=${PKGTYPE:-tgz}
+PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
