@@ -5,8 +5,6 @@ libpeas2
 libportal
 libostree
 template-glib
-webkit2gtk
-cmark
 libgit2-glib
 libspelling
 sysprof
