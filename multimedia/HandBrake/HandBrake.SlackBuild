@@ -151,6 +151,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 # Don't use the doinst.sh if there is no GUI
 if [ "$GUI" != "no" ]; then cat $CWD/doinst.sh > $PKG/install/doinst.sh; fi
 

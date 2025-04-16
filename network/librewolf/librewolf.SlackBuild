@@ -83,6 +83,7 @@ install -Dm0644 -T $PKG/opt/$NAMVER/browser/chrome/icons/default/default128.png 
 cp "$CWD/$PRGNAM.SlackBuild" "$PKG/usr/doc/$NAMVER/$PRGNAM.SlackBuild"
 cp "$CWD/README" "$PKG/usr/doc/$NAMVER/README"
 cp "$CWD/slack-desc" "$PKG/install/slack-desc"
+cat $CWD/slack-required > $PKG/install/slack-required
 cp "$CWD/doinst.sh" "$PKG/install/doinst.sh"
 
 cd "$PKG"
