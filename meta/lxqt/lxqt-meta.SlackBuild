@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for lxqt (metapackage)
+# Slackware build script for lxqt-meta (metapackage)
 
 # Copyright (C) 2023 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
@@ -28,8 +28,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=lxqt
-VERSION=${VERSION:-2.1.0}
+PRGNAM=lxqt-meta
+VERSION=${VERSION:-2.2.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}

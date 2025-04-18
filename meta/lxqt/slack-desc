@@ -5,15 +5,15 @@
 # You must make exactly 11 lines for the formatting to be correct.  It's also
 # customary to leave one space after the ':' except on otherwise blank lines.
 
-    |-----handy-ruler------------------------------------------------------|
-lxqt: lxqt (LXQt - Lightweight Qt Desktop meta-package)
-lxqt:
-lxqt: This is a meta-package to control the LXQt desktop installation.
-lxqt: Removal of this package will not effect your LXQt install, it
-lxqt: is intended to make installs/updates easier.
-lxqt:
-lxqt: Homepage: https://lxqt-project.org/
-lxqt:
-lxqt:
-lxqt:
-lxqt:
+         |-----handy-ruler------------------------------------------------------|
+lxqt-meta: lxqt (LXQt - Lightweight Qt Desktop meta-package)
+lxqt-meta:
+lxqt-meta: This is a meta-package to control the LXQt desktop installation.
+lxqt-meta: Removal of this package will not effect your LXQt install, it
+lxqt-meta: is intended to make installs/updates easier.
+lxqt-meta:
+lxqt-meta: Homepage: https://lxqt-project.org/
+lxqt-meta:
+lxqt-meta:
+lxqt-meta:
+lxqt-meta:
