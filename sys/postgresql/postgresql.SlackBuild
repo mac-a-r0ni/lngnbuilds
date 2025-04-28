@@ -213,6 +213,7 @@ chmod 755 $PKG/var/log/setup/setup.$PRGNAM
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 sed -e "s%@PG_VERSION@%$PG_VERSION%" \
   -e "s%@PRGNAM@%$PRGNAM%" \
   -e "s%@LIBDIRSUFFIX@%$LIBDIRSUFFIX%" \
