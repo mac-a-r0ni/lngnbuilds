@@ -1,10 +1,10 @@
 PRGNAM="zulu-openjdk11"
-VERSION="11.0.25"
+VERSION="11.0.27"
 HOMEPAGE="https://www.azul.com/downloads/"
-DOWNLOAD="https://cdn.azul.com/zulu/bin/zulu11.76.21-ca-jdk11.0.25-linux_aarch64.tar.gz \
-          https://cdn.azul.com/zulu/bin/zulu11.76.21-ca-jdk11.0.25-linux_x64.tar.gz"
-MD5SUM="1f720b32516b182255d5239d288ee3dd \
-        bbb05ef2e5e28e02bdea57a2bf7d0090"
+DOWNLOAD="https://cdn.azul.com/zulu/bin/zulu11.80.21-ca-jdk11.0.27-linux_aarch64.tar.gz \
+          https://cdn.azul.com/zulu/bin/zulu11.80.21-ca-jdk11.0.27-linux_x64.tar.gz"
+MD5SUM="1917851e9a653bfc5b5e9aa7f66e726f \
+        afd459a406d99735ccea893cc6e72bbc"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
