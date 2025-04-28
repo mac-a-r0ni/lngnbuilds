@@ -87,7 +87,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # aarch64 fixes
-patch -Np1 -i $CWD/2434.diff || exit 1
+patch -Np1 -i $CWD/2434.patch || exit 1
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
