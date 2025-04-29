@@ -7,6 +7,6 @@ MD5SUM="c5b75918b0eb7e73cf638c4e4cae896b \
         e12e2bc1630553bdad927b6c34a86ad9"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="google-go-lang"
+REQUIRES=""
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
