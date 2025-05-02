@@ -9,58 +9,13 @@
 
 # Licensed under the WTFPL. See http://www.wtfpl.net/txt/copying/ for details.
 
-# 20241216 bkw: Updated for v0.272 (incl. groovy patch).
-# 20241101 bkw: Updated for v0.271 (incl. groovy patch).
-# 20241009 bkw:
-# - Updated for v0.270 (incl. groovy patch).
-# - Add SLKCFLAGS for aarch64, courtesy of stormtracknole.
-
-# 20240907 bkw: Updated for v0.269 (incl. groovy patch).
-# 20240805 bkw: add groovy patch for v0.268 (no other changes).
-# 20240802 bkw: Updated for v0.268.
-# 20240330 bkw: Updated for v0.264.
-# 20231031 bkw: Updated for v0.260, add WAYLAND option.
-# 20230710 bkw: Updated for v0.256.
-# 20230428 bkw: Updated for v0.254.
-# 20230103 bkw: Updated for v0.251.
-# 20220205 bkw: Updated for v0.240.
-
-# 20211115 bkw:
-# - updated for v0.237 on -current aka 15.0rc1.
-# - new-style icons.
-# - update mame.ini (lots of new options, some old ones went away).
-# - include the new support stuff (hash, language, etc)
-# - rename mame's 'split' to 'mame-split' to avoid potential conflict
-#   with coreutils (if someone has /usr/games before /usr/bin in $PATH).
-# - include ini/{examples,presets} in the package (in the doc dir).
-# - make ccache work! finally! see README_ccache.txt if you care.
-# - make GroovyMAME support work again (upstream switched to github).
-# - remove gcc9 stuff. it was specific to Slackware 14.2.
-
-# 20191208 bkw: Updated for v0.214, after long hiatus. This isn't
-# actually the latest version, but it's the latest version that will
-# compile with any of the compilers available in Slackware 14.2:
-# gcc-5.5.0, llvm-3.8.0, llvm-8.0.1 (from /extra). It may still be
-# possible to patch 0.216 to build, or possibly 0.217 will have a fix for
-# llvm-8.0.1 (mame docs claim to support "clang version 5 and later").
-# Meanwhile this update is better than nothing. Special thanks for ponce
-# and chriswilling for doing test builds on much faster machines than
-# I currently have access to. Also, moved old comment log entries to
-# ChangeLog.old as it was getting ridiculously long.
-
-# 20181227 bkw: Updated for v0.205.
-# 20181130 bkw: Updated for v0.204, including compile fix for xavix.cpp.
-# 20181031 bkw: Updated for v0.203.
-# 20180928 bkw: Updated for v0.202.
-# 20180830 bkw: Updated for v0.201.
-
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mame
-VERSION=${VERSION:-0.272}
+VERSION=${VERSION:-0.277}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
-PKGTYPE=${PKGTYPE:-tgz}
+TAG=${TAG:-_lngn}
+PKGTYPE=${PKGTYPE:-txz}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -75,7 +30,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/SBo}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
@@ -98,29 +53,6 @@ SHORTNAME=${PRGNAM}${VERSION/./}
 DIRNAME=$PRGNAM-$SHORTNAME
 
 set -e
-
-# 20200108 bkw: before doing ANYTHING else, check to make sure
-# our required deps are installed. This is helpful because if
-# they are missing, the mame compile will still start and run
-# for an hour or more before it errors out, wasting a lot of
-# time (some of which was mine).
-MISSING=""
-for i in sdl2 SDL2_ttf; do
-  pkg-config --exists $i || MISSING="$MISSING $i"
-done
-if [ -n "$MISSING" ]; then
-  echo "*** Missing required dependencies:$MISSING" 1>&2
-  exit 1
-fi
-
-# 20211112 bkw: GroovyMAME support has changed, see README_groovy.txt.
-# This part of it has to run in $CWD.
-GROOVY="${GROOVY:-no}"
-
-if [ "$GROOVY" = "update" ]; then
-  sh mkgroovy.sh $VERSION
-  GROOVY=yes
-fi
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -162,26 +94,6 @@ find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
 # JDK! In case you're wondering, only the C code in the bundled portmidi
 # is built (no Java needed).
 
-# Version-specific patches & sed fixes. We do it this way to keep this
-# script compatible with older versions.
-PATCHES=""
-case "$VERSION" in
-  0.200) # couple files missing an include...
-    sed -i '1i#include <cmath>' \
-           src/devices/cpu/mips/ps2vif1.cpp \
-           src/devices/cpu/mips/mips3.cpp
-           ;;
-  0.204)
-    sed -i '1i#include <cmath>' src/mame/video/xavix.cpp
-    ;;
-  *) ;;
-esac
-
-[ -n "$PATCHES" ] && \
-  for i in "$PATCHES"; do
-    [ -f "$CWD/$i" ] && patch -p1 < "$CWD/$i"
-  done
-
 # This is purely cosmetic, and can't be set on the make command line.
 sed -i 's,ubuntu-intrepid,slackware,g' scripts/genie.lua
 sed -i 's/DISTRO := generic/DISTRO := slackware/' makefile
@@ -194,13 +106,6 @@ sed -i 's,\.;ini,/etc,' src/osd/sdl/sdlmain.cpp
 # Tried several variants of this, none work, ended up using the sed
 # stuff above.
 #SDL_INI_PATH='$$HOME/.mame;/etc' \
-
-# 20211110 bkw: undocumented option. keep this Just In Case.
-if [ "${QTDEBUG:-yes}" = "yes" ]; then
-  QTOPT=1
-else
-  QTOPT=0
-fi
 
 
 # Build option notes:
@@ -219,8 +124,6 @@ fi
 # would fail if PyXML happened to be installed. Probably don't need it
 # with py3, but it won't hurt anything either.
 
-# 20211111 bkw: make ccache handle precompiled headers
-export CCACHE_SLOPPINESS=pch_defines,time_macros,include_file_mtime,include_file_ctime
 
 # 20211111 bkw: undocumented option, build a mame that only supports
 # pac-man and its clones. used for testing only.
@@ -228,41 +131,19 @@ if [ "${PACONLY:-no}" = "yes" ]; then
   PACOPT="SOURCES=src/mame/drivers/pacman.cpp"
 fi
 
-# 20231031 bkw: build option for wayland, see README
-if [ "${WAYLAND:-no}" = "yes" ]; then
-  WAYLOPT="USE_WAYLAND=1"
-fi
-
-# 20211111 bkw: build with ccache by default, now that it works.
-if [ "${USE_CCACHE:-yes}" = "yes" ]; then
-  CC="/usr/bin/ccache /usr/bin/clang"
-  CXX="/usr/bin/ccache /usr/bin/clang++"
-else
-  CC="${CC:-$( which gcc )}"
-  CXX="${CXX:-$( which g++ )}"
-fi
-
-make USE_QTDEBUG=$QTOPT \
-     USE_SYSTEM_LIB_EXPAT=1 \
+make USE_SYSTEM_LIB_EXPAT=1 \
      USE_SYSTEM_LIB_ZLIB=1 \
      USE_SYSTEM_LIB_JPEG=1 \
      USE_SYSTEM_LIB_FLAC=1 \
      PYTHON_EXECUTABLE="/usr/bin/python3 -S" \
      OPT_FLAGS="$SLKCFLAGS" \
      LDOPTS="-fuse-ld=gold" \
-     OVERRIDE_CC="$CC" \
-     OVERRIDE_CXX="$CXX" \
-     CC="$CC" \
-     CXX="$CXX" \
-     ARCH="" \
+     PTR64=1 \
      PRECOMPILE=1 \
      VERBOSE=1 \
      NOWERROR=1 \
      TOOLS=1 \
-     TARGET=$PRGNAM \
-     $PACOPT \
-     USE_WAYLANG=1 \
-     SUBTARGET=$PRGNAM
+     USE_WAYLAND=1
 
 # No 'make install' target, do it manually.
 mkdir -p $PKG/usr/games $PKG/etc $PKG/usr/man/man6 $PKG/usr/man/man1 \
