@@ -81,14 +81,14 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 cargo build --release --all-features
-install -Dt $PKG/usr/bin $TMP/$NAME-$VERSION/target/release/regreet
+install -Dt $PKG/usr/bin $TMP/$SRCNAM-$VERSION/target/release/regreet
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 # install sample skel config
 mkdir -p $PKG/etc/greetd
-install -Dm644 $TMP/$NAME-$VERSION/regreet.sample.toml $PKG/etc/greetd
+install -Dm644 $TMP/$SRCNAM-$VERSION/regreet.sample.toml $PKG/etc/greetd
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
