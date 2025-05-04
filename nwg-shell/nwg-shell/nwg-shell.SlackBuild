@@ -54,7 +54,7 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-v$VERSION.tar.?z
-cd $PRGNAM-$VERSION
+cd $PRGNAM-$VERSION || cd $PRGNAM-v$VERSION
 chown -R root:root .
 
 # patches removing refs to systemctl, replaced w/ loginctl & disable updater

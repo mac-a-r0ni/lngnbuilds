@@ -91,7 +91,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # Correct dependency tarball naming inconsistency
-mv download/AMF-1.4.35-slim.tar.gz download/AMF-1.4.35.tar.gz
+mv download/AMF-1.4.36-slim.tar.gz download/AMF-1.4.36.tar.gz
 
 # Disable 10/12bit x265 on 32bit since it fails compilation
 if echo "$ARCH" | grep -q "i.86"; then
