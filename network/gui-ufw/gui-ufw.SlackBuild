@@ -81,10 +81,10 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # path & opening app fixes from ubuntu
-patch -Np1 -i < $CWD/gufw-open.diff
-patch -Np1 -i < $CWD/path-fix.diff
+patch -Np1 -i $CWD/gufw-open.diff
+patch -Np1 -i $CWD/path-fix.diff
 # switch from webkitgtk-4.0 to 4.1
-patch -Np1 -i < $CWD/46b62003dc15dbaba96f3880739ac951145be5a8.patch
+patch -Np1 -i $CWD/46b62003dc15dbaba96f3880739ac951145be5a8.patch
 
 python3 setup.py install --prefix=/usr --root=$PKG
 
