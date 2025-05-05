@@ -7,6 +7,6 @@ MD5SUM="fe5fbe8744d922525ed2c0f29f50c582 \
         34ceebd431eeda5a1d0c0bbd4e62d86e"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="nwg-drawer"
+REQUIRES="hyprland nwg-drawer"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"

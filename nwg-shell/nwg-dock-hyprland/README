@@ -1,7 +1,10 @@
 nwg-dock-hyprland (GTK3-based dock for hyprland)
 
 Fully configurable (w/ command line arguments and css) dock, written
-in Go, aimed exclusively at sway Wayland compositor. It features
+in Go, aimed exclusively at hyprland Wayland compositor. It features
 pinned buttons, task buttons, the workspace switcher and the launcher
 button. The latter by default starts nwg-drawer or nwggrid
 (application grid) - if found.
+
+NOTE: hyprland & nwg-drawer are not build requirements but this
+application is useless without them.
