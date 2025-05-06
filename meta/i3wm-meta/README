@@ -1,0 +1,6 @@
+i3wm-meta (i3wm Improved dynamic tiling window manager meta-package)
+
+This is a meta-package to control the i3wm desktop installation.
+This is the needed packages required to have a desktop.
+Removal of this package will not effect your i3wm install, it
+is intended to make installs/updates easier.
