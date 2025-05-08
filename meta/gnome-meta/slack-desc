@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|
-gnome-base: gnome-base (minimal GNOME Desktop meta-package)
-gnome-base:
-gnome-base: This is a meta-package to control the GNOME desktop installation.
-gnome-base: Removal of this package will not effect your GNOME install, it
-gnome-base: is intended to make installs/updates easier.
-gnome-base:
-gnome-base: Homepage: https://gnome.org/
-gnome-base:
-gnome-base:
-gnome-base:
-gnome-base:
+gnome-meta: gnome-meta (GNOME Desktop meta-package)
+gnome-meta:
+gnome-meta: This is a meta-package to control the GNOME desktop installation.
+gnome-meta: Removal of this package will not effect your GNOME install, it
+gnome-meta: is intended to make installs/updates easier.
+gnome-meta:
+gnome-meta: Homepage: https://gnome.org/
+gnome-meta:
+gnome-meta:
+gnome-meta:
+gnome-meta:
