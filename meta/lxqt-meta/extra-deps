@@ -1,0 +1,4 @@
+#extra-cmake-modules
+#kcoreaddons
+#ki18n
+#plasma-wayland-protocols
