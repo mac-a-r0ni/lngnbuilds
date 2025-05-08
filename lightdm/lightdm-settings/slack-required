@@ -1,2 +1,2 @@
 lightdm-slick-greeter
-setproctitle
+python-setproctitle
