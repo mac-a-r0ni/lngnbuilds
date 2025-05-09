@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for typescript
+# Slackware build script for lightdm
 
-# Copyright 2025 Jay Lanagan (j@lngn.net), Detroit, MI, USA
+# Copyright 2025 Isaac Yu <isaacyu@protonmail.com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,11 +22,16 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# This SlackBuild is derived from the following sources:
+# Frank Honolka:
+# https://gitlab.com/slackernetuk/slackware-xfce-classic/-/tree/master/lightdm
+# Slint (SLKBUILD originally written by George Vlahavas):
+# https://slackware.uk/slint/x86_64/slint-15.0/source/lightdm/
+
 cd $(dirname $0) ; CWD=$(pwd)
 
-SRCNAM=TypeScript
-PRGNAM=typescript
-VERSION=${VERSION:-5.8.3}
+PRGNAM=lightdm
+VERSION=${VERSION:-1.32.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -65,14 +70,26 @@ else
   LIBDIRSUFFIX=""
 fi
 
+if ! grep -q ^lightdm: /etc/group ; then
+  groupadd -g 380 lightdm
+  useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm
+fi
+
+# Bail if user isn't valid on your system
+if ! getent group lightdm 1>/dev/null 2>/dev/null ; then
+  bailout
+elif ! getent passwd lightdm 1>/dev/null 2>/dev/null ; then
+  bailout
+fi
+
 set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $SRCNAM-$VERSION
-tar xvf $CWD/$SRCNAM-$VERSION.tar.?z
-cd $SRCNAM-$VERSION
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
+cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -80,26 +97,67 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-npm ci
-npx hereby LKG
+patch -p1 < $CWD/default-config.patch
+sed -i s/systemd/elogind/ data/pam/*
 
-  mod_dir=/usr/lib${LIBDIRSUFFIX}/node_modules/$PRGNAM
-  install -d $PKG/{usr/bin,$mod_dir}
-  ln -s $mod_dir/bin/{tsc,tsserver} $PKG/usr/bin
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --libexecdir=/usr/lib${LIBDIRSUFFIX}/lightdm \
+  --localstatedir=/var \
+  --sbindir=/usr/bin \
+  --sysconfdir=/etc \
+  --disable-static \
+  --disable-tests \
+  --with-greeter-user=lightdm  \
+  --with-greeter-session=lightdm-gtk-greeter \
+  --disable-liblightdm-qt5 \
+  --mandir=/usr/man \
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --build=$ARCH-slackware-linux
 
-  rsync -r --exclude=.gitattributes bin lib package.json $PKG/$mod_dir
+make
+make install DESTDIR=$PKG
 
-#cd ..
+cp tests/src/lightdm-session $PKG/usr/bin
+sed -i '1 s/sh/bash --login/' $PKG/usr/bin/lightdm-session
+rm -rf $PKG/etc/init
+
+install -v -dm755 -o lightdm -g lightdm $PKG/var/lib/lightdm
+install -v -dm755 -o lightdm -g lightdm $PKG/var/lib/lightdm-data
+install -v -dm755 -o lightdm -g lightdm $PKG/var/cache/lightdm
+install -v -dm770 -o lightdm -g lightdm $PKG/var/log/lightdm
+
+# Remove .la file
+rm $PKG/usr/lib${LIBDIRSUFFIX}/liblightdm-gobject-1.la
+
+# Remove apparmor profiles - they only work with Ubuntu's apparmor package
+# Refer to bug #494426 for more details:
+# https://bugs.gentoo.org/494426
+rm -rf $PKG/etc/apparmor.d
+
+# PAM
+cp $CWD/pam.d/* $PKG/etc/pam.d/
+
+# PolicyKit
+mkdir -p -m700 $PKG/usr/share/polkit-1/rules.d
+chown polkitd $PKG/usr/share/polkit-1/rules.d
+install -m 644 $CWD/42-lightdm.rules $PKG/usr/share/polkit-1/rules.d/42-lightdm.rules
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CODE_OF_CONDUCT.md CONTRIBUTING.md LICENSE.txt README.md SECURITY.md SUPPORT.md \
-  $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a COPYING.GPL3 COPYING.LGPL2 COPYING.LGPL3 NEWS README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/slack-required > $PKG/install/slack-required
 

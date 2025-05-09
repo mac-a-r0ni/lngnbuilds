@@ -1,0 +1,6 @@
+gnome-base (GNOME Desktop meta-package)
+
+This is a meta-package to control the GNOME desktop installation.
+This is a minimal packageset required to have a basic desktop.
+Removal of this package will not effect your GNOME install, it
+is intended to make installs/updates easier.
