@@ -1,5 +1,5 @@
 PRGNAM="gnome-base"
-VERSION="48.0"
+VERSION="48"
 HOMEPAGE="http://gnome.org/"
 DOWNLOAD="https://download.gnome.org/teams/releng/48.0/NEWS"
 MD5SUM="8212b36395bb3212eca471bb5743437a"
