@@ -1,0 +1,8 @@
+PRGNAM="kvantum"
+VERSION="1.1.4"
+HOMEPAGE="https://github.com/tsujan/Kvantum/"
+DOWNLOAD="https://github.com/tsujan/Kvantum/releases/download/V1.1.4/Kvantum-1.1.4.tar.xz"
+MD5SUM="985e0dbe120c289536abc7e0802d9f45"
+REQUIRES=""
+MAINTAINER=""
+EMAIL=""
