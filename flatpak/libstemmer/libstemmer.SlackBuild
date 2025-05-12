@@ -72,18 +72,13 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-cat $CWD/0001-Make-libstemmer-a-shared-library.patch | patch -p1 || exit
+cat $CWD/libstemmer_c-shared-library.patch | patch -p1 || exit
 
-make
+make libstemmer.so stemwords
 
-mkdir -p $PKG/usr/{bin,include,lib$LIBDIRSUFFIX}
-install -Dm644 include/libstemmer.h -t $PKG/usr/include
-
-install -Dm644 libstemmer.so.0 $PKG/usr/lib${LIBDIRSUFFIX}/libstemmer.so.0.0.0
-ln -s libstemmer.so.0.0.0 $PKG/usr/lib${LIBDIRSUFFIX}/libstemmer.so.0
-ln -s libstemmer.so.0 $PKG/usr/lib${LIBDIRSUFFIX}/lib${LIBDIRSUFFIX}stemmer.so
-
-install -D snowball stemwords -t $PKG/usr/bin
+mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
+mv libstemmer.so* $PKG/usr/lib${LIBDIRSUFFIX}
+mv include $PKG/usr
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -99,4 +94,3 @@ cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-txz}
-
