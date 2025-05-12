@@ -63,8 +63,9 @@ else
   LIBDIRSUFFIX=""
 fi
 
-TMP=${TMP:-/tmp}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PKGNAM
+OUTPUT=${OUTPUT:-/tmp}
 
 rm -rf $PKG
 mkdir -p $TMP $PKG
@@ -121,8 +122,9 @@ cp -a \
   $PKG/usr/doc/${PKGNAM}-$VERSION
 
 mkdir -p $PKG/install
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
-/sbin/makepkg -l y -c n $TMP/$PKGNAM-$VERSION-$ARCH-$BUILD$TAG.txz
+/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$VERSION-$ARCH-$BUILD$TAG.txz
