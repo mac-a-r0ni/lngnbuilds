@@ -28,7 +28,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=dkms
-VERSION=${VERSION:-3.2.0}
+VERSION=${VERSION:-3.2.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -86,8 +86,8 @@ make \
   CFLAGS="$SLKCFLAGS" \
   DESTDIR="$PKG" \
   SBIN=/sbin \
-  KCONF=/../trash \
-  LIBDIR=/../trash \
+  KCONF=/dev/null \
+  LIBDIR=/dev/null \
   MODDIR=/lib/modules \
   install
 
