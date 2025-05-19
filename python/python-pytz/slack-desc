@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+           |-----handy-ruler------------------------------------------------------|
+python-pytz: python-pytz (World timezone definitions for Python)
+python-pytz:
+python-pytz: pytz brings the Olson tz database into Python. This library allows
+python-pytz: accurate and cross platform timezone calculations using Python 2.3
+python-pytz: or higher. It also solves the issue of ambiguous times at the end
+python-pytz: of daylight savings, which you can read more about in the Python
+python-pytz: Library Reference (datetime.tzinfo).
+python-pytz:
+python-pytz: Homepage: https://launchpad.net/pytz
+python-pytz:
+python-pytz:
