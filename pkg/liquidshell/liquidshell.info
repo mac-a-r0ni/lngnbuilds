@@ -1,0 +1,8 @@
+PRGNAM="liquidshell"
+VERSION="1.10.0"
+HOMEPAGE="https://download.kde.org/stable/liquidshell/"
+DOWNLOAD="https://download.kde.org/stable/liquidshell/liquidshell-1.10.0.tar.xz"
+MD5SUM="38538d72349fe1c0a676e1cd979e6d77"
+REQUIRES="bluez-qt karchive kcmutils kcolorscheme kconfig kcoreaddons kcrash kdbusaddons ki18n kiconthemes kio kitemviews knewstuff knotifications kservice kstatusnotifieritem kwidgetsaddons kwindowsystem kxmlgui networkmanager-qt solid"
+MAINTAINER=""
+EMAIL=""
