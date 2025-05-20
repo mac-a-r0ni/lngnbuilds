@@ -24,8 +24,9 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
+SRCNAM=libyuv-upstream
 PRGNAM=libyuv
-VERSION=${VERSION:-20240409.a6135cfe}
+VERSION=${VERSION:-0.0.1904.20250204}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -73,9 +74,9 @@ trap 'echo "$0 FAILED at line $LINENO!" | tee $OUTPUT/error-${PRGNAM}.log' ERR
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
-cd $PRGNAM-$VERSION
+rm -rf $SRCNAM-$VERSION
+tar xvf $CWD/$SRCNAM-$VERSION.tar.?z
+cd $SRCNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -83,14 +84,18 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-if [ "$ARCH" = "x86_64" ]; then
-    sed -i 's+DESTINATION lib+DESTINATION lib64+g' $TMP/$PRGNAM-$VERSION/CMakeLists.txt
-fi
-if [ "$ARCH" = "aarch64" ]; then
-    sed -i 's+DESTINATION lib+DESTINATION lib64+g' $TMP/$PRGNAM-$VERSION/CMakeLists.txt
-fi
+patch -Np1 -i $CWD/0001-CMakeLists.txt-Apply-SONAME-and-multiarch.patch
+patch -Np1 -i $CWD/0003-CMakeLists.txt-Install-missing-yuvconstants-binary.patch
+patch -Np1 -i $CWD/0004-CMakeLists.txt-Do-not-enable-NEON-for-armel-armhf.patch
 
-cmake -B build -S $TMP/$PRGNAM-$VERSION \
+#if [ "$ARCH" = "x86_64" ]; then
+#    sed -i 's+DESTINATION lib+DESTINATION lib64+g' $TMP/$PRGNAM-$VERSION/CMakeLists.txt
+#fi
+#if [ "$ARCH" = "aarch64" ]; then
+#    sed -i 's+DESTINATION lib+DESTINATION lib64+g' $TMP/$PRGNAM-$VERSION/CMakeLists.txt
+#fi
+cmake -B build -S $TMP/$SRCNAM-$VERSION \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
