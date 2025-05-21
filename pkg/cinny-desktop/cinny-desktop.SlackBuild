@@ -74,7 +74,7 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $PKG
 
 if [ "$DEBARCH" = "amd64" ]; then
-ar p $CWD/cinny_${VERSION}_$DEBARCH.deb data.tar.gz | tar xzv
+ar p $CWD/${SRCNAM}-x86_64.deb data.tar.gz | tar xzv
 elif [ "$DEBARCH" = "arm64" ]; then
 ar p $CWD/cinny_${VERSION}_$DEBARCH.deb data.tar.gz | tar xzv
 fi
