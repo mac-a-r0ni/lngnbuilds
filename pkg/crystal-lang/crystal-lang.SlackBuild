@@ -26,8 +26,8 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=crystal-lang
 SRCNAM=crystal
-VERSION=${VERSION:-1.15.1}
-RELEASE=${RELEASE:-260}
+VERSION=${VERSION:-1.16.3}
+RELEASE=${RELEASE:-407}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
