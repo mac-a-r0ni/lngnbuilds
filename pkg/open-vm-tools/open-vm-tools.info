@@ -1,7 +1,7 @@
 PRGNAM="open-vm-tools"
 VERSION="12.5.2_24697584"
 HOMEPAGE="https://github.com/vmware/open-vm-tools"
-DOWNLOAD="https://github.com/vmware/open-vm-tools/releases/download/12.5.2/open-vm-tools-12.5.2-24697584.tar.gz"
+DOWNLOAD="https://github.com/vmware/open-vm-tools/releases/download/stable-12.5.2/open-vm-tools-12.5.2-24697584.tar.gz"
 MD5SUM="4c5bad8e6bd0b75467c312034678b9de"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
