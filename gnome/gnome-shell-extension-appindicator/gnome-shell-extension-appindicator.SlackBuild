@@ -93,6 +93,9 @@ cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+# this isn't supposed to be here...
+rm $PKG/usr/share/glib-2.0/schemas/gschemas.compiled
+
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
   AUTHORS.md LICENSE README.md \
