@@ -11,7 +11,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=totem-pl-parser
 VERSION=${VERSION:-3.26.6}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
