@@ -36,7 +36,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-24.8.3.2}
+VERSION=${VERSION:-25.2.4.3}
 SHORT_VERSION=${VERSION%.*.*}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
@@ -236,8 +236,8 @@ export qt6_libexec_dirs="/usr/lib$LIBDIRSUFFIX/qt6/bin"
     --enable-gtk3 \
     --enable-gtk3-kde5 \
     --enable-qt5 \
-    --enable-kf5 \
     --enable-qt6 \
+    --enable-kf5 \
     --enable-kf6 \
     --enable-lto \
     --enable-python=system \
@@ -380,6 +380,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
