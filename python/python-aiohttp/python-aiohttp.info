@@ -6,6 +6,6 @@ DOWNLOAD="https://github.com/aio-libs/aiohttp/releases/download/v3.12.11/aiohttp
 MD5SUM="fc48ae2d90c6f134cf3a5a93e83e847b"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="python-aiohappyeyeballs python-aiosignal python-async-timeout python-attrs python-pkgconfig python-yarl"
+REQUIRES="python-aiohappyeyeballs python-aiosignal python-async-timeout python-attrs python-pkgconfig python-propcache python-yarl"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"

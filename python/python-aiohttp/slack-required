@@ -3,4 +3,5 @@ python-aiosignal
 python-async-timeout
 python-attrs
 python-pkgconfig
+python-propcache
 python-yarl

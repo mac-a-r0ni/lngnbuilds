@@ -1,3 +1,4 @@
 python-expandvars
 python-multidict
 python-pep517
+python-propcache
