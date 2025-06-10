@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for sway
+# Slackware build script for wlroots
 
 # Copyright 2022 Damian Perticone Berisso, Argentina
-# based on Biker-rat user work, kudos to him!.
-# Changes 2023 Jay Lanagan (j@lngn.net), cleanup, added desktop file, portals, etc.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,11 +22,11 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=sway
-VERSION=${VERSION:-1.11}
-#SRCVER=$(echo $VERSION | tr _ -)
+cd $(dirname $0) ; CWD=$(pwd)
+SRCNAM=wlroots
+PRGNAM=wlroots019
+VERSION=${VERSION:-0.19.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -51,16 +49,16 @@ PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686 -Wno-error"
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686 -Wno-error"
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -march=x86-64 -mtune=generic -fPIC -Wno-error"
+  SLKCFLAGS="-O2 -march=x86-64 -mtune=generic -fPIC"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-O2 -march=armv8-a -mtune=generic -fPIC -Wno-error"
+  SLKCFLAGS="-O2 -march=armv8-a -mtune=generic -fPIC"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
@@ -68,12 +66,13 @@ else
 fi
 
 set -e
+
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
-cd $PRGNAM-$VERSION
+rm -rf $SRCNAM-$VERSION
+tar xvf $CWD/$SRCNAM-$VERSION.tar.gz
+cd $SRCNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -81,10 +80,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir meson-build
-cd meson-build
- CFLAGS="$SLKCFLAGS" \
- CXXFLAGS="$SLKCFLAGS" \
+mkdir build
+cd build
+  CFLAGS="$SLKCFLAGS" \
+  CXXFLAGS="$SLKCFLAGS" \
   meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \
@@ -94,36 +93,23 @@ cd meson-build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
-    -Ddefault-wallpaper=true \
-    -Dswaybar=true \
-    -Dtray=enabled \
-    -Dgdk-pixbuf=enabled \
-    -Dswaynag=true \
-    -Dbash-completions=true \
-    -Dzsh-completions=true \
-    -Dfish-completions=true \
-    -Dsd-bus-provider=libelogind
+    -Dxcb-errors=enabled \
+    -Dexamples=false \
+    -Drenderers=gles2,vulkan \
+    -Dxwayland=enabled \
+    -Dbackends=drm,libinput,x11
 
-   "${NINJA:=ninja}"
+  "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
-
-# install our created wayland-session desktop file which starts sway in a dbus session properly
-# & sway-portals.conf for setting XDG_CURRENT_DESKTOP correctly.
-rm $PKG/usr/share/wayland-sessions/sway.desktop
-install -Dm644 $CWD/sway.desktop $PKG/usr/share/wayland-sessions
-install -Dm644 $CWD/sway-portals.conf $PKG/usr/share/xdg-desktop-portal/sway-portals.conf
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
-
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CONTRIBUTING.md LICENSE *.md  $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a CONTRIBUTING.md LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
