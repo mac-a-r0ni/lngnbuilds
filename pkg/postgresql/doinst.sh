@@ -1,3 +1,8 @@
+if ! grep -q ^postgres: /etc/group ; then
+  chroot . groupadd -g 209 postgres
+  chroot . useradd  -u 209 -g 209 -d /var/lib/pgsql postgres
+fi
+
 config() {
   NEW="$1"
   OLD="$(dirname $NEW)/$(basename $NEW .new)"

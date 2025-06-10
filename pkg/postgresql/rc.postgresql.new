@@ -6,6 +6,7 @@
 # $Date$
 #
 # Copyright 2007-2018 Adis Nezirovic <adis_at_linux.org.ba>
+# Copyright 2025 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -29,8 +30,8 @@
 #
 # Since version 9.3 this startup script can run multiple PostgreSQL
 # versions on different ports and with different data dirs.
-# 
-# e.g. PG_VERSION=14 PG_PORT=6432 /etc/rc.d/rc.@PRGNAM@ start
+#
+# e.g. PG_VERSION=17 PG_PORT=6432 /etc/rc.d/rc.@PRGNAM@ start
 
 PG_VERSION=${PG_VERSION:-@PG_VERSION@}
 PG_PORT=${PG_PORT:-@PG_PORT@}
@@ -43,7 +44,7 @@ PIDFILE=$DATADIR/postmaster.pid
 
 # oom-killer score
 #
-# https://www.postgresql.org/docs/14/kernel-resources.html#LINUX-MEMORY-OVERCOMMIT
+# https://www.postgresql.org/docs/17/kernel-resources.html#LINUX-MEMORY-OVERCOMMIT
 PG_OOM_ADJUST_FILE=/proc/self/oom_score_adj
 PG_MASTER_OOM_SCORE_ADJ=-1000
 PG_CHILD_OOM_SCORE_ADJ=0
@@ -77,13 +78,13 @@ case "$1" in
 		touch $LOGFILE
 		chown postgres:wheel $LOGFILE
 		chmod 0640 $LOGFILE
-	
+
 		if [ ! -e $DATADIR/PG_VERSION ]; then
 			echo "You should initialize the PostgreSQL database at location $DATADIR"
 			echo "e.g. su postgres -c \"initdb -D $DATADIR --locale=en_US.UTF-8 -A md5 -W\""
 			exit 6
 		fi
-	
+
 		if [ $(pgrep -f $POSTGRES) ]; then
 
 			echo "PostgreSQL daemon already running"
@@ -96,7 +97,7 @@ case "$1" in
 			test -e "$PG_OOM_ADJUST_FILE" && echo "$PG_MASTER_OOM_SCORE_ADJ" > "$PG_OOM_ADJUST_FILE"
 			pg_ctl start -w -l $LOGFILE -D $DATADIR
 			exit 0
-		fi	
+		fi
 	;;
 
 	"stop")
@@ -110,7 +111,7 @@ case "$1" in
 		echo "Shutting down PostgreSQL (fast)..."
 		pg_ctl stop -l $LOGFILE -D $DATADIR -m fast
 	;;
-	
+
 	"unclean-stop")
 		# Take care! This will abort server process itself
 		# resulting with database recovery on next start.
@@ -168,4 +169,4 @@ case "$1" in
 		echo "Usage: $0 {start|stop|force-stop|status|restart|force-restart|reload}"
 		exit 1
 	;;
-esac	
+esac
