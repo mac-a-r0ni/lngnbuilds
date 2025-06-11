@@ -1,10 +1,10 @@
 PRGNAM="cinny-desktop"
-VERSION="4.8.0"
+VERSION="4.8.1"
 HOMEPAGE="https://cinny.in/"
-DOWNLOAD="https://github.com/cinnyapp/cinny-desktop/releases/download/v4.8.0/Cinny_desktop-x86_64.deb \
-          https://slackware.lngn.net/pub/source/cinny-desktop/cinny_4.8.0_arm64.deb"
-MD5SUM="aeed0ce6dade1b880b8c601bd4e8c5e7 \
-        3e32e2710ee2e15ef3c74472467a47f6"
+DOWNLOAD="https://github.com/cinnyapp/cinny-desktop/releases/download/v4.8.1/Cinny_desktop-x86_64.deb \
+          https://slackware.lngn.net/pub/source/cinny-desktop/cinny_4.8.1_arm64.deb"
+MD5SUM="97fc2a30e442ec9ce61de83fa8cba5f6 \
+        b970d594676c9c0a014fb9eedb450219"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="libayatana-appindicator webkit2gtk"
