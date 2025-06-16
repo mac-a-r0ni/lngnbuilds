@@ -87,7 +87,7 @@ patch -p1 -i $CWD/path-fix.diff
 python3 setup.py install --prefix=/usr --root=$PKG
 
 # remove unneeded patching backup
-rm $PKG/usr/bin/ufw.orig
+rm $PKG/usr/bin/gufw.orig
 
 # Move the manpage to a sane directory.
 mv $PKG/usr/share/man $PKG/usr
