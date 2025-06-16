@@ -2,7 +2,7 @@
 
 # Slackware build script for gui-ufw
 
-# Copyright 2022-23 Jay Lanagan (j@lngn.net), Detroit, MI, USA
+# Copyright 2022-2025 Jay Lanagan (j@lngn.net), Detroit, MI, USA
 # Previous script by Skaendo w/ bkw patches, this replaces it.
 # All rights reserved.
 #
@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gui-ufw
-VERSION=${VERSION:-24.04.0}
+VERSION=${VERSION:-26.04.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -81,12 +81,13 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # path & opening app fixes from ubuntu
-patch -Np1 -i $CWD/gufw-open.diff
-patch -Np1 -i $CWD/path-fix.diff
-# switch from webkitgtk-4.0 to 4.1
-patch -Np1 -i $CWD/46b62003dc15dbaba96f3880739ac951145be5a8.patch
+patch -p1 -i $CWD/gufw-open.diff
+patch -p1 -i $CWD/path-fix.diff
 
 python3 setup.py install --prefix=/usr --root=$PKG
+
+# remove unneeded patching backup
+rm $PKG/usr/bin/ufw.orig
 
 # Move the manpage to a sane directory.
 mv $PKG/usr/share/man $PKG/usr
