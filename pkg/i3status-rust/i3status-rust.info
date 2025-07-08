@@ -1,9 +1,9 @@
 PRGNAM="i3status-rust"
-VERSION="0.33.2"
+VERSION="0.34.0"
 HOMEPAGE="https://i3wm.org/i3status/"
-DOWNLOAD="https://github.com/greshake/i3status-rust/archive/v0.33.2/i3status-rust-0.33.2.tar.gz \
+DOWNLOAD="https://github.com/greshake/i3status-rust/archive/v0.34.0/i3status-rust-0.34.0.tar.gz \
           https://raw.githubusercontent.com/greshake/i3status-rust/master/examples/config.toml"
-MD5SUM="e918e2e1f48319b4e526bad3e31401b5 \
+MD5SUM="6863175b7d0239be64c6da1b099674b3 \
         b58a325a8349a630c8ca1a532fe07b01"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
