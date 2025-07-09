@@ -1,10 +1,10 @@
 PRGNAM="git-lfs"
-VERSION="3.6.1"
+VERSION="3.7.0"
 HOMEPAGE="https://git-lfs.github.com/"
-DOWNLOAD="https://github.com/git-lfs/git-lfs/releases/download/v3.6.1/git-lfs-linux-amd64-v3.6.1.tar.gz \
-          https://github.com/git-lfs/git-lfs/releases/download/v3.6.1/git-lfs-linux-arm64-v3.6.1.tar.gz"
-MD5SUM="ae358aeacbd863ea7617c0b558a34e6e \
-        42075fb09e59572ba0f852801adf8456"
+DOWNLOAD="https://github.com/git-lfs/git-lfs/releases/download/v3.7.0/git-lfs-linux-amd64-v3.7.0.tar.gz \
+          https://github.com/git-lfs/git-lfs/releases/download/v3.7.0/git-lfs-linux-arm64-v3.7.0.tar.gz"
+MD5SUM="d149c5508ad1d8ba9058cd587d686e64 \
+        1d80a79d96374771c206d9f2f66baeed"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
