@@ -8,7 +8,7 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/broadcom-wl-dkms
 
 # Copyright 2015-2019 Andreas Voegele <andreas@andreasvoegele.com>
-# Copyright 2022-23 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
+# Copyright 2022-2025 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -75,6 +75,7 @@ find -L . \
 if [ "$IFNAME" != "eth" ]; then
   sed -i "/BRCM_WLAN_IFNAME/s/eth/$IFNAME/" src/wl/sys/wl_linux.c
 fi
+
 sed -e "s/@PACKAGE_VERSION@/$VERSION/" $CWD/dkms.conf.in > dkms.conf
 
 DEST="$PKG/usr/src/${PRGNAM/-dkms/}-$VERSION"
