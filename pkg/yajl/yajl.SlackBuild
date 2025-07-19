@@ -88,11 +88,11 @@ find -L . \
 patch -Np1 -i $CWD/yajl-2.1.0-CVE-2017-16516.patch
 patch -Np1 -i $CWD/yajl-2.1.0-CVE-2022-24795.patch
 patch -Np1 -i $CWD/yajl-2.1.0-memory_leak.patch
+patch -Np1 -i $CWD/0009-cmake4.patch
 
 mkdir build
 cd build
   cmake .. \
-    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
