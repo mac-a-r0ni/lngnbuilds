@@ -151,6 +151,7 @@ fi
 mkdir -p build
 cd build
   cmake \
+    -DCMAKE_POLICY_VERSION-MINIMUM=3.5 \
     -DREBUILD_WEB=OFF \
     -DUSE_SYSTEM_EVENT2=OFF \
     -DUSE_SYSTEM_DEFLATE=OFF \
