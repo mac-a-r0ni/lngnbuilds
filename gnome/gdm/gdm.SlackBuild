@@ -80,6 +80,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 patch -Np1 -i $CWD/0001-Xsession-Don-t-start-ssh-agent-by-default.patch
+patch -Np1 -i $CWD/0002-gdm-settings-utils-rename-variable-to-fix-build-with.patch
 patch -Np1 -i $CWD/0003-add-wayland-session-script.patch
 patch -Np1 -i $CWD/0004-fix-Xsession-language-in-gnome.patch
 
