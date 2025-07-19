@@ -85,6 +85,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+patch -Np1 -i $CWD/yajl-2.1.0-CVE-2017-16516.patch
+patch -Np1 -i $CWD/yajl-2.1.0-CVE-2022-24795.patch
+patch -Np1 -i $CWD/yajl-2.1.0-memory_leak.patch
+
 mkdir build
 cd build
   cmake .. \
