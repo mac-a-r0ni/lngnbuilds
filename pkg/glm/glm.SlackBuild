@@ -85,6 +85,7 @@ find -L . \
 mkdir -p build
 cd build
   cmake \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DGLM_TEST_ENABLE=ON \
     -DGLM_TEST_ENABLE_CXX_11=ON ..
