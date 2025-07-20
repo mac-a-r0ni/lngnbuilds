@@ -2,7 +2,7 @@
 
 # Slackware build script for rpi-imager
 
-# Copyright 2024 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
+# Copyright 2024-2025 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=rpi-imager
-VERSION=${VERSION:-1.9.0}
+VERSION=${VERSION:-1.9.5}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -83,8 +83,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-patch -Np1 -i $CWD/remove_update_checking.patch
-patch -Np1 -i $CWD/0bd585fa0b54a2b85cea6a6768c7e1d953b24334.patch
+patch -Np1 -i $CWD/remove-vendoring.patch
 
 mkdir -p build
 cd build
@@ -97,11 +96,14 @@ cmake -S ../src \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX=/usr \
   -DENABLE_CHECK_VERSION=OFF \
-  -DENABLE_VENDORING=OFF \
   -G Ninja
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
+
+# install man page
+mkdir -p $PKG/usr/man/man1
+cp doc/man/rpi-imager.1 $PKG/usr/man/man1
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
