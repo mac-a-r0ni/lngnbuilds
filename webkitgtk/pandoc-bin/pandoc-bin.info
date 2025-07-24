@@ -1,10 +1,10 @@
 PRGNAM="pandoc-bin"
-VERSION="3.7.0.1"
+VERSION="3.7.0.2"
 HOMEPAGE="https://github.com/jgm/pandoc"
-DOWNLOAD="https://github.com/jgm/pandoc/releases/download/3.7.0.1/pandoc-3.7.0.1-1-amd64.deb \
-          https://github.com/jgm/pandoc/releases/download/3.7.0.1/pandoc-3.7.0.1-1-arm64.deb"
-MD5SUM="12147993c0531ca24edea68fb315b8ed \
-        1422ff4f23699222867f461f04d6bae2"
+DOWNLOAD="https://github.com/jgm/pandoc/releases/download/3.7.0.2/pandoc-3.7.0.2-1-amd64.deb \
+          https://github.com/jgm/pandoc/releases/download/3.7.0.2/pandoc-3.7.0.2-1-arm64.deb"
+MD5SUM="40ccea81680427dd67b877911adf1469 \
+        2882f19809d77992448bc0a151490d8e"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
