@@ -95,11 +95,11 @@ find -L . \
 CARGO_HOME=.cargo \
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-cargo build --release $CARGOTARGET
+cargo build --release --no-default-features --features binaries,asm,threading,signal_support $CARGOTARGET
 CARGO_HOME=.cargo \
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-cargo cbuild --release $CARGOTARGET
+cargo cbuild --release --no-default-features --features binaries,asm,threading,signal_support $CARGOTARGET
 cargo install  --no-track --root "${PKG}/usr" --path="."
 cargo cinstall --destdir=${PKG} --prefix=/usr --libdir=/usr/lib$LIBDIRSUFFIX
 
