@@ -1,10 +1,10 @@
 PRGNAM="LibreOffice"
-VERSION="25.2.5.2"
+VERSION="25.8.0.2"
 HOMEPAGE="https://www.libreoffice.org"
-DOWNLOAD="https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.5.2/src/libreoffice-25.2.5.2.tar.xz \
-          https://slackware.lngn.net/pub/source/libreoffice/libreoffice-25.2.5.2-srcs.tar.xz"
-MD5SUM="f215c051d230755251e32b4112459950 \
-        d01dae4b96049b7afa2e4c3e5b4bf83e"
+DOWNLOAD="https://downloadarchive.documentfoundation.org/libreoffice/old/25.8.0.2/src/libreoffice-25.8.0.2.tar.xz \
+          https://slackware.lngn.net/pub/source/libreoffice/libreoffice-25.8.0.2-srcs.tar.xz"
+MD5SUM="bc2e161a0d0393f6564cf8f77f15043a \
+        12e5e04c20472617d0b0255bf1db538d"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="zulu-openjdk17 apache-ant liblangtag perl-Archive-Zip"
