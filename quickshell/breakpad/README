@@ -1,0 +1,4 @@
+breakpad (client/server crash reporting)
+
+A set of client and server components which implement a
+crash-reporting system.

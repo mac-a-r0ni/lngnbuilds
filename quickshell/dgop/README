@@ -1,0 +1,5 @@
+dgop (API & CLI for System Resources)
+
+System monitoring tool with CLI and REST API. Can be used standalone,
+or as a companion for DankMaterialShell to unlock system information
+functionality.
