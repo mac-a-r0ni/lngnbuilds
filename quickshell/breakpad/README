@@ -2,3 +2,5 @@ breakpad (client/server crash reporting)
 
 A set of client and server components which implement a
 crash-reporting system.
+
+The source is mirrored as the md5 changes every download.

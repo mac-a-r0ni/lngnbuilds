@@ -1,10 +1,10 @@
 PRGNAM="breakpad"
 VERSION="2024.02.16"
 HOMEPAGE="https://chromium.googlesource.com/breakpad/"
-DOWNLOAD="https://chromium.googlesource.com/breakpad/breakpad/+archive/refs/tags/v2024.02.16.tar.gz \
-          https://chromium.googlesource.com/linux-syscall-support/+archive/refs/tags/v2024.02.01.tar.gz"
-MD5SUM="de64caaa956f1f311ddefa49b17056f1 \
-        3fc080aeee759268ac0905eb50087824"
+DOWNLOAD="https://slackware.lngn.net/pub/source/breakpad/v2024.02.16.tar.gz \
+          https://slackware.lngn.net/pub/source/breakpad/v2024.02.01.tar.gz"
+MD5SUM="8b36c0455c7353f59a5aac5edce6e51c \
+        9abaf235d45788ee17826c23e52be244"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
