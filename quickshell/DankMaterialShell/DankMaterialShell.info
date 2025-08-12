@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/bbedward/DankMaterialShell/archive/v0.0.2/DankMater
 MD5SUM="522f8e8b7cd76bf2d24e068fbb031f08"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="quickshell"
+REQUIRES="brightnessctl cliphist colloid-gtk-theme colloid-icon-theme ddcutil dgop matugen wl-clipboard quickshell"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
