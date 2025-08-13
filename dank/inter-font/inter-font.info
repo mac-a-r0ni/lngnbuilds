@@ -1,0 +1,10 @@
+PRGNAM="inter-font"
+VERSION="4.1"
+HOMEPAGE=""https://github.com/rsms/inter/
+DOWNLOAD="https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip"
+MD5SUM="d00ce561d197b9a2fb82b2fa615075b7"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"
