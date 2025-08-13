@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+             |-----handy-ruler------------------------------------------------------|
+ttf-fira-code: ttf-fira-code (Free monospaced font with programming ligatures)
+ttf-fira-code:
+ttf-fira-code: Fira Code is a free monospaced font containing ligatures for common
+ttf-fira-code: programming multi-character combinations. This is just a font
+ttf-fira-code: rendering feature: underlying code remains ASCII-compatible. This
+ttf-fira-code: helps to read and understand code faster. For some frequent sequences
+ttf-fira-code: like .. or //, ligatures allow us to correct spacing.
+ttf-fira-code:
+ttf-fira-code: Homepage: https://github.com/tonsky/FiraCode
+ttf-fira-code:
+ttf-fira-code:

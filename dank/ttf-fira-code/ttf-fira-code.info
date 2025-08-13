@@ -1,0 +1,10 @@
+PRGNAM="ttf-fira-code"
+VERSION="6.2"
+HOMEPAGE=""https://github.com/rsms/inter/
+DOWNLOAD="https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip"
+MD5SUM="77dfd6d902db1ee8d8a6722373ce7933"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"
