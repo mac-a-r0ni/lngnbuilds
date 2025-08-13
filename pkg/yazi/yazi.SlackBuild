@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=yazi
 VERSION=${VERSION:-25.5.31}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -95,6 +95,13 @@ find $PKG | xargs file | egrep "ELF.*executable" | cut -f 1 -d : \
           | xargs strip --strip-unneeded 2> /dev/null
 
 #gzip -9 $PKG/usr/man/man?/*
+
+for i in *; do mkdir "$i"x"$";
+  for i in 16 24 32 48 64 128 256; do
+    install -dm755 $PKG/usr/share/icons/hicolor/${i}x${i}/apps
+    magick assets/logo.png -resize ${i}x${i} $PKG/usr/share/icons/hicolor/${i}x${i}/apps/yazi.png
+  done
+done
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a *.md LICENSE* \
