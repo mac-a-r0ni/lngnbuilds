@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+          |-----handy-ruler------------------------------------------------------|
+inter-font: inter-font (The Inter font family)
+inter-font:
+inter-font: Inter is a typeface carefully crafted & designed for computer
+inter-font: screens. Inter features a tall x-height to aid in readability of
+inter-font: mixed-case and lower-case text. Inter is a variable font with several
+inter-font: OpenType features, like contextual alternates that adjusts
+inter-font: punctuation depending on the shape of surrounding glyphs, slashed
+inter-font: zero for when you need to disambiguate "0" from "o", tabular numbers,
+inter-font: etc.
+inter-font:
+inter-font: Homepage: https://github.com/rsms/inter
