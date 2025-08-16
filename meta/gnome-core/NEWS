@@ -1,0 +1,305 @@
+The following modules have a new version:
+- at-spi2-core (2.56.3 => 2.56.4)
+- gexiv2 (0.14.5 => 0.14.6)
+- glib (2.84.3 => 2.84.4)
+- glycin (1.2.2 => 1.2.3)
+- gnome-builder (48.0 => 48.2)
+- gnome-control-center (48.3 => 48.4)
+- gnome-maps (48.4 => 48.6)
+- gnome-online-accounts (3.54.4 => 3.54.5)
+- gnome-shell (48.3 => 48.4)
+- gnome-software (48.3 => 48.4)
+- gtk+-3 (3.24.49 => 3.24.50)
+- libadwaita (1.7.5 => 1.7.6)
+- zenity (4.1.90 => 4.1.99)
+
+The following modules weren't upgraded in this release:
+   NetworkManager, adwaita-fonts, adwaita-icon-theme, baobab, blueprint-compiler, calls, cantarell-fonts, d-spy, dconf, dconf-editor, decibels, devhelp, epiphany, evince, evolution-data-server, folks, gcab, gcr, gcr-3, gdk-pixbuf, gdm, geocode-glib, gi-docgen, gjs, glib-networking, glibmm, gnome-app-list, gnome-autoar, gnome-backgrounds, gnome-bluetooth, gnome-boxes, gnome-calculator, gnome-calendar, gnome-characters, gnome-clocks, gnome-color-manager, gnome-connections, gnome-console, gnome-contacts, gnome-desktop, gnome-disk-utility, gnome-font-viewer, gnome-initial-setup, gnome-keyring, gnome-logs, gnome-menus, gnome-music, gnome-remote-desktop, gnome-session, gnome-settings-daemon, gnome-system-monitor, gnome-text-editor, gnome-tour, gnome-user-docs, gnome-user-share, gnome-weather, gobject-introspection, gom, graphene, grilo, grilo-plugins, gsettings-desktop-schemas, gsound, gspell, gssdp, gtk, gtk-doc, gtk-vnc, gtkmm, gtksourceview, gtksourceview-4, gupnp, gupnp-av, gupnp-dlna, gvfs, json-glib, jsonrpc-glib, libcloudproviders, libdex, libgee, libgit2-glib, libgsf, libgtop, libgweather, libgxps, libhandy, libmanette, libmediaart, libnma, libnotify, libpanel, libpeas, libpeas-1, librest, librsvg, libsecret, libshumate, libsigcplusplus, libsoup, libspelling, localsearch, loupe, mm-common, mobile-broadband-provider-info, msgraph, mutter, nautilus, orca, pango, pangomm, phodav, pyatspi, pygobject, rygel, simple-scan, snapshot, startup-notification, sushi, sysprof, tecla, template-glib, tinysparql, totem, totem-pl-parser, vala, vte, xdg-desktop-portal-gnome, xdg-user-dirs-gtk, yelp, yelp-tools, yelp-xsl
+
+========================================
+  at-spi2-core
+========================================
+
+What's new in at-spi2-core 2.56.4:
+
+* Fix key grabs when num lock or caps lock are on under Wayland.
+
+    atk-bridge: Don't crash when requesting a plug if not activated
+
+* Add sanity checks for child indices received via DBus.
+
+
+========================================
+  gexiv2
+========================================
+
+gexiv2 0.14.6 - 6 Jul 2025 (stable)
+ 
+ * Fix get_tag_multiple for tags that have LangAlt and contain ","
+ * Fix a memory leak when calling open_* multiple times on the same
+   Metadata object.
+
+Bugs fixed in this release:
+ - https://gitlab.gnome.org/GNOME/gexiv2/issues/87
+
+All contributors to this release:
+ - Jens Georg <mail@jensge.org>
+ - Jacob Boerema <jgboerema@gmail.com>
+
+
+========================================
+  glib
+========================================
+
+Overview of changes in GLib 2.84.4, 2025-08-08
+==============================================
+
+* Bugs fixed:
+  - #3716 (CVE-2025-7039) (#YWH-PGM9867-104) Buffer Under-read on GLib through
+    glib/gfileutils.c via get_tmp_file() (Michael Catanzaro)
+  - #3721 GFile leak in g_local_file_set_display_name during error handling
+    (Philip Withnall, Michael Catanzaro)
+  - !4668 Backport !4667 “Incorrect output parameter handling in closure helper
+    of g_settings_bind_with_mapping_closures” to glib-2-84
+  - !4675 Backport !4674 “gfileutils: fix computation of temporary file name” to
+    glib-2-84
+  - !4679 Backport !4677 and !4678 “Fix GFile leak in
+    g_local_file_set_display_name()” to glib-2-84
+  - !4697 Backport !4696 “gthreadpool: Catch pool_spawner creation failure” to
+    glib-2-84
+  - !4705 Backport !4702 “gio/filenamecompleter: Fix leaks” to glib-2-84
+  - !4711 Backport !4708 “gfilenamecompleter: Fix g_object_unref() of undefined
+    value” to glib-2-84
+
+
+
+========================================
+  glycin
+========================================
+
+## 1.2.3 (2025-08-01)
+
+This release contains the following new component versions:
+
+- glycin-image-rs 1.2.3
+
+### Fixed
+
+- image-rs: Force at least zune-jpeg 0.4.19 to fix a JPEG loading issues for
+  images with extra data at the end.
+
+
+========================================
+  gnome-builder
+========================================
+
+# GNOME Builder 48.2
+
+ * Fix CI for release tarballs
+
+# GNOME Builder 48.1
+
+ * Meson template fixes
+ * Translation updates
+ * Fix application of text edits with some LSPs
+ * Fix certain types of directory updates to project tree
+
+
+========================================
+  gnome-control-center
+========================================
+
+============
+Version 48.4
+============
+
+= Various translation updates
+
+Online Accounts
+- Disable markup in toasts for displaying URLs properly
+
+Power
+- Move geenral section above "Power Saving"
+
+
+========================================
+  gnome-maps
+========================================
+
+48.6 - Aug 3, 2025
+=========================
+
+Added/updated/fixed translations
+ - Romanian
+ - Thai
+
+All contributors to this release
+Aefgh Threenine <aefgh39622@gmail.com>
+Antonio Marin <gnmer.6qxyg@slmail.me>
+Marcus Lundblad <ml@dfupdate.se>
+
+48.5 - Jul 15, 2025
+=========================
+
+Changes since 48.4
+ - Remove extra slash in API URL for Transitous, unbreaks routing with latests
+   MOTIS releases
+
+All contributors to this release
+Marcus Lundblad <ml@dfupdate.se>
+
+
+========================================
+  gnome-online-accounts
+========================================
+
+Overview of changes in 3.54.5
+=============================
+* Bugs fixed:
+  - #71 Adding GOA account fails with sonic.net IMAP service
+  - #162 Cannot add a ProtonMail bridge with IMAP + TLS
+  - #420 Nextcloud login does not work anymore due to OPTIONS /login request
+  - #429 Linked online accounts no longer work
+  - #430 Invalid URI when adding Google account
+  - !340 goamsgraphprovider: ensure a valid PresentationIdentity
+  - !345 goadaemon: complete GTasks to avoid a scary debug warning
+
+
+========================================
+  gnome-shell
+========================================
+
+48.4
+====
+* Fix taking interactive screenshots via D-Bus [Florian; !3803]
+* Fix pointer scaling glitches in magnifier [Marco; !475]
+* Fix drawing glitch in sliders in RTL locales [Sebastian, Khalid; !3817]
+* Misc. bug fixes and cleanups [Marco, Sebastian, Florian, Mike, Jonas; !3785,
+  !3798, !3799, !3816, !3796, !3750]
+
+Contributors:
+  Khalid Abu Shawarib, Jonas Dreßler, Mike FABIAN, Sebastian Keller,
+  Florian Müllner, Marco Trevisan (Treviño)
+
+Translators:
+  Aefgh Threenine [th]
+
+
+========================================
+  gnome-software
+========================================
+
+Version 48.4
+~~~~~~~~~~~~
+Released: 2025-08-01
+
+This is a stable release with the following change:
+ * Improve update notifications
+
+This release also updates translation:
+ * Chinese (Taiwan) (Cheng-Chia Tseng)
+ * Russian (Artur S0)
+
+
+========================================
+  gtk+-3
+========================================
+
+Overview of Changes in GTK+ 3.24.50, 07-08-2025
+===============================================
+
+* Themes:
+ - Add a progress-working-symbolic icon
+ - Support strokes in symbolic icons
+ - Update theme CSS
+ - Remove hardcoded Cantarell font
+
+* GtkShortcutsWindow:
+ - Differentiate all keypad symbols visually
+
+* GtkApplication:
+ - Register unsandboxed apps with the portals
+
+* macOS:
+ - Remove redundant NSView calls
+ - Fix some memory leaks
+ - Don't try to use the file transfer portal
+
+* Windows:
+ - Always mark windows as minimizable
+
+* X11
+ - Fix problems with gtk_window_get_geometry
+
+* Wayland:
+ - Fix a crash
+
+* Input:
+ - Make compose sequence visuals configurable
+
+* Printing:
+ - Fix the build with libcups 3
+ - Support gnome-papers as previewer
+
+* Translation updates
+ Nepali
+ Persian
+ Uzbek (Latin)
+
+
+
+========================================
+  libadwaita
+========================================
+
+=============
+Version 1.7.6
+=============
+
+- AdwAlertDialog/AdwMessageDialog
+  - Emit ::response when cancelled after calling choose()
+- AdwDialog
+  - Fix widget activation in window-backed dialogs
+  - Fix set_focus() in window-backed dialogs
+- AdwLayoutSlot
+  - Error out if ID is not set
+- AdwNavigationView
+ - Defer swipe start to ::begin-swipe
+- AdwTabOverview
+  - Make button hitboxes larger
+- AdwWrapLayout
+  - Fix a memory leak
+- Various fixes
+
+=============
+
+========================================
+  zenity
+========================================
+
+Zenity 4.1.99
+  Release candidate for Zenity 4.2
+
+  Changes and fixes since 4.1.90:
+  - filesel: fixes for opening provided directory (cava)
+
+  Translation updates:
+  - Alexander Shopov (bg)
+  - Anders Jonsson (sv)
+  - Andi Chandler (en_GB)
+  - Artur S0 (ru)
+  - Balázs Úr (hu)
+  - Baxrom Raxmatov (uz)
+  - Daniel Rusek (cs)
+  - Ekaterine Papava (ka)
+  - Hugo Carvalho (pt)
+  - Jordi Mas i Hernandez (ca)
+  - Jürgen Benvenuti (de)
+  - Luming Zh (zh_CN)
+  - Martin (sl)
+  - Piotr Drąg (pl)
+  - Rafael Fontenelle (pt_BR)
+  - Sabri Ünal (tr)
+  - Yaron Shahrabani (he)
+
+

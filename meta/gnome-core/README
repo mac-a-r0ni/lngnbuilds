@@ -1,4 +1,4 @@
-gnome-base (GNOME Desktop meta-package)
+gnome-core (GNOME Desktop meta-package)
 
 This is a meta-package to control the GNOME desktop installation.
 This is a minimal packageset required to have a basic desktop.
