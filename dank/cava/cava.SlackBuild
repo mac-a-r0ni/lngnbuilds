@@ -82,10 +82,9 @@ find -L . \
 autoreconf -vif
 
 # https://gitweb.gentoo.org/repo/gentoo.git/commit/?id=06f462555fe7acf69ec61ed98a437cc74530e203
-# doesn't work, going to have to patch autoconf-archive instead
+# the patch included in $CWD is for autoconf-archive which is included in slackware,
+# this package will not build unless that is patched first
 # https://patch-diff.githubusercontent.com/raw/autoconf-archive/autoconf-archive/pull/312.patch
-#sed -i 's/AX_CHECK_GL/&_DISABLED/' configure.ac || exit 1
-#sed -i 's/AX_CHECK_GL_MANUAL_LIBS_GENERIC/&_DISABLED/' configure.ac || exit 1
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
@@ -111,6 +110,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/slack-required > $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
