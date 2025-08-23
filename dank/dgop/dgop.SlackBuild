@@ -72,6 +72,7 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-vendor-$VERSION.tar.?z
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -79,9 +80,13 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# this is a go program, I should pack vendor files and build it directly instead
+CGO_ENABLED=0 \
+GOFLAGS=-ldflags="-s -w" \
+CGO_CFLAGS="$SLKCFLAGS" \
+CGO_CXXFLAGS="$SLKCFLAGS" \
+go build -mod vendor -o bin/$PRGNAM cmd/cli/*.go
+
 mkdir -p $PKG/usr/bin
-make
 install -Dm755 -t $PKG/usr/bin/ bin/$PRGNAM
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
