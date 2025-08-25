@@ -28,7 +28,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 PRGNAM=re2
 VERSION=${VERSION:-2025_08_12}
 PKGVER=$(echo $VERSION | tr _ -)
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
