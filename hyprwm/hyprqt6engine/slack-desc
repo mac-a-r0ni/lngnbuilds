@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+             |-----handy-ruler------------------------------------------------------|
+hyprqt6engine: hyprqt6engine (QT6 Theme Provider for Hyprland)
+hyprqt6engine:
+hyprqt6engine: QT6 Theme Provider for Hyprland. Compatible with KDE, replaces qt6ct.
+hyprqt6engine:
+hyprqt6engine: Homepage: https://hyprland.org/
+hyprqt6engine:
+hyprqt6engine:
+hyprqt6engine:
+hyprqt6engine:
+hyprqt6engine:
+hyprqt6engine:
