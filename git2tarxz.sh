@@ -6,8 +6,8 @@
 # Note that this script doesn't need to be run as root. It does
 # need to be able to write to the current directory it's run from.
 
-PRGNAM=webp-pixbuf-loader
-CLONE_URL=https://github.com/aruiz/$PRGNAM.git
+PRGNAM=xxx
+CLONE_URL=https://github.com/xxx/$PRGNAM.git
 
 set -e
 
@@ -35,7 +35,7 @@ Archive created: $PRGNAM-$VERSION.tar.xz
 Update $PRGNAM.info with:
 
 VERSION="$VERSION"
-DOWNLOAD="https://slackware.uk/~urchlay/src/$PRGNAM-$VERSION.tar.xz"
+DOWNLOAD="https://slackware.lngn.net/pub/source/$PRGNAM-$VERSION.tar.xz"
 MD5SUM="$( md5sum $PRGNAM-$VERSION.tar.xz | cut -d' ' -f1 )"
 
 Don't forget to upload the new source!
