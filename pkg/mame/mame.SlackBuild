@@ -131,7 +131,8 @@ if [ "${PACONLY:-no}" = "yes" ]; then
   PACOPT="SOURCES=src/mame/drivers/pacman.cpp"
 fi
 
-make USE_SYSTEM_LIB_EXPAT=1 \
+make -j$(expr $(nproc) + 1) \
+     USE_SYSTEM_LIB_EXPAT=1 \
      USE_SYSTEM_LIB_ZLIB=1 \
      USE_SYSTEM_LIB_JPEG=1 \
      USE_SYSTEM_LIB_FLAC=1 \
