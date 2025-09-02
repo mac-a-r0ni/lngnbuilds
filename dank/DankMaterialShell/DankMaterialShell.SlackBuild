@@ -82,12 +82,9 @@ find -L . \
 # Install shell files to quickshell config directory
 install -dm755 $PKG/etc/xdg/quickshell/DankMaterialShell
 cp -r * $PKG/etc/xdg/quickshell/DankMaterialShell/
-#    ./*
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
-
-rm -rf $PKG/usr/lib${LIBDIRSUFFIX}/*.la
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a LICENSE *.md $PKG/usr/doc/$PRGNAM-$VERSION
