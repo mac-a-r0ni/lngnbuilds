@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+          |-----handy-ruler------------------------------------------------------|
+ttf-roboto: ttf-roboto (system font)
+ttf-roboto:
+ttf-roboto: This is a variable version of Roboto intended to be a 1:1 match with
+ttf-roboto: the official non-variable release from Google.
+ttf-roboto:
+ttf-roboto: Homepage: https://github.com/googlefonts/roboto-3-classic
+ttf-roboto:
+ttf-roboto:
+ttf-roboto:
+ttf-roboto:
+ttf-roboto:
