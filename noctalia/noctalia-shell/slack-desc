@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+              |-----handy-ruler------------------------------------------------------|
+noctalia-shell: noctalia-shell (Quickshell for Niri)
+noctalia-shell:
+noctalia-shell: A sleek and minimal desktop shell thoughtfully crafted for Wayland,
+noctalia-shell: built with Quickshell. Features a modern modular architecture with a
+noctalia-shell: status bar, notification system, control panel, comprehensive system
+noctalia-shell: integration, and more — all styled with a warm lavender palette, or
+noctalia-shell: your favorite color scheme!
+noctalia-shell:
+noctalia-shell: Homepage: https://github.com/noctalia-dev/noctalia-shell
+noctalia-shell:
+noctalia-shell:
