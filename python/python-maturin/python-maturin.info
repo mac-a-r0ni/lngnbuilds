@@ -5,6 +5,6 @@ DOWNLOAD="https://files.pythonhosted.org/packages/source/m/maturin/maturin-1.9.4
 MD5SUM="b12c0b3e219ea890377b1e10377d1b2d"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=""
+REQUIRES="python-setuptools-rust"
 MAINTAINER="fourtysixandtwo"
 EMAIL=""
