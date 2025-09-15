@@ -93,6 +93,8 @@ cd build
     --sysconfdir=/etc \
     -Dstrip=true \
     -Dsystemd_user_services=false \
+    -Dfunctional_tests=false \
+    -Dsandbox_tests=false \
     -Dlandlock=disabled
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
