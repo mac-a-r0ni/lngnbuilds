@@ -1,0 +1,13 @@
+diff --git a/js/ui/screenShield.js b/js/ui/screenShield.js
+index ab9d1b2..d544a20 100644
+--- a/js/ui/screenShield.js
++++ b/js/ui/screenShield.js
+@@ -423,6 +423,8 @@ export class ScreenShield extends Signals.EventEmitter {
+                 return false;
+             }
+ 
++            this._lockDialogGroup.set_style('background-image: url("/usr/share/pixmaps/noise-texture.png"); background-size: cover;');
++            this._dialog?.set_style('background-image: none; background-color: transparent;');
+             this._dialog = new constructor(this._lockDialogGroup);
+ 
+             if (!this._dialog.open()) {
