@@ -91,8 +91,8 @@ sed -e 's/libsystemd/libelogind/' \
     -i plugins/power/test.py
 
 # Fixing backlight functionality in gnome-control-center:
-sed -e 's/(backlight->logind_proxy)/(0)/' \
-    -i plugins/power/gsd-backlight.c
+#sed -e 's/(backlight->logind_proxy)/(0)/' \
+#    -i plugins/power/gsd-backlight.c
 
 mkdir build
 cd build
