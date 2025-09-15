@@ -81,8 +81,8 @@ find -L . -prune -name 'subprojects/gvc/.gitlab-ci' \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 patch -Np1 -i $CWD/0001-gdm-Work-around-failing-fingerprint-auth.patch
-#patch -Np1 -i $CWD/0001-status-keyboard-Add-a-catch-around-reload-call.patch
-patch -Np1 -i $CWD/0002-status-keyboard-Load-keyboard-from-system-settings-i.patch
+patch -Np1 -i $CWD/0001-status-keyboard-Add-a-catch-around-reload-call.patch
+#patch -Np1 -i $CWD/0002-status-keyboard-Load-keyboard-from-system-settings-i.patch
 patch -Np1 -i $CWD/0003-status-keyboard-Use-gnome-desktop-API-for-getting-de.patch
 #patch -Np1 -i $CWD/add-login-background-support.patch
 patch -Np1 -i $CWD/1747a59aa5d44f4d7b74e1f1fee1d48174a1ce5a.patch
