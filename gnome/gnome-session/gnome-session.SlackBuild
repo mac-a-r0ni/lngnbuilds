@@ -118,7 +118,7 @@ install -vDm 0755 $CWD/xinitrc.gnome -t $PKG/etc/X11/xinit
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS NEWS ChangeLog* COPYING MAINTAINERS README.md \
+  NEWS COPYING README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
