@@ -9816,7 +9816,7 @@ deleted file mode 100644
 index 511166d6..00000000
 --- a/gnome-session/leader-main.c
 +++ /dev/null
-@@ -1,251 +0,0 @@
+@@ -1,256 +0,0 @@
 -/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
 - *
 - * Copyright (C) 2006 Novell, Inc.
@@ -9972,6 +9972,11 @@ index 511166d6..00000000
 -
 -        ibus_path = g_find_program_in_path ("ibus-daemon");
 -        if (ibus_path) {
+-                /* For Qt 6.8 and newer */
+-                if (IS_STRING_EMPTY (g_getenv ("QT_IM_MODULES")))
+-                        g_setenv ("QT_IM_MODULES", "wayland;ibus", TRUE);
+-
+-                /* For Qt 6.7 and older */
 -                if (IS_STRING_EMPTY (g_getenv ("QT_IM_MODULE")))
 -                        g_setenv ("QT_IM_MODULE", "ibus", TRUE);
 -
@@ -12037,7 +12042,7 @@ diff --git a/po/ro.po b/po/ro.po
 index 2055afbd..ccbc0674 100644
 --- a/po/ro.po
 +++ b/po/ro.po
-@@ -4,25 +4,32 @@
+@@ -4,203 +4,328 @@
  # Lucian Adrian Grijincu <lucian.grijincu@gmail.com>, 2009, 2011.
  # Daniel Șerbănescu <cyber19rider@gmail.com>, 2010, 2011.
  # Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015, 2017.
@@ -12047,8 +12052,8 @@ index 2055afbd..ccbc0674 100644
  msgstr ""
  "Project-Id-Version: gnome-session-2.0\n"
  "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-session/issues\n"
--"POT-Creation-Date: 2025-07-03 20:25+0000\n"
--"PO-Revision-Date: 2025-07-13 18:53+0200\n"
+-"POT-Creation-Date: 2025-09-12 18:51+0000\n"
+-"PO-Revision-Date: 2025-09-14 19:04+0200\n"
 -"Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 -"Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 +"POT-Creation-Date: 2024-01-08 21:02+0000\n"
@@ -12067,6 +12072,7 @@ index 2055afbd..ccbc0674 100644
 +"X-Generator: Poedit 3.4.1\n"
  "X-Project-Style: gnome\n"
  
+-#: data/gnome.desktop.in.in:2 data/gnome.session.desktop:2
 +#: data/gnome-custom-session.desktop.in.in:3
 +msgid "Custom"
 +msgstr "Personalizat"
@@ -12075,23 +12081,30 @@ index 2055afbd..ccbc0674 100644
 +msgid "This entry lets you select a saved session"
 +msgstr "Această opțiune vă permite să selectați o sesiune salvată"
 +
- #: data/gnome.desktop.in.in:3 data/gnome.session.desktop.in.in:3
++#: data/gnome.desktop.in.in:3 data/gnome.session.desktop.in.in:3
  msgid "GNOME"
  msgstr "GNOME"
-@@ -30,7 +37,11 @@ msgstr "GNOME"
- #: data/gnome.desktop.in.in:4 data/gnome-wayland.desktop.in.in:4
- #: data/gnome-xorg.desktop.in.in:4
+ 
+-#: data/gnome.desktop.in.in:3 data/gnome-wayland.desktop.in.in:3
+-#: data/gnome-xorg.desktop.in.in:3
++#: data/gnome.desktop.in.in:4 data/gnome-wayland.desktop.in.in:4
++#: data/gnome-xorg.desktop.in.in:4
  msgid "This session logs you into GNOME"
 -msgstr "Această sesiune efectuează autentificarea în GNOME"
 +msgstr "Această sesiune vă va autentifica în GNOME"
-+
+ 
+-#: data/gnome-wayland.desktop.in.in:2
 +#: data/gnome-dummy.session.desktop.in.in:3
 +msgid "GNOME dummy"
 +msgstr "Machetă GNOME"
- 
- #: data/gnome-wayland.desktop.in.in:3
++
++#: data/gnome-wayland.desktop.in.in:3
  msgid "GNOME on Wayland"
-@@ -41,222 +52,280 @@ msgid "GNOME on Xorg"
+ msgstr "GNOME pe Wayland"
+ 
+-#: data/gnome-xorg.desktop.in.in:2
++#: data/gnome-xorg.desktop.in.in:3
+ msgid "GNOME on Xorg"
  msgstr "GNOME pe Xorg"
  
  #: data/org.gnome.SessionManager.gschema.xml:5
@@ -12145,9 +12158,7 @@ index 2055afbd..ccbc0674 100644
 -"autentificare dacă s-a trecut automat la sesiunea de rezervă.."
 +"Dacă este activat, gnome-session va afișa un dialog de avertizare după "
 +"autentificare dacă sesiunea de rezervă a fost inițiată."
- 
--#: gnome-session/gsm-fail-whale-dialog.c:90
--msgid "Oh no! Something has gone wrong."
++
 +#: data/session-selector.ui:15
 +msgid "Custom Session"
 +msgstr "Sesiune personalizată"
@@ -12174,69 +12185,54 @@ index 2055afbd..ccbc0674 100644
 +
 +#: gnome-session/gsm-fail-whale-dialog.c:318
 +msgid "Oh no!  Something has gone wrong."
- msgstr "Oh, nu! Ceva nu a funcționat corect."
- 
--#: gnome-session/gsm-fail-whale-dialog.c:97
++msgstr "Oh, nu! Ceva nu a funcționat corect."
++
 +#: gnome-session/gsm-fail-whale-dialog.c:325
- msgid ""
- "A problem has occurred and the system can’t recover. Please contact a system "
- "administrator"
- msgstr ""
--"A apărut o problemă și sistemul nu poate fi recuperat. Trebuie contactat "
--"administratorul sistemului"
++msgid ""
++"A problem has occurred and the system can’t recover. Please contact a system "
++"administrator"
++msgstr ""
 +"A intervenit o problemă și sistemul nu se poate recupera. Contactați un "
 +"administrator de sistem"
- 
--#: gnome-session/gsm-fail-whale-dialog.c:99
++
 +#: gnome-session/gsm-fail-whale-dialog.c:327
- msgid ""
- "A problem has occurred and the system can’t recover. All extensions have "
- "been disabled as a precaution."
- msgstr ""
--"A apărut o problemă și sistemul nu poate fi recuperat. Toate extensiile au "
--"fost dezactivate preventiv."
++msgid ""
++"A problem has occurred and the system can’t recover. All extensions have "
++"been disabled as a precaution."
++msgstr ""
 +"A intervenit o problemă și sistemul nu se poate recupera. Toate extensiile "
 +"au fost dezactivate preventiv."
- 
--#: gnome-session/gsm-fail-whale-dialog.c:101
++
 +#: gnome-session/gsm-fail-whale-dialog.c:329
- msgid ""
- "A problem has occurred and the system can’t recover.\n"
- "Please log out and try again."
- msgstr ""
--"A apărut o problemă și sistemul nu poate fi recuperat.\n"
--"Termină sesiunea și încearcă din nou."
++msgid ""
++"A problem has occurred and the system can’t recover.\n"
++"Please log out and try again."
++msgstr ""
 +"A intervenit o problemă și sistemul nu se poate recupera.\n"
 +"Ieșiți din sesiune și încercați din nou."
- 
--#: gnome-session/gsm-fail-whale-dialog.c:109
++
 +#: gnome-session/gsm-fail-whale-dialog.c:344
- msgid "_Log Out"
--msgstr "_Termină sesiunea"
++msgid "_Log Out"
 +msgstr "_Ieșire din sesiune"
- 
--#: gnome-session/gsm-fail-whale-dialog.c:153 gnome-session/main.c:479
++
 +#: gnome-session/gsm-fail-whale-dialog.c:412 gnome-session/main.c:403
- msgid "Enable debugging code"
- msgstr "Activează codul pentru depanare"
- 
--#: gnome-session/gsm-fail-whale-dialog.c:154
++msgid "Enable debugging code"
++msgstr "Activează codul pentru depanare"
++
 +#: gnome-session/gsm-fail-whale-dialog.c:413
- msgid "Allow logout"
--msgstr "Permite terminarea sesiunii"
++msgid "Allow logout"
 +msgstr "Permite ieșierea din sesiune"
- 
--#: gnome-session/gsm-fail-whale-dialog.c:155
++
 +#: gnome-session/gsm-fail-whale-dialog.c:414
- msgid "Show extension warning"
- msgstr "Afișează avertizările pentru extensii"
++msgid "Show extension warning"
++msgstr "Afișează avertizările pentru extensii"
  
--#: gnome-session/gsm-manager.c:1292 gnome-session/gsm-manager.c:1907
+-#: gnome-session/gsm-manager.c:709 gnome-session/gsm-manager.c:1040
 +#: gnome-session/gsm-manager.c:1301 gnome-session/gsm-manager.c:2050
  msgid "Not responding"
  msgstr "Nu răspunde"
  
--#: gnome-session/gsm-util.c:342
+-#: gnome-session/gsm-util.c:167
 +#: gnome-session/gsm-util.c:431
  msgid "_Log out"
 -msgstr "_Termină sesiunea"
@@ -12253,8 +12249,7 @@ index 2055afbd..ccbc0674 100644
 +#: gnome-session/gsm-xsmp-client.c:1216
 +msgid "This program is blocking logout."
 +msgstr "Acest program blochează ieșirea din sesiune."
- 
--#: gnome-session/main.c:476
++
 +#: gnome-session/gsm-xsmp-server.c:340
 +msgid ""
 +"Refusing new client connection because the session is currently being shut "
@@ -12268,55 +12263,55 @@ index 2055afbd..ccbc0674 100644
 +msgstr "Nu s-a putut creea socketul de ascultare ICE: %s"
 +
 +#: gnome-session/main.c:400
- msgid "Running as systemd service"
--msgstr "Funcționează ca serviciu systemd"
++msgid "Running as systemd service"
 +msgstr "Rulează ca serviciu systemd"
- 
--#: gnome-session/main.c:477
++
 +#: gnome-session/main.c:401
- msgid "Override standard autostart directories"
- msgstr "Înlocuiește dosarele standard de pornire automată"
++msgid "Override standard autostart directories"
++msgstr "Înlocuiește dosarele standard de pornire automată"
  
--#: gnome-session/main.c:477
+-#: gnome-session/leader-main.c:181 gnome-session/service-main.c:148
 +#: gnome-session/main.c:401
- msgid "AUTOSTART_DIR"
--msgstr "DOSAR_DE_PORNIRE"
++msgid "AUTOSTART_DIR"
 +msgstr "DIRECTOR_DE_PORNIRE"
- 
--#: gnome-session/main.c:478
++
 +#: gnome-session/main.c:402
  msgid "Session to use"
  msgstr "Sesiunea de utilizat"
  
--#: gnome-session/main.c:478
+-#: gnome-session/leader-main.c:181 gnome-session/service-main.c:148
 +#: gnome-session/main.c:402
  msgid "SESSION_NAME"
  msgstr "NUMELE_SESIUNII"
  
--#: gnome-session/main.c:480
+-#: gnome-session/leader-main.c:182
+-msgid "Enable debugging code"
+-msgstr "Activează codul pentru depanare"
 +#: gnome-session/main.c:404
- msgid "Do not load user-specified applications"
- msgstr "Nu încărca aplicațiile specificate de utilizator"
++msgid "Do not load user-specified applications"
++msgstr "Nu încărca aplicațiile specificate de utilizator"
  
--#: gnome-session/main.c:481
+-#: gnome-session/leader-main.c:183
 +#: gnome-session/main.c:405
  msgid "Version of this application"
  msgstr "Versiunea acestei aplicații"
  
- #. Translators: the 'fail whale' is the black dialog we show when something goes seriously wrong
--#: gnome-session/main.c:483
-+#: gnome-session/main.c:407
- msgid "Show the fail whale dialog for testing"
- msgstr "Afișează dialogul de eroare pentru testare"
- 
--#: gnome-session/main.c:484
+-#: gnome-session/leader-main.c:184
 -msgid "This option is ignored"
 -msgstr "Această opțiune este ignorată"
++#. Translators: the 'fail whale' is the black dialog we show when something goes seriously wrong
++#: gnome-session/main.c:407
++msgid "Show the fail whale dialog for testing"
++msgstr "Afișează dialogul de eroare pentru testare"
+ 
+-#: gnome-session/leader-main.c:185
+-msgid "Don't re-exec into a login shell"
+-msgstr "Nu reporni la autentificare"
 +#: gnome-session/main.c:408
 +msgid "Disable hardware acceleration check"
 +msgstr "Dezactivează verificarea accelerării hardware"
  
--#: gnome-session/main.c:516
+-#: gnome-session/leader-main.c:203 gnome-session/service-main.c:157
 +#: gnome-session/main.c:440
  msgid " — the GNOME session manager"
 -msgstr " — Administratorul de sesiuni GNOME"
@@ -12352,9 +12347,11 @@ index 2055afbd..ccbc0674 100644
 -#: tools/gnome-session-ctl.c:251
 +#: tools/gnome-session-ctl.c:249
  msgid ""
- "Run from ExecStopPost to start gnome-session-failed.target on service failure"
+-"Run from ExecStopPost to start gnome-session-shutdown.target on service "
+-"failure"
++"Run from ExecStopPost to start gnome-session-failed.target on service failure"
  msgstr ""
--"Execută din ExecStopPost pentru a porni gnome-session-failed.target la "
+-"Execută din ExecStopPost pentru a porni gnome-session-shutdown.target la "
 +"Rulează de la ExecStopPost pentru a începe gnome-session-failed.target la "
  "eșecul serviciului"
  
@@ -12363,13 +12360,13 @@ index 2055afbd..ccbc0674 100644
  msgid "Program needs exactly one parameter"
  msgstr "Programul necesită exact un parametru"
  
--#: tools/gnome-session-inhibit.c:69
+-#: tools/gnome-session-inhibit.c:68
 +#: tools/gnome-session-inhibit.c:108
  #, c-format
 -msgid "Unknown inhibit argument: %s"
 -msgstr "Argument necunoscut de blocare: %s"
 -
--#: tools/gnome-session-inhibit.c:289
+-#: tools/gnome-session-inhibit.c:288
 +msgid ""
 +"%s [OPTION…] COMMAND\n"
 +"\n"
@@ -12410,57 +12407,57 @@ index 2055afbd..ccbc0674 100644
 -msgid "Failed to execute %s: %m\n"
 -msgstr "Eroare la executarea %s: %m\n"
 -
--#: tools/gnome-session-inhibit.c:361
+-#: tools/gnome-session-inhibit.c:360
 -msgid "Show program version"
 -msgstr "Arată versiunea programului"
 -
--#: tools/gnome-session-inhibit.c:362
+-#: tools/gnome-session-inhibit.c:361
 -msgid "The application id to use when inhibiting (optional)"
 -msgstr "ID-ul programului care va fi utilizat pentru blocare (facultativ)"
 -
--#: tools/gnome-session-inhibit.c:362
+-#: tools/gnome-session-inhibit.c:361
 -msgid "ID"
 -msgstr "ID"
--
--#: tools/gnome-session-inhibit.c:363
--msgid "The reason for inhibiting (optional)"
--msgstr "Motivul blocării (facultativ)"
--
--#: tools/gnome-session-inhibit.c:363
--msgid "REASON"
--msgstr "MOTIVUL"
--
--#: tools/gnome-session-inhibit.c:364
--msgid "Add action to inhibit (repeatable)"
--msgstr "Adaugă acțiunea de blocat (repetabilă)"
--
--#: tools/gnome-session-inhibit.c:364
--msgid "ACTION"
--msgstr "ACȚIUNE"
--
--#: tools/gnome-session-inhibit.c:365
--msgid "Do not launch COMMAND and wait forever instead"
--msgstr "Nu lansa COMANDA ci așteaptă pentru totdeauna"
 +msgid "Error while creating pipe: %s\n"
 +msgstr "Eroare în timpul creării conductei: %s\n"
  
--#: tools/gnome-session-inhibit.c:366
--msgid "List the existing inhibitions, and exit"
--msgstr "Afișează blocările existente, și închide"
+-#: tools/gnome-session-inhibit.c:362
+-msgid "The reason for inhibiting (optional)"
+-msgstr "Motivul blocării (facultativ)"
 +#: tools/gnome-session-inhibit.c:299
 +msgid "Failure reading pipe\n"
 +msgstr "Eșec la citirea conductei\n"
  
--#: tools/gnome-session-inhibit.c:378
+-#: tools/gnome-session-inhibit.c:362
+-msgid "REASON"
+-msgstr "MOTIVUL"
+-
+-#: tools/gnome-session-inhibit.c:363
+-msgid "Add action to inhibit (repeatable)"
+-msgstr "Adaugă acțiunea de blocat (repetabilă)"
+-
+-#: tools/gnome-session-inhibit.c:363
+-msgid "ACTION"
+-msgstr "ACȚIUNE"
+-
+-#: tools/gnome-session-inhibit.c:364
+-msgid "Do not launch COMMAND and wait forever instead"
+-msgstr "Nu lansa COMANDA ci așteaptă pentru totdeauna"
+-
+-#: tools/gnome-session-inhibit.c:365
+-msgid "List the existing inhibitions, and exit"
+-msgstr "Afișează blocările existente, și închide"
+-
+-#: tools/gnome-session-inhibit.c:377
 -msgid "COMMAND"
 -msgstr "COMANDA"
 -
--#: tools/gnome-session-inhibit.c:384
+-#: tools/gnome-session-inhibit.c:383
 -msgid "Execute COMMAND while inhibiting some session functionality."
 -msgstr ""
 -"Execută COMANDA în timpul blocării anumitor caracteristici ale sesiunii."
 -
--#: tools/gnome-session-inhibit.c:385
+-#: tools/gnome-session-inhibit.c:384
 -msgid ""
 -"Valid ACTION values are: logout, switch-user, suspend, idle, and automount.\n"
 -"If no --inhibit options are specified, idle is assumed."
@@ -12473,7 +12470,7 @@ index 2055afbd..ccbc0674 100644
 +msgid "Failed to execute %s\n"
 +msgstr "Eroare la executarea %s\n"
  
--#: tools/gnome-session-inhibit.c:409
+-#: tools/gnome-session-inhibit.c:408
 -msgid "Neither COMMAND nor --inhibit-only were specified."
 -msgstr "Nu au fost specificate nici COMANDA, nici --inhibit-only."
 +#: tools/gnome-session-inhibit.c:376 tools/gnome-session-inhibit.c:386
@@ -12489,7 +12486,7 @@ index 2055afbd..ccbc0674 100644
  
  #: tools/gnome-session-quit.c:51
  msgid "Power off"
-@@ -280,4 +349,397 @@ msgstr "Nu s-a putut realiza conectarea la administratorul de sesiuni"
+@@ -224,4 +349,397 @@ msgstr "Nu s-a putut realiza conectarea la administratorul de sesiuni"
  
  #: tools/gnome-session-quit.c:198
  msgid "Program called with conflicting options"
@@ -13112,7 +13109,7 @@ diff --git a/po/tr.po b/po/tr.po
 index 30729c40..2943295c 100644
 --- a/po/tr.po
 +++ b/po/tr.po
-@@ -16,15 +16,15 @@
+@@ -16,14 +16,14 @@
  # Muhammet Kara <muhammetk@gmail.com>, 2011-2015.
  # Çağatay Yiğit Şahin <cyigitsahin@outlook.com>, 2017, 2018.
  # Sabri Ünal <yakushabb@gmail.com>, 2019, 2022-2024.
@@ -13123,19 +13120,21 @@ index 30729c40..2943295c 100644
  msgstr ""
  "Project-Id-Version: gnome-session\n"
  "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-session/issues\n"
--"POT-Creation-Date: 2025-06-23 18:48+0000\n"
--"PO-Revision-Date: 2025-07-13 08:00+0300\n"
--"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+-"POT-Creation-Date: 2025-08-27 22:11+0000\n"
+-"PO-Revision-Date: 2025-08-28 14:07+0300\n"
 +"POT-Creation-Date: 2024-07-29 23:21+0000\n"
 +"PO-Revision-Date: 2024-05-07 12:06+0300\n"
-+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
+ "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
  "Language-Team: Turkish <takim@gnome.org.tr>\n"
  "Language: tr\n"
- "MIME-Version: 1.0\n"
-@@ -33,6 +33,14 @@ msgstr ""
+@@ -31,39 +31,71 @@ msgstr ""
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
  "Plural-Forms: nplurals=1; plural=0;\n"
- "X-Generator: Poedit 3.4.2\n"
+-"X-Generator: Poedit 3.6\n"
++"X-Generator: Poedit 3.4.2\n"
  
+-#: data/gnome.desktop.in.in:2 data/gnome.session.desktop:2
 +#: data/gnome-custom-session.desktop.in.in:3
 +msgid "Custom"
 +msgstr "Özel"
@@ -13144,21 +13143,29 @@ index 30729c40..2943295c 100644
 +msgid "This entry lets you select a saved session"
 +msgstr "Bu girdi, kaydedilmiş oturum seçmenizi sağlar"
 +
- #: data/gnome.desktop.in.in:3 data/gnome.session.desktop.in.in:3
++#: data/gnome.desktop.in.in:3 data/gnome.session.desktop.in.in:3
  msgid "GNOME"
  msgstr "GNOME"
-@@ -42,6 +50,10 @@ msgstr "GNOME"
+ 
+-#: data/gnome.desktop.in.in:3 data/gnome-wayland.desktop.in.in:3
+-#: data/gnome-xorg.desktop.in.in:3
++#: data/gnome.desktop.in.in:4 data/gnome-wayland.desktop.in.in:4
++#: data/gnome-xorg.desktop.in.in:4
  msgid "This session logs you into GNOME"
  msgstr "Bu oturum GNOME’a girmenizi sağlar"
  
+-#: data/gnome-wayland.desktop.in.in:2
 +#: data/gnome-dummy.session.desktop.in.in:3
 +msgid "GNOME dummy"
 +msgstr "GNOME dummy"
 +
- #: data/gnome-wayland.desktop.in.in:3
++#: data/gnome-wayland.desktop.in.in:3
  msgid "GNOME on Wayland"
  msgstr "Wayland üzerinde GNOME"
-@@ -51,19 +63,39 @@ msgid "GNOME on Xorg"
+ 
+-#: data/gnome-xorg.desktop.in.in:2
++#: data/gnome-xorg.desktop.in.in:3
+ msgid "GNOME on Xorg"
  msgstr "Xorg üzerinde GNOME"
  
  #: data/org.gnome.SessionManager.gschema.xml:5
@@ -13201,13 +13208,11 @@ index 30729c40..2943295c 100644
  msgid ""
  "If enabled, gnome-session will display a warning dialog after login if the "
  "session was automatically fallen back."
-@@ -71,18 +103,42 @@ msgstr ""
+@@ -71,39 +103,142 @@ msgstr ""
  "Etkinse, gnome-session, oturum kendiliğinden yedeğe düşmüşse girişin "
  "ardından uyarı penceresi gösterecektir."
  
--#: gnome-session/gsm-fail-whale-dialog.c:90
--msgid "Oh no! Something has gone wrong."
--msgstr "Hayda! Bir şeyler yanlış gitti."
+-#: gnome-session/gsm-manager.c:709 gnome-session/gsm-manager.c:1040
 +#: data/session-selector.ui:15
 +msgid "Custom Session"
 +msgstr "Özel Oturum"
@@ -13231,68 +13236,60 @@ index 30729c40..2943295c 100644
 +#: data/session-selector.ui:168
 +msgid "_Continue"
 +msgstr "_Sürdür"
- 
--#: gnome-session/gsm-fail-whale-dialog.c:97
++
 +#: gnome-session/gsm-fail-whale-dialog.c:318
 +msgid "Oh no!  Something has gone wrong."
 +msgstr "Hayda!  Bir şeyler yanlış gitti."
 +
 +#: gnome-session/gsm-fail-whale-dialog.c:325
- msgid ""
- "A problem has occurred and the system can’t recover. Please contact a system "
- "administrator"
- msgstr ""
- "Sorun oluştu ve sistem kurtarılamıyor. Lütfen sistem yöneticisine başvurun"
- 
--#: gnome-session/gsm-fail-whale-dialog.c:99
++msgid ""
++"A problem has occurred and the system can’t recover. Please contact a system "
++"administrator"
++msgstr ""
++"Sorun oluştu ve sistem kurtarılamıyor. Lütfen sistem yöneticisine başvurun"
++
 +#: gnome-session/gsm-fail-whale-dialog.c:327
- msgid ""
- "A problem has occurred and the system can’t recover. All extensions have "
- "been disabled as a precaution."
-@@ -90,7 +146,7 @@ msgstr ""
- "Sorun oluştu ve sistem kurtarılamıyor. Önlem olarak tüm uzantılar devre dışı "
- "bırakıldı."
- 
--#: gnome-session/gsm-fail-whale-dialog.c:101
++msgid ""
++"A problem has occurred and the system can’t recover. All extensions have "
++"been disabled as a precaution."
++msgstr ""
++"Sorun oluştu ve sistem kurtarılamıyor. Önlem olarak tüm uzantılar devre dışı "
++"bırakıldı."
++
 +#: gnome-session/gsm-fail-whale-dialog.c:329
- msgid ""
- "A problem has occurred and the system can’t recover.\n"
- "Please log out and try again."
-@@ -98,68 +154,91 @@ msgstr ""
- "Sorun oluştu ve sistem kurtarılamıyor.\n"
- "Lütfen oturumu kapatıp yeniden deneyin."
- 
--#: gnome-session/gsm-fail-whale-dialog.c:109
++msgid ""
++"A problem has occurred and the system can’t recover.\n"
++"Please log out and try again."
++msgstr ""
++"Sorun oluştu ve sistem kurtarılamıyor.\n"
++"Lütfen oturumu kapatıp yeniden deneyin."
++
 +#: gnome-session/gsm-fail-whale-dialog.c:344
- msgid "_Log Out"
- msgstr "_Oturumu Kapat"
- 
--#: gnome-session/gsm-fail-whale-dialog.c:153 gnome-session/main.c:479
++msgid "_Log Out"
++msgstr "_Oturumu Kapat"
++
 +#: gnome-session/gsm-fail-whale-dialog.c:412 gnome-session/main.c:505
- msgid "Enable debugging code"
- msgstr "Kod hatası ayıklamayı etkinleştir"
- 
--#: gnome-session/gsm-fail-whale-dialog.c:154
++msgid "Enable debugging code"
++msgstr "Kod hatası ayıklamayı etkinleştir"
++
 +#: gnome-session/gsm-fail-whale-dialog.c:413
- msgid "Allow logout"
- msgstr "Oturumu kapatmaya izin ver"
- 
--#: gnome-session/gsm-fail-whale-dialog.c:155
++msgid "Allow logout"
++msgstr "Oturumu kapatmaya izin ver"
++
 +#: gnome-session/gsm-fail-whale-dialog.c:414
- msgid "Show extension warning"
- msgstr "Uzantı uyarısını göster"
- 
--#: gnome-session/gsm-manager.c:1292 gnome-session/gsm-manager.c:1907
++msgid "Show extension warning"
++msgstr "Uzantı uyarısını göster"
++
 +#: gnome-session/gsm-manager.c:1301 gnome-session/gsm-manager.c:2050
  msgid "Not responding"
  msgstr "Yanıtlamıyor"
  
--#: gnome-session/gsm-util.c:342
+-#: gnome-session/gsm-util.c:167
 +#: gnome-session/gsm-util.c:431
  msgid "_Log out"
  msgstr "_Oturumu kapat"
  
--#: gnome-session/main.c:476
+-#: gnome-session/leader-main.c:181 gnome-session/service-main.c:148
 +#. It'd be really surprising to reach this code: if we're here,
 +#. * then the XSMP client already has set several XSMP
 +#. * properties. But it could still be that SmProgram is not set.
@@ -13317,58 +13314,70 @@ index 30729c40..2943295c 100644
 +msgstr "ICE dinleme soketi oluşturulamadı: %s"
 +
 +#: gnome-session/main.c:502
- msgid "Running as systemd service"
- msgstr "systemd hizmeti olarak çalışıyor"
- 
--#: gnome-session/main.c:477
++msgid "Running as systemd service"
++msgstr "systemd hizmeti olarak çalışıyor"
++
 +#: gnome-session/main.c:503
- msgid "Override standard autostart directories"
- msgstr "Standart kendiliğinden başlat dizinlerinin yerine geç"
- 
--#: gnome-session/main.c:477
++msgid "Override standard autostart directories"
++msgstr "Standart kendiliğinden başlat dizinlerinin yerine geç"
++
 +#: gnome-session/main.c:503
- msgid "AUTOSTART_DIR"
- msgstr "KENDILIGINDANBASLAT_DIZINI"
- 
--#: gnome-session/main.c:478
++msgid "AUTOSTART_DIR"
++msgstr "KENDILIGINDANBASLAT_DIZINI"
++
 +#: gnome-session/main.c:504
  msgid "Session to use"
  msgstr "Kullanılacak oturum"
  
--#: gnome-session/main.c:478
+-#: gnome-session/leader-main.c:181 gnome-session/service-main.c:148
 +#: gnome-session/main.c:504
  msgid "SESSION_NAME"
  msgstr "OTURUM_ADI"
  
--#: gnome-session/main.c:480
+-#: gnome-session/leader-main.c:182
+-msgid "Enable debugging code"
+-msgstr "Kod hatası ayıklamayı etkinleştir"
 +#: gnome-session/main.c:506
- msgid "Do not load user-specified applications"
- msgstr "Kullanıcıya özel programları yükleme"
++msgid "Do not load user-specified applications"
++msgstr "Kullanıcıya özel programları yükleme"
  
--#: gnome-session/main.c:481
+-#: gnome-session/leader-main.c:183
 +#: gnome-session/main.c:507
  msgid "Version of this application"
  msgstr "Bu uygulamanın sürümü"
  
- #. Translators: the 'fail whale' is the black dialog we show when something goes seriously wrong
--#: gnome-session/main.c:483
-+#: gnome-session/main.c:509
- msgid "Show the fail whale dialog for testing"
- msgstr "Sınama için büyük hata iletişim penceresini göster"
- 
--#: gnome-session/main.c:484
+-#: gnome-session/leader-main.c:184
 -msgid "This option is ignored"
 -msgstr "Bu seçenek yok sayıldı"
++#. Translators: the 'fail whale' is the black dialog we show when something goes seriously wrong
++#: gnome-session/main.c:509
++msgid "Show the fail whale dialog for testing"
++msgstr "Sınama için büyük hata iletişim penceresini göster"
+ 
+-#: gnome-session/leader-main.c:185
+-msgid "Don't re-exec into a login shell"
+-msgstr "Oturum açma kabuğuna yeniden girme"
 +#: gnome-session/main.c:510
 +msgid "Disable hardware acceleration check"
 +msgstr "Donanım hızlandırma denetimini devre dışı bırak"
  
--#: gnome-session/main.c:516
+-#: gnome-session/leader-main.c:203 gnome-session/service-main.c:157
 +#: gnome-session/main.c:542
  msgid " — the GNOME session manager"
  msgstr " — GNOME oturum yöneticisi"
  
-@@ -191,72 +270,60 @@ msgstr "Hizmet hatasında gnome-session-failed.target’ı ExecStopPost’tan ba
+@@ -128,82 +263,67 @@ msgstr "Çalışıyorsa dbus.service’i yeniden başlat"
+ 
+ #: tools/gnome-session-ctl.c:251
+ msgid ""
+-"Run from ExecStopPost to start gnome-session-shutdown.target on service "
+-"failure"
+-msgstr ""
+-"Hizmet hatasında gnome-session-shutdown.target’ı ExecStopPost’tan başlat"
++"Run from ExecStopPost to start gnome-session-failed.target on service failure"
++msgstr "Hizmet hatasında gnome-session-failed.target’ı ExecStopPost’tan başlat"
+ 
+ #: tools/gnome-session-ctl.c:281
  msgid "Program needs exactly one parameter"
  msgstr "Program tam olarak bir parametreye gereksiniyor"
  
@@ -13436,11 +13445,16 @@ index 30729c40..2943295c 100644
 -#: tools/gnome-session-inhibit.c:363
 -msgid "REASON"
 -msgstr "NEDEN"
--
++msgid "Error while creating pipe: %s\n"
++msgstr "Boru oluşturulurken hata: %s\n"
+ 
 -#: tools/gnome-session-inhibit.c:364
 -msgid "Add action to inhibit (repeatable)"
 -msgstr "Önlemeye eylem ekle (yinelenebilir)"
--
++#: tools/gnome-session-inhibit.c:299
++msgid "Failure reading pipe\n"
++msgstr "Boru okuma hatası\n"
+ 
 -#: tools/gnome-session-inhibit.c:364
 -msgid "ACTION"
 -msgstr "EYLEM"
@@ -13452,16 +13466,11 @@ index 30729c40..2943295c 100644
 -#: tools/gnome-session-inhibit.c:366
 -msgid "List the existing inhibitions, and exit"
 -msgstr "Var olan önlemeleri listele ve çık"
-+msgid "Error while creating pipe: %s\n"
-+msgstr "Boru oluşturulurken hata: %s\n"
- 
+-
 -#: tools/gnome-session-inhibit.c:378
 -msgid "COMMAND"
 -msgstr "KOMUT"
-+#: tools/gnome-session-inhibit.c:299
-+msgid "Failure reading pipe\n"
-+msgstr "Boru okuma hatası\n"
- 
+-
 -#: tools/gnome-session-inhibit.c:384
 -msgid "Execute COMMAND while inhibiting some session functionality."
 -msgstr "Bazı oturum işlevselliğini önlerken KOMUTU çalıştır"
@@ -13471,8 +13480,9 @@ index 30729c40..2943295c 100644
 -"Valid ACTION values are: logout, switch-user, suspend, idle, and automount.\n"
 -"If no --inhibit options are specified, idle is assumed."
 -msgstr ""
--"Geçerli EYLEM değerleri şunlardır: logout (oturumu kapat), switch-user (kullanıcı değiştir), "
--"suspend (askıya al), idle (boşta) ve automount (kendiliğinden bağla).\n"
+-"Geçerli EYLEM değerleri şunlardır: logout (oturumu kapat), switch-user "
+-"(kullanıcı değiştir), suspend (askıya al), idle (boşta) ve automount "
+-"(kendiliğinden bağla).\n"
 -"Eğer herhangi bir --inhibit seçeneği belirtilmezse idle (boşta) kullanılır."
 +#: tools/gnome-session-inhibit.c:303
 +#, c-format
@@ -13490,7 +13500,7 @@ index 30729c40..2943295c 100644
  
  #: tools/gnome-session-quit.c:50
  msgid "Log out"
-@@ -268,11 +335,11 @@ msgstr "Bilgisayarı kapat"
+@@ -215,11 +335,11 @@ msgstr "Bilgisayarı kapat"
  
  #: tools/gnome-session-quit.c:52
  msgid "Reboot"
@@ -13504,29 +13514,70 @@ index 30729c40..2943295c 100644
  
  #: tools/gnome-session-quit.c:54
  msgid "Don’t prompt for user confirmation"
-@@ -285,3 +352,26 @@ msgstr "Oturum yöneticisine bağlanılamadı"
- #: tools/gnome-session-quit.c:198
+@@ -233,49 +353,25 @@ msgstr "Oturum yöneticisine bağlanılamadı"
  msgid "Program called with conflicting options"
  msgstr "Program çakışan seçeneklerle çağırıldı"
-+
+ 
+-#~ msgid "Oh no! Something has gone wrong."
+-#~ msgstr "Hayda! Bir şeyler yanlış gitti."
+-
+-#~ msgid ""
+-#~ "A problem has occurred and the system can’t recover. Please contact a "
+-#~ "system administrator"
+-#~ msgstr ""
+-#~ "Sorun oluştu ve sistem kurtarılamıyor. Lütfen sistem yöneticisine başvurun"
+-
+-#~ msgid ""
+-#~ "A problem has occurred and the system can’t recover. All extensions have "
+-#~ "been disabled as a precaution."
+-#~ msgstr ""
+-#~ "Sorun oluştu ve sistem kurtarılamıyor. Önlem olarak tüm uzantılar devre "
+-#~ "dışı bırakıldı."
+-
+-#~ msgid ""
+-#~ "A problem has occurred and the system can’t recover.\n"
+-#~ "Please log out and try again."
+-#~ msgstr ""
+-#~ "Sorun oluştu ve sistem kurtarılamıyor.\n"
+-#~ "Lütfen oturumu kapatıp yeniden deneyin."
+-
+-#~ msgid "_Log Out"
+-#~ msgstr "_Oturumu Kapat"
+-
+-#~ msgid "Allow logout"
+-#~ msgstr "Oturumu kapatmaya izin ver"
+-
+-#~ msgid "Show extension warning"
+-#~ msgstr "Uzantı uyarısını göster"
+-
+-#~ msgid "Running as systemd service"
+-#~ msgstr "systemd hizmeti olarak çalışıyor"
 +#: tools/gnome-session-selector.c:61
 +#, c-format
 +msgid "Session %d"
 +msgstr "%d Oturumu"
-+
+ 
+-#~ msgid "Override standard autostart directories"
+-#~ msgstr "Standart kendiliğinden başlat dizinlerinin yerine geç"
 +#: tools/gnome-session-selector.c:107
 +msgid ""
 +"Session names are not allowed to start with “.” or contain “/” characters"
 +msgstr "Oturum adları “.” ile başlayamaz ve “/” karakterini içeremez"
-+
+ 
+-#~ msgid "AUTOSTART_DIR"
+-#~ msgstr "KENDILIGINDANBASLAT_DIZINI"
 +#: tools/gnome-session-selector.c:111
 +msgid "Session names are not allowed to start with “.”"
 +msgstr "Oturum adları “.” ile başlayamaz"
-+
+ 
+-#~ msgid "Do not load user-specified applications"
+-#~ msgstr "Kullanıcıya özel programları yükleme"
 +#: tools/gnome-session-selector.c:115
 +msgid "Session names are not allowed to contain “/” characters"
 +msgstr "Oturum adları “/” karakterini içeremez"
-+
+ 
+-#~ msgid "Show the fail whale dialog for testing"
+-#~ msgstr "Sınama için büyük hata iletişim penceresini göster"
 +#: tools/gnome-session-selector.c:123
 +#, c-format
 +msgid "A session named “%s” already exists"
