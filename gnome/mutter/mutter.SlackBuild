@@ -102,6 +102,7 @@ cd build
     -Dclutter_tests=false \
     -Dstrip=true \
     -Dprofiler=false \
+    -Dx11=true \
     -Dtests=disabled
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install

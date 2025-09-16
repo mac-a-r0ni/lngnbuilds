@@ -112,6 +112,8 @@ cd build
     -Dx11-support=true \
     -Dipv6=true \
     -Dselinux=disabled \
+    -Dgdm-xsession=true \
+    -Dx11-support=true \
     -Dinitial-vt=7
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
