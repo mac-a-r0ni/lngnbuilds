@@ -79,7 +79,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-patch -Np1 -i $CWD/145.patch || exit 1
+patch -Np1 -i $CWD/0000-revert-userdb.patch || exit 1
 patch -Np1 -i $CWD/0001-meson-add-elogind-support.patch || exit 1
 patch -Np1 -i $CWD/0002-gnome-session-add-profile-sourcing.patch || exit 1
 
@@ -96,6 +96,7 @@ cd build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
+    -Dmimeapps=false \
     -Ddocbook=false \
     -Dx11=true \
     -Dlogind_provider=elogind
