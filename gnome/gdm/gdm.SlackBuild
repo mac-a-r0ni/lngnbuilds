@@ -82,7 +82,6 @@ find -L . \
 patch -Np1 -i $CWD/307.patch
 patch -Np1 -i $CWD/0001-Xsession-Don-t-start-ssh-agent-by-default.patch
 patch -Np1 -i $CWD/0003-add-wayland-session-script.patch
-patch -Np1 -i $CWD/0004-fix-Xsession-language-in-gnome.patch
 
 mkdir build
 cd build
@@ -112,8 +111,6 @@ cd build
     -Dx11-support=true \
     -Dipv6=true \
     -Dselinux=disabled \
-    -Dgdm-xsession=true \
-    -Dx11-support=true \
     -Dinitial-vt=7
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
@@ -130,6 +127,7 @@ cat $CWD/gdm-autologin.pam > $PKG/etc/pam.d/gdm-autologin
 cat $CWD/gdm-password.pam > $PKG/etc/pam.d/gdm-password
 cat $CWD/gdm-launch-environment.pam > $PKG/etc/pam.d/gdm-launch-environment
 cat $CWD/wayland-session > $PKG/etc/gdm/wayland-session
+chmod 755 $PKG/etc/gdm/wayland-session
 
 # Handle /etc/gdm/custom.conf a little nicer:
 mv $PKG/etc/gdm/{custom.conf,custom.conf.new}
