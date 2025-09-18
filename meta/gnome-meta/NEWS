@@ -1,0 +1,1558 @@
+The following modules have a new version:
+- adwaita-icon-theme (49.rc => 49.0)
+- at-spi2-core (2.57.2 => 2.58.0)
+- baobab (48.0 => 49.0)
+- d-spy (48.0 => 49.1)
+- dconf (0.40.0 => 0.49.0)
+- dconf-editor (45.0.1 => 49.0)
+- decibels (48.0.alpha => 49.0)
+- epiphany (49.rc => 49.0)
+- evolution-data-server (3.57.3 => 3.58.0)
+- foundry (1.0.rc => 1.0.0)
+- gdk-pixbuf (2.43.5 => 2.44.1)
+- gdm (49.rc => 49.0)
+- gjs (1.85.2 => 1.85.90)
+- glib (2.85.4 => 2.86.0)
+- glycin (2.0.rc => 2.0.0)
+- gnome-backgrounds (49.beta => 49.0)
+- gnome-builder (49.rc => 49.0)
+- gnome-calculator (49.rc => 49.0)
+- gnome-calendar (49.rc => 49.0.1)
+- gnome-characters (49.rc => 49.0)
+- gnome-clocks (48.0 => 49.0)
+- gnome-connections (49.beta => 49.0)
+- gnome-console (49.rc => 49.0)
+- gnome-control-center (49.rc => 49.0)
+- gnome-desktop (44.3 => 44.4)
+- gnome-font-viewer (49.rc => 49.0)
+- gnome-logs (49.rc => 49.0)
+- gnome-maps (49.rc => 49.0)
+- gnome-music (49.rc => 49.0.2)
+- gnome-online-accounts (3.55.2 => 3.56.0)
+- gnome-remote-desktop (49.rc => 49.0)
+- gnome-session (49.rc => 49.0)
+- gnome-settings-daemon (49.rc => 49.0)
+- gnome-shell (49.rc => 49.0)
+- gnome-software (49.rc => 49.0)
+- gnome-system-monitor (49.rc => 49.0)
+- gnome-text-editor (49.rc => 49.0)
+- gnome-tour (48.1 => 49.0)
+- gnome-user-docs (48.2 => 49.0)
+- gnome-weather (49.rc => 49.0)
+- gobject-introspection (1.84.0 => 1.86.0)
+- gsettings-desktop-schemas (49.rc => 49.0)
+- gtk (4.20.0 => 4.20.1)
+- gtksourceview (5.17.1 => 5.18.0)
+- gvfs (1.57.2 => 1.58.0)
+- json-glib (1.10.6 => 1.10.8)
+- libadwaita (1.8.rc => 1.8.0)
+- libpanel (1.10.1 => 1.10.2)
+- libpeas (2.1.0 => 2.2.0)
+- librsvg (2.61.0 => 2.61.1)
+- libshumate (1.5.beta => 1.5.0.1)
+- localsearch (3.10.rc => 3.10.0)
+- loupe (49.rc => 49.0)
+- manuals (49.alpha.1 => 49.0)
+- mutter (49.rc => 49.0)
+- nautilus (49.rc => 49.0)
+- papers (49.rc => 49.0)
+- pyatspi (2.57.0 => 2.58.0)
+- pygobject (3.53.0 => 3.54.2)
+- rygel (45.rc => 45.0)
+- showtime (49.rc => 49.0)
+- snapshot (49.rc => 49.0)
+- sysprof (49.rc => 49.0)
+- tecla (49.rc => 49.0)
+- template-glib (3.37.1 => 3.38.0)
+- tinysparql (3.10.rc => 3.10.0)
+- vte (0.81.90 => 0.82.0)
+- xdg-desktop-portal-gnome (49.rc => 49.0)
+- yelp (49.rc => 49.0)
+- yelp-xsl (49.beta => 49.0)
+
+The following modules weren't upgraded in this release:
+   adwaita-fonts, blueprint-compiler, calls, cantarell-fonts, evince, folks, gcab, gcr, gcr-3, geocode-glib, gexiv2, gi-docgen, glib-networking, glibmm, gnome-app-list, gnome-autoar, gnome-bluetooth, gnome-boxes, gnome-color-manager, gnome-contacts, gnome-disk-utility, gnome-initial-setup, gnome-keyring, gnome-menus, gnome-user-share, gom, graphene, grilo, grilo-plugins, gsound, gspell, gssdp, gtk+-3, gtk-doc, gtk-vnc, gtkmm, gtksourceview-4, gupnp, gupnp-av, gupnp-dlna, jsonrpc-glib, libcloudproviders, libdex, libgee, libgit2-glib, libgsf, libgtop, libgweather, libgxps, libhandy, libmanette-0.2, libmediaart, libnma, libnotify, librest, libsecret, libsigcplusplus, libsoup, libspelling, mm-common, mobile-broadband-provider-info, msgraph, orca, pango, pangomm, phodav, simple-scan, startup-notification, sushi, totem-pl-parser, vala, xdg-user-dirs-gtk, yelp-tools, zenity
+
+========================================
+  adwaita-icon-theme
+========================================
+
+49.0
+
+========================================
+  at-spi2-core
+========================================
+
+What's new in at-spi2-core 2.58.0:
+
+* libatspi: Increase ATSPI_ROLE_COUNT after switch role was added
+
+* Add ATSPI_CHECK_VERSION macro.
+
+* Properly fix key notifications under X11 when multiple keyboard layouts
+  are in use.
+
+
+========================================
+  baobab
+========================================
+
+49.0
+====
+* Improve Scanning Speed and Memory Usage (Khalid Abu Shawarib)
+
+* Translation updates:
+  - Arabic (Ahmed Najmawi)
+  - Azerbaijani (Ramal Rəhimov)
+  - Catalan (Jordi Mas)
+  - Chinese (Taiwan) (Yi-Jyun Pan)
+  - Interlingua (International Auxiliary Language Association) (Emilio
+    Sepúlveda)
+  - Japanese (Takayuki KUSANO)
+  - Slovak (Dušan Kazik)
+  - Uighur (Abduqadir Abliz)
+  - Uzbek (Asadbek Rajabov)
+
+
+========================================
+  d-spy
+========================================
+
+# D-Spy 49.0
+
+ * Fixes for CI
+
+# D-Spy 49.0
+
+ * Translation updates
+
+# D-Spy 49.rc
+
+ * A new interface design that is more adaptable to exploring
+   complex D-Bus peers as well as working on more constrained
+   display devices.
+
+
+========================================
+  dconf
+========================================
+
+Changes in dconf 0.49.0
+=======================
+
+ - ci: Add release-service component to automate releases (Jordan Petridis, !90)
+ - ci: Remove lcov workaround (Diego Escalante Urrelo, !84)
+ - ci: Add lcov package missing dependencies (Diego Escalante Urrelo, !76)
+ - ci: Tell debconf to be noninteractive (Diego Escalante Urrelo, !76)
+ - ci: Tidy up common setup config (Diego Escalante Urrelo, !76)
+ - ci: Fix dist job (Diego Escalante Urrelo, !76)
+ - ci: Tidy up meson calls (Diego Escalante Urrelo, !76)
+ - ci: Keep all the apt calls together (Diego Escalante Urrelo, !76)
+ - ci: Add explanation for missing `lcov_2.0-3` deps (Diego Escalante Urrelo, !76)
+ - ci: Rename master branch to main (Philip Withnall, !80)
+ - ci: Combine build and test CI jobs (Philip Withnall, !81)
+ - tests: Use g_memdup2 (Matt Turner, !73)
+ - tests: Do not link libdconf_engine_test with libdconf (Xavier Claessens, !75)
+ - tests: Do not use system profile (Marek Kasik, !87)
+ - tests: Use specific g_assert_ functions (Diego Escalante Urrelo, !77)
+ - tests: Add a shellcheck test to validate SH files (Philip Withnall, !81)
+ - docs: Enable gtk-doc check (Diego Escalante Urrelo, !76)
+ - docs: Document dconf read -d option in dconf-tool.xml (bugith, !74)
+ - Spelling fixes (Ville Skyttä, !79)
+ - completion: Fix error on unknown command in nounset mode (Ville Skyttä, !78)
+ - completion: Remove redundant case match (Philip Withnall, !81)
+ - completion: Annotate file with shell for shellcheck to use (Philip Withnall, !81)
+ - completion: Ignore shellcheck error about COMPREPLY (Philip Withnall, !81)
+ - completion: invoke the dconf command being completed (Ville Skyttä, !82)
+ - completion: avoid errors from words starting with a dash (Ville Skyttä, !83)
+ - build: Use GNOME module post_install() (Matt Turner, !72)
+ - build: Use install prefix in systemd files paths (Diego Escalante Urrelo, !71)
+ - build: Fix use of deprecated dependency.get_pkgconfig_variable() (Philip Withnall, !81)
+ - build: Move gvdb to a subproject and update (Wesley Hershberger, !89)
+ - Remove invalid maintainer entry from doap file (Sophie Herold, !85)
+
+
+ - Engine: fix deadlock which occurred when using the engine from libsoup
+
+========================================
+  dconf-editor
+========================================
+
+dconf-editor 49.0
+=================
+
+Fix validation errors in AppStream metadata.
+
+Translations updated:
+  Basque: Asier Sarasua Garmendia
+  Brazilian Portuguese: Juliano de Souza Camargo
+  Chinese (China): Luming Zh
+  Czech: Daniel Rusek
+  Dutch: Nathan Follens
+  Esperanto: Kristjan Schmidt
+  Galician: Fran Dieguez
+  Georgian: Ekaterine Papava
+  Hebrew: Yaron Shahrabani
+  Hungarian: Balázs Úr
+  Korean: Changwoo Ryu
+  Lithuanian: Aurimas Černius
+  Persian: Danial Behzadi
+  Polish: Piotr Drąg
+  Russian: Artur S0
+  Slovenian: Martin S
+  Spanish: Daniel Mustieles
+  Swedish: Anders Jonsson
+  Turkish: Sabri Ünal
+  Ukrainian: Yuri Chornoivan
+
+dconf-editor 49.rc
+=================
+
+Fix a crash with GSETTINGS_SCHEMA_DIR, fix build errors with newer versions of
+Vala, add relocatable schemas for Ptyxis and soem ibus engines, and modernize
+AppStream metadata.
+
+Translations updated:
+  Basque: Asier Sarasua Garmendia
+  Belarusian: Vasil Pupkin
+  Brazilian Portuguese: Juliano de Souza Camargo
+  British English: Andi Chandler
+  Bulgarian: Alexander Shopov
+  Catalan: Jordi Mas
+  Chinese (China): Boyuan Yang
+  Chinese (Taiwan): Chao-Hsiung Liao
+  Czech: Daniel Rusek
+  Danish: Ask Hjorth Larsen
+  Dutch: Nathan Follens
+  French: Guillaume Bernard
+  Friulian: Fabio Tomat
+  Galician: Fran Dieguez
+  Georgian: Ekaterine Papava
+  German: Jürgen Benvenuti and Tim Sabsch
+  Greek: Efstathios Iosifidis
+  Hindi: Scrambled 777
+  Hungarian: Balázs Úr
+  Indonesian: Andika Triwidada
+  Japanese: Seiji Iizuka
+  Kabyle: Athmane Mokraoui and Rachida Saci
+  Korean: Changwoo Ryu
+  Latvian: Rūdolfs Mazurs
+  Lithuanian: Aurimas Černius
+  Nepali: Pawan Chitrakar
+  Persian: Danial Behzadi
+  Polish: Piotr Drąg
+  Portuguese: Hugo Carvalho
+  Romanian: Daniel Șerbănescu
+  Russian: Artur S0
+  Serbian (Latin): Милош Поповић
+  Serbian: Милош Поповић
+  Slovak: Jose Riha
+  Slovenian: Matej Urbančič
+  Spanish: Daniel Mustieles
+  Swedish: Anders Jonsson
+  Thai: Aefgh Threenine
+  Turkish: Emin Tufan Çetin and Sabri Ünal
+  Ukrainian: Yuri Chornoivan
+  Uzbek (Latin): Baxrom Raxmatov
+
+========================================
+  decibels
+========================================
+
+49.0
+---
+
+* Bugs fixed:
+  - #130 Missing trailing new line (Jeremy Bícha)
+  - !154 fix: reset position when skipping past the end of audio
+  - !156 fix: correctly avoid excess draws on waveform scale position update
+  - !157 Fix translate url
+  - !162 metainfo: fix dark brand color
+  - !163 Force playback buttons and timeline to be Left-To-Right
+  - !164 Port to AdwShortcutsDialog
+  - !165 flatpak: Remove blueprint-compiler and update node extension
+  - !167 Put each main window into its own group
+
+* Translation updates:
+  - Arabic (Amar Al-Janabi)
+  - Belarusian (Vasil Pupkin)
+  - Catalan (Jordi Mas)
+  - Chinese (Taiwan) (Cheng-Chia Tseng)
+  - Dutch (Nathan Follens)
+  - Esperanto (Kristjan SCHMIDT)
+  - French (Jeremy Bícha)
+  - Friulian (Fabio Tomat)
+  - Greek, Modern (1453-) (Giannis Antypas)
+  - Interlingua (International Auxiliary Language Association) (Emilio
+    Sepúlveda)
+  - Italian (Jeremy Bícha)
+  - Japanese (Jun Oyamada)
+  - Kabyle (Athmane MOKRAOUI)
+  - Romanian (Antonio Marin)
+  - Uzbek (Asadbek Rajabov)
+
+48.0
+---
+
+* Bugs fixed:
+  - !144 Cleanup: Remove unused seek 30s icons
+  - !145 metainfo: Fix developer id
+  - !146 Fix links
+  - !147 metainfo: Mark developer name as translatable
+  - !149 Upgrade blueprint-compiler
+  - !150 Update the file name to LICENSE
+
+* Translation updates:
+  - Basque (Asier Sarasua Garmendia)
+  - Belarusian (Vasil Pupkin)
+  - Bokmål, Norwegian (Brage Fuglseth)
+  - Bulgarian (Alexander Shopov)
+  - Catalan (Jordi Mas i Hernandez)
+  - Chinese (China) (Luming Zh)
+  - Czech (Daniel Rusek)
+  - Danish (Ask Hjorth Larsen)
+  - Finnish (Jiri Grönroos)
+  - French (Alexandre Franke)
+  - Galician (Fran Dieguez)
+  - Georgian (Ekaterine Papava)
+  - German (Jürgen Benvenuti)
+  - Hebrew (Yaron Shahrabani)
+  - Hindi (Scrambled 777)
+  - Hungarian (Balázs Meskó)
+  - Indonesian (Andika Triwidada)
+  - Interlingua (International Auxiliary Language Association) (Emilio
+    Sepúlveda)
+  - Italian (Davide Ferracin)
+  - Korean (Seong-ho Cho)
+  - Lithuanian (Aurimas Černius)
+  - Nepali (Pawan Chitrakar)
+  - Occitan (post 1500) (Quentin PAGÈS)
+  - Panjabi (A S Alam)
+  - Persian (Danial Behzadi)
+  - Portuguese (Hugo Carvalho)
+  - Portuguese (Brazil) (Rafael Fontenelle)
+  - Russian (Artur S0)
+  - Serbian (Мирослав Николић)
+  - Slovak (Peter Mráz)
+  - Slovenian (Martin, Matej Urbančič)
+  - Spanish (Julián Villodre)
+  - Swedish (Anders Jonsson)
+  - Turkish (Emin Tufan Çetin)
+  - Ukrainian (Yuri Chornoivan)
+
+
+========================================
+  epiphany
+========================================
+
+49.0 - September 11, 2025
+=========================
+
+
+========================================
+  evolution-data-server
+========================================
+
+Evolution-Data-Server 3.58.0 2025-09-12
+---------------------------------------
+
+Bug Fixes:
+	I#607 - test-cal-component-bag: Fails to run with source tree only
+
+Miscellaneous:
+	IMAP: Disable PREVIEW fetch on FETCH error
+
+Translations:
+	Balázs Úr (hu)
+	Daniel Rusek (cs)
+
+
+========================================
+  foundry
+========================================
+
+Foundry 1.0.0
+=============
+
+ * Give access to VIM im context from FoundrySourceView
+ * Simplified GActions for many FoundryService-derived managers
+ * Foundry executable is now dynamically linked
+ * FoundrySearchResult gained icon support
+ * New API to allow creating a PTY producer from a consumer FD
+ * Many fit'n'finish fixes for 1.0 API
+ * The FoundryFileManager can now discover content-type from a
+   filename if the content-type is not provided to determine
+   appropriate symbolic icons.
+ * Improvements to terminal palette parsing
+ * A new FoundryMenuProxy enables easily integrationg with
+   GMenuModel with a menu ID referenced in the applications
+   merged menus (See FoundryMenuManager).
+ * The fallback storage for extended attributes (SQLite) now
+   properly ensures uniqueness for columns based on file URI.
+ * Some API was renamed to improve future expansion.
+
+
+========================================
+  gdk-pixbuf
+========================================
+
+2.44.1
+===
+
+- Re-enable animation tests [!236]
+- Fix leak in load_animation_with_glycin [!237]
+
+2.44.0
+===
+
+- build: Fix cross-building
+- build: Don't build documentation by default
+- glycin: Implement animation
+- Translation updates
+
+
+========================================
+  gdm
+========================================
+
+49.0
+==========
+
+* Translation updates
+* Fix build failures when built without plymouth support
+* Fix permissions issue on the GDM work dir (/var/lib/gdm) that broke settings
+  persistence
+
+
+========================================
+  gjs
+========================================
+
+Version 1.85.90
+---------------
+
+- Closed bugs and merge requests:
+  * Support flat C array return values [#603, 1015, Gary Li]
+  * Make Gtk4Warnings test work again on CI [#698, !1017, Gary Li]
+  * overrides/Gio: Add wrappers for platform-specific Gio functions [!1018,
+    Marco Trevisan, Philip Chimento]
+  * Consider whether to handle invalid UTF-8 coming from C when converting to
+    JS string [#658, !1019, Gary Li]
+  * cleanup: Remove dead code using older GLib [!1020, Marco Trevisan]
+  * gjs -m makes mojibake [#707, !1021, Gary Li]
+  * Various maintenance [!1022, Philip Chimento]
+
+
+========================================
+  glib
+========================================
+
+Overview of changes in GLib 2.86.0, 2025-09-05
+==============================================
+
+* Rework how platform-specific introspected GIO APIs have to be imported to fix
+  problems with backwards-compatibility provision for it, by removing duplicate
+  platform-specific symbols from `Gio-2.0`. Users of platform-specific GIO APIs
+  should be unaffected, as `GIRepository` will now automatically import
+  `GioWin32-2.0` or `GioUnix-2.0` when asked to import `Gio-2.0`. However,
+  projects generating introspection data which depends on types from either of
+  those platform-specific GIRs must make sure they depend on those GIRs
+  explicitly, rather than just transitively depending on them through `Gio-2.0`
+  (#3744, work by Emmanuele Bassi, Marco Trevisan, Florian Müllner, and others)
+
+* Fix file existence queries on Solaris, broken due to unexpected flags handling
+  within `faccessat()` (#3770, work by Niveditha Rau)
+
+* Bugs fixed:
+  - #3744 GDesktopAppInfo API disappeared after girepository-2.0 port (Emmanuele
+    Bassi)
+  - #3768 g_test_trap_subprocess does not check G_TEST_SUBPROCESS_INHERIT_STDIN
+    (Philip Withnall)
+  - !4751 gtestutils: Fix a slightly broken example in a doc comment
+  - !4754 Update Polish translation 250825
+  - !4758 Update Swedish translation
+  - !4762 gio: gmemorymonitorpsi: Replace GRegex with g_str_has_prefix()
+  - !4765 girepository: Add an assertion to help scan-build
+  - !4767 glocalfile: Disable faccessat()-based query_exists on Solaris
+  - !4768 gmessages: Fix win32_keep_fatal_message regression
+  - !4769 docs: Fix typos
+  - !4770 Update Chinese translation
+  - !4771 Update Georgian translation
+  - !4772 po: Update Persian translation.
+
+* Translation updates:
+  - Chinese (China) (lumingzh)
+  - Georgian (NorwayFun)
+  - Persian (Danial Behzadi)
+  - Polish (Piotr Drąg)
+  - Swedish (Anders Jonsson)
+
+
+
+========================================
+  glycin
+========================================
+
+## 2.0.0 (2025-09-11)
+
+This release contains the following new component versions:
+
+- glycin-common 1.0.0
+- glycin-heif 2.0.0
+- glycin-image-rs 2.0.0
+- glycin-jpeg2000 2.0.0
+- glycin-jxl 2.0.0
+- glycin-raw 2.0.0
+- glycin-svg 2.0.0
+- glycin-thumbnailer 2.0.0
+- glycin-utils 4.0.0
+- glycin 3.0.0
+- libglycin 2.0.0
+- libglycin-gtk4 2.0.0
+
+### Fixed
+
+- Use new versions of TIFF, GIF, PNG decoders, and image-rs to support more
+  variants of these formats.
+- Using --clear-env actually breaks the portal due to a Flatpak bug
+  <https://github.com/flatpak/flatpak/issues/5271>.
+- glycin/sandbox: Allow uname sycall for Arm64 SVE
+- glycin/sandbox: Pass XDG_RUNTIME_DIR env var to flatpak-spawn. This fixes
+  flatpak-spawn not working.
+- libglycin-gtk4: List "glycin" in the public "Requires" for pkgconf
+- svg: Keep aspect ratio when scaling
+
+## 1.2.4 (2025-09-11)
+
+This release contains the following new component versions:
+
+- glycin 2.1.4
+- libglycin 1.0.4
+- glycin-svg 1.2.4
+- svg: Correctly define data from rsvg as premultiplied.
+
+========================================
+  gnome-backgrounds
+========================================
+
+=================
+ Version 49.0
+=================
+ Version 49.rc
+=================
+- default: adjustments to dark variant
+
+- updates to existing assets and new additions
+- new assets to use Display P3 colorspace
+
+========================================
+  gnome-builder
+========================================
+
+# GNOME Builder 49.0
+
+ * Fix various 32-bit builds
+ * Fix a warning with AdwShortcutLabel being assigned a NULL value
+ * Translation updates
+
+
+========================================
+  gnome-calculator
+========================================
+
+Overview of changes in gnome-calculator 49.0
+    * Updated translations
+
+
+========================================
+  gnome-calendar
+========================================
+
+Major changes in 49.0.1:
+* Fix Flatpak build
+
+Major changes in 49.0:
+* Remove outdated event style class
+* Various fixes to the calendar editor dialog
+* Updated translations
+
+
+========================================
+  gnome-characters
+========================================
+
+49.0
+====
+* flatpak: Update noto emoji font (Alice Mikhaylenko)
+* New translations:
+  - Uighur (Abduqadir Abliz)
+
+
+========================================
+  gnome-clocks
+========================================
+
+gnome-clocks 49.0
+=================
+* help-overlay: Fix F10 shortcut not showing
+* world-location-dialog: Set the search entry as the default focus widget
+* Translation updates
+
+
+========================================
+  gnome-connections
+========================================
+
+49.0 - 12 Sep, 2025
+=====================
+
+Changes since 49.rc
+
+  - Added/Updated translations:
+     - Brazilian-Portuguese
+     - British-English
+     - Danish
+     - Dutch
+     - Korean
+     - Lithuanian
+     - Spanish
+     - Swedish
+     - Turkish
+     - Ukrainian
+
+49.rc - 04 Sep, 2025
+=====================
+
+Changes since 49.beta
+
+  - Added button tooltips to the topbar
+  - Added saving of user-preferred window size
+  - Allow shrinking display size down to 360x294
+  - Allow building without spice-gtk3
+  - Handle existing SPICE connections when SPICE is disabled
+
+  - Added/Updated translations:
+     - Basque
+     - Chinese
+     - Czech
+     - Finnish
+     - Galician
+     - Georgian
+     - Hebrew
+     - Hungarian
+     - Japanese
+     - Persian
+     - Polish
+     - Romanian
+     - Russian
+     - Swedish
+
+
+========================================
+  gnome-console
+========================================
+
+Version 49.0
+~~~~~~~~~~~~
+
+New Translations
+ * Interlingua  (Emilio Sepúlveda)
+
+Updated Translations
+ * Basque  (Asier Saratsua Garmendia)
+ * British English  (Andi Chandler)
+ * Catalan  (Francesc Busquets)
+ * Chinese (China)  (luming zh)
+ * Czech  (Daniel Rusek)
+ * Danish  (Ask Hjorth Larsen)
+ * Dutch  (Nathan Follens)
+ * Esperanto  (Kristjan SCHMIDT)
+ * Finnish  (Jiri Grönroos)
+ * Galician  (Francisco Diéguez Souto)
+ * Georgian  (Ekaterine Papava)
+ * German  (Froschi)
+ * Hungarian  (Balázs Úr)
+ * Japanese  (Jun Oyamada)
+ * Korean  (DaeHyun Sung)
+ * Lithuanian  (Aurimas Aurimas Černius)
+ * Spanish  (Daniel Mustieles)
+ * Swedish  (Anders Jonsson)
+ * Turkish  (Sabri Ünal)
+ * Ukrainian  (Yuri Chornoivan)
+
+
+========================================
+  gnome-control-center
+========================================
+
+============
+Version 49.0
+============
+
+- Various translation updates
+
+Mobile Networks
+- Fix crash with APNs without a name label
+
+Sound
+- Fix unreadable profile combo row label
+
+
+========================================
+  gnome-desktop
+========================================
+
+============
+Version 44.4
+============
+
+- Support TryExec for thumbnailers
+- Translation updates
+
+
+========================================
+  gnome-font-viewer
+========================================
+
+GNOME Font Viewer - 49.0
+-------------------------------------------------------------------------------
+Fonts 49.0 comes with no changes since 49.rc.
+
+
+========================================
+  gnome-logs
+========================================
+
+GNOME Logs 49.0
+===============
+
+* meson: Add glib-compile-schemas test
+* meson: Add appstreamcli-validate test
+* meson: Add desktop-file-validate test
+* application: Fix icon name
+
+
+========================================
+  gnome-maps
+========================================
+
+49.0 - Sep 12, 2025
+=========================
+
+Changes since 49.rc
+ - Use GioUnix to check availability of Weather and Clocks in Send To dialog
+
+Added/updated/fixed translations
+ - Turkish
+ - Spanish
+ - Dutch
+ - Catalan
+ - Brazilian Portuguese
+ - Lithuanian
+ - Ukranian
+ - Swedish
+ - Chinese (China)
+ - Russian
+ - Georgian
+ - British English
+ - Danish
+ - Finnish
+ - Basque
+ - Romanian
+ - Galician
+ - Hebrew
+ - Japanese
+ - Polish
+ - Hungarian
+ - Persian
+
+All contributors to this release
+Alan Mortensen <alanmortensen.am@gmail.com>
+Anders Jonsson <anders.jonsson@norsjovallen.se>
+Antonio Marin <gnmer.6qxyg@slmail.me>
+Artur S0 <arturios05@bk.ru>
+Asier Saratsua Garmendia <asiersarasua@ni.eus>
+Aurimas Aurimas Černius <aurisc4@gmail.com>
+Balázs Úr <balazs@urbalazs.hu>
+Bruce Cowan <bruce@bcowan.me.uk>
+Danial Behzadi <dani.behzi@ubuntu.com>
+Daniel Mustieles <daniel.mustieles@gmail.com>
+Ekaterine Papava <papava.e@gtu.ge>
+Fran Diéguez <frandieguez@gnome.org>
+Jiri Grönroos <jiri.gronroos@iki.fi>
+Jordi Mas <jmas@softcatala.org>
+Juliano de Souza Camargo <julianosc@protonmail.com>
+luming zh <lumingzh@qq.com>
+Makoto Sakaguchi <ycco34vx@gmail.com>
+Marcus Lundblad <ml@dfupdate.se>
+Nathan Follens <nfollens@gnome.org>
+Piotr Drąg <piotrdrag@gmail.com>
+Sabri Ünal <yakushabb@gmail.com>
+Yaron Shahrabani <sh.yaron@gmail.com>
+Yuri Chornoivan <yurchor@ukr.net>
+
+
+========================================
+  gnome-music
+========================================
+
+Overview of changes in 49.0.2
+=============================
+
+Fix flatpak build.
+
+
+Overview of changes in 49.0.1
+=============================
+
+Fix issue in metainfo.
+
+
+Overview of changes in 49.0
+===========================
+
+• Translation updates
+
+Bugs fixed:
+ Fix type in error message
+
+
+
+========================================
+  gnome-online-accounts
+========================================
+
+Overview of changes in 3.56.0
+=============================
+* Changes:
+  - !353 Code style and logging cleanups
+
+* Translation updates:
+  - Basque (Asier Saratsua Garmendia)
+  - Catalan (Jordi Mas i Hernandez)
+  - Chinese (China) (luming zh)
+  - Danish (Ask Hjorth Larsen)
+  - Dutch (Nathan Follens)
+  - Esperanto (Kristjan SCHMIDT)
+  - French (Julien Humbert)
+  - Georgian (Ekaterine Papava)
+  - Korean (Seong-ho Cho)
+  - Lithuanian (Aurimas Aurimas Černius)
+  - Occitan (post 1500) (Quentin PAGÈS)
+  - Portuguese (Brazil) (Juliano de Souza Camargo)
+  - Spanish (Daniel Mustieles)
+  - Swedish (Anders Jonsson)
+  - Turkish (Sabri Ünal)
+  - Ukrainian (Yuri Chornoivan)
+
+
+========================================
+  gnome-remote-desktop
+========================================
+
+49.0
+====
+
+* Handle Vulkan dma-buf format compatibility issues [Pascal; !339]
+* Fix crash [Jonas; !341]
+
+Contributors:
+  Jonas Ådahl, Pascal Nowack
+
+Translators:
+  Makoto Sakaguchi [ja], luming zh [zh_CN], Ekaterine Papava [ka],
+  Anders Jonsson [sv], Artur S0 [ru], Daniel Mustieles [es],
+  Jordi Mas i Hernandez [ca], Asier Saratsua Garmendia [eu], Seong-ho Cho [ko],
+  Yuri Chornoivan [uk], Aurimas Aurimas Černius [lt],
+  Juliano de Souza Camargo [pt_BR], Francisco Diéguez Souto [gl],
+  Ask Hjorth Larsen [da], Nathan Follens [nl], Kristjan SCHMIDT [eo],
+  Emin Tufan Çetin [tr]
+
+
+========================================
+  gnome-session
+========================================
+
+============
+Version 49.0
+============
+
+- Translation updates
+- Fixed build with musl libc
+- Fixed some memory corruption bugs that led to gnome-session-init-worker
+  crashing on logout
+- Fixed a memory leak in gnome-session-init-worker
+- Allowed Qt apps to use the Wayland text-input protocol, instead of forcing
+  them to use the direct ibus integration plugin
+
+
+========================================
+  gnome-settings-daemon
+========================================
+
+============
+Version 49.0
+============
+- Translation updates
+
+Power:
+- Avoid polling light sensor if ambient light setting is disabled
+
+
+========================================
+  gnome-shell
+========================================
+
+49.0
+====
+* Fix misplaced background menu [Jonas; !3863]
+* Fix toggling buttons via keyboard [Alessandro; !3865]
+* Fix brightness controls not working after suspend [Sebastian; !3864]
+* Fix layout of app search results in RTL locales [Khalid; !3851]
+* Fix pointer a11y timeout animation [Carlos; !3877]
+* Fix notification banners sometimes getting stuck [everyx; !3861]
+* Fixed crash [Alessandro; !3872]
+* Misc. bug fixes and cleanups [Marco, Florian, Pranav, Ignacy; !3855,
+  !3866, !3867, !3856, !3868, !3836, !3870, !3869, !3871, !3876, !3875,
+  !3873, !3884, !3860]
+
+Contributors:
+  Khalid Abu Shawarib, Alessandro Astone, everyx, Carlos Garnacho,
+  Ignacy Kuchciński, Florian Müllner, Marco Trevisan (Treviño),
+  Sebastian Wick, Jonas Ådahl
+
+Translators:
+  luming zh [zh_CN], Rafael Fontenelle [pt_BR], Bruce Cowan [en_GB],
+  Balázs Úr [hu], Asier Saratsua Garmendia [eu], Ekaterine Papava [ka],
+  Danial Behzadi [fa], Artur S0 [ru], Daniel Mustieles [es],
+  Yuri Chornoivan [uk], Aurimas Aurimas Černius [lt], Anders Jonsson [sv],
+  Changwoo Ryu [ko], Sabri Ünal [tr], Emilio Sepúlveda [ia],
+  Ask Hjorth Larsen [da], Nathan Follens [nl], Pranav Jerry [ml],
+  Antonio Marin [ro], Kristjan SCHMIDT [eo]
+
+
+========================================
+  gnome-software
+========================================
+
+Version 49.0
+~~~~~~~~~~~~
+Released: 2025-09-12
+
+This is a stable release with the following changes:
+ * Flag flatpak gpg-agent socket permission as potentially unsafe
+ * Do not animate featured carousel when animations are disabled
+
+This release also updates translations:
+ * Basque (Asier Saratsua Garmendia)
+ * Catalan (Jordi Mas i Hernandez)
+ * Danish (Alan Mortensen)
+ * Dutch (Nathan Follens)
+ * English (United Kingdom) (Andi Chandler)
+ * Esperanto (Kristjan SCHMIDT)
+ * Finnish (Jiri Grönroos)
+ * Galician (Fran Diéguez)
+ * Georgian (Ekaterine Papava)
+ * Hebrew (Yaron Shahrabani)
+ * Hungarian (Balázs Úr)
+ * Korean (Seong-ho Cho)
+ * Lithuanian (Aurimas Aurimas Černius)
+ * Persian (Danial Behzadi)
+ * Portuguese (Brazil) (Juliano de Souza Camargo)
+ * Romanian (Antonio Marin)
+ * Russian (Artur S0)
+ * Spanish (Daniel Mustieles)
+ * Swedish (Anders Jonsson)
+ * Turkish (Sabri Ünal)
+ * Ukrainian (Yuri Chornoivan)
+
+
+========================================
+  gnome-system-monitor
+========================================
+
+New in 49.0 - 15 September 2025
+
+* Updated translations
+
+
+========================================
+  gnome-text-editor
+========================================
+
+# Text Editor 49.0
+
+ * Fix modal state when showing font dialog
+ * Build/CI updates
+
+
+========================================
+  gnome-tour
+========================================
+
+gnome-tour 49.0
+===============
+* dist-vendor: Sync with template
+* Add D-Bus service file
+* Don't set prgname
+* Translations updates
+
+
+========================================
+  gnome-user-docs
+========================================
+
+49.0
+====
+* Updates to GNOME Help (Andre Klapper, Dick Groskamp, Damilola Oladele)
+* Updated translations:
+  ca        (Jordi Mas)
+  de        (James Bond)
+  eu        (Asier Saratsua Garmendia)
+  fa        (Danial Behzadi)
+  fi        (Jiri Grönroos)
+  hu        (Balázs Úr)
+  pt_BR     (Juliano de Souza Camargo)
+  ru        (Artur S0, Vyacheslav Gurin, Olesya Gerasimenko)
+  sv        (Anders Jonsson)
+  th        (Aefgh Threenine)
+  uk        (Yuri Chornoivan)
+
+
+========================================
+  gnome-weather
+========================================
+
+49.0
+====
+Weather 49.0 comes with the following translation updates for the following
+locales:
+  - Norwegian Nynorsk (Bjørn Mørkedal)
+  - Uighur (Abduqadir Abliz)
+
+
+========================================
+  gobject-introspection
+========================================
+
+1.86.0 - 2025-09-13
+-------------------
+
+- giscanner: Added ability to add wrapper script arguments [!530]
+- g-ir-tools: Support reading @rspfiles for arguments [!532]
+- Update gobject-introspection-tests [!536]
+- giscanner: support alignof expressions [!538]
+- dumper: Fix introspection binaries missing rpaths for uninstalled ELF shlibs [!540]
+- meson: Fix fs.copyfile semantics breaking GIR build with Ninja 1.12+ [!534]
+- giscanner: Deduplicate arguments and use response files for MSVC [!535]
+- scanner: Prefer some getters over others [!473]
+- girepository: Initialize the async functions parameters [!544]
+
+
+========================================
+  gsettings-desktop-schemas
+========================================
+
+Major changes in 49.0
+=====================
+- Translation updates
+
+
+========================================
+  gtk
+========================================
+
+Overview of Changes in 4.20.1, 08-09-2025
+=========================================
+
+* Bugs fixed:
+  - #6666 Second Drag-and-Drop operation causes Gtk-CRITICAL messages at every
+    event (Matthias Clasen)
+  - #7345 columnview focus problem with menus
+  - #7717 GtkTextView with css padding shows offscreen widgets in upper left
+    corner (Matthias Clasen)
+  - #7724 Occasional crashes in gsk_gl_device_setup_samplers() (Benjamin Otte)
+  - #7729 Gtk.Entry: Cursor disappears when reaching right border (Matthias
+    Clasen)
+  - #7731 GTK_THEME environment variable not working properly with GTK4-4.20
+    (Matthias Clasen)
+  - #7734 MacOS: dyld: file does not start with MH_MAGIC[_64]: 0x00000000
+    0x00000000 (sid)
+
+* Changes:
+  - !8888 4.20.0 (Matthias Clasen)
+  - !8889 Plug some memory leaks (Matthias Clasen)
+  - !8890 node-editor: Plug GskTransform leak (Maximiliano Sandoval)
+  - !8891 macos: do not explicitly disable window controls (Arjan Molenaar)
+  - !8893 text: Only clip the text drawing (Matthias Clasen)
+  - !8894 Improve DND interoperability with kwin (Matthias Clasen)
+  - !8896 Make GTK_THEME work as before (Matthias Clasen)
+  - !8897 columnview: Fix arrow navigation in a nested widget inside a cell
+    (Lukáš Tyrychtr)
+  - !8898 docs: Fix invalid picture elements (Chris Mayo)
+  - !8899 docs: Fix Image.set_pixel_size reference to set_icon_size (Chris Mayo)
+  - !8900 offload: Do not try to raise subsurface above itself (Robert Mader)
+  - !8902 Try harder to fix caret visibility in entries (Matthias Clasen)
+  - !8904 various small fixes (Benjamin Otte)
+  - !8905 Modernize the app chooser (Matthias Clasen)
+  - !8907 colorchooser: Fix up editor focus (Matthias Clasen)
+  - !8908 filechooser: Improve error handling (Matthias Clasen)
+  - !8909 build: update to accesskit-c v0.17.0 (Christoph Reiter)
+  - !8910 a11y: Give spinner a progressbar role (Matthias Clasen)
+  - !8911 fontchooser: Make lists more keynav-friendly (Matthias Clasen)
+  - !8912 textview: Connect to detailed can-undo/can-redo notify signals (Julian
+    Sparber)
+  - !8913 gtk-demo: Support svg without width/height (Matthias Clasen)
+  - !8916 docs: Add illustrations for component transfer (Matthias Clasen)
+  - !8917 gtk-demo: Add a demo for sections (Matthias Clasen)
+  - !8918 gsk: Tweak the formula for component transfer (Matthias Clasen)
+  - !8919 Fix MacOS build failure (sid)
+  - !8920 demos: Improve the image filtering demo (Matthias Clasen)
+  - !8921 demos: Memory leak fixes (Matthias Clasen)
+  - !8922 Adapt to deprecations (Matthias Clasen)
+  - !8924 docs: Fix broken links (Chris Mayo)
+  - !8926 scrolledwindow: Improve behavior if nested in other scrollables
+    (Carlos Garnacho)
+
+* Translation updates:
+  - Basque (Asier Saratsua Garmendia)
+  - Catalan (Jordi Mas i Hernandez, Jordi Mas)
+  - Chinese (China) (luming zh)
+  - Finnish (Jiri Grönroos)
+  - Georgian (Ekaterine Papava)
+  - Hebrew (Yosef Or Boczko)
+  - Hungarian (Balázs Úr)
+  - Japanese (Makoto Sakaguchi)
+  - Korean (Changwoo Ryu)
+  - Lithuanian (Aurimas Aurimas Černius)
+  - Persian (Danial Behzadi)
+  - Portuguese (Brazil) (Rafael Fontenelle)
+  - Russian (Artur S0)
+  - Swedish (Anders Jonsson)
+  - Ukrainian (Yuri Chornoivan)
+
+
+========================================
+  gtksourceview
+========================================
+
+News in 5.18.0, 2025-09-12
+--------------------------
+
+This is a stable release for GNOME 49.0
+
+ * Translation updates
+
+
+========================================
+  gvfs
+========================================
+
+Major changes in 1.58.0
+=======================
+* mtp: Allow cancelling ongoing folder enumerations
+* wsdd: Use socket-activated service if available
+* onedrive: Set emblem for remote data
+* fix: Add file rename support in MTP backend move operation
+* mtp: Fix -Wmaybe-uninitialized warning in pad_file
+* fuse: use fuse_(un)set_feature_flag for libfuse 3.17+
+* smbbrowse: Purge server cache for next auth try
+* metatree: Open files with O_CLOEXEC
+* cdda: Fix incorrect track duration for 99-track CDs
+* metadata: Fix journal file permissions inconsistency (#808)
+* dav: recognize 308 Permanent Redirect
+
+
+========================================
+  json-glib
+========================================
+
+• Add missing escape [#79]
+• Fix static builds [#80]
+
+========================================
+  libadwaita
+========================================
+
+=============
+Version 1.8.0
+=============
+
+- AdwSpinner
+  - Switch to progressbar accessible role
+- AdwSwipeTracker
+  - Fix memory leak
+- Demo
+  - Fix 2 memory leaks
+- Docs
+  - Typo fixes
+- Translation updates
+  - Basque
+  - British English
+  - Catalan
+  - Chinese (China)
+  - Czech
+  - Danish
+  - Spanish
+  - Esperanto
+  - Finnish
+  - Galician
+  - Georgian
+  - Hungarian
+  - Korean
+  - Lithuanian
+  - Swedish
+  - Turkish
+  - Ukrainian
+
+
+========================================
+  libpanel
+========================================
+
+libpanel 1.10.2
+===============
+
+ * Allow toggle buttons to autodiscover PanelDock
+ * Fix incorrect CSS styling of bottom corner buttons
+
+
+========================================
+  libpeas
+========================================
+
+# Libpeas 2.2.0
+
+This is a stable release for GNOME 49.0
+
+ * Disable Lua tests until we have a GIRepository-2.0 supported
+   version of LuaGI. Only our testsuite requires it, not runtime
+   use of libpeas-2.x.
+ * Build system improvements.
+
+
+========================================
+  librsvg
+========================================
+
+Version 2.61.1
+==============
+
+librsvg crate version 2.61.1
+
+librsvg-rebind crate version 0.2.1
+
+- #1182 - Don't use GIO-based file sniffing so referencing external
+  files works reliably on Windows.
+
+- #1188 - Fixed miscellaneous lints in the CI's shell scripts and in
+  the pull-container-image.sh script for development.
+
+- Update Rust dependencies.
+
+
+========================================
+  libshumate
+========================================
+
+===================
+Version 1.5.0.1
+===================
+ - Re-tagged due to broken 1.5.0 tag
+
+===================
+Version 1.5.0
+===================
+ - No changes since 1.5.beta
+
+
+========================================
+  localsearch
+========================================
+
+NEW in 3.10.0 - 2025-09-14
+==========================
+  * Fixes to handling of configuration changes
+  * Improvements to the test suite
+
+Translations: da, en_GB, eo, es, eu, fa, he, hu, ka, ko, lt, nl, pt_BR, ru, sv, tr, uk, zh_CN
+
+Notable changes since 3.9.0:
+  * A number of behavioral settings has been deprecated
+  * Webp file format now has a metadata extractor
+
+
+========================================
+  loupe
+========================================
+
+## 49.0 (2025-09-12)
+
+### Fixed
+
+- `F9 <Alt>Return` accel not being parsed correctly
+
+
+========================================
+  manuals
+========================================
+
+Manuals 49.0
+============
+
+ * Various build system improvements
+ * Translation updates
+
+
+========================================
+  mutter
+========================================
+
+49.0
+====
+* Improve compliance of pointer-warp protocol implementation [Vadim; !4626]
+* Fix unminimizing in multi-monitor setups [Jonas; !4627]
+* Fix coordinates in crossing events [Carlos; !4640]
+* Update viewport after virtual monitor size changes [Jonas; !4622]
+* Fix "ghost" modifier key presses in clients [Carlos; !4653]
+* Fixed crashes [Jonas, Sebastian, Daniel; !4654, !4638, !4612]
+* Misc. bug fixes and cleanups [Jonas, Daniel, Olivier, Alexandre, Florian;
+  !4625, !4624, !4630, !4631, !4636, !4620, !4642, !4641, !4637, !4656,
+  !4649, !4657, !4658]
+
+Contributors:
+  Olivier Fourdan, Carlos Garnacho, Alexandre Janniaux, Florian Müllner,
+  Daniel van Vugt, Sebastian Wick, Vadim Zeitlin, Jonas Ådahl
+
+Translators:
+  Balázs Úr [hu], Jiri Grönroos [fi], Asier Saratsua Garmendia [eu],
+  Ekaterine Papava [ka], Artur S0 [ru], luming zh [zh_CN], Danial Behzadi [fa],
+  Yuri Chornoivan [uk], Aurimas Aurimas Černius [lt], Anders Jonsson [sv],
+  Nilton Perim Neto [pt_BR], Francisco Diéguez Souto [gl],
+  Ask Hjorth Larsen [da], Bruce Cowan [en_GB], Sabri Ünal [tr],
+  Daniel Mustieles [es], Jordi Mas [ca], Gwan-gyeong Mun [ko],
+  Kristjan SCHMIDT [eo], Nathan Follens [nl]
+
+
+========================================
+  nautilus
+========================================
+
+Major Changes in 49.0
+=====================
+* Enhancements:
+- Add tests for replacing files (Khalid Abu Shawarib)
+
+* Bugfixes:
+- Fix hidden state of edited files (Khalid Abu Shawarib)
+- Fix thumbnail canceling (Khalid Abu Shawarib)
+- Fix moving of starred files (Khalid Abu Shawarib)
+
+* Cleanups:
+- Use GSettings memory backend for tests (Khalid Abu Shawarib)
+- Skip thumbnail tests without sandbox (Alessandro Astone)
+- Fix multiple leaks (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+
+========================================
+  pyatspi
+========================================
+
+What's new in pyatspi 2.58.0:
+
+* Install image.py (fixes regression from 2.57.0).
+
+
+========================================
+  pygobject
+========================================
+
+3.54.2 - 2025-09-13
+-------------------
+
+* Prefix platform specific symbols with platform name :mr:`451`
+
+3.54.1 - 2025-09-12
+-------------------
+
+* Excempt GioPlatform namespaces from required version check :mr:`450`
+
+3.54.0 - 2025-09-06
+-------------------
+
+* Fix compatibility with Python 3.14 :mr:`433`
+* Add platform specific symbols back to Gio module :mr:`445`
+* Include docs from old GNOME wiki :mr:`441`
+* Add override for `GLib.MainContext.query()` :mr:`446`
+* Fix optional inout parameter marshalling :mr:`447`
+
+
+========================================
+  rygel
+========================================
+
+45 (stable)
+===========
+
+Translation updates
+
+All contributors to this release:
+ - Alan Mortensen <alanmortensen.am@gmail.com>
+ - Anders Jonsson <anders.jonsson@norsjovallen.se>
+ - Antonio Marin <gnmer.6qxyg@slmail.me>
+ - Asier Saratsua Garmendia <asiersarasua@ni.eus>
+ - Aurimas Aurimas Černius <aurisc4@gmail.com>
+ - Balázs Úr <balazs@urbalazs.hu>
+ - Changwoo Ryu <cwryu@debian.org>
+ - Daniel Mustieles <daniel.mustieles@gmail.com>
+ - Daniel Rusek <mail@asciiwolf.com>
+ - Ekaterine Papava <papava.e@gtu.ge>
+ - Hugo Carvalho <hugokarvalho@hotmail.com>
+ - Jordi Mas i Hernandez <jmas@softcatala.org>
+ - Juliano de Souza Camargo <julianosc@protonmail.com>
+ - Nathan Follens <nfollens@gnome.org>
+ - Quentin PAGÈS <pages_quentin@hotmail.com>
+ - Yuri Chornoivan <yurchor@ukr.net>
+
+Added/updated translations:
+ - po/ca.po, courtesy of Jordi Mas i Hernandez
+ - po/cs.po, courtesy of Daniel Rusek
+ - po/da.po, courtesy of Alan Mortensen
+ - po/es.po, courtesy of Daniel Mustieles
+ - po/eu.po, courtesy of Asier Saratsua Garmendia
+ - po/hu.po, courtesy of Balázs Úr
+ - po/ka.po, courtesy of Ekaterine Papava
+ - po/ko.po, courtesy of Changwoo Ryu
+ - po/lt.po, courtesy of Aurimas Aurimas Černius
+ - po/nl.po, courtesy of Nathan Follens
+ - po/oc.po, courtesy of Quentin PAGÈS
+ - po/pt_BR.po, courtesy of Juliano de Souza Camargo
+ - po/pt.po, courtesy of Hugo Carvalho
+ - po/ro.po, courtesy of Antonio Marin
+ - po/sv.po, courtesy of Anders Jonsson
+ - po/uk.po, courtesy of Yuri Chornoivan
+
+
+========================================
+  snapshot
+========================================
+
+## 49.0 - 2025-09-11
+- Updated cargo dependencies
+- Updated translations
+
+
+========================================
+  sysprof
+========================================
+
+Overview of changes in Sysprof 49.0
+===================================
+
+ * Disable unloading of libraries linking libsysprof-capture as it
+   uses TLS in intrusive ways
+ * Translation updates
+
+
+========================================
+  tecla
+========================================
+
+NEW in 49.0
+===========
+- Translation updates
+
+
+========================================
+  template-glib
+========================================
+
+==============
+Version 3.38.0
+==============
+
+This is a stable release for GNOME 49.0
+
+ * Allow GObject Introspection to automatically cast various numerics into
+   the arguments of a call-site when the will fit in the destination type
+   and size.
+ * Use gi-doc for documentation.
+
+
+========================================
+  tinysparql
+========================================
+
+NEW in 3.10.0 - 2025-09-14
+==========================
+  * Relax TrackerNamespaceManager impositions on having a single prefix
+    pointing to a same URI, and to avoid changes in prefixes. This is
+    not consistent with RDF standards.
+  * Fixes to libstemmer subproject fallback for git snapshot users with
+    --wrap-mode=nodownload
+
+Translations: es
+
+Notable changes since 3.9.0:
+  * Changed database format to store all data in a single database file,
+    see 3.10.beta release notes
+  * More resilient SPARQL and RDF parsers
+  * Improved memory usage and performance during database updates
+  * Stemming became a mandatory feature
+
+NEW in 3.10.rc.1 - 2025-09-10
+=============================
+  * Bundle libstemmer as a fallback in the tarball
+
+Translations: ca, cs, da, eu, fa, gl, ka, ko, lt, pt_BR, sv, tr, uk, zh_CN
+
+
+========================================
+  xdg-desktop-portal-gnome
+========================================
+
+Changes in 49.0
+=================
+- Minor code style cleanups
+- Translation updates
+
+
+========================================
+  yelp
+========================================
+
+49.0
+====
+* Updated translations:
+  ca    (Jordi Mas)
+  da    (Alan Mortensen)
+  en_GB (Bruce Cowan)
+  es    (Daniel Mustieles)
+  eu    (Asier Saratsua Garmendia)
+  fi    (Jiri Grönroos)
+  gl    (Francisco Diéguez Souto)
+  he    (Yaron Shahrabani)
+  hu    (Balázs Úr)
+  ja    (Makoto Sakaguchi)
+  ka    (Ekaterine Papava)
+  ko    (Seong-ho Cho)
+  lt    (Aurimas Aurimas Černius)
+  nl    (Nathan Follens)
+  pt    (Hugo Carvalho)
+  sv    (Anders Jonsson)
+  tr    (Sabri Ünal)
+  uk    (Yuri Chornoivan)
+  zh_CN (luming zh)
+
+
+========================================
+  yelp-xsl
+========================================
+
+49.0
+====
+* Stable release
+
+
