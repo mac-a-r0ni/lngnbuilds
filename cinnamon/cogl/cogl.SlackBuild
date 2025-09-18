@@ -97,11 +97,41 @@ CXXFLAGS="$SLKCFLAGS" \
   --enable-gles2 \
   --enable-gtk-doc="$GTKDOC" \
   --enable-introspection="$INTROSPECTION" \
-  --enable-wayland-egl-server \
-  --enable-wayland-egl-platform \
-  --enable-kms-egl-platform \
+  --enable-installed-tests=no \
+  --enable-emscripten=no \
+  --enable-standalone=no \
+  --enable-debug=no \
+  --enable-unit-tests=no \
+  --enable-cairo=yes\
+  --enable-profile=no \
+  --enable-maintainer-flags=no \
+  --enable-deprecated=yes \
+  --enable-glib=yes \
+  --enable-cogl-pango=yes \
+  --enable-cogl-gst=yes \
+  --enable-cogl-path=yes \
+  --enable-gdk-pixbuf=yes \
+  --enable-quartz-image=no \
   --enable-examples-install=no \
-  --with-x \
+  --enable-gles1=yes \
+  --enable-gles2=yes \
+  --enable-gl=yes \
+  --enable-cogl-gles2=yes \
+  --enable-glx=yes \
+  --enable-wgl=auto \
+  --enable-wgl=auto \
+  --enable-sdl=no \
+  --enable-sdl2=no \
+  --enable-null-egl-platform=no \
+  --enable-gdl-egl-platform=no \
+  --enable-wayland-egl-platform=yes \
+  --enable-kms-egl-platform=yes \
+  --enable-wayland-egl-server=yes \
+  --enable-android-egl-platform=no \
+  --enable-mir-egl-platform=no \
+  --enable-xlib-egl-platform=yes \
+  --enable-introspection=yes \
+  --disable-glibtest \
   --build=$ARCH-slackware-linux
 
 make -j1
