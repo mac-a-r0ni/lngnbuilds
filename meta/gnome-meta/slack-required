@@ -53,7 +53,6 @@ gtk-vnc
 gtksourceview5
 highlight
 http-parser
-jq
 jsonrpc-glib
 kvazaar
 libadwaita
