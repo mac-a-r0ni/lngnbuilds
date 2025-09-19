@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-connections/49/gnome-connecti
 MD5SUM="27a6ab606f446264db42f74d13d3eb06"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gtk-vnc"
+REQUIRES="gtk-vnc freerdp3"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
