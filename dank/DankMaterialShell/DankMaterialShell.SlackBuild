@@ -25,29 +25,10 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=DankMaterialShell
-CLONE_URL=https://github.com/AvengeMedia/$PRGNAM.git
+VERSION=${VERSION:-0.0.8}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
-
-set -e
-
-GITDIR=$( mktemp -dt $PRGNAM.git.XXXXXX )
-rm -rf $GITDIR
-git clone $CLONE_URL $GITDIR
-
-CWD="$( pwd )"
-cd $GITDIR
-
-VERSION=$( git log --date=format:%Y%m%d --pretty=format:%cd.%h -n1 )
-
-rm -rf .git
-find . -name .gitignore -print0 | xargs -0 rm -f
-
-cd "$CWD"
-rm -rf $PRGNAM-$VERSION $PRGNAM-$VERSION.tar.xz
-mv $GITDIR $PRGNAM-$VERSION
-tar cvfJ $PRGNAM-$VERSION.tar.xz $PRGNAM-$VERSION
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -111,43 +92,11 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a LICENSE *.md $PKG/usr/doc/$PRGNAM-$VERSION
-#cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
-cat <<EOPL > $PKG/install/slack-desc
-# HOW TO EDIT THIS FILE:
-# The "handy ruler" below makes it easier to edit a package description.  Line
-# up the first '|' above the ':' following the base package name, and the '|'
-# on the right side marks the last column you can put a character in.  You must
-# make exactly 11 lines for the formatting to be correct.  It's also
-# customary to leave one space after the ':'.
-
-                 |-----handy-ruler------------------------------------------------------|
-DankMaterialShell: DankMaterialShell (Quickshell for Niri)
-DankMaterialShell:
-DankMaterialShell: A modern Wayland desktop shell built with Quickshell and designed
-DankMaterialShell: specifically for the niri compositor. Features Material 3 design
-DankMaterialShell: principles with a heavy focus on functionality and customizability.
-DankMaterialShell:
-DankMaterialShell: Homepage: https://github.com/bbedward/DankMaterialShell
-DankMaterialShell:
-DankMaterialShell:
-DankMaterialShell:
-DankMaterialShell:
-EOPL
-cat <<EOPL > $PKG/install/slack-required
-brightnessctl
-cava
-cliphist
-colloid-gtk-theme
-colloid-icon-theme
-ddcutil
-dgop
-matugen
-quickshell
-wl-clipboard
-EOPL
+cat $PKG/install/slack-desc
+cat $PKG/install/slack-required
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
-/sbin/upgradepkg --install-new --reinstall $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
