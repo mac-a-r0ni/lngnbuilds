@@ -27,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=x264
-VERSION=${VERSION:-git_20240227_c24e06c2}
+VERSION=${VERSION:-git_20250402_b35605ac}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
