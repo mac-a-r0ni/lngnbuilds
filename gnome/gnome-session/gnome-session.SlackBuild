@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-session
-VERSION=${VERSION:-48.0}
+VERSION=${VERSION:-49.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -79,9 +79,9 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-patch -Np1 -i $CWD/0001-meson-add-elogind-support.patch
-patch -Np1 -i $CWD/0002-gnome-session-add-profile-sourcing.patch
-#patch -Np1 -i $CWD/0003-revert-systemd-hard-dep.patch
+patch -Np1 -i $CWD/0000-revert-userdb.patch || exit 1
+patch -Np1 -i $CWD/0001-meson-add-elogind-support.patch || exit 1
+patch -Np1 -i $CWD/0002-gnome-session-add-profile-sourcing.patch || exit 1
 
 mkdir build
 cd build
@@ -96,6 +96,7 @@ cd build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Dstrip=true \
+    -Dmimeapps=false \
     -Ddocbook=false \
     -Dx11=true \
     -Dlogind_provider=elogind
@@ -118,7 +119,7 @@ install -vDm 0755 $CWD/xinitrc.gnome -t $PKG/etc/X11/xinit
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS NEWS ChangeLog* COPYING MAINTAINERS README.md \
+  NEWS COPYING README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

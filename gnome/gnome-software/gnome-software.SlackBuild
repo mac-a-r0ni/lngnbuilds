@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-software
-VERSION=${VERSION:-48.4}
+VERSION=${VERSION:-49.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -107,10 +107,10 @@ cd ..
 
 # remove problematic plugins from package so gnome-software works as intended
 # we want GS to ONLY manage flatpak/fwupd packages and not show ANY system software!
-rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-22/libgs_plugin_appstream.so
-rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-22/libgs_plugin_dpkg.so
-rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-22/libgs_plugin_fedora-*.so
-rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-22/libgs_plugin_provenance-*.so
+rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-23/libgs_plugin_appstream.so
+rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-23/libgs_plugin_dpkg.so
+rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-23/libgs_plugin_fedora-*.so
+rm $PKG/usr/lib${LIBDIRSUFFIX}/gnome-software/plugins-23/libgs_plugin_provenance-*.so
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

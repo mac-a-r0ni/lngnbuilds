@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-shell
-VERSION=${VERSION:-48.4}
+VERSION=${VERSION:-49.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -80,6 +80,9 @@ find -L . -prune -name 'subprojects/gvc/.gitlab-ci' \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+patch -Np1 -i $CWD/0001-gdm-Work-around-failing-fingerprint-auth.patch
+patch -Np1 -i $CWD/0003-notify.patch
+
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
@@ -93,12 +96,15 @@ cd build
     --mandir=/usr/man \
     --prefix=/usr \
     --sysconfdir=/etc \
+    -Dportal_helper=true \
     -Dstrip=true \
     -Dtests=false \
     -Dsystemd=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
+
+install -Dm644 "$CWD/org.gnome.Shell.desktop" $PKG/usr/share/applications/
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

@@ -97,6 +97,7 @@ cd meson-build
     --prefix=/usr \
     --sysconfdir=/etc \
     -Ddocs=false \
+    -Dbackend-qt6=disabled \
     -Dtests=false
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
