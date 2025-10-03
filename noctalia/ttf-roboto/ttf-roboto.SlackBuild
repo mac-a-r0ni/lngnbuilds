@@ -25,12 +25,12 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=ttf-roboto
-VERSION=${VERSION:-3.0.11}
+VERSION=${VERSION:-3.0.12}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
-SRCNAM=Roboto_v3.011
+SRCNAM=Roboto_v3.012
 ARCH=noarch
 
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
