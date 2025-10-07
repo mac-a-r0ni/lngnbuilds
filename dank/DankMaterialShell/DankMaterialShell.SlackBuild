@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=DankMaterialShell
 VERSION=${VERSION:-0.0.30}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -72,6 +72,9 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
+# we're unpacking these inside our source dir to build
+tar xvf $CWD/danklinux-$VERSION.tar.gz
+tar xvf $CWD/danklinux-$VERSION-vendor.tar.xz -C danklinux-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -83,7 +86,19 @@ find -L . \
 install -dm755 $PKG/etc/xdg/quickshell/DankMaterialShell
 cp -r * $PKG/etc/xdg/quickshell/DankMaterialShell/
 
+cd danklinux-$VERSION
+
 mkdir -p $PKG/usr/bin
+
+export CGO_CPPFLAGS="${SLKCFLAGS}"
+export CGO_CFLAGS="${SLKCFLAGS}"
+export CGO_CXXFLAGS="${SLKCFLAGS}"
+export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
+
+go build -mod vendor -o dms ./cmd/dms
+install -Dm755 dms $PKG/usr/bin/dms
+
+# install self-update script
 cat $CWD/updank > $PKG/usr/bin/updank
 chmod 755 $PKG/usr/bin/updank
 
