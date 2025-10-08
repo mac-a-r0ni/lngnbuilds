@@ -79,8 +79,17 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-zig build -p $PKG/usr -Doptimize=ReleaseFast
+zig build \
+  --prefix $PKG/usr \
+  --summary all \
+  -Doptimize=ReleaseFast \
+  -Dgtk-x11=true \
+  -Dcpu=baseline \
+  -Dpie=true \
+  -Dversion-string="v$VERSION"
 
+rm $PKG/usr/share/applications/com.mitchellh.ghostty.desktop
+cp $CWD/com.mitchellh.ghostty.desktop $PKG/usr/share/applications/
 rm -rf $PKG/usr/share/bat/*
 rmdir $PKG/usr/share/bat
 mkdir $PKG/usr/man
