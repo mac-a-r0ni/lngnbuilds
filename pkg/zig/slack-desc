@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+   |-----handy-ruler------------------------------------------------------|
+zig: zig (development toolchain)
+zig:
+zig: Zig is a general-purpose programming language and toolchain for
+zig: maintaining robust, optimal and reusable software.
+zig:
+zig: https://ziglang.org
+zig:
+zig: This is a static library build repacked from ziglang.org.
+zig:
+zig:
+zig:

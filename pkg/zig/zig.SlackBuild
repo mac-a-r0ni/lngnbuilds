@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for ghostty
+# Slackware build script for zig
 
 # Copyright 2025 Jay Lanagan (j@lngn.net), Detroit, MI, USA
 # All rights reserved.
@@ -24,8 +24,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=ghostty
-VERSION=${VERSION:-1.2.1}
+PRGNAM=zig
+VERSION=${VERSION:-0.14.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -69,9 +69,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-v$VERSION.tar.?z
-cd $PRGNAM-$VERSION
+rm -rf $PRGNAM-$ARCH-linux-$VERSION
+tar xvf $CWD/$PRGNAM-$ARCH-linux-$VERSION.tar.?z
+cd $PRGNAM-$ARCH-linux-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -79,28 +79,18 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-zig build -p $PKG/usr -Doptimize=ReleaseFast
-
-rm -rf $PKG/usr/share/bat/*
-rmdir $PKG/usr/share/bat
-mkdir $PKG/usr/man
-mv $PKG/usr/share/man/* $PKG/usr/man
-rmdir $PKG/usr/share/man
-rm -rf $PKG/usr/share/systemd/*
-rmdir $PKG/usr/share/systemd
-rm -rf $PKG/usr/share/ghostty/doc/*
-rmdir $PKG/usr/share/ghostty/doc
-
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+mkdir -p $PKG/usr/{bin,lib,doc}
+mv zig $PKG/usr/bin
+mv lib/* $PKG/usr/lib
+cd $TMP/$PRGNAM-$ARCH-linux-$VERSION
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a LICENSE AGENTS.md CONTRIBUTING.md HACKING.md README.md \
+mv doc/* $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a LICENSE README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/slack-required > $PKG/install/slack-required
 

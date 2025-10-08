@@ -1,0 +1,12 @@
+PRGNAM="zig"
+VERSION="0.14.1"
+HOMEPAGE="https://ziglang.org/"
+DOWNLOAD="https://ziglang.org/download/0.14.1/zig-x86_64-linux-0.14.1.tar.xz \
+          https://ziglang.org/download/0.14.1/zig-aarch64-linux-0.14.1.tar.xz"
+MD5SUM="f9044f2efa1d515d46d2b6aaf98df3e3 \
+        3cd0c17bd23aad34c2b4b38753b075c2"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"
