@@ -86,7 +86,7 @@ zig build \
   -Dgtk-x11=true \
   -Dcpu=baseline \
   -Dpie=true \
-  -Dversion-string="v$VERSION"
+  -Dversion-string="$VERSION"
 
 rm $PKG/usr/share/applications/com.mitchellh.ghostty.desktop
 cp $CWD/com.mitchellh.ghostty.desktop $PKG/usr/share/applications/
