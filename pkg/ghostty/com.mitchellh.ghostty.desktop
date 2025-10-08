@@ -18,7 +18,6 @@ X-TerminalArgTitle=--title=
 X-TerminalArgAppId=--class=
 X-TerminalArgDir=--working-directory=
 X-TerminalArgHold=--wait-after-command
-DBusActivatable=true
 X-KDE-Shortcuts=Ctrl+Alt+T
 
 [Desktop Action new-window]
