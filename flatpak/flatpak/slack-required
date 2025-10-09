@@ -1,5 +1,4 @@
 bubblewrap
 libostree
-appstream
 xdg-dbus-proxy
 xdg-desktop-portal-gtk
