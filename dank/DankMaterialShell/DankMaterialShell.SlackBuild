@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=DankMaterialShell
-VERSION=${VERSION:-0.1.6}
+VERSION=${VERSION:-0.1.7}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -99,8 +99,9 @@ go build -mod vendor -o dms ./cmd/dms
 install -Dm755 dms $PKG/usr/bin/dms
 
 # install self-update script
-cat $CWD/updank > $PKG/usr/bin/updank
-chmod 755 $PKG/usr/bin/updank
+# lets take this out for a minute
+# cat $CWD/updank > $PKG/usr/bin/updank
+# chmod 755 $PKG/usr/bin/updank
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
