@@ -83,11 +83,13 @@ find -L . \
 
 install -d $PKG/usr/share/themes
 # lets remove anything that might be there first
-./install.sh --uninstall
+# useful on a dirty system but should be avoided on fresh builds
+#./install.sh --uninstall
+
 # standard install, debating on if I should include libadwaita hack or not with "-l"
 ./install.sh -t default -s standard --tweaks normal -d $PKG/usr/share/themes
 
-# if you want everything, this is massive and overkill
+# if you want everything, this is massive and overkill literally takes days to make doinst.sh
 #./install.sh -t all --tweaks all -d $PKG/usr/share/themes
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
