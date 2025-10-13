@@ -81,6 +81,8 @@ cd build
   --sysconfdir=/etc \
   -Dhelp=false \
   -Dtests=disabled \
+  -Ddaap=enabled \
+  -Dplugins_python=disabled \
   -Dstrip=true
 
   "${NINJA:=ninja}"
