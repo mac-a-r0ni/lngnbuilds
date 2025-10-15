@@ -103,6 +103,8 @@ install -Dm755 dms $PKG/usr/bin/dms
 # cat $CWD/updank > $PKG/usr/bin/updank
 # chmod 755 $PKG/usr/bin/updank
 cd ..
+rm -rf danklinux-$VERSION
+rmdir danklinux-$VERSION
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
