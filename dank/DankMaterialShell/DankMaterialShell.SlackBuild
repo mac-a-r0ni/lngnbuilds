@@ -72,9 +72,6 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
-# we're unpacking these inside our source dir to build
-tar xvf $CWD/danklinux-$VERSION.tar.gz
-tar xvf $CWD/danklinux-$VERSION-vendor.tar.xz -C danklinux-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -85,6 +82,11 @@ find -L . \
 # Install shell files to quickshell config directory
 install -dm755 $PKG/etc/xdg/quickshell/DankMaterialShell
 cp -r * $PKG/etc/xdg/quickshell/DankMaterialShell/
+
+cd ..
+
+tar xvf $CWD/danklinux-$VERSION.tar.gz
+tar xvf $CWD/danklinux-$VERSION-vendor.tar.xz -C danklinux-$VERSION
 
 cd danklinux-$VERSION
 
@@ -102,9 +104,6 @@ install -Dm755 dms $PKG/usr/bin/dms
 # lets take this out for a minute
 # cat $CWD/updank > $PKG/usr/bin/updank
 # chmod 755 $PKG/usr/bin/updank
-cd ..
-rm -rf danklinux-$VERSION/{*,.*}
-rmdir danklinux-$VERSION
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
