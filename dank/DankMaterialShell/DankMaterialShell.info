@@ -1,12 +1,12 @@
 PRGNAM="dankmaterialshell"
-VERSION="0.1.16"
+VERSION="0.1.17"
 HOMEPAGE="https://github.com/AvengeMedia/DankMaterialShell/"
-DOWNLOAD="https://github.com/AvengeMedia/DankMaterialShell/archive/v0.1.16/DankMaterialShell-0.1.16.tar.gz \
-          https://github.com/AvengeMedia/danklinux/archive/v0.1.16/danklinux-0.1.16.tar.gz \
-          https://slackware.lngn.net/pub/source/dms/danklinux-0.1.16-vendor.tar.xz"
-MD5SUM="cb7860da2695c70162b85bbe1ca83e9d \
-        5501e64f557f06c121daff7e1fcf5aea \
-        faba8b9228e8e0dd9b95866f7dba71d0"
+DOWNLOAD="https://github.com/AvengeMedia/DankMaterialShell/archive/v0.1.17/DankMaterialShell-0.1.17.tar.gz \
+          https://github.com/AvengeMedia/danklinux/archive/v0.1.17/danklinux-0.1.17.tar.gz \
+          https://slackware.lngn.net/pub/source/dms/danklinux-0.1.17-vendor.tar.xz"
+MD5SUM="07a2476ae2b6915c139bb543baed9807 \
+        eeb386c7218f83122ca0891fc96aac81 \
+        61d41a598ff22a5c173579bce749a722"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="brightnessctl cliphist colloid-gtk-theme colloid-icon-theme ddcutil dgop gammastep material-design-icons matugen wl-clipboard quickshell"
