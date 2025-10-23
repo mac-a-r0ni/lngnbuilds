@@ -90,15 +90,13 @@ zig build \
 
 rm $PKG/usr/share/applications/com.mitchellh.ghostty.desktop
 cp $CWD/com.mitchellh.ghostty.desktop $PKG/usr/share/applications/
-rm -rf $PKG/usr/share/bat/*
-rmdir $PKG/usr/share/bat
+
+rm -rf $PKG/usr/share/bat/* && rmdir $PKG/usr/share/bat
 mkdir $PKG/usr/man
 mv $PKG/usr/share/man/* $PKG/usr/man
 rmdir $PKG/usr/share/man
-rm -rf $PKG/usr/share/systemd/*
-rmdir $PKG/usr/share/systemd
-rm -rf $PKG/usr/share/ghostty/doc/*
-rmdir $PKG/usr/share/ghostty/doc
+rm -rf $PKG/usr/share/systemd/* && rmdir $PKG/usr/share/systemd
+rm -rf $PKG/usr/share/ghostty/doc/* && rmdir $PKG/usr/share/ghostty/doc
 
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
