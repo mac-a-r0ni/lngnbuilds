@@ -100,8 +100,8 @@ for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; r
 fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-mv $PKG/usr/share/doc/$PRGNAM/* $PKG/usr/doc/$PRGNAM-$VERSION
-rm -rf $PKG/usr/share/doc/$PRGNAM
+#mv $PKG/usr/share/doc/$PRGNAM/* $PKG/usr/doc/$PRGNAM-$VERSION
+#rm -rf $PKG/usr/share/doc/$PRGNAM
 rmdir $PKG/usr/share/doc
 cp -a AUTHORS CHANGELOG COPYING README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
