@@ -56,9 +56,11 @@ elif [ "$ARCH" = "i686" ]; then
 elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-O2 -march=x86-64 -mtune=generic -fPIC"
   LIBDIRSUFFIX="64"
+  BIN="amd64"
 elif [ "$ARCH" = "aarch64" ]; then
   SLKCFLAGS="-O2 -march=armv8-a -mtune=generic -fPIC"
   LIBDIRSUFFIX="64"
+  BIN="arm64"
 else
   SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
@@ -92,13 +94,15 @@ cd danklinux-$VERSION
 
 mkdir -p $PKG/usr/bin
 
-export CGO_CPPFLAGS="${SLKCFLAGS}"
-export CGO_CFLAGS="${SLKCFLAGS}"
-export CGO_CXXFLAGS="${SLKCFLAGS}"
-export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
+#export CGO_CPPFLAGS="${SLKCFLAGS}"
+#export CGO_CFLAGS="${SLKCFLAGS}"
+#export CGO_CXXFLAGS="${SLKCFLAGS}"
+#export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
 
-go build -mod vendor -o dms ./cmd/dms
-install -Dm755 dms $PKG/usr/bin/dms
+make dist
+#DESTDIR=$PKG make install
+#go build -mod vendor -o dms ./cmd/dms
+install -Dm755 bin/dms-linux-$BIN $PKG/usr/bin/dms
 
 # install self-update script
 # lets take this out for a minute
