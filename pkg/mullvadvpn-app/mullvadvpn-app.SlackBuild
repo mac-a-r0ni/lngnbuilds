@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mullvadvpn-app
 SRCNAM=MullvadVPN
-SRCVERSION=${VERSION:-2025.10}
+SRCVERSION=${VERSION:-2025.13}
 VERSION=$(echo "$SRCVERSION" | tr - .)
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
