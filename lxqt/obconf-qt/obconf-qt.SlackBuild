@@ -25,8 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=obconf-qt
-VERSION=${VERSION:-0.16.5}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-0.16.6}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
