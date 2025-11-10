@@ -27,7 +27,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=hyprqt6engine
 VERSION=${VERSION:-0.1.0}
-BUILD=${BUILD:-3}
+BUILD=${BUILD:-4}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -80,6 +80,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+patch -Np1 < $CWD/9063e6837b4e282a73b052a0c0371916daccf50a.patch
+
 mkdir -p build
 cd build
 CFLAGS="$SLKCFLAGS" \
@@ -90,6 +92,7 @@ CXXFLAGS="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SYSTEM_LIBRARY_PATH=/usr/lib${LIBDIRSUFFIX} \
     -DCMAKE_BUILD_TYPE=Release .. \
+    -DQT_NO_PRIVATE_MODULE_WARNING=ON \
     -G Ninja
 
 "${NINJA:=ninja}"

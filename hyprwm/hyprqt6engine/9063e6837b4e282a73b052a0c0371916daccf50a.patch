@@ -1,0 +1,22 @@
+From 9063e6837b4e282a73b052a0c0371916daccf50a Mon Sep 17 00:00:00 2001
+From: VuaTech <vuatech@proton.me>
+Date: Fri, 12 Sep 2025 12:32:44 -0400
+Subject: [PATCH] cmake: Added find_package to resolve GuiPrivate not being
+ found (#4)
+
+---
+ hyprqtplugin/CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/hyprqtplugin/CMakeLists.txt b/hyprqtplugin/CMakeLists.txt
+index bbdb33a..c427670 100644
+--- a/hyprqtplugin/CMakeLists.txt
++++ b/hyprqtplugin/CMakeLists.txt
+@@ -1,5 +1,7 @@
+ project(hyprqtplugin)
+ 
++find_package(Qt6 REQUIRED COMPONENTS Gui GuiPrivate)
++
+ set(app_SRCS
+   main.cpp
+   PlatformTheme.cpp
