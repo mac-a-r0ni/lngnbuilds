@@ -1,0 +1,4 @@
+wofi (wlroots based Wayland launcher)
+
+Wofi is a launcher/menu program for wlroots based wayland compositors
+such as sway.
