@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/libadwaita/1.8/libadwaita-1.8.1.tar
 MD5SUM="b8131caf8794e7e9e3aa657ee23975fd"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="libxmlb"
+REQUIRES=""
 MAINTAINER=""
 EMAIL=""
