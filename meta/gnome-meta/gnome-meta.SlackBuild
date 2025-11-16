@@ -30,7 +30,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gnome-meta
 VERSION=${VERSION:-49}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-3}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 ARCH=noarch
