@@ -93,7 +93,7 @@ meson setup \
   --sysconfdir=/etc \
   -Dtests=false \
   -Dexamples=false \
-  -Dgtk_doc=false \
+  -Ddocumentation=false \
   build/
 
 ${NINJA:=ninja} -v -C build/
