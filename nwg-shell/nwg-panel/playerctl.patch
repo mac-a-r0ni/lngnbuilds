@@ -1,0 +1,31 @@
+--- a/nwg_panel/main.py
++++ b/nwg_panel/main.py
+@@ -43,7 +43,7 @@
+ from nwg_panel.modules.executor import Executor
+ from nwg_panel.modules.clock import Clock
+ from nwg_panel.modules.controls import Controls
+-from nwg_panel.modules.playerctl import Playerctl
++#from nwg_panel.modules.playerctl import Playerctl
+ from nwg_panel.modules.cpu_avg import CpuAvg
+ from nwg_panel.modules.scratchpad import Scratchpad
+ from nwg_panel.modules.dwl_tags import DwlTags
+@@ -430,12 +430,12 @@
+                 clock = Clock({})
+                 container.pack_start(clock, False, False, 0)
+ 
+-        if item == "playerctl":
+-            if item in panel:
+-                playerctl = Playerctl(panel[item], voc, icons_path)
+-                container.pack_start(playerctl, False, False, panel["items-padding"])
+-            else:
+-                print("'{}' not defined in this panel instance".format(item))
++#        if item == "playerctl":
++#            if item in panel:
++#                playerctl = Playerctl(panel[item], voc, icons_path)
++#                container.pack_start(playerctl, False, False, panel["items-padding"])
++#            else:
++#                print("'{}' not defined in this panel instance".format(item))
+ 
+         if item == "openweather":
+             if "python-requests" in common.commands and common.commands["python-requests"]:
+
