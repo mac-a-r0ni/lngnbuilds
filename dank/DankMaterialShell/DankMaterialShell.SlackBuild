@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=DankMaterialShell
-VERSION=${VERSION:-0.5.0}
+VERSION=${VERSION:-0.6.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -82,32 +82,14 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # Install shell files to quickshell config directory
-install -dm755 $PKG/etc/xdg/quickshell/DankMaterialShell
-cp -r * $PKG/etc/xdg/quickshell/DankMaterialShell/
+install -dm755 $PKG/etc/xdg/quickshell/dms
+cp -r * $PKG/etc/xdg/quickshell/dms/
 
-cd ..
-
-tar xvf $CWD/danklinux-$VERSION.tar.gz
-tar xvf $CWD/danklinux-$VERSION-vendor.tar.xz -C danklinux-$VERSION
-
-cd danklinux-$VERSION
-
+cd core
 mkdir -p $PKG/usr/bin
-
-#export CGO_CPPFLAGS="${SLKCFLAGS}"
-#export CGO_CFLAGS="${SLKCFLAGS}"
-#export CGO_CXXFLAGS="${SLKCFLAGS}"
-#export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
-
-make dist
-#DESTDIR=$PKG make install
-#go build -mod vendor -o dms ./cmd/dms
-install -Dm755 bin/dms-linux-$BIN $PKG/usr/bin/dms
-
-# install self-update script
-# lets take this out for a minute
-# cat $CWD/updank > $PKG/usr/bin/updank
-# chmod 755 $PKG/usr/bin/updank
+make
+install -Dm755 bin/dms $PKG/usr/bin/dms
+cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
