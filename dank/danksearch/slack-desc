@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+          |-----handy-ruler------------------------------------------------------|
+danksearch: danksearch (Indexed filesystem search in GO)
+danksearch:
+danksearch: Fast, configurable filesystem search with fuzzy matching
+danksearch:
+danksearch: Homepage: https://github.com/AvengeMedia/danksearch
+danksearch:
+danksearch:
+danksearch:
+danksearch:
+danksearch:
+danksearch:
