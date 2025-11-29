@@ -24,8 +24,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=niri
-VERSION=${VERSION:-25.08}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-25.11}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -80,7 +80,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # libdisplay-info 0.3.0 patch!!
-patch -Np1 -i $CWD/update_to_libdisplay-info_3.patch
+#patch -Np1 -i $CWD/update_to_libdisplay-info_3.patch
 
 export NIRI_BUILD_COMMIT="8ba57fc"
 cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
