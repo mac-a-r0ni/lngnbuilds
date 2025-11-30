@@ -2,7 +2,7 @@
 
 # Slackware build script for quickshell
 
-# Copyright 2024 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
+# Copyright 2025 Jay Lanagan (j@lngn.net), Detroit, MI, USA.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,7 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=quickshell
-VERSION=${VERSION:-0.2.1}
+VERSION=${VERSION:-0.2.1_e9bad67}
+GIT=${GIT:-e9bad67619ee9937a1bbecfc6ad3b4231d2ecdc3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -64,9 +65,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
-cd $PRGNAM-$VERSION
+rm -rf $PRGNAM-$GIT
+tar xvf $CWD/$GIT.tar.?z
+cd $PRGNAM-$GIT
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
