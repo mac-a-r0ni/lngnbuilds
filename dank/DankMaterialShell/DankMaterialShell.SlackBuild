@@ -87,7 +87,7 @@ cd quickshell
 install -dm755 $PKG/etc/xdg/quickshell/dms
 cp -r * $PKG/etc/xdg/quickshell/dms/
 
-cd core
+cd ../core
 mkdir -p $PKG/usr/bin
 make
 install -Dm755 bin/dms $PKG/usr/bin/dms
