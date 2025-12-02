@@ -1,0 +1,12 @@
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -64,7 +64,7 @@
+     set(IMAGER_VERSION_MAJOR 0)
+     set(IMAGER_VERSION_MINOR 0)
+     set(IMAGER_VERSION_PATCH 0)
+-    set(IMAGER_VERSION_STR "0.0.0-unknown")
++    set(IMAGER_VERSION_STR "2.0.0-slackware")
+     message(WARNING "Git not found or no tags available, using fallback version: ${IMAGER_VERSION_STR}")
+ endif()
+ 
+
