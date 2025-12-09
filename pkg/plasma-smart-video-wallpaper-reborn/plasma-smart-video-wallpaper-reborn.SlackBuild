@@ -5,7 +5,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=plasma-smart-video-wallpaper-reborn
-VERSION=${VERSION:-2.3.2}
+VERSION=${VERSION:-2.7.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
