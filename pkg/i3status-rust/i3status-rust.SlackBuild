@@ -24,7 +24,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=i3status-rust
-VERSION=${VERSION:-0.34.0}
+VERSION=${VERSION:-0.35.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
