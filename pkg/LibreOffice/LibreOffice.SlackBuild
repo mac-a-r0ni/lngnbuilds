@@ -2,6 +2,7 @@
 #
 # ex:set ai shiftwidth=4 inputtab=spaces smarttab noautotab:
 # Edits for aarch64 builds by Jay Lanagan (j@lngn.net)
+# 25.8.4.2 re-added --with-system-icu, fails without
 # 24.8.3.2 hello icu, removed --with-system-icu again, never a dull moment.
 # 24.8.0.1 removed icu patch, not needed. Added wayland patch.
 # 24.2.0.3 uncommented --with-system-lxml
@@ -36,7 +37,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-25.8.3.2}
+VERSION=${VERSION:-25.8.4.2}
 SHORT_VERSION=${VERSION%.*.*}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
@@ -267,6 +268,7 @@ export qt6_libexec_dirs="/usr/lib$LIBDIRSUFFIX/qt6/bin"
     --with-system-epoxy \
     --with-system-expat \
     --with-system-hunspell \
+    --with-system-icu \
     --with-system-jpeg \
     --with-system-lcms2 \
     --with-system-libodfgen \
