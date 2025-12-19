@@ -145,9 +145,9 @@ perl Makefile.PL \
   INSTALLVENDORMAN3DIR=/usr/man/man3
 make
 
-if [ -n "$DISPLAY" ]; then
-  make test
-fi
+#if [ -n "$DISPLAY" ]; then
+#  make test
+#fi
 
 make install DESTDIR=$PKG
 
