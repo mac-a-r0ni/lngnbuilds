@@ -1,0 +1,61 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index a83cad86..d046bab0 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -170,26 +170,31 @@ set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+ set(BUILD_STATIC_LIBS ON)
+ set(BUILD_SHARED_LIBS OFF)
+ 
+-include(FetchContent)
++#include(FetchContent)
+ 
+ # Bundled liblzma
+-include(dependencies/xz.cmake)
++#include(dependencies/xz.cmake)
++find_package(LibLZMA 5.8.1 REQUIRED)
+ 
+ # Bundled zstd
+-include(dependencies/zstd.cmake)
++#include(dependencies/zstd.cmake)
++find_package(zstd 1.5.7 REQUIRED)
+ 
+ # Remote nghttp2
+-include(dependencies/nghttp2.cmake)
++#include(dependencies/nghttp2.cmake)
++#find_package(libnghttp2 1.67.0 REQUIRED)
+ 
+ # Bundled yescrypt
+ include(dependencies/yescrypt.cmake)
+ 
+ 
+ # Bundled zlib
+-include(dependencies/zlib.cmake)
++#include(dependencies/zlib.cmake)
++find_package(ZLIB REQUIRED)
+ 
+ # Bundled libarchive
+-include(dependencies/libarchive.cmake)
++#include(dependencies/libarchive.cmake)
++find_package(LibArchive 3.8.1 REQUIRED)
+ 
+ # libcurl
+ if(APPLE)
+@@ -203,7 +208,8 @@ if(APPLE)
+     # Note: No need to find OpenSSL on macOS - we use native Security.framework
+     # for RSA operations and CommonCrypto for hashing
+ else()
+-    include(dependencies/curl.cmake)
++#    include(dependencies/curl.cmake)
++    find_package(CURL 8.15.0 REQUIRED)
+ endif()
+ 
+ 
+@@ -561,7 +567,7 @@ else()
+     include(linux/PlatformPackaging.cmake)
+ endif()
+ 
+-add_dependencies(${PROJECT_NAME} zlibstatic yescrypt)
++add_dependencies(${PROJECT_NAME} yescrypt)
+ include_directories(${CURL_INCLUDE_DIR} ${LibArchive_INCLUDE_DIR} ${LIBLZMA_INCLUDE_DIRS} ${LIBDRM_INCLUDE_DIRS} ${ZLIB_INCLUDE_DIRS} ${ZSTD_INCLUDE_DIR} ${YESCRYPT_INCLUDE_DIR})
+ 
+ # Link different Qt components based on build type
