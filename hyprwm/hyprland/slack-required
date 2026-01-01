@@ -4,6 +4,7 @@ hyprcursor
 hyprgraphics
 hyprwayland-scanner
 libliftoff
+muparser
 re2
 tomlplusplus
 udis86
