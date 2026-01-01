@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/hyprwm/hyprpaper/archive/v0.8.0/hyprpaper-0.8.0.tar
 MD5SUM="13f32f15c3ba2ca192190ade475f35fb"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="hyprgraphics hyprlang hyprutils hyprwayland-scanner"
+REQUIRES="hyprgraphics hyprlang hyprtoolkit hyprutils hyprwire hyprwayland-scanner"
 MAINTAINER="Jay Lanagan"
 EMAIL="j@lngn.net"
