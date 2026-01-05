@@ -66,14 +66,6 @@ else
   LIBDIRSUFFIX=""
 fi
 
-#Test for multilib
-COMPAT32=${COMPAT32@L}
-COMPATTMP="$( mktemp -d $TMP/compat32-test-XXXXXX )"
-echo "int main(void) {; return(0); }" > "$COMPATTMP/test.c"
-gcc -m32 "$COMPATTMP/test.c" -o /dev/null >/dev/null 2>&1 \
-  && COMPAT32=${COMPAT32:-yes}
-rm -rf "$COMPATTMP"
-
 set -e
 
 rm -rf $PKG
@@ -105,26 +97,6 @@ cd build
   make
   make install/strip DESTDIR=$PKG
 cd ..
-
-if [ "$COMPAT32" = "yes" ]; then
-  mkdir -p build32
-  cd build32
-    cmake \
-      -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS -m32" \
-      -DCMAKE_SHARED_LINKER_FLAGS:STRING="-m32" \
-      -DCMAKE_INSTALL_PREFIX=/usr \
-      -DCMAKE_INSTALL_LIBDIR=lib \
-      -DSPDLOG_BUILD_SHARED=ON \
-      -DSPDLOG_BUILD_TESTS=ON \
-      -DSPDLOG_BUILD_BENCH=OFF \
-      -DSPDLOG_BUILD_EXAMPLE=OFF \
-      -DSPDLOG_FMT_EXTERNAL=OFF \
-      -DCMAKE_SKIP_RPATH=TRUE \
-      -DCMAKE_BUILD_TYPE=Release ..
-    make
-    make install/strip DESTDIR=$PKG
-  cd ..
-fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
