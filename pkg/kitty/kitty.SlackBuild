@@ -76,7 +76,7 @@ sed -i 's,-O3,-O2,g' setup.py
 # The -Wl,-s makes the linker strip the binaries.
 # --ignore-compiler-warnings is needed to turn off -Werror.
 
-export GOROOT=/usr/lib$LIBDIRSUFFIX/go1.25.3/go
+export GOROOT=/usr/lib$LIBDIRSUFFIX/go1.25.5/go
 export PATH="$GOROOT/bin:$PATH"
 
 CGO_ENABLED=0 \
