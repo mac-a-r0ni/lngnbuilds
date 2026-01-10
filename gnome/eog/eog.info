@@ -1,7 +1,7 @@
 PRGNAM="eog"
 VERSION="49.1"
 HOMEPAGE="https://wiki.gnome.org/Apps/EyeOfGnome"
-DOWNLOAD="https://download.gnome.org/sources/eog/47/eog-49.1.tar.xz"
+DOWNLOAD="https://download.gnome.org/sources/eog/49/eog-49.1.tar.xz"
 MD5SUM="f945d2a181e24e4abdf33ce1de463586"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
