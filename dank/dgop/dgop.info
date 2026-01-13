@@ -1,10 +1,10 @@
 PRGNAM="dgop"
-VERSION="0.1.12"
+VERSION="0.1.13"
 HOMEPAGE="https://github.com/AvengeMedia/dgop/"
-DOWNLOAD="https://github.com/AvengeMedia/dgop/archive/v0.1.12/dgop-0.1.12.tar.gz \
-          https://slackware.lngn.net/pub/source/dgop/dgop-vendor-0.1.12.tar.xz"
-MD5SUM="01c0987f8bacd64d92efacd412bd3ae2 \
-        b54f63193df4e7386f0162c3b02908d6"
+DOWNLOAD="https://github.com/AvengeMedia/dgop/archive/v0.1.13/dgop-0.1.13.tar.gz \
+          https://slackware.lngn.net/pub/source/dgop/dgop-vendor-0.1.13.tar.xz"
+MD5SUM="b6bd39adce2390270a40c1869e3f8ffa \
+        "
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
