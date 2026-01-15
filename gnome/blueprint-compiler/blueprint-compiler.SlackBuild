@@ -2,7 +2,7 @@
 
 # Slackware build script for blueprint-compiler
 
-# Copyright 2022-2025 Jay Lanagan (j@lngn.net), Detroit, MI, USA
+# Copyright 2022-2026 Jay Lanagan (j@lngn.net), Detroit, MI, USA
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=blueprint-compiler
-VERSION=${VERSION:-0.18.0}
+VERSION=${VERSION:-0.19.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
