@@ -1,6 +1,0 @@
-plasma-meta (KDE Plasma base meta-package)
-
-This is a meta-package to control the plasma desktop installation.
-This is the needed packages required to have a desktop.
-Removal of this package will not effect your plasma install, it
-is intended to make installs/updates easier.
