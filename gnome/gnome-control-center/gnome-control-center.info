@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-control-center/49/gnome-contr
 MD5SUM="f85817e359077fcef8febffb54796e98"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gnome-color-manager colord-gtk gnome-bluetooth gnome-online-accounts gnome-settings-daemon gsound libadwaita libnma-gtk4 cups-pk-helper webp-pixbuf-loader xdg-desktop-portal-gnome tecla"
+REQUIRES="blueprint-compiler gnome-color-manager colord-gtk gnome-bluetooth gnome-online-accounts gnome-settings-daemon gsound libadwaita libnma-gtk4 cups-pk-helper webp-pixbuf-loader xdg-desktop-portal-gnome tecla"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
