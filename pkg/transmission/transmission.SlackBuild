@@ -151,7 +151,6 @@ fi
 mkdir -p build
 cd build
   cmake \
-    -DCMAKE_POLICY_VERSION-MINIMUM=3.5 \
     -DREBUILD_WEB=OFF \
     -DUSE_SYSTEM_EVENT2=OFF \
     -DUSE_SYSTEM_DEFLATE=OFF \
@@ -175,6 +174,10 @@ cd build
     -DCMAKE_INSTALL_MANDIR=/usr/man \
     -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION \
     -DCMAKE_BUILD_TYPE=Release ..
+
+  # avoid issues with cmake >= 4 when building dependencies
+  export CMAKE_POLICY_VERSION_MINIMUM=3.5
+
   make VERBOSE=1
   make install/strip DESTDIR=$PKG
 cd ..
@@ -187,7 +190,7 @@ mkdir -p $PKG/install
 sed "s,@opts@,GTK=$GTK QT=$QT CLI=$CLI DAEMON=$DAEMON," \
   $CWD/slack-desc \
   > $PKG/install/slack-desc
-  cat $CWD/slack-required > $PKG/install/slack-required
+cat $CWD/slack-required > $PKG/install/slack-required
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
