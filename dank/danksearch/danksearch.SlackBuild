@@ -84,8 +84,8 @@ CGO_ENABLED=0 \
 GOFLAGS=-ldflags="-s -w" \
 CGO_CFLAGS="$SLKCFLAGS" \
 CGO_CXXFLAGS="$SLKCFLAGS" \
-go build -mod vendor -o bin/$PRGNAM cmd/cli/*.go
-#make
+#go build -mod vendor -o bin/$PRGNAM cmd/cli/*.go
+make
 mkdir -p $PKG/usr/bin
 install -Dm755 -t $PKG/usr/bin/ bin/dsearch
 
