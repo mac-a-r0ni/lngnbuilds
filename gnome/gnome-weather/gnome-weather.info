@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-weather/49/gnome-weather-49.0
 MD5SUM="8738500c9637f260cbac4e11b6270cb8"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="geoclue2 libadwaita libgweather4"
+REQUIRES="geoclue2 libadwaita libgweather4 typescript"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
