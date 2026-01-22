@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=danksearch
-VERSION=${VERSION:-0.0.7}
+VERSION=${VERSION:-0.1.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -72,7 +72,7 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
-#tar xvf $CWD/$PRGNAM-vendor-$VERSION.tar.?z
+tar xvf $CWD/$PRGNAM-vendor-$VERSION.tar.?z
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -84,8 +84,8 @@ CGO_ENABLED=0 \
 GOFLAGS=-ldflags="-s -w" \
 CGO_CFLAGS="$SLKCFLAGS" \
 CGO_CXXFLAGS="$SLKCFLAGS" \
-#go build -mod vendor -o bin/$PRGNAM cmd/cli/*.go
-make
+go build -mod vendor -o bin/$PRGNAM cmd/cli/*.go
+#make
 mkdir -p $PKG/usr/bin
 install -Dm755 -t $PKG/usr/bin/ bin/dsearch
 
