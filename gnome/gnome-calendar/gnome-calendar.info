@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-calendar/49/gnome-calendar-49
 MD5SUM="d393958bf063b3b6ab970abf37c73a10"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="evolution-data-server geoclue2 libgweather4 libadwaita"
+REQUIRES="blueprint-compiler evolution-data-server geoclue2 libgweather4 libadwaita"
 MAINTAINER="Bob Funk"
 EMAIL="bobfunk11@gmail.com"
