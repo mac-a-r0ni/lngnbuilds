@@ -101,7 +101,6 @@ if echo "$ARCH" | grep -q "i.86"; then
 fi
 
 # Patch x265 for cmake 4
-
 cp $CWD/A08-cmake4.patch contrib/x265/
 
 # Make the GUI optional
