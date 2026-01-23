@@ -5,7 +5,7 @@
      set(IMAGER_VERSION_MINOR 0)
      set(IMAGER_VERSION_PATCH 0)
 -    set(IMAGER_VERSION_STR "0.0.0-unknown")
-+    set(IMAGER_VERSION_STR "2.0.2-slackware")
++    set(IMAGER_VERSION_STR "2.0.6-slackware")
      message(WARNING "Git not found or no tags available, using fallback version: ${IMAGER_VERSION_STR}")
  endif()
  
