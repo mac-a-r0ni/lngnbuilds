@@ -1,7 +1,7 @@
 PRGNAM="ghostty"
 VERSION="1.2.3"
 HOMEPAGE="https://ghostty.org/"
-DOWNLOAD="https://github.com/ghostty-org/ghostty/archive/v1.2.3/ghostty-v1.2.3.tar.gz"
+DOWNLOAD="https://github.com/ghostty-org/ghostty/archive/v1.2.3/ghostty-1.2.3.tar.gz"
 MD5SUM="7f41a9b72b6b82a0611a33104a957a3c"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
