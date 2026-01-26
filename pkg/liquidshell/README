@@ -1,3 +1,6 @@
 liquidshell (alternative for plasmashell)
 
 A basic Desktop Shell implemented using QtWidgets.
+
+* This SlackBuild requires Plasma 6, which will not be included 
+in the deps because slackrepo hates this one trick.
