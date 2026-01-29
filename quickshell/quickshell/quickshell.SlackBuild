@@ -25,8 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=quickshell
-VERSION=${VERSION:-0.2.1_191085a}
-GIT=${GIT:-191085a8821b35680bba16ce5411fc9dbe912237}
+VERSION=${VERSION:-0.2.1_1e4d804}
+GIT=${GIT:-1e4d804e7f3fa7465811030e8da2bf10d544426a}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -89,6 +89,9 @@ cd build
   make
   make install DESTDIR=$PKG
 cd ..
+
+# this location will serve as default install location for qs modules so pkgtools will track new files
+mkdir -p $PKG/usr/share/quickshell
 
 # Don't ship .la files:
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
