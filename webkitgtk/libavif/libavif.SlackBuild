@@ -85,6 +85,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # fix for svt-av1-4.0
+patch -Np1 -i $CWD/2962.patch || exit 1
 patch -Np1 -i $CWD/2971.patch || exit 1
 patch -Np1 -i $CWD/2978.patch || exit 1
 
