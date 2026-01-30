@@ -1,0 +1,61 @@
+From e496576f71038d7c33677435fe847070930e8251 Mon Sep 17 00:00:00 2001
+From: Wan-Teh Chang <wtc@google.com>
+Date: Wed, 28 Jan 2026 19:45:44 -0800
+Subject: [PATCH] Bump SVT-AV1 dependency to v4.0.1
+
+---
+ CHANGELOG.md                 | 2 +-
+ cmake/Modules/LocalSvt.cmake | 2 +-
+ ext/svt.cmd                  | 2 +-
+ ext/svt.sh                   | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index c1900e512f..85ef886d38 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -38,7 +38,7 @@ The changes are relative to the previous release, unless the baseline is specifi
+ * Update LocalAvm.cmake: research-v13.0.0
+ * Update rav1e.cmd/LocalRav1e.cmake: cargo-c v0.10.14, corrosion v0.5.2,
+   rav1e v0.8.1
+-* Update svt.cmd/svt.sh/LocalSvt.cmake: v4.0.0
++* Update svt.cmd/svt.sh/LocalSvt.cmake: v4.0.1
+ * Update zlibpng.cmd/LocalZlibpng.cmake: libpng 1.6.51, zlib 1.3.1.2
+ * Fix grayscale conversion when changing the bit depth.
+ * Bump cmake_minimum_required from 3.13 to 3.22
+diff --git a/cmake/Modules/LocalSvt.cmake b/cmake/Modules/LocalSvt.cmake
+index 3dc52c577e..c096efa945 100644
+--- a/cmake/Modules/LocalSvt.cmake
++++ b/cmake/Modules/LocalSvt.cmake
+@@ -1,4 +1,4 @@
+-set(AVIF_SVT_GIT_TAG "v4.0.0")
++set(AVIF_SVT_GIT_TAG "v4.0.1")
+ 
+ set(LIB_FILENAME "${AVIF_SOURCE_DIR}/ext/SVT-AV1/Bin/Release/${AVIF_LIBRARY_PREFIX}SvtAv1Enc${CMAKE_STATIC_LIBRARY_SUFFIX}")
+ 
+diff --git a/ext/svt.cmd b/ext/svt.cmd
+index 7b566f0535..1dec2d73e5 100755
+--- a/ext/svt.cmd
++++ b/ext/svt.cmd
+@@ -11,7 +11,7 @@
+ : # If you're running this on Windows, be sure you've already run this (from your VC2019 install dir):
+ : #    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Auxiliary\Build\vcvars64.bat"
+ 
+-git clone -b v4.0.0 --depth 1 https://gitlab.com/AOMediaCodec/SVT-AV1.git
++git clone -b v4.0.1 --depth 1 https://gitlab.com/AOMediaCodec/SVT-AV1.git
+ 
+ cd SVT-AV1
+ cd Build/windows
+diff --git a/ext/svt.sh b/ext/svt.sh
+index f61a620197..405d04c8e3 100644
+--- a/ext/svt.sh
++++ b/ext/svt.sh
+@@ -4,7 +4,7 @@
+ 
+ set -e
+ 
+-git clone -b v4.0.0 --depth 1 https://gitlab.com/AOMediaCodec/SVT-AV1.git
++git clone -b v4.0.1 --depth 1 https://gitlab.com/AOMediaCodec/SVT-AV1.git
+ 
+ cd SVT-AV1
+ cd Build/linux
