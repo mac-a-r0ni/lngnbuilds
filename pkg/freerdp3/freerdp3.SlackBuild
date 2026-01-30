@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=freerdp3
 SRCNAM=freerdp
-VERSION=${VERSION:-3.21.0}
+VERSION=${VERSION:-3.22.0}
 TAG=${TAG:-_lngn}
 BUILD=${BUILD:-1}
 PKGTYPE=${PKGTYPE:-txz}
