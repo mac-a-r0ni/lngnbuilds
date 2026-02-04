@@ -1,10 +1,10 @@
 PRGNAM="librewolf"
-VERSION="146.0.1"
+VERSION="147.0.2"
 HOMEPAGE="https://librewolf.net/"
-DOWNLOAD="https://gitlab.com/api/v4/projects/24386000/packages/generic/librewolf/146.0.1-1/LibreWolf.aarch64.AppImage \
-          https://gitlab.com/api/v4/projects/24386000/packages/generic/librewolf/146.0.1-1/LibreWolf.x86_64.AppImage"
-MD5SUM="e40223552fdc2f45b0439e2239da661f \
-        3aef31b107e17b89d306b3894a2aeb64"
+DOWNLOAD="https://gitlab.com/api/v4/projects/24386000/packages/generic/librewolf/147.0.2-1/LibreWolf.aarch64.AppImage \
+          https://gitlab.com/api/v4/projects/24386000/packages/generic/librewolf/147.0.2-1/LibreWolf.x86_64.AppImage"
+MD5SUM=" \
+        bc7beccb985163fbfce64cca2b8e6cef"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
