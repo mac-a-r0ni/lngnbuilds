@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/gnome-builder/49/gnome-builder-49.1
 MD5SUM="f164a635046fa662b51e7168bedd0daf"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="d-spy flatpak jsonrpc-glib libpeas2 libportal libostree template-glib gom libgit2-glib libspelling sysprof webkitgtk6.0"
+REQUIRES="d-spy flatpak jsonrpc-glib libpeas2 libostree template-glib gom libgit2-glib libspelling sysprof webkitgtk6.0"
 MAINTAINER="Charadon"
 EMAIL=""

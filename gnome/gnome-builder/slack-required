@@ -2,7 +2,6 @@ d-spy
 flatpak
 jsonrpc-glib
 libpeas2
-libportal
 libostree
 template-glib
 libgit2-glib
