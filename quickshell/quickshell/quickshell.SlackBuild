@@ -25,8 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=quickshell
-VERSION=${VERSION:-0.2.1_4429c03}
-GIT=${GIT:-4429c038377a2c59dfcab6fe2424fb2c3a99d2cd}
+VERSION=${VERSION:-0.2.1_dacfa9d}
+GIT=${GIT:-dacfa9de829ac7cb173825f593236bf2c21f637e}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
