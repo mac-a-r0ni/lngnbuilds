@@ -1,10 +1,10 @@
 PRGNAM="legcord-bin"
-VERSION="1.1.6"
+VERSION="1.2.1"
 HOMEPAGE="https://github.com/Legcord/Legcord"
-DOWNLOAD="https://github.com/Legcord/Legcord/releases/download/v1.1.6/Legcord-1.1.6-linux-amd64.deb \
-          https://github.com/Legcord/Legcord/releases/download/v1.1.6/Legcord-1.1.6-linux-arm64.deb"
-MD5SUM="d04ad46f33ed31ab80798847d5d8a9ca \
-        4579a9cbafce5a5fc7741ab1b842fe2b"
+DOWNLOAD="https://github.com/Legcord/Legcord/releases/download/v1.2.1/Legcord-1.2.1-linux-amd64.deb \
+          https://github.com/Legcord/Legcord/releases/download/v1.2.1/Legcord-1.2.1-linux-arm64.deb"
+MD5SUM="94e8b5a42c4ed34f8243aeea269a3a48 \
+        4e889bea4c21c8e98e8926194613c61b"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
