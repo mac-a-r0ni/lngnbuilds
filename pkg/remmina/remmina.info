@@ -5,6 +5,6 @@ DOWNLOAD="https://gitlab.com/Remmina/Remmina/-/archive/v1.4.42/Remmina-v1.4.42.t
 MD5SUM="0521b90d7c7741d567246dccbfee12b4"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="libayatana-appindicator spice-gtk webkitgtk4.1"
+REQUIRES="freerdp3 libayatana-appindicator spice-gtk webkitgtk4.1"
 MAINTAINER=""
 EMAIL=""
