@@ -83,7 +83,7 @@ find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
 # Where possible, use system libraries instead of building the ones
 # bundled with the mame source. However, SBo's lua is (still!) too old
 # for mame.
-#USE_SYSTEM_LIB_LUA=1 \
+USE_SYSTEM_LIB_LUA=1 \
 
 # Upstream dropped sqlite as a dependency, this no longer matters.
 #USE_SYSTEM_LIB_SQLITE3=1 \
