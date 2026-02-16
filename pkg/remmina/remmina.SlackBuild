@@ -95,7 +95,7 @@ cd build
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=/usr/lib${LIBDIRSUFFIX} \
     -DWEBKIT2GTK_LIB=/usr/lib${LIBDIRSUFFIX} \
-    -DWEBKIT2GTK_INCLUDE_DIR=/usr/include/webkitgtk-4.1 \
+    -DWEBKIT2GTK_INCLUDE_DIR=/usr/include/webkitgtk-4.1/ \
     -DWITH_AVAHI=${AVAHI} \
     -DWITH_TELEPATHY=${TELEPATHY} \
     -DWITH_VTE=ON \
