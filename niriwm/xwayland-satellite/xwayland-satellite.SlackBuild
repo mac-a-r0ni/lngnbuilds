@@ -24,7 +24,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=xwayland-satellite
-VERSION=${VERSION:-0.8}
+VERSION=${VERSION:-0.8.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -83,10 +83,12 @@ cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
 cargo build --frozen --release --all-features
 
 install -vDm 755 target/release/$PRGNAM -t $PKG/usr/bin/
+install -dm755 $PKG/usr/man/man1
+cp $SRC/$PRGNAM.man $PKG/usr/man/man1/$PRGNAM.1
+gzip -9 $PKG/usr/man/man1/$PRGNAM.1
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
-
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
