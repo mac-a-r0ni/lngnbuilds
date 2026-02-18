@@ -1,9 +1,0 @@
-gpu-screen-recorder (A shadowplay-like screen recorder for Linux.)
-
-This is a screen recorder that has minimal impact on system
-performance by recording your monitor using the GPU only, similar to
-shadowplay on windows. This is the fastest screen recording tool for
-Linux. This screen recorder can be used for recording your desktop
-offline, for live streaming and for nvidia shadowplay-like instant
-replay, where only the last few minutes are saved. This software can
-also take screenshots.
