@@ -84,7 +84,7 @@ cargo build --frozen --release --all-features
 
 install -vDm 755 target/release/$PRGNAM -t $PKG/usr/bin/
 install -dm755 $PKG/usr/man/man1
-cp $SRC/$PRGNAM.man $PKG/usr/man/man1/$PRGNAM.1
+cp $TMP/$PRGNAM-$VERSION/$PRGNAM.man $PKG/usr/man/man1/$PRGNAM.1
 gzip -9 $PKG/usr/man/man1/$PRGNAM.1
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
