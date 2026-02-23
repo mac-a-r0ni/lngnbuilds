@@ -89,7 +89,6 @@ CXXFLAGS="$SLKCFLAGS" \
     --libexec=/usr/libexec \
     --localstatedir=/var \
     --sysconfdir=/etc \
-    -Dsystemdsystemunitdir=no \
     -Dtests=false \
     -Dstrip=true
 "${NINJA:=ninja}"
