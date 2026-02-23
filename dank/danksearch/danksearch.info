@@ -1,10 +1,10 @@
 PRGNAM="danksearch"
-VERSION="0.1.2"
+VERSION="0.2.0"
 HOMEPAGE="https://github.com/AvengeMedia/danksearch/"
-DOWNLOAD="https://github.com/AvengeMedia/danksearch/archive/v0.1.2/danksearch-0.1.2.tar.gz \
-          https://slackware.lngn.net/pub/source/danksearch/danksearch-0.1.2-vendor.tar.xz"
-MD5SUM="fadfcea7ff6b550c8150e253f92c8290 \
-        5408839c05af4481d86e2065d0684927"
+DOWNLOAD="https://github.com/AvengeMedia/danksearch/archive/v0.2.0/danksearch-0.2.0.tar.gz \
+          https://slackware.lngn.net/pub/source/danksearch/danksearch-0.2.0-vendor.tar.xz"
+MD5SUM="f80207a88c9fd5aa29321dc0112c86c1 \
+        8d2ef30f1fe6d8c15f4f9731af5374bb"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
