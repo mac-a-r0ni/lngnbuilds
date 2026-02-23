@@ -89,7 +89,7 @@ CXXFLAGS="$SLKCFLAGS" \
     --libexec=/usr/libexec \
     --localstatedir=/var \
     --sysconfdir=/etc \
-    -Dsystemdsystemunitdir=$TMP \
+    -Dsystemdsystemunitdir=/usr/systemd \
     -Dtests=false \
     -Dstrip=true
 "${NINJA:=ninja}"
@@ -113,6 +113,7 @@ mkdir -p $PKG/install
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/slack-required > $PKG/install/slack-required
+rm -r $PKG/usr/systemd
 
 cd $PKG
 /sbin/makepkg -l y -c n $TMP/$PKGNAM-$VERSION-$ARCH-$BUILD$TAG.txz
