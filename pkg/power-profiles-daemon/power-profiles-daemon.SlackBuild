@@ -42,7 +42,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp}
+TMP=${TMP:-/tmp/lngn}
 PKG=$TMP/package-$PKGNAM
 
 if [ "$ARCH" = "i586" ]; then
