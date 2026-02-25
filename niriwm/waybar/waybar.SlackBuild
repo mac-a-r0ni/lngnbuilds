@@ -79,6 +79,9 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+# wtf is this doing here, creates filesystem loop
+rm _codeql_detected_source_root
+
 mkdir meson-build
 cd meson-build
   CFLAGS="$SLKCFLAGS" \
