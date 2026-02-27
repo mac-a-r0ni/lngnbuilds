@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=DankMaterialShell
 VERSION=${VERSION:-1.4.3}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
 
@@ -87,17 +87,23 @@ cd quickshell
 install -dm755 $PKG/etc/xdg/quickshell/dms
 cp -r * $PKG/etc/xdg/quickshell/dms/
 
-cd ../core
+#cd ../core
+#make
+#install -Dm755 bin/dms $PKG/usr/bin/dms
+#cd ..
+
+# building the dms binary produces a half-broken build on slackware... cause unknown as of yet, so we'll use thier build for now
 mkdir -p $PKG/usr/bin
-make
-install -Dm755 bin/dms $PKG/usr/bin/dms
+gunzip $CWD/dms-distropkg-$BIN.gz
+mv $CWD/dms-distropkg-$BIN $PKG/usr/bin/dms
+chmod 755 $PKG/usr/bin/dms
 cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a LICENSE *.md $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a docs/* LICENSE *.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

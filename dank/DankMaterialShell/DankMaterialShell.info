@@ -1,8 +1,12 @@
 PRGNAM="DankMaterialShell"
 VERSION="1.4.3"
 HOMEPAGE="https://github.com/AvengeMedia/DankMaterialShell/"
-DOWNLOAD="https://github.com/AvengeMedia/DankMaterialShell/archive/v1.4.3/DankMaterialShell-1.4.3.tar.gz"
-MD5SUM="aa1c8b2b1270f5e8c0f7d715d1fd56c8"
+DOWNLOAD="https://github.com/AvengeMedia/DankMaterialShell/archive/v1.4.3/DankMaterialShell-1.4.3.tar.gz \
+          https://github.com/AvengeMedia/DankMaterialShell/releases/download/v1.4.3/dms-distropkg-amd64.gz \
+          https://github.com/AvengeMedia/DankMaterialShell/releases/download/v1.4.3/dms-distropkg-arm64.gz"
+MD5SUM="aa1c8b2b1270f5e8c0f7d715d1fd56c8 \
+        0bde729b7fbab33cd9f7aeb471582a45 \
+        22d965381470e74344e5037011046105"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="brightnessctl cliphist colloid-gtk-theme colloid-icon-theme ddcutil dgop gammastep material-design-icons matugen wl-clipboard quickshell"
