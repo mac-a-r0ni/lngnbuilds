@@ -1,7 +1,7 @@
 PRGNAM="mangowc"
 VERSION="0.12.5"
 HOMEPAGE="https://github.com/mangowm/mango"
-DOWNLOAD="https://github.com/mangowm/mango/archive/0.12.5/mangowc-0.12.5.tar.gz"
+DOWNLOAD="https://github.com/mangowm/mango/archive/0.12.5/mango-0.12.5.tar.gz"
 MD5SUM="a3782330dd5710d545debf3416f1ad53"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
