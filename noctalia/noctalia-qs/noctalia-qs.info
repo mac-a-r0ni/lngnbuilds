@@ -1,0 +1,8 @@
+PRGNAM="noctalia-qs"
+VERSION="0.0.4"
+HOMEPAGE="https://github.com/noctalia-dev/noctalia-qs/"
+DOWNLOAD="https://github.com/noctalia-dev/noctalia-qs/archive/v0.0.4/noctalia-qs-0.0.4.tar.gz"
+MD5SUM="164bd6a8d823f7d00630f1130fb08f19"
+REQUIRES="breakpad CLI11"
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"
