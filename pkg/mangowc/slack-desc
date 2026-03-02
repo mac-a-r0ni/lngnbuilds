@@ -10,7 +10,7 @@ mangowc: mangowc (dwm-like WM for Wayland)
 mangowc:
 mangowc: wayland compositor base wlroots and scenefx (dwm but wayland).
 mangowc:
-mangowc: Homepage: https://github.com/DreamMaoMao/mangowc
+mangowc: Homepage: https://github.com/mangowm/mango
 mangowc:
 mangowc:
 mangowc:
