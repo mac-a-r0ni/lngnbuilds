@@ -96,8 +96,8 @@ cd build
     -DVENDOR_CPPTRACE=ON \
     -DCRASH_HANDLER=ON \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-  make
-  make install DESTDIR=$PKG
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 cd ..
 
 # this location will serve as default install location for qs modules so pkgtools will track new files
