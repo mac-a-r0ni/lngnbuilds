@@ -8,7 +8,7 @@ DOWNLOAD="https://github.com/denoland/deno/archive/v2.7.2/deno-2.7.2.tar.gz \
 MD5SUM="da0a6e3f4586012436e2b19f14bb65c8 \
         3f6c36370f1c8c40e29507dc8319d3b0 \
         2e50c112dd7d7cdf21265dc0de2fa601 \
-        "
+        e9e99ddb71862eca61d2ad09d0e36e8b"
 REQUIRES=""
 MAINTAINER="fourtysixandtwo"
 EMAIL="fourtysixandtwo@sliderr.net"
