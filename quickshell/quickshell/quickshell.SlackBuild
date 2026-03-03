@@ -25,8 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=quickshell
-VERSION=${VERSION:-0.2.1_cdde4c6}
-GIT=${GIT:-cdde4c63f4dd09e92a960e27f1202ca2e0d830d1}
+VERSION=${VERSION:-0.2.1_a849a88}
+GIT=${GIT:-a849a88893c71d409aecef0b999e6cc3d9b50034}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_lngn}
 PKGTYPE=${PKGTYPE:-txz}
@@ -92,7 +92,6 @@ cd build
     -DCMAKE_INSTALL_FULL_LIBDIR=/usr/lib${LIBDIRSUFFIX} \
     -DINSTALL_QML_PREFIX=lib${LIBDIRSUFFIX}/qt6/qml \
     -DDISTRIBUTOR="slackware.lngn.net" \
-    -DDISTRIBUTOR_DEBUGINFO_AVAILABLE=NO \
     -DVENDOR_CPPTRACE=OFF \
     -DCRASH_HANDLER=OFF \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
