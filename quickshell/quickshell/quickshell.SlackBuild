@@ -96,8 +96,8 @@ cd build
     -DVENDOR_CPPTRACE=OFF \
     -DCRASH_HANDLER=OFF \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-  cmake --build build
-  DESTDIR=$PKG cmake --install build
+  make
+  make install DESTDIR=$PKG
 cd ..
 #    -DCMAKE_CXX_SCAN_FOR_MODULES=OFF \
 
