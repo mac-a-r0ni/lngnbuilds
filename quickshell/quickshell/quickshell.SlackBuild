@@ -93,13 +93,13 @@ cd build
     -DINSTALL_QML_PREFIX=lib${LIBDIRSUFFIX}/qt6/qml \
     -DDISTRIBUTOR="slackware.lngn.net" \
     -DDISTRIBUTOR_DEBUGINFO_AVAILABLE=NO \
-    -DCMAKE_CXX_SCAN_FOR_MODULES=OFF \
-    -DVENDOR_CPPTRACE=ON \
-    -DCRASH_HANDLER=ON \
+    -DVENDOR_CPPTRACE=OFF \
+    -DCRASH_HANDLER=OFF \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
   cmake --build build
   DESTDIR=$PKG cmake --install build
 cd ..
+#    -DCMAKE_CXX_SCAN_FOR_MODULES=OFF \
 
 # this location will serve as default install location for qs modules so pkgtools will track new files
 mkdir -p $PKG/usr/share/quickshell
