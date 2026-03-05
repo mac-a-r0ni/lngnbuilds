@@ -1,14 +1,14 @@
 PRGNAM="deno"
-VERSION="2.7.3"
+VERSION="2.7.4"
 HOMEPAGE="https://deno.com"
-DOWNLOAD="https://github.com/denoland/deno/archive/v2.7.3/deno-2.7.3.tar.gz \
+DOWNLOAD="https://github.com/denoland/deno/archive/v2.7.4/deno-2.7.4.tar.gz \
           https://github.com/denoland/rusty_v8/releases/download/v145.0.0/librusty_v8_release_x86_64-unknown-linux-gnu.a.gz \
           https://github.com/denoland/rusty_v8/releases/download/v145.0.0/librusty_v8_release_aarch64-unknown-linux-gnu.a.gz \
-          https://slackware.lngn.net/pub/source/deno/deno-vendored-sources-2.7.3-1.tar.xz"
-MD5SUM="881aafd2749cd943c8fb29942c0b913e \
+          https://slackware.lngn.net/pub/source/deno/deno-vendored-sources-2.7.4-1.tar.xz"
+MD5SUM="f4a7b6fafb211c5fbcc550ec97280d51 \
         3f6c36370f1c8c40e29507dc8319d3b0 \
         2e50c112dd7d7cdf21265dc0de2fa601 \
-        3227a25ca38b1adb09d7f8189b759b6f"
+        c6ee8d2afbf3aa595c094be078506d34"
 REQUIRES=""
 MAINTAINER="fourtysixandtwo"
 EMAIL="fourtysixandtwo@sliderr.net"
